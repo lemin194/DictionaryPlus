@@ -1,4 +1,4 @@
-package com.dictionary.translateapi;
+package Dictionary.Services;
 
 public class TestAPI {
     private static void testTTS() {

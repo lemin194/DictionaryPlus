@@ -1,4 +1,4 @@
-package com.dictionary.translateapi;
+package Dictionary.Services;
 
 import java.io.*;
 import java.net.HttpURLConnection;

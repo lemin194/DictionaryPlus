@@ -1,4 +1,4 @@
-package com.dictionary.dictionaryplus;
+package Dictionary.Views;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
