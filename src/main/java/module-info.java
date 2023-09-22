@@ -4,6 +4,6 @@ module com.dictionary.dictionaryplus {
     requires jlayer;
 
 
-    opens com.dictionary.dictionaryplus to javafx.fxml;
-    exports com.dictionary.dictionaryplus;
+    opens Dictionary.Views to javafx.fxml;
+    exports Dictionary.Views;
 }
