@@ -10,6 +10,10 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 import org.json.JSONArray;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+
 
 public class Translation {
     /**
@@ -19,8 +23,18 @@ public class Translation {
      * @param targetLanguage    Target language (en or vi).
      * @return Translated text.
      */
+
+
     public static String TranslateText(String text, String sourceLanguage, String targetLanguage) {
         String ret = "";
+
+        Pattern spacePattern = Pattern.compile("^[\\s]+$");
+        Matcher matcher = spacePattern.matcher(text);
+        if (matcher.matches()) {
+            // Text contains only white spaces.
+            return ret;
+        }
+
         String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8);
         System.out.println(encodedText);
         String apiUrl  = "https://translate.googleapis.com/translate_a/single?";
