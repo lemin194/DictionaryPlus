@@ -11,7 +11,8 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        TextToSpeech.TTS("ABC 123214", "vi");
+        TextToSpeech.TTS("pneumonoultramicroscopicsilicovolcanoconiosis", "en");
+        System.out.println("tts");
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");

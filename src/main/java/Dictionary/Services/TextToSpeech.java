@@ -1,5 +1,8 @@
 package Dictionary.Services;
 
+import javazoom.jl.player.FactoryRegistry;
+import javazoom.jl.player.advanced.AdvancedPlayer;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -10,8 +13,6 @@ import java.nio.file.Paths;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import javazoom.jl.player.FactoryRegistry;
-import javazoom.jl.player.advanced.AdvancedPlayer;
 
 public class TextToSpeech {
     private static final String tts_audio_path = "temp/speech_tmp.mp3";
@@ -23,25 +24,21 @@ public class TextToSpeech {
                 @Override
                 public void run() {
                     try {
-
-                        try {
-                            FileInputStream fis = new FileInputStream(tts_audio_path);
-                            AdvancedPlayer player = new AdvancedPlayer(fis, FactoryRegistry.systemRegistry().createAudioDevice());
-                            player.play();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        } finally {
-                            // Delete the file after playing the audio
-                            File file_to_delete = new File(tts_audio_path);
-                            if (file_to_delete.exists()) {
+                        FileInputStream fis = new FileInputStream(tts_audio_path);
+                        AdvancedPlayer player = new AdvancedPlayer(fis, FactoryRegistry.systemRegistry().createAudioDevice());
+                        player.play();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        // Delete the file after playing the audio
+                        File file_to_delete = new File(tts_audio_path);
+                        if (file_to_delete.exists()) {
                                 if (file_to_delete.delete()) {
                                     System.out.println("File deleted successfully.");
                                 } else {
                                     System.err.println("Failed to delete file.");
                                 }
-                            }
                         }
-                    } catch (Exception e) {
                     }
                 }
             });
