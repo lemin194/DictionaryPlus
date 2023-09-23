@@ -12,7 +12,8 @@ public class TestAPI {
 
     public static void TestTranslate() {
         System.out.println("Begin connecting");
-        String ret = Translation.TranslateText("\n \t    ",
+        String ret = Translation.TranslateText(
+                "",
                 "en", "vi");
         System.out.println("Translated: \n" + ret);
     }
