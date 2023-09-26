@@ -1,4 +1,4 @@
-package Dictionary.Models;
+package dictionary.models;
 
 public class WordCollection {
 }

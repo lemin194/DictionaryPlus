@@ -1,4 +1,4 @@
-package Dictionary.Services;
+package dictionary.services;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -30,10 +30,10 @@ public class Translation {
 
         Pattern spacePattern = Pattern.compile("^[\\s]+$");
         Matcher matcher = spacePattern.matcher(text);
-        if (matcher.matches()) {
-            // Text contains only white spaces.
-            return ret;
-        }
+//        if (matcher.matches()) {
+//            // Text contains only white spaces.
+//            return ret;
+//        }
 
         String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8);
         System.out.println(encodedText);
@@ -75,7 +75,11 @@ public class Translation {
             in.close();
 
             JSONArray respond = new JSONArray(content.toString());
+            if (respond.get(0).toString().equals("null")) {
+                return ret;
+            }
             JSONArray sentences = (JSONArray) respond.get(0);
+
             for (Object sentenceObject : sentences) {
                 JSONArray sentence = new JSONArray(sentenceObject.toString());
                 String translatedSentence = sentence.get(0).toString();
