@@ -1,4 +1,4 @@
-package Dictionary.Services;
+package dictionary.services;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

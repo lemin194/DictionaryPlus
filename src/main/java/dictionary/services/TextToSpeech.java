@@ -1,4 +1,4 @@
-package Dictionary.Services;
+package dictionary.services;
 
 import javazoom.jl.player.FactoryRegistry;
 import javazoom.jl.player.advanced.AdvancedPlayer;

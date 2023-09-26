@@ -1,4 +1,4 @@
-package Dictionary.Controllers;
+package dictionary.controllers;
 
 public class HomeController {
 }

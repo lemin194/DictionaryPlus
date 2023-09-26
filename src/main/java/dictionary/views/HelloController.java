@@ -1,5 +1,6 @@
-package Dictionary.Views;
+package dictionary.views;
 
+import dictionary.services.TextToSpeech;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -9,6 +10,6 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+
     }
 }

@@ -5,6 +5,10 @@ module com.dictionary.dictionaryplus {
     requires org.json;
 
 
-    opens Dictionary.Views to javafx.fxml;
-    exports Dictionary.Views;
+    opens dictionary.views to javafx.fxml;
+    exports dictionary.views;
+    opens dictionary to javafx.fxml;
+    exports dictionary;
+    exports dictionary.controllers;
+    opens dictionary.controllers to javafx.fxml;
 }
