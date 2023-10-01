@@ -3,6 +3,8 @@ module com.dictionary.dictionaryplus {
     requires javafx.fxml;
     requires jlayer;
     requires org.json;
+    requires java.sql;
+    requires org.jsoup;
 
 
     opens dictionary.views to javafx.fxml;
