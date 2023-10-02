@@ -34,8 +34,35 @@ public class WordsDao {
         return success;
     }
 
-    public ArrayList<Word> queryWord(int leftIndex, int rightIndex) {
+    public boolean deleteWord(String word) {
+        Connection conn = DatabaseConnection.getConnection();
+        ArrayList<Integer> couple = AllWord.wordsContainPrefix(word);
+        int leftIndex = couple.get(0);
+        int rightIndex = couple.get(1);
+        if (leftIndex == -1) {
+            return false;
+        }
+        String stmt = "DELETE FROM av WHERE id BETWEEN ? AND ?";
+        try {
+            preparedStatement = conn.prepareStatement(stmt);
+            preparedStatement.setInt(1, leftIndex);
+            preparedStatement.setInt(1, rightIndex);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseClose.databaseClose(conn, preparedStatement, null);
+        }
+        return true;
+    }
+    public ArrayList<Word> queryWord(String pref) {
+        ArrayList<Integer> bound = AllWord.wordsContainPrefix(pref);
+        int leftIndex = bound.get(0);
+        int rightIndex = bound.get(1);
         ArrayList<Word> wordList = new ArrayList<>();
+        if (leftIndex == -1) {
+            return wordList;
+        }
         Connection conn = DatabaseConnection.getConnection();
         int showWords = Math.min(rightIndex - leftIndex + 1, 10);
 //        String stmt = String.format("SELECT * FROM av LIMIT %d OFFSET %d", showWords, leftIndex);
@@ -102,30 +129,5 @@ public class WordsDao {
         contentList.add(meaning.toString());
 
         return contentList;
-    }
-
-
-    public static void main(String[] args){
-//        Connection conn = DatabaseConnection.getConnection();
-//        String query = "SELECT * FROM av LIMIT 50";
-//        Statement stmt = null;
-//        ResultSet queryResult = null;
-//        try {
-//            stmt = conn.createStatement();
-//            queryResult = stmt.executeQuery(query);
-//            while (queryResult.next()) {
-//                String word = queryResult.getString(1);
-//                ArrayList<String> content = convertFromHTML(queryResult.getString(2));
-//
-//                System.out.println(word);
-//                for (String partition : content) System.out.println(partition);
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            DatabaseClose.databaseClose(conn, null, queryResult);
-//        }
-
     }
 }
