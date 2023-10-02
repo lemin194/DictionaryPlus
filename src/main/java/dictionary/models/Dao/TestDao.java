@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class TestDao {
     public static void main(String[] args) {
         WordsDao wrd = new WordsDao();
-        ArrayList<Word> testList = wrd.queryWord("he");
+        ArrayList<Word> testList = wrd.queryWord("hi");
         for (Word x : testList) {
             System.out.print(x);
         }
