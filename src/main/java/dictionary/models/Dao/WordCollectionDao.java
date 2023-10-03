@@ -14,6 +14,7 @@ public class WordCollectionDao {
     public boolean addWord(Word word) {
         boolean success = false;
         Connection conn = DatabaseConnection.getConnection();
+
         return success;
     }
 }
