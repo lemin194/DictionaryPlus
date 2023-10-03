@@ -13,11 +13,11 @@ public class AllWord {
         Connection conn = DatabaseConnection.getConnection();
         ResultSet resultSet = null;
         try {
-            String query = "SELECT * FROM av ";
+            String query = "SELECT * FROM anhviet";
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(query);
             while (resultSet.next()) {
-                word.add(resultSet.getString(1));
+                word.add(resultSet.getString(2));
             }
         } catch (SQLException e) {
             e.printStackTrace();

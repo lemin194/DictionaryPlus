@@ -1,45 +1,49 @@
 package dictionary.models.Entity;
 
+import dictionary.models.Dao.DatabaseClose;
+import dictionary.models.Dao.DatabaseConnection;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class WordCollection {
-    private ArrayList<Word> wordList;
-    private HashMap<String,Integer> index;
+    private PreparedStatement preparedStatement = null;
+    private ResultSet resultSet = null;
 
-    public WordCollection() {
-        wordList = new ArrayList<>();
-        index = new HashMap<>();
-    }
+    private Connection conn = null;
+    private String collectionName;
+    public WordCollection(String collectionName) {
+        this.collectionName = collectionName;
+        conn = DatabaseConnection.getConnection();
 
-    public int findWordPosition(String word) {
-        if (index.containsKey(word)) {
-            Integer id = index.get(word);
-            return (int)id;
+        StringBuilder createStmt = new StringBuilder("CREATE TABLE ? ( ");
+        createStmt.append("id INTEGER PRIMARY KEY,");
+        createStmt.append("word TEXT NOT NULL,");
+        createStmt.append("pronunciation TEXT,");
+        createStmt.append("type TEXT,");
+        createStmt.append("meaning TEXT NOT NULL );");
+        try {
+            preparedStatement = conn.prepareStatement(createStmt.toString());
+            preparedStatement.setString(1, collectionName);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return -1;
+
+        DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
     }
 
     public void adding(String word, String pronunciation, String type, String meaning) {
-        int id = findWordPosition(word);
-        if (id != -1) {
-            wordList.get(id).modify(meaning);
-        } else {
-            Word newWord = new Word(word, pronunciation, type, meaning);
-            wordList.add(newWord);
-            index.put(word, wordList.size() - 1);
-        }
+        conn = DatabaseConnection.getConnection();
+
+        String addStmt = "INSERT INTO ? VALUES(";
+
+
     }
 
     public boolean delete(String word) {
-        int id = findWordPosition(word);
-        if (id != -1) {
-            wordList.remove(id);
-            index.remove(word);
-            return true;
-        } else {
-            return false;
-        }
+        return true;
     }
 
 }
