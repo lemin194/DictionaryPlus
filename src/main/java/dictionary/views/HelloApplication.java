@@ -1,6 +1,5 @@
 package dictionary.views;
 
-import dictionary.services.TextToSpeech;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
