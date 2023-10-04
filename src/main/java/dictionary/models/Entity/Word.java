@@ -7,11 +7,7 @@ public class Word {
     private String meaning;
 
     /**
-     *
-     * @param word
-     * @param pronunciation
-     * @param type
-     * @param meaning
+     * Full attribute constructor.
      */
     public Word(String word, String pronunciation, String type, String meaning) {
         this.word = word;
@@ -40,7 +36,7 @@ public class Word {
         return type;
     }
 
-    public void setExplanation(String type) {
+    public void setType(String type) {
         this.type = type;
     }
 

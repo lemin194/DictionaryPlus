@@ -6,6 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseClose {
+
+    /**
+     * Close connection, prepared statement and result set.
+     * The closing order is: result set -> prepared statement -> connection.
+     */
     public static void databaseClose(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
         // close order is reverse open order
         try {

@@ -1,64 +1,91 @@
 package dictionary.models.Dao;
 
 import dictionary.models.Entity.Word;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class WordsDao {
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
+/* How to use ?
+- If you want to add word to specific table, using addWord method
+Example: addWord(golang, anhviet) => this will add golang into table anhviet
 
-    public boolean addWord(Word word, String table) {
-        boolean success = false;
-        Connection conn = DatabaseConnection.getConnection();
-        String stmt = "INSERT INTO ? (word,pronunciation,type,meaning) VALUES (?,?,?,?)";
+- If you want to delete word from specific table, using deleteWord method
+Example: deleteWord(golang, anhviet) => this will delete golang from table anhviet (in case exist)
+
+- If you want to modify word in specific table, using modifyWord method
+Example: modifyWord(golang, meaning, orz, anhviet) => this will modify golang meaning to orz.
+
+- If you want to query word in specific table, using queryWord method
+Example: queryWord("he", anhviet) => this will return a list of Word object that contain
+prefix "he" like "hello", "help", "height", etc.
+
+Also take care of object type passing in each method
+In case object ype is Word => fast passing like this new Word(word,pronunciation,type,meaning)
+ */
+public class WordsDao {
+    private static PreparedStatement preparedStatement = null;
+    private static ResultSet resultSet = null;
+    private static Connection conn = null;
+
+    /**
+     * Adding word into specific table.
+     */
+    public static boolean addWord(Word word, String table) {
+        boolean isSuccess = false;
+        int id = AllWord.leftMostIndex(word.getWord());
+        if (id != -1) {
+            System.out.println("This word already in dictionary");
+            return isSuccess;
+        }
+
+        isSuccess = true;
+        conn = DatabaseConnection.getConnection();
+        String stmt = "INSERT INTO " + table + "(word,pronunciation,type,meaning) VALUES (?,?,?,?)";
         try {
             preparedStatement = conn.prepareStatement(stmt);
-            preparedStatement.setString(1, table);
-            preparedStatement.setString(2,word.getWord());
-            preparedStatement.setString(3,word.getPronunciation());
-            preparedStatement.setString(4,word.getType());
-            preparedStatement.setString(5,word.getMeaning());
-
+            preparedStatement.setString(1, word.getWord());
+            preparedStatement.setString(2, word.getPronunciation());
+            preparedStatement.setString(3, word.getType());
+            preparedStatement.setString(4, word.getMeaning());
             if (preparedStatement.executeUpdate() > 0) {
-                success = true;
+                isSuccess = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DatabaseClose.databaseClose(conn,preparedStatement,null);
+            DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
         }
-        return success;
+        AllWord.addWord(word.getWord());
+        return isSuccess;
     }
 
-    public boolean deleteWord(String word, String table) {
-        Connection conn = DatabaseConnection.getConnection();
-        ArrayList<Integer> couple = AllWord.wordsContainPrefix(word);
-        int leftIndex = couple.get(0);
-        int rightIndex = couple.get(1);
-        if (leftIndex == -1) {
+    /**
+     * Delete word from specific table.
+     */
+    public static boolean deleteWord(String word, String table) {
+        int index = AllWord.leftMostIndex(word);
+        if (index == -1) {
             return false;
         }
-        String stmt = "DELETE FROM ? WHERE id BETWEEN ? AND ?";
+        index = AllWord.tableID(index);
+        conn = DatabaseConnection.getConnection();
+        String stmt = "DELETE FROM " + table + " WHERE id = ?;";
         try {
             preparedStatement = conn.prepareStatement(stmt);
-            preparedStatement.setString(1, table);
-            preparedStatement.setInt(2, leftIndex);
-            preparedStatement.setInt(3, rightIndex);
+            preparedStatement.setInt(1, index);
             preparedStatement.execute();
+            AllWord.deleteWord(index);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DatabaseClose.databaseClose(conn, preparedStatement, null);
+            DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
         }
         return true;
     }
-    
-    public ArrayList<Word> queryWord(String pref, String table) {
+
+    /**
+     * Query word from specific table.
+     */
+    public static ArrayList<Word> queryWord(String pref, String table) {
         ArrayList<Integer> bound = AllWord.wordsContainPrefix(pref);
         int leftIndex = bound.get(0);
         int rightIndex = bound.get(1);
@@ -66,34 +93,53 @@ public class WordsDao {
         if (leftIndex == -1) {
             return wordList;
         }
-        Connection conn = DatabaseConnection.getConnection();
-        int showWords = rightIndex - leftIndex + 1;
-//        String stmt = String.format("SELECT * FROM av LIMIT %d OFFSET %d", showWords, leftIndex);
-        String stmt = "SELECT * FROM ? LIMIT ? OFFSET ?";
+        conn = DatabaseConnection.getConnection();
+        String stmt = "SELECT * FROM " + table + " WHERE id = ?";
         try {
             preparedStatement = conn.prepareStatement(stmt);
-            preparedStatement.setString(1, table);
-            preparedStatement.setInt(2, showWords);
-            preparedStatement.setInt(3, leftIndex);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                String word = resultSet.getString(2);
-//                ArrayList<String> content = convertFromHTML(resultSet.getString(3));
-                String pronunciation = resultSet.getString(3);
-                String type = resultSet.getString(4);
-                String meaning = resultSet.getString(5);
-                wordList.add(new Word(word, pronunciation, type, meaning));
+            for (int i = leftIndex; i <= rightIndex; i++) {
+                int tableID = AllWord.tableID(i);
+                preparedStatement.setInt(1, tableID);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    String word = resultSet.getString(2);
+                    String pronunciation = resultSet.getString(3);
+                    String type = resultSet.getString(4);
+                    String meaning = resultSet.getString(5);
+                    wordList.add(new Word(word, pronunciation, type, meaning));
+                }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
         }
-        DatabaseClose.databaseClose(conn, null, null);
         return wordList;
     }
 
+    public static boolean modifyWord(String word, String modifyType, String modifyStr, String table) {
+        int index = AllWord.leftMostIndex(word);
+        if (index == -1) {
+            // this word is not in table
+            return false;
+        }
+        index = AllWord.tableID(index);
+        conn = DatabaseConnection.getConnection();
+        String modifyStmt = "UPDATE " + table + " SET " + modifyType + " = ? WHERE id = ?";
+        try {
+            preparedStatement = conn.prepareStatement(modifyStmt);
+            preparedStatement.setString(1, modifyStr);
+            preparedStatement.setInt(2, index);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
+        }
+        return true;
+    }
 
+//    just method using to get clean db.
 //    private static ArrayList<String> convertFromHTML(String initString) {
 //        Document doc = (org.jsoup.nodes.Document) Jsoup.parse(initString);
 //        String pronunciation = doc.select("h3 i").text();
@@ -112,4 +158,9 @@ public class WordsDao {
 //
 //        return contentList;
 //    }
+
+
+    public static void main(String[] args) {
+        modifyWord("zymotic", "meaning", "len men", "anhviet");
+    }
 }
