@@ -1,40 +1,44 @@
 package dictionary.models.Entity;
-
-import dictionary.models.Dao.DatabaseClose;
-import dictionary.models.Dao.DatabaseConnection;
-import dictionary.models.Dao.WordsDao;
-
-import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.List;
 
 public class WordCollection {
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
-
-    private Connection conn = null;
+    public static List<String> collectionNameList = new ArrayList<>();
     private String collectionName;
     public WordCollection(String collectionName) {
         this.collectionName = collectionName;
-        conn = DatabaseConnection.getConnection();
-
-        StringBuilder createStmt = new StringBuilder(String.format("CREATE TABLE %s ( ", collectionName));
-        createStmt.append("id INTEGER PRIMARY KEY,");
-        createStmt.append("word TEXT NOT NULL,");
-        createStmt.append("pronunciation TEXT,");
-        createStmt.append("type TEXT,");
-        createStmt.append("meaning TEXT NOT NULL );");
-        try {
-            preparedStatement = conn.prepareStatement(createStmt.toString());
-            preparedStatement.setString(1, collectionName);
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
+        collectionNameList.add(collectionName);
+        Collections.sort(collectionNameList);
     }
 
+    public static boolean isExist(String collectionName) {
+        for (int i = 0; i < collectionNameList.size(); i++) {
+            if (collectionNameList.get(i).equals(collectionName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean validPrefix(String collectionName, String prefix) {
+        for (int i = 0; i < prefix.length(); i++) {
+            if (collectionName.charAt(i) != prefix.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static List<String> collectionNamesContainPrefix(String prefix) {
+        List<String> containPrefixList = new ArrayList<>();
+        for (String collectionName : collectionNameList) {
+            if (validPrefix(collectionName, prefix)) {
+                containPrefixList.add(collectionName);
+            }
+        }
+        return containPrefixList;
+    }
 
 }
 
