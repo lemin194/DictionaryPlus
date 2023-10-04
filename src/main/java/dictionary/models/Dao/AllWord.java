@@ -55,6 +55,7 @@ public class AllWord {
             DatabaseClose.databaseClose(conn, null, resultSet);
         }
         words.sort((IndexWord w1, IndexWord w2) -> w1.getWord().compareToIgnoreCase(w2.getWord()));
+        for (IndexWord word : words) System.out.println(word.getWord());
     }
 
     /**

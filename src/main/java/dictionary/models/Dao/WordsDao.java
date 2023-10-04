@@ -66,6 +66,7 @@ public class WordsDao {
         if (index == -1) {
             return false;
         }
+        AllWord.deleteWord(index);
         index = AllWord.tableID(index);
         conn = DatabaseConnection.getConnection();
         String stmt = "DELETE FROM " + table + " WHERE id = ?;";
@@ -73,7 +74,6 @@ public class WordsDao {
             preparedStatement = conn.prepareStatement(stmt);
             preparedStatement.setInt(1, index);
             preparedStatement.execute();
-            AllWord.deleteWord(index);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -161,6 +161,6 @@ public class WordsDao {
 
 
     public static void main(String[] args) {
-        modifyWord("zymotic", "meaning", "len men", "anhviet");
+        deleteWord("a", "anhviet");
     }
 }
