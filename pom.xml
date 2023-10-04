@@ -59,7 +59,13 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>  </dependencies>
+    </dependency>
+      <dependency>
+          <groupId>javazoom</groupId>
+          <artifactId>jlayer</artifactId>
+          <version>1.0.1</version>
+      </dependency>
+  </dependencies>
 
   <build>
     <plugins>

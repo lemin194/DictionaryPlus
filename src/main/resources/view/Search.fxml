@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="dictionary.controllers.SearchController"
+            prefHeight="500" prefWidth="900" stylesheets="@../style/main.css" styleClass="border">
+    <TextField fx:id="searchBox" layoutX="47.0" layoutY="2.0" prefHeight="43.0" prefWidth="240.0" promptText="Nhập từ cần tìm kiếm " styleClass="text-field">
+        <font>
+            <Font size="15.0"/>
+        </font>
+    </TextField>
+
+</AnchorPane>

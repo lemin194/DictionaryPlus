@@ -31,17 +31,14 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws Exception {
         System.out.println(HelloApplication.class);
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Main.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Main.fxml")));
             Scene scene = new Scene(root, Color.web("1F1F1F"));
 
-            scene.getStylesheets().add(getClass().getResource("/main.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/style/main.css").toExternalForm());
 
             stage.setTitle("Dictionary Plus");
             stage.setScene(scene);
-            stage.setWidth(800);
-            stage.setHeight(600);
-            stage.setMinWidth(400);
-            stage.setMinHeight(400);
+
 
             stage.show();
         } catch (Exception e) {

@@ -7,10 +7,10 @@ module com.dictionary.dictionaryplus {
     requires org.jsoup;
 
 
-    opens dictionary.views to javafx.fxml;
-    exports dictionary.views;
-    opens dictionary to javafx.fxml;
     exports dictionary;
     exports dictionary.controllers;
+
+    opens dictionary to javafx.fxml;
     opens dictionary.controllers to javafx.fxml;
+
 }
