@@ -1,44 +1,69 @@
 package dictionary.models.Entity;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class WordCollection {
-    public static List<String> collectionNameList = new ArrayList<>();
+
     private String collectionName;
+    private List<Word> wordList;
+    private Set<String> wordSet;
     public WordCollection(String collectionName) {
+        wordList = new ArrayList<>();
+        wordSet = new HashSet<>();
         this.collectionName = collectionName;
-        collectionNameList.add(collectionName);
-        Collections.sort(collectionNameList);
     }
 
-    public static boolean isExist(String collectionName) {
-        for (int i = 0; i < collectionNameList.size(); i++) {
-            if (collectionNameList.get(i).equals(collectionName)) {
-                return true;
+    public List<Word> getWordList() {
+        return wordList;
+    }
+
+    public int findIndex(String word) {
+        for (int i = 0; i < wordList.size(); i++) {
+            if (wordList.get(i).getWord().equals(word)) {
+                return i;
             }
         }
-        return false;
+        return -1;
     }
-
-    public static boolean validPrefix(String collectionName, String prefix) {
-        for (int i = 0; i < prefix.length(); i++) {
-            if (collectionName.charAt(i) != prefix.charAt(i)) {
-                return false;
-            }
+    public void addNewWord(Word word) {
+        if (wordSet.contains(word.getWord())) {
+            System.out.printf("Word %s has already appeared in collection\n", word.getWord());
+            return;
         }
-        return true;
+
+        wordList.add(word);
+        wordSet.add(word.getWord());
     }
 
-    public static List<String> collectionNamesContainPrefix(String prefix) {
-        List<String> containPrefixList = new ArrayList<>();
-        for (String collectionName : collectionNameList) {
-            if (validPrefix(collectionName, prefix)) {
-                containPrefixList.add(collectionName);
-            }
+    public void deleteWord(String word) {
+        if (!wordSet.contains(word)) {
+            System.out.printf("Word %s not exist in collection\n", word);
+            return;
         }
-        return containPrefixList;
+
+        wordSet.remove(word);
+        wordList.remove(findIndex(word));
     }
 
+    public void modifyWord(String word, String modifyType, String modifyStr) {
+        int index = findIndex(word);
+        if (index == -1) {
+            return;
+        }
+
+        switch (modifyType) {
+            case "pronunciation":
+                wordList.get(index).setPronunciation(modifyStr);
+                break;
+            case "type":
+                wordList.get(index).setType(modifyStr);
+                break;
+            case "meaning":
+                wordList.get(index).setMeaning(modifyStr);
+                break;
+            default:
+                System.out.println("There's no modify type like this");
+        }
+    }
 }
+
 
