@@ -2,6 +2,7 @@ package dictionary.models.Entity;
 
 import dictionary.models.Dao.DatabaseClose;
 import dictionary.models.Dao.DatabaseConnection;
+import dictionary.models.Dao.WordsDao;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class WordCollection {
         this.collectionName = collectionName;
         conn = DatabaseConnection.getConnection();
 
-        StringBuilder createStmt = new StringBuilder("CREATE TABLE ? ( ");
+        StringBuilder createStmt = new StringBuilder(String.format("CREATE TABLE %s ( ", collectionName));
         createStmt.append("id INTEGER PRIMARY KEY,");
         createStmt.append("word TEXT NOT NULL,");
         createStmt.append("pronunciation TEXT,");
@@ -34,17 +35,6 @@ public class WordCollection {
         DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
     }
 
-    public void adding(String word, String pronunciation, String type, String meaning) {
-        conn = DatabaseConnection.getConnection();
-
-        String addStmt = "INSERT INTO ? VALUES(";
-
-
-    }
-
-    public boolean delete(String word) {
-        return true;
-    }
 
 }
 
