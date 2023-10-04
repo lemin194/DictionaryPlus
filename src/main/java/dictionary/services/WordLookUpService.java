@@ -33,12 +33,6 @@ public class WordLookUpService {
 
     public static void main(String[] args) {
         WordLookUpService wlkService = new WordLookUpService();
-        wlkService.addWord(new Word("hihihoh","bro","lo","comoo"));
-        wlkService.addWord(new Word("badfd", "bafdas", "twarw", "afdsfa"));
-        wlkService.addWord(new Word("bruh", "glo", "adff", "adfsd"));
-        wlkService.addWord(new Word("bibo", "bib", "lib", "fib"));
-        wlkService.addWord(new Word("afafd", "bib", "lib", "fib"));
-        wlkService.addWord(new Word("alor", "blog", "close", "loto"));
         for (Word word : wlkService.retrieveLastSearch()) {
             System.out.println(word);
         }
