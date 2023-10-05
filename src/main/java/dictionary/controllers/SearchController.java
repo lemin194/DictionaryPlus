@@ -23,4 +23,11 @@ import javafx.scene.input.KeyEvent;
 public class SearchController {
     @FXML
     public TextField searchBox;
+    @FXML
+    public TextArea wordDefinition = new TextArea();
+    @FXML
+    public ListView<String> searchResultsListView = new ListView<>();
+
+
+
 }

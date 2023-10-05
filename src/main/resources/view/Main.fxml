@@ -1,37 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
+<AnchorPane prefHeight="600" prefWidth="900" styleClass="root" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.MainController">
 
-<AnchorPane prefHeight="600" prefWidth="900" styleClass="root"
-            stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/20.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.MainController">
+      <AnchorPane fx:id="container" layoutX="130.0" layoutY="20.0" prefHeight="560" prefWidth="725" styleClass="container" />
 
-      <AnchorPane fx:id="container" layoutX="0" layoutY="100" prefHeight="500" prefWidth="900" styleClass="container"/>
-
-      <Button fx:id="searchBtn" layoutX="175.0" layoutY="14.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="114.0"  text="Search" />
-      <Button fx:id="reviewBtn" layoutX="330.0" layoutY="14.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="104.0"  text="Review" />
-      <Button fx:id="translateBtn" layoutX="465.0" layoutY="14.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="104.0" text="Translate" />
-      <Label fx:id="logo" layoutX="23.0" layoutY="14.0" prefHeight="100.0" prefWidth="104.0">
-      <graphic>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                        <Image url="@../imgs/cat_face_________04_171113_4x.jpg" />
-                  </image>
-            </ImageView>
-      </graphic>
+      <Label fx:id="logo" layoutX="10.0" layoutY="10.0">
+            <graphic>
+                  <ImageView fitHeight="64" fitWidth="64.0" layoutX="3.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                              <Image url="@../utils/imgs/logo.png" />
+                        </image>
+                  </ImageView>
+            </graphic>
       </Label>
+      <Button fx:id="searchBtn" layoutX="10" layoutY="110" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button" >
+            <graphic>
+                  <ImageView fitHeight="64" fitWidth="64" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                              <Image url="@../utils/icons/main/search.png" />
+                        </image>
+                  </ImageView>
+            </graphic>
+      </Button>
 
 
+      <Button fx:id="translateBtn" layoutX="10" layoutY="210" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
+            <graphic>
+                  <ImageView fitHeight="64" fitWidth="64" layoutX="28.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                              <Image url="@../utils/icons/main/translate.png" />
+                        </image>
+                  </ImageView>
+            </graphic>
+      </Button>
+
+      <Button fx:id="reviewBtn" layoutX="10" layoutY="310" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
+            <graphic>
+                  <ImageView fitHeight="64" fitWidth="64" layoutX="28.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                              <Image url="@../utils/icons/main/review.png" />
+                        </image>
+                  </ImageView>
+            </graphic>
+      </Button>
+
+      <Button fx:id="editBtn" layoutX="10" layoutY="410" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
+            <graphic>
+                  <ImageView fitHeight="64" fitWidth="64" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                              <Image url="@../utils/icons/main/edit.png" />
+                        </image>
+                  </ImageView>
+            </graphic>
+      </Button>
+
+      <Button fx:id="exitBtn" layoutX="10" layoutY="510" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
+            <graphic>
+                  <ImageView fitHeight="64" fitWidth="64" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                              <Image url="@../utils/icons/main/quit.png" />
+                        </image>
+                  </ImageView>
+            </graphic>
+      </Button>
 </AnchorPane>
