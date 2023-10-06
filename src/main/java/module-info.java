@@ -5,6 +5,8 @@ module com.dictionary.dictionaryplus {
     requires org.json;
     requires java.sql;
     requires org.jsoup;
+    requires java.net.http;
+    requires com.fasterxml.jackson.databind;
 
 
     exports dictionary;
