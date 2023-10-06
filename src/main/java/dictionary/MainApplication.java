@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.Objects;
 
 public class MainApplication extends Application {
+    public static Stage mainStage;
     public static void main(String[]args) {
         System.out.println(new File("./src/main/java/Dictionary/Main.fxml").exists());
         launch(args);
@@ -41,6 +42,7 @@ public class MainApplication extends Application {
 
 
             stage.show();
+            mainStage = stage;
         } catch (Exception e) {
             e.printStackTrace();
         }

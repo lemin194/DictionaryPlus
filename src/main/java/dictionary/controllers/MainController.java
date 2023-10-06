@@ -28,6 +28,7 @@ public class MainController implements Initializable{
 
     @FXML
     public AnchorPane container = new AnchorPane();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         searchBtn.setOnAction(event -> showComponent("/view/Search.fxml"));
