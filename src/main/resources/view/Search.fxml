@@ -25,10 +25,15 @@
                 <Font size="15.0" />
             </font>
         </TextArea>
+        <Label  fx:id="wordDisplay" layoutX="75" layoutY="1" prefHeight="45.0" prefWidth="150" text = "" textFill="#000000">
+            <font>
+                <Font name="System Bold Italic" size="19" />
+            </font>
+        </Label>
     </AnchorPane>
 
    <AnchorPane layoutX="14.0" layoutY="172.0" prefHeight="374.0" prefWidth="200.0" styleClass="explain-field">
-       <ListView fx:id="relatedResults" layoutX="1" layoutY="1" prefHeight="374.0" prefWidth="200" styleClass="explain-field"/>
+       <ListView fx:id="relatedResults" layoutX="8.75" layoutY="12" prefHeight="354.0" prefWidth="184" styleClass="search-area"/>
    </AnchorPane>
    <AnchorPane layoutX="236.0" layoutY="110.0" prefHeight="43.0" prefWidth="500.0" styleClass="explain-field">
        <ImageView fitHeight="48" fitWidth="48" layoutX="15" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
@@ -70,5 +75,10 @@
           </image>
       </ImageView>
 
+    <Label layoutX="585" layoutY="20" fx:id="notAvailable" prefHeight="57.0" prefWidth="177" styleClass="alert" wrapText="true">
+        <font>
+            <Font size="17" />
+        </font>
+    </Label>
 
 </AnchorPane>
