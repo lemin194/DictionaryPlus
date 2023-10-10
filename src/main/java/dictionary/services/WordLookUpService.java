@@ -9,35 +9,23 @@ import java.util.List;
 
 public class WordLookUpService {
     private static final int cacheSize = 5;
-    private Cache cache;
+    private static Cache cache = new Cache(cacheSize);
 
-    public WordLookUpService() {
-        cache = new Cache(cacheSize);
-        cache.read();
-    }
-    public List<Word> retrieveLastSearch() {
+    public static List<Word> retrieveLastSearch() {
         return cache.retrieve();
     }
 
-    public List<Word> findWord(String prefix, String tableName) {
+    public static List<Word> findWord(String prefix, String tableName) {
         prefix = prefix.toLowerCase();
         return WordsDao.queryWord(prefix, tableName);
     }
 
-    public void addWord(Word word) {
+    public static void addWord(Word word) {
         cache.add(word);
     }
 
-    public void close() {
+    public static void close() {
         cache.write();
-    }
-
-    public static void main(String[] args) {
-        WordLookUpService wlkService = new WordLookUpService();
-        for (Word word : wlkService.retrieveLastSearch()) {
-            System.out.println(word);
-        }
-        wlkService.close();
     }
 }
 
