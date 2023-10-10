@@ -1,5 +1,6 @@
 package dictionary.controllers;
 
+import dictionary.services.WordLookUpService;
 import javafx.application.Application;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
@@ -54,15 +55,14 @@ public class SearchController implements Initializable {
         relatedResults.setOnMouseClicked(event -> {
             String selectedWord = relatedResults.getSelectionModel().getSelectedItem();
             if (selectedWord != null) {
-
-                    Word english = WordsDao.queryWord(selectedWord, "anhviet").get(0);
-                    if (english != null) {
-                        wordToFind = english;
-                        wordDefinition.setText(english.getMeaning());
-                    } else {
-                        wordDefinition.setText("Definition not found for: " + selectedWord);
-                    }
-
+                Word english = WordsDao.queryWord(selectedWord, "anhviet").get(0);
+                if (english != null) {
+                    wordToFind = english;
+                    wordDefinition.setText(english.getMeaning());
+                } else {
+                    wordDefinition.setText("Definition not found for: " + selectedWord);
+                }
+                WordLookUpService.addWord(english);
             }
         });
     }
@@ -74,6 +74,8 @@ public class SearchController implements Initializable {
             relatedResults.getItems().clear();
             notAvailable.setText("");
             wordDefinition.setText("");
+            List<Word> pastWords = WordLookUpService.retrieveLastSearch();
+            for (Word word : pastWords) relatedResults.getItems().add(word.getWord());
             return;
         }
 
