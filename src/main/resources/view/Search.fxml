@@ -14,18 +14,18 @@
 
 
     <AnchorPane layoutX="236.0" layoutY="172.0" prefHeight="374.0" prefWidth="500" styleClass="explain-field">
-        <Pane layoutX="25" layoutY="57" prefWidth="445" prefHeight="3" styleClass="bar"/>
-        <ImageView fitHeight="48" fitWidth="48" layoutX="25" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+        <Pane layoutX="29.0" layoutY="74.0" prefHeight="3" prefWidth="445" styleClass="bar" />
+        <ImageView fitHeight="48" fitWidth="48" layoutX="28.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../utils/icons/search/icons8-speaker-48.png" />
             </image>
         </ImageView>
-        <TextArea fx:id="wordDefinition" layoutX="25.0" layoutY="93.0" prefHeight="242.0" prefWidth="452.0" styleClass="text-area" wrapText="true">
+        <TextArea fx:id="wordDefinition" editable="false" layoutX="24.0" layoutY="93.0" prefHeight="242.0" prefWidth="452.0" styleClass="text-area" wrapText="true">
             <font>
                 <Font size="15.0" />
             </font>
         </TextArea>
-        <Label  fx:id="wordDisplay" layoutX="75" layoutY="1" prefHeight="45.0" prefWidth="150" text = "" textFill="#000000">
+        <Label fx:id="wordDisplay" layoutX="82.0" layoutY="4.0" prefHeight="70.0" prefWidth="380.0" text="" textFill="#000000">
             <font>
                 <Font name="System Bold Italic" size="19" />
             </font>
@@ -33,7 +33,7 @@
     </AnchorPane>
 
    <AnchorPane layoutX="14.0" layoutY="172.0" prefHeight="374.0" prefWidth="200.0" styleClass="explain-field">
-       <ListView fx:id="relatedResults" layoutX="8.75" layoutY="12" prefHeight="354.0" prefWidth="184" styleClass="search-area"/>
+       <ListView fx:id="relatedResults" layoutX="8.75" layoutY="12" prefHeight="354.0" prefWidth="184" styleClass="search-area" />
    </AnchorPane>
    <AnchorPane layoutX="236.0" layoutY="110.0" prefHeight="43.0" prefWidth="500.0" styleClass="explain-field">
        <ImageView fitHeight="48" fitWidth="48" layoutX="15" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
@@ -41,7 +41,7 @@
                <Image url="@../utils/icons/search/icons8-book-48.png" />
            </image>
        </ImageView>
-       <Label  layoutX="70" prefHeight="45.0" prefWidth="150" text="Definition" textFill="#000000">
+       <Label layoutX="70" prefHeight="45.0" prefWidth="150" text="Definition" textFill="#000000">
            <font>
                <Font name="System Bold Italic" size="19" />
            </font>
@@ -53,14 +53,14 @@
                <Image url="@../utils/icons/search/icons8-filter-48.png" />
            </image>
        </ImageView>
-       <Label  layoutX="60" prefHeight="45.0" prefWidth="150" text="Search results" textFill="#000000">
+       <Label layoutX="60" prefHeight="45.0" prefWidth="150" text="Search results" textFill="#000000">
             <font>
                 <Font name="System Bold Italic" size="19" />
             </font>
        </Label>
    </AnchorPane>
     <AnchorPane layoutX="213.0" layoutY="26" prefHeight="50" prefWidth="315.0" styleClass="explain-field">
-        <TextField fx:id="searchBox" layoutX="50.0" layoutY="1.0" prefHeight="48.0" prefWidth="314.0" promptText="test" styleClass="text-field" onKeyReleased="#handleSearch">
+        <TextField fx:id="searchBox" layoutX="50.0" layoutY="1.0" onKeyReleased="#handleSearch" prefHeight="48.0" prefWidth="314.0" promptText="test" styleClass="text-field">
             <font>
                 <Font size="15.0" />
             </font>
@@ -75,7 +75,7 @@
           </image>
       </ImageView>
 
-    <Label layoutX="585" layoutY="20" fx:id="notAvailable" prefHeight="57.0" prefWidth="177" styleClass="alert" wrapText="true">
+    <Label fx:id="notAvailable" layoutX="585" layoutY="20" prefHeight="57.0" prefWidth="177" styleClass="alert" wrapText="true">
         <font>
             <Font size="17" />
         </font>
