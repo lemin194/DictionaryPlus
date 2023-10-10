@@ -77,5 +77,15 @@
 .bar{
     -fx-background-color: #bebebe;
     -fx-effect: dropshadow(gaussian, #545454, 5, 0, 0, 3) ;
+}
 
+.search-area{
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-color: transparent; /* Transparent border */
+    -fx-padding: 0 5 0 5; /* Adjust padding as needed */
+}
+
+.alert{
+    -fx-font-family: "Comic Sans MS";
+    -fx-text-fill: #ffffff;
 }
