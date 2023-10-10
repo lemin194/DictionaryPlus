@@ -20,6 +20,7 @@ public class WordLookUpService {
     }
 
     public List<Word> findWord(String prefix, String tableName) {
+        prefix = prefix.toLowerCase();
         return WordsDao.queryWord(prefix, tableName);
     }
 

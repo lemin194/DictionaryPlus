@@ -39,27 +39,30 @@ public class SearchController implements Initializable {
     private TextField searchBox = new TextField();
     @FXML
     private ListView<String> relatedResults = new ListView<>();
+
     @FXML
     private Label notAvailable = new Label();
-    @FXML
-    private Label wordDisplay = new Label();
+
     @FXML
     private TextArea wordDefinition = new TextArea();
+
     @FXML
     public Word wordToFind;
+
     @FXML
     public void initialize(URL location, ResourceBundle Resources) {
         relatedResults.setOnMouseClicked(event -> {
             String selectedWord = relatedResults.getSelectionModel().getSelectedItem();
             if (selectedWord != null) {
+
                     Word english = WordsDao.queryWord(selectedWord, "anhviet").get(0);
                     if (english != null) {
                         wordToFind = english;
                         wordDefinition.setText(english.getMeaning());
-                        wordDisplay.setText(wordToFind.getWord());
                     } else {
                         wordDefinition.setText("Definition not found for: " + selectedWord);
                     }
+
             }
         });
     }
@@ -71,39 +74,38 @@ public class SearchController implements Initializable {
             relatedResults.getItems().clear();
             notAvailable.setText("");
             wordDefinition.setText("");
-            wordDisplay.setText("");
             return;
         }
 
-        relatedResults.getItems().clear();
-        List<Word> list = WordsDao.queryWord(searchTerm, "anhviet");
-        if (list.isEmpty()) {
-            clearSearchResultsView();
-            notAvailable.setText("Sorry, We don't have this word !");
-            return;
-        }
-        wordToFind = list.get(0);
-        wordDisplay.setText(wordToFind.getWord());
-        wordDefinition.setText(wordToFind.getMeaning());
+            relatedResults.getItems().clear();
+            List<Word> list = WordsDao.queryWord(searchTerm, "anhviet");
+            if (list.isEmpty()) {
+                clearSearchResultsView();
+                notAvailable.setText("Sorry, We don't have word " + searchTerm);
+                return;
+            }
+            wordToFind = list.get(0);
+            wordDefinition.setText(wordToFind.getMeaning());
+            for (Word english : list) {
+                System.out.println(english.getWord());
+                relatedResults.getItems().add(english.getWord());
+            }
+            Collections.sort(relatedResults.getItems());
 
-        Collections.sort(relatedResults.getItems());
-
-
-        /** debug purposes.*/
-        for (Word english : list) {
-            System.out.println(english.getWord());
-            relatedResults.getItems().add(english.getWord());
-        }
     }
 
-    @FXML
     public void clearSearchResultsView() {
         relatedResults.getItems().clear();
         wordDefinition.setText("");
-        notAvailable.setText("");
     }
 
     public void initializeWithStage(Stage stage) {
         this.initializeWithStage(stage);
     }
+
+
+
+
+
+
 }
