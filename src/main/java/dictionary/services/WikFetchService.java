@@ -101,6 +101,6 @@ public class WikFetchService {
     //----------------------------------------------------------------------------------
     public static void main(String[] args) throws IOException, InterruptedException {
         WikFetchService wfService = new WikFetchService();
-        System.out.println(wfService.search("VietNam"));
+        System.out.println(wfService.search("one"));
     }
 }

@@ -5,6 +5,7 @@ import dictionary.models.Entity.WordCollection;
 import dictionary.models.Entity.WordCollectionManagement;
 
 import java.sql.*;
+import java.util.List;
 
 public class WordCollectionDao {
     private static Connection conn = null;
@@ -31,6 +32,7 @@ public class WordCollectionDao {
             DatabaseClose.databaseClose(conn, preparedStatement, null);
         }
     }
+
     public static void deleteCollection(String collectionName){
         if (!WordCollectionManagement.isExist(collectionName)) {
             return;
