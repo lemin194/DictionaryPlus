@@ -15,14 +15,20 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.util.Objects;
 
+import javafx.scene.control.Tooltip;
 
 public class MainController implements Initializable{
     @FXML
     private Label logo = new Label();
     @FXML
-    private Button searchBtn, translateBtn, reviewBtn;
+    private Button searchBtn, translateBtn, reviewBtn, editBtn, exitBtn;
+
+    @FXML
+    public Tooltip searchTooltip, translateTooltip, reviewTooltip, editTooltip, exitTooltip;
+
     @FXML
     public AnchorPane container = new AnchorPane();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         searchBtn.setOnAction(event -> showComponent("/view/Search.fxml"));
@@ -31,7 +37,11 @@ public class MainController implements Initializable{
 
         translateBtn.setOnAction(event -> showComponent("/view/Translate.fxml"));
 
+        editBtn.setOnAction(event -> showComponent("/view/Edit.fxml"));
+
         showComponent("/view/Search.fxml");
+
+        exitBtn.setOnMouseClicked(e -> System.exit(0));
 
     }
 

@@ -1,32 +1,81 @@
 .root{
-    -fx-background-color: linear-gradient(to top right,#d5eaf5, #f5ddda);
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
+    -fx-background-color: #fde2ac;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
 }
-
-
-
 .button {
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
     -fx-background-color: linear-gradient(to top right,#79ceed, #c5e7f1);
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
     -fx-font-weight: bold;
     -fx-font-size: 1.1em;
 }
-.button:hover {
-    -fx-background-color: linear-gradient(to top right,#19335a, #8fc8eb);
-}
-.button:pressed {
-    -fx-padding: 10 15 13 15;
-    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
-}
-.button Text {
-    -fx-fill: white;
-    -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
+
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
 }
 
 .border {
     -fx-background-color: #809ccc;
+}
+
+.explain-field {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3) ;
+}
+
+.explain-area {
+    -fx-background-color: transparent;
+}
+
+.container{
+    -fx-background-color:  #9eced9;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-effect: dropshadow(gaussian, #545454, 5, 0, 0, 3) ;
+}
+
+.search-box{
+    -fx-background-color:  transparent;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-effect: dropshadow(three-pass-box, #545454, 5, 0, 0, 3) ;
+}
+.text-field {
+    -fx-font-size: 18.0;
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-background-radius: 5;
+    -fx-border-color: transparent; /* Transparent border */
+    -fx-border-radius: 5;
+    -fx-text-fill: #333333; /* Text color */
+    -fx-prompt-text-fill: #999999; /* Prompt text color */
+    -fx-padding: 0 5 0 5; /* Adjust padding as needed */
+}
+
+.text-area {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+.bar{
+    -fx-background-color: #bebebe;
+    -fx-effect: dropshadow(gaussian, #545454, 5, 0, 0, 3) ;
+
 }

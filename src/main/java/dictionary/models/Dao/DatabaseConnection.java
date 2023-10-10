@@ -19,4 +19,7 @@ public class DatabaseConnection {
         }
         return conn;
     }
+
+    public static WordsDao wordsDao;
+
 }
