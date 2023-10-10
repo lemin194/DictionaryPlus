@@ -6,6 +6,7 @@ public class Word {
     private String type;
     private String meaning;
 
+
     /**
      * Full attribute constructor.
      */

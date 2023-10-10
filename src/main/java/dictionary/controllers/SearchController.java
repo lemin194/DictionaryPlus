@@ -1,5 +1,6 @@
 package dictionary.controllers;
 
+import dictionary.services.WordLookUpService;
 import javafx.application.Application;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
@@ -50,19 +51,22 @@ public class SearchController implements Initializable {
     public Word wordToFind;
 
     @FXML
+    private Label wordDisplay = new Label();
+
+    @FXML
     public void initialize(URL location, ResourceBundle Resources) {
         relatedResults.setOnMouseClicked(event -> {
             String selectedWord = relatedResults.getSelectionModel().getSelectedItem();
             if (selectedWord != null) {
-
-                    Word english = WordsDao.queryWord(selectedWord, "anhviet").get(0);
-                    if (english != null) {
-                        wordToFind = english;
-                        wordDefinition.setText(english.getMeaning());
-                    } else {
-                        wordDefinition.setText("Definition not found for: " + selectedWord);
-                    }
-
+                Word english = WordLookUpService.findWord(selectedWord, "anhviet").get(0);
+                if (english != null) {
+                    wordToFind = english;
+                    wordDefinition.setText("Type:\n" + english.getType() + "\n" + "Meaning:\n" +english.getMeaning() );
+                    wordDisplay.setText(english.getWord() + "\n" + english.getPronunciation());
+                } else {
+                    wordDefinition.setText("Definition not found for: " + selectedWord);
+                }
+                WordLookUpService.addWord(english);
             }
         });
     }
@@ -71,9 +75,9 @@ public class SearchController implements Initializable {
     public void handleSearch(KeyEvent keyEvent) {
         String searchTerm = searchBox.getText();
         if (searchTerm.isEmpty() || searchTerm.isBlank()) {
-            relatedResults.getItems().clear();
-            notAvailable.setText("");
-            wordDefinition.setText("");
+            clearSearchResultsView();
+            List<Word> pastWords = WordLookUpService.retrieveLastSearch();
+            for (Word word : pastWords) relatedResults.getItems().add(word.getWord());
             return;
         }
 
@@ -81,11 +85,12 @@ public class SearchController implements Initializable {
             List<Word> list = WordsDao.queryWord(searchTerm, "anhviet");
             if (list.isEmpty()) {
                 clearSearchResultsView();
-                notAvailable.setText("Sorry, We don't have word " + searchTerm);
+                notAvailable.setText("We don't have this word!");
                 return;
             }
             wordToFind = list.get(0);
-            wordDefinition.setText(wordToFind.getMeaning());
+            wordDefinition.setText("Type:\n" + wordToFind.getType()+ "\nMeaning:\n" + wordToFind.getMeaning());
+            wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
             for (Word english : list) {
                 System.out.println(english.getWord());
                 relatedResults.getItems().add(english.getWord());
@@ -97,6 +102,8 @@ public class SearchController implements Initializable {
     public void clearSearchResultsView() {
         relatedResults.getItems().clear();
         wordDefinition.setText("");
+        wordDisplay.setText("");
+        notAvailable.setText("");
     }
 
     public void initializeWithStage(Stage stage) {
