@@ -63,6 +63,7 @@ public class SearchController implements Initializable {
                     wordToFind = english;
                     wordDefinition.setText("Type:\n" + english.getType() + "\n" + "Meaning:\n" +english.getMeaning() );
                     wordDisplay.setText(english.getWord() + "\n" + english.getPronunciation());
+                
                 } else {
                     wordDefinition.setText("Definition not found for: " + selectedWord);
                 }
@@ -76,6 +77,7 @@ public class SearchController implements Initializable {
         String searchTerm = searchBox.getText();
         if (searchTerm.isEmpty() || searchTerm.isBlank()) {
             clearSearchResultsView();
+
             List<Word> pastWords = WordLookUpService.retrieveLastSearch();
             for (Word word : pastWords) relatedResults.getItems().add(word.getWord());
             return;
