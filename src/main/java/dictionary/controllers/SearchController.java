@@ -97,8 +97,6 @@ public class SearchController implements Initializable {
                 System.out.println(english.getWord());
                 relatedResults.getItems().add(english.getWord());
             }
-            Collections.sort(relatedResults.getItems());
-
     }
 
     public void clearSearchResultsView() {
