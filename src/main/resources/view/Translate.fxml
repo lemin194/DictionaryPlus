@@ -1,14 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="dictionary.controllers.TranslateController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="560.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.TranslateController">
+   <children>
+      <VBox>
+         <children>
+            <AnchorPane prefHeight="17.0" prefWidth="750.0">
+               <children>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../utils/imgs/logo.png" />
+                     </image>
+                  </ImageView>
+                  <AnchorPane layoutX="265.0" layoutY="26.0" styleClass="explain-field">
+                     <children>
+                        <ImageView fitHeight="48" fitWidth="48" layoutX="15.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../utils/icons/search/icons8-book-48.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="70" prefHeight="45.0" prefWidth="150" text="Translate" textFill="#000000">
+                           <font>
+                              <Font name="System Bold Italic" size="19" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="456.0" prefWidth="750.0">
+               <children>
+                  <VBox layoutX="15.0" layoutY="26.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                     <children>
+                        <HBox alignment="CENTER" spacing="16.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="360.0" prefWidth="512.0" styleClass="translate-box">
+                                 <children>
+                                    <ChoiceBox fx:id="fromLanguageChoice" prefWidth="150.0" styleClass="choicebox-language" />
+                                    <TextArea fx:id="fromTextArea" minHeight="250.0" minWidth="300.0" prefHeight="250.0" prefWidth="332.0" styleClass="translate-text-box" wrapText="true">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <stylesheets>
+                                          <URL value="@../style/translate.css" />
+                                          <URL value="@../style/variable.css" />
+                                       </stylesheets>
+                                    </TextArea>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="332.0">
+                                       <children>
+                                          <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#ToggleRecord" prefHeight="48.0" prefWidth="48.0" styleClass="button-translate-service" text="Button">
+                                             <graphic>
+                                                <ImageView fx:id="recordingButtonIcon" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../utils/icons/translate/micro.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXButton>
+                                          <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#PlayTextFrom" prefHeight="48.0" prefWidth="48.0" styleClass="button-translate-service" text=" ">
+                                             <graphic>
+                                                <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../utils/icons/translate/speaker.png" />
+                                                   </image>
+                                                   <viewport>
+                                                      <Rectangle2D />
+                                                   </viewport>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" prefHeight="360.0" prefWidth="512.0" styleClass="translate-box">
+                                 <children>
+                                    <ChoiceBox fx:id="toLanguageChoice" prefWidth="150.0" styleClass="choicebox-language" />
+                                    <TextArea fx:id="toTextArea" editable="false" minHeight="250.0" minWidth="300.0" prefHeight="250.0" prefWidth="332.0" styleClass="translate-text-box" stylesheets="@../style/translate.css" wrapText="true">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </TextArea>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="48.0">
+                                       <children>
+                                          <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#PlayTextTo" prefHeight="48.0" prefWidth="48.0" styleClass="button-translate-service" text=" ">
+                                             <graphic>
+                                                <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../utils/icons/translate/speaker.png" />
+                                                   </image>
+                                                   <viewport>
+                                                      <Rectangle2D />
+                                                   </viewport>
+                                                </ImageView>
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <stylesheets>
+                  <URL value="@../style/variable.css" />
+                  <URL value="@../style/translate.css" />
+               </stylesheets>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
