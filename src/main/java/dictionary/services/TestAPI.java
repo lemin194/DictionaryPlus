@@ -28,6 +28,6 @@ public class TestAPI {
 //        TestTTS();
 //        SpeechToText.beginRecord();
 //        SpeechToText.stopRecording();
-        System.out.println(SpeechToText.STT("de"));
+        System.out.println(SpeechToText.STT("ru"));
     }
 }

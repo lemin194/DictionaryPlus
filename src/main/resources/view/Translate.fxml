@@ -47,7 +47,7 @@
                      <children>
                         <HBox alignment="CENTER" spacing="16.0">
                            <children>
-                              <VBox alignment="CENTER" prefHeight="360.0" prefWidth="512.0" styleClass="translate-box">
+                              <VBox alignment="CENTER" prefHeight="350.0" prefWidth="512.0" spacing="4.0" styleClass="translate-box">
                                  <children>
                                     <ChoiceBox fx:id="fromLanguageChoice" prefWidth="150.0" styleClass="choicebox-language" />
                                     <TextArea fx:id="fromTextArea" minHeight="250.0" minWidth="300.0" prefHeight="250.0" prefWidth="332.0" styleClass="translate-text-box" wrapText="true">
@@ -92,7 +92,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER" prefHeight="360.0" prefWidth="512.0" styleClass="translate-box">
+                              <VBox alignment="CENTER" prefHeight="350.0" prefWidth="512.0" spacing="4.0" styleClass="translate-box">
                                  <children>
                                     <ChoiceBox fx:id="toLanguageChoice" prefWidth="150.0" styleClass="choicebox-language" />
                                     <TextArea fx:id="toTextArea" editable="false" minHeight="250.0" minWidth="300.0" prefHeight="250.0" prefWidth="332.0" styleClass="translate-text-box" stylesheets="@../style/translate.css" wrapText="true">

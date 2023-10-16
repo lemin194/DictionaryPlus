@@ -265,12 +265,14 @@ public class SpeechToText {
         System.out.println(lang);
 
         // Create a multipart entity with form data
-        HttpEntity entity = new UrlEncodedFormEntity(formParams, StandardCharsets.UTF_8);
 
         // Attach the file to the entity
-        entity = MultipartEntityBuilder.create()
-            .addPart("file", new FileBody(new File(filePath)))
-            .setCharset(Charset.forName("UTF-8"))
+        var builder = MultipartEntityBuilder.create();
+        for (var nvp : formParams) {
+          builder = builder.addTextBody(nvp.getName(), nvp.getValue());
+        }
+        HttpEntity entity = builder.addPart("file", new FileBody(new File(filePath)))
+            .setCharset(StandardCharsets.UTF_8)
             .setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
             .setBoundary("===" + System.currentTimeMillis() + "===")
             .build();
