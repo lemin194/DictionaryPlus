@@ -30,14 +30,7 @@ public class WordCollectionDao {
             Statement stmt = conn.createStatement();
             stmt.execute(createStmt.toString());
             WordCollectionManagement.addCollection(collectionName);
-
-            // storing wordCollection for next use
-            String filePATH = "src/main/resources/data/Collection.txt";
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePATH))) {
-                writer.write(collectionName+"\n");
-            }
-
-        } catch (SQLException | IOException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DatabaseClose.databaseClose(conn, preparedStatement, null);

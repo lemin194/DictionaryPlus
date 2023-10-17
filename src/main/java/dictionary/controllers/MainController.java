@@ -1,5 +1,6 @@
 package dictionary.controllers;
 
+import dictionary.models.Dao.Utils;
 import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,8 +39,14 @@ public class MainController implements Initializable{
 
         showComponent("/view/Search.fxml");
 
-        exitBtn.setOnMouseClicked(e -> System.exit(0));
+        exitBtn.setOnMouseClicked(e -> exit());
+    }
 
+    public void exit() {
+        Utils utils = new Utils();
+        utils.storeCollection();
+        utils.storeLastFind();
+        System.exit(0);
     }
 
     public void setNode(Node node) {
