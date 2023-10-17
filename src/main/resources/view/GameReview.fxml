@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="419.0" prefWidth="688.0" styleClass="sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.GameReviewController">
+    <children>
+        <Button fx:id="editCollectionBtn" layoutX="190.0" layoutY="20.0" mnemonicParsing="false" text="add/edit" />
+        <Button fx:id="playBtn" layoutX="399.0" layoutY="20.0" mnemonicParsing="false" text="play" />
+        <AnchorPane fx:id="reviewContainer" layoutX="38.0" layoutY="77.0" prefHeight="317.0" prefWidth="623.0" styleClass="sub-sub-container" />
+    </children>
+</AnchorPane>

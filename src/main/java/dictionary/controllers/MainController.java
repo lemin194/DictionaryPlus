@@ -24,16 +24,13 @@ public class MainController implements Initializable{
     private Button searchBtn, translateBtn, reviewBtn, editBtn, exitBtn;
 
     @FXML
-    public Tooltip searchTooltip, translateTooltip, reviewTooltip, editTooltip, exitTooltip;
-
-    @FXML
     public AnchorPane container = new AnchorPane();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         searchBtn.setOnAction(event -> showComponent("/view/Search.fxml"));
 
-        reviewBtn.setOnAction(event -> showComponent("/view/Review.fxml"));
+        reviewBtn.setOnAction(event -> showComponent("/view/Game.fxml"));
 
         translateBtn.setOnAction(event -> showComponent("/view/Translate.fxml"));
 

@@ -80,6 +80,9 @@ public class SearchController implements Initializable {
 
             List<Word> pastWords = WordLookUpService.retrieveLastSearch();
             for (Word word : pastWords) relatedResults.getItems().add(word.getWord());
+            Word tmp = pastWords.get(0);
+            wordDefinition.setText("Type:\n" + tmp.getType()+ "\nMeaning:\n" + tmp.getMeaning());
+            wordDisplay.setText(tmp.getWord() + "\n" + tmp.getPronunciation());
             return;
         }
 

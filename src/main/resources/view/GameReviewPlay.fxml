@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="317.0" prefWidth="623.0" styleClass="sub-sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.GameReviewPlayController">
+   <children>
+      <ChoiceBox layoutX="411.0" layoutY="35.0" prefWidth="150.0" />
+      <Button layoutX="30.0" layoutY="27.0" mnemonicParsing="false" text="Button" />
+      <Label layoutX="513.0" layoutY="79.0" styleClass="button" text="19/70" />
+      <Label layoutX="130.0" layoutY="27.0" styleClass="button" text="current word" />
+      <Button layoutX="411.0" layoutY="134.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="111.0" text="easy" />
+      <Button layoutX="411.0" layoutY="192.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="111.0" text="hard" />
+      <Button layoutX="414.0" layoutY="251.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="111.0" text="medium" />
+      <Label layoutX="67.0" layoutY="79.0" text="label: word pronounciation" />
+      <TextArea layoutX="39.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" promptText="I AM BREAKING FREE FROM THESE MEMORIES" styleClass="text-area" />
+   </children>
+</AnchorPane>
