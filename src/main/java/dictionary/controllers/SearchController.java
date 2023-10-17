@@ -83,20 +83,20 @@ public class SearchController implements Initializable {
             return;
         }
 
-            relatedResults.getItems().clear();
-            List<Word> list = WordsDao.queryWord(searchTerm, "anhviet");
-            if (list.isEmpty()) {
-                clearSearchResultsView();
-                notAvailable.setText("We don't have this word!");
-                return;
-            }
-            wordToFind = list.get(0);
-            wordDefinition.setText("Type:\n" + wordToFind.getType()+ "\nMeaning:\n" + wordToFind.getMeaning());
-            wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
-            for (Word english : list) {
-                System.out.println(english.getWord());
-                relatedResults.getItems().add(english.getWord());
-            }
+        relatedResults.getItems().clear();
+        List<Word> list = WordsDao.queryWord(searchTerm, "anhviet");
+        if (list.isEmpty()) {
+            clearSearchResultsView();
+            notAvailable.setText("We don't have this word!");
+            return;
+        }
+        wordToFind = list.get(0);
+        wordDefinition.setText("Type:\n" + wordToFind.getType()+ "\nMeaning:\n" + wordToFind.getMeaning());
+        wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
+        for (Word english : list) {
+            System.out.println(english.getWord());
+            relatedResults.getItems().add(english.getWord());
+        }
     }
 
     public void clearSearchResultsView() {

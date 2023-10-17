@@ -43,7 +43,6 @@ public class MainController implements Initializable{
         showComponent("/view/Search.fxml");
 
         exitBtn.setOnMouseClicked(e -> exit());
-
     }
 
     public void exit() {
