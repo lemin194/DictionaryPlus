@@ -9,6 +9,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+import java.util.ArrayList;
+import java.util.List;
+import javafx.util.Pair;
 import org.json.JSONArray;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -25,15 +28,17 @@ public class Translation {
      */
 
 
-    public static String TranslateText(String text, String sourceLanguage, String targetLanguage) {
-        String ret = "";
+    public static List<String> TranslateText(String text, String sourceLanguage, String targetLanguage) {
+        List<String> ret = new ArrayList<>();
+        ret.add("");
+        ret.add("en");
 
         Pattern spacePattern = Pattern.compile("^[\\s]+$");
         Matcher matcher = spacePattern.matcher(text);
-//        if (matcher.matches()) {
-//            // Text contains only white spaces.
-//            return ret;
-//        }
+        if (matcher.matches()) {
+            // Text contains only white spaces.
+            return ret;
+        }
 
         String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8);
         System.out.println(encodedText);
@@ -79,11 +84,12 @@ public class Translation {
                 return ret;
             }
             JSONArray sentences = (JSONArray) respond.get(0);
-
+            String lang = respond.get(2).toString();
+            ret.set(1, lang);
             for (Object sentenceObject : sentences) {
                 JSONArray sentence = new JSONArray(sentenceObject.toString());
                 String translatedSentence = sentence.get(0).toString();
-                ret += translatedSentence;
+                ret.set(0, ret.get(0) + translatedSentence);
             }
 
         } catch (Exception e) {

@@ -131,6 +131,8 @@ public class AllWord {
     public static int tableID(int index) {
         return words.get(index).getIndex();
     }
-    public static void main(String[] args) {
+
+    public static int amountWord() {
+        return words.size();
     }
 }

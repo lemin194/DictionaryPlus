@@ -1,5 +1,7 @@
 package dictionary.services;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javazoom.jl.player.FactoryRegistry;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
@@ -16,7 +18,10 @@ import java.util.concurrent.Executors;
 
 public class TextToSpeech {
     private static final String tts_audio_path = "temp/speech_tmp.mp3";
+    private static boolean playing = false;
     private static int playVoice() {
+        final int[] ret = {0};
+        if (playing) return ret[0];
         ExecutorService executor = null;
         try {
             executor = Executors.newSingleThreadExecutor();
@@ -26,18 +31,21 @@ public class TextToSpeech {
                     try {
                         FileInputStream fis = new FileInputStream(tts_audio_path);
                         AdvancedPlayer player = new AdvancedPlayer(fis, FactoryRegistry.systemRegistry().createAudioDevice());
+                        playing = true;
                         player.play();
+                        playing = false;
                     } catch (Exception e) {
                         e.printStackTrace();
+                        ret[0] = -1;
                     } finally {
                         // Delete the file after playing the audio
                         File file_to_delete = new File(tts_audio_path);
                         if (file_to_delete.exists()) {
-                                if (file_to_delete.delete()) {
-                                    System.out.println("File deleted successfully.");
-                                } else {
-                                    System.err.println("Failed to delete file.");
-                                }
+//                                if (file_to_delete.delete()) {
+////                                    System.out.println("File deleted successfully.");
+//                                } else {
+//                                    System.err.println("Failed to delete file.");
+//                                }
                         }
                     }
                 }
@@ -47,7 +55,7 @@ public class TextToSpeech {
                 executor.shutdown();
             }
         }
-        return 0;
+        return ret[0];
     }
 
     private static int getVoice(String text, String lang) {
@@ -98,11 +106,19 @@ public class TextToSpeech {
     }
 
     /**
-     * Text to Speech API.
+     * Speak input text.
      * @param lang  Language ("en" or "vi").
      * @param text  Input text.
      */
     public static String TTS(String text, String lang) {
+
+        Pattern spacePattern = Pattern.compile("^[\\s]+$");
+        Matcher matcher = spacePattern.matcher(text);
+        if (matcher.matches()) {
+            // Text contains only white spaces.
+            return "OK";
+        }
+
         int code = 0;
         code = getVoice(text, lang);
         if (code > 299) {

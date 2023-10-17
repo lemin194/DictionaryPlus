@@ -4,6 +4,9 @@ import dictionary.models.Entity.Word;
 import dictionary.models.Entity.WordCollection;
 import dictionary.models.Entity.WordCollectionManagement;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.List;
 
@@ -26,7 +29,15 @@ public class WordCollectionDao {
         try {
             Statement stmt = conn.createStatement();
             stmt.execute(createStmt.toString());
-        } catch (SQLException e) {
+            WordCollectionManagement.addCollection(collectionName);
+
+            // storing wordCollection for next use
+            String filePATH = "src/main/resources/data/Collection.txt";
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePATH))) {
+                writer.write(collectionName+"\n");
+            }
+
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         } finally {
             DatabaseClose.databaseClose(conn, preparedStatement, null);

@@ -139,6 +139,28 @@ public class WordsDao {
         return true;
     }
 
+    // this use for query word by index
+    public static Word queryWordByIndex(int index, String table) {
+        String query = String.format("SELECT * FROM %s WHERE id = %d", table, index);
+        conn = DatabaseConnection.getConnection();
+        Word result = null;
+        try {
+            Statement stmt = conn.createStatement();
+            resultSet = stmt.executeQuery(query);
+            while (resultSet.next()) {
+                String word = resultSet.getString(2);
+                String pronunciation = resultSet.getString(3);
+                String type = resultSet.getString(4);
+                String meaning = resultSet.getString(5);
+                result = new Word(word, pronunciation, type, meaning);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
+        }
+        return result;
+    }
 //    just method using to get clean db.
 //    private static ArrayList<String> convertFromHTML(String initString) {
 //        Document doc = (org.jsoup.nodes.Document) Jsoup.parse(initString);
@@ -158,9 +180,4 @@ public class WordsDao {
 //
 //        return contentList;
 //    }
-
-
-    public static void main(String[] args) {
-        deleteWord("a", "anhviet");
-    }
 }

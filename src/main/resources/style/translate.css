@@ -1,0 +1,56 @@
+.translate-text-box {
+  -fx-background-insets: 0;
+  -fx-background-color: transparent;
+}
+
+.translate-text-box .content {
+  -fx-background-color: transparent, white, transparent, white;
+}
+
+.translate-text-box:focused .content {
+  -fx-background-color: transparent, white, transparent, white;
+}
+
+.translate-text-box:focused {
+  -fx-highlight-fill: -text-highlight-fill;
+}
+
+.translate-text-box .content {
+  -fx-padding: 16px;
+  -fx-text-fill: -text-fill;
+  -fx-highlight-fill: -text-highlight-fill;
+}
+
+.translate-box {
+  -fx-background-color: -tertiary;
+  -fx-background-radius: 32px;
+}
+.button-translate-service {
+  -fx-background-radius: 64pt;
+}
+.button-translate-service:hover {
+  -fx-background-color: #EEEEEE;
+}
+.button-translate-service:pressed {
+  -fx-background-color: #E0E0E0;
+}
+
+.choicebox-language .arrow-button {
+  -fx-background-color: -fx; /* Change the arrow button background color */
+  -fx-shape: "M0,0 L7,10 L14,0 Z"; /* Change the arrow icon */
+  -fx-background-insets: 0;
+}
+
+.choicebox-language .label {
+  -fx-font-size: 14px; /* Change the font size of the selected item label */
+  -fx-text-fill: -text-language-select; /* Change the text color of the selected item label */
+}
+
+.choicebox-language .menu-item {
+  -fx-font-size: 14px; /* Change the font size of menu items */
+  -fx-text-fill: -text-language-select; /* Change the text color of menu items */
+}
+
+.choicebox-language .menu-item:hover {
+  -fx-background-color: #f0f0f0; /* Change the background color of the hovered menu item */
+}

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class WordLookUpService {
-    private static final int cacheSize = 5;
+    private static final int cacheSize = 10;
     private static Cache cache = new Cache(cacheSize);
 
     public static List<Word> retrieveLastSearch() {
@@ -22,6 +22,9 @@ public class WordLookUpService {
 
     public static void addWord(Word word) {
         cache.add(word);
+    }
+    public static void start() {
+        cache.read();
     }
 
     public static void close() {
