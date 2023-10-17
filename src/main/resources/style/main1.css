@@ -1,0 +1,79 @@
+.root{
+    -fx-background-color: #fde2ac;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+}
+
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.button {
+        -fx-padding: 8 15 15 15;
+        -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+        -fx-background-radius: 8;
+        -fx-background-color: linear-gradient(to top right,#d31027, #ea384d);
+        -fx-font-weight: bold;
+        -fx-font-size: 1.1em;
+}
+
+.main-container {
+    -fx-background-color:  #9eced9;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-effect: dropshadow(gaussian, #545454, 5, 0, 0, 3) ;
+}
+
+.sub-container {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3) ;
+}
+
+.sub-sub-container {
+    -fx-background-color: #9eced9;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3) ;
+}
+
+.text-field {
+    -fx-font-size: 18.0;
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-background-radius: 5;
+    -fx-border-color: transparent; /* Transparent border */
+    -fx-border-radius: 5;
+    -fx-text-fill: #333333; /* Text color */
+    -fx-prompt-text-fill: #999999; /* Prompt text color */
+    -fx-padding: 0 5 0 5; /* Adjust padding as needed */
+}
+
+.list-view {
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-color: transparent; /* Transparent border */
+    -fx-padding: 0 5 0 5; /* Adjust padding as needed */
+}
+
+.bar{
+    -fx-background-color: #bebebe;
+    -fx-effect: dropshadow(gaussian, #545454, 5, 0, 0, 3) ;
+}
+
+.text-area {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
