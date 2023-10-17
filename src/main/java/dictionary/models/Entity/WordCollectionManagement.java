@@ -1,15 +1,29 @@
 package dictionary.models.Entity;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WordCollectionManagement {
+
     public static List<String> collectionNameList = new ArrayList<>();
     public static List<WordCollection> allCollection = new ArrayList<>();
 
     static
     {
-
+        String filePATH = "src/main/resources/data/Collection.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePATH))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                collectionNameList.add(line);
+                System.out.println("this come from Collection.txt" + line);
+                System.out.println("is it two");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public static void addCollection(String collectionName) {
         if (!isExist(collectionName)) {

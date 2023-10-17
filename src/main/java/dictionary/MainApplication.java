@@ -41,10 +41,10 @@ public class MainApplication extends Application {
 
             stage.setTitle("Dictionary Plus");
             stage.setScene(scene);
-            WordLookUpService.close();
 
             stage.show();
             mainStage = stage;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
