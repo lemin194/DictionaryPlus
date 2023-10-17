@@ -1,5 +1,6 @@
 package dictionary;
 
+import dictionary.services.WordLookUpService;
 import dictionary.views.HelloApplication;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +33,7 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws Exception {
         System.out.println(HelloApplication.class);
         try {
+            WordLookUpService.start();
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Main.fxml")));
             Scene scene = new Scene(root, Color.web("1F1F1F"));
 
@@ -39,7 +41,7 @@ public class MainApplication extends Application {
 
             stage.setTitle("Dictionary Plus");
             stage.setScene(scene);
-
+            WordLookUpService.close();
 
             stage.show();
             mainStage = stage;
