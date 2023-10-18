@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
@@ -14,22 +15,66 @@
 
 
     <AnchorPane layoutX="236.0" layoutY="172.0" prefHeight="374.0" prefWidth="500" styleClass="explain-field">
-        <Pane layoutX="29.0" layoutY="74.0" prefHeight="3" prefWidth="445" styleClass="bar" />
-        <ImageView fitHeight="48" fitWidth="48" layoutX="28.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../utils/icons/search/icons8-speaker-48.png" />
-            </image>
-        </ImageView>
-        <TextArea fx:id="wordDefinition" editable="false" layoutX="24.0" layoutY="93.0" prefHeight="242.0" prefWidth="452.0" styleClass="text-area" wrapText="true">
+        <Pane layoutX="24.0" layoutY="74.0" prefHeight="4.0" prefWidth="452.0" styleClass="bar" />
+        <Button fx:id="speaker" layoutX="14" layoutY="20" mnemonicParsing="false" onAction="#handleSpeaker" prefHeight="64" prefWidth="64" styleClass="transparentButton" >
+            <graphic>
+                <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../utils/icons/search/icons8-speaker-48.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <TextArea fx:id="wordDefinition" editable="false" layoutX="24.0" layoutY="93.0" prefHeight="233.0" prefWidth="452.0" styleClass="text-area" wrapText="true">
             <font>
                 <Font size="15.0" />
             </font>
         </TextArea>
-        <Label fx:id="wordDisplay" layoutX="82.0" layoutY="4.0" prefHeight="70.0" prefWidth="380.0" text="" textFill="#000000">
+        <Label fx:id="wordDisplay" layoutX="82.0" layoutY="4.0" prefHeight="70.0" prefWidth="233.0" text="" textFill="#000000">
             <font>
                 <Font name="System Bold Italic" size="19" />
             </font>
         </Label>
+      <Button fx:id="deleteBtn" layoutX="386.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="48.0" prefWidth="48.0" styleClass="transparentButton">
+            <graphic>
+                <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../utils/icons/search/delete.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+      </Button>
+      <Button fx:id="editBtn" layoutX="434.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleEdit" prefHeight="48.0" prefWidth="48.0" styleClass="transparentButton">
+            <graphic>
+                <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../utils/icons/search/edit.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+      </Button>
+      <Button fx:id="addBtn" layoutX="338.0" layoutY="28.0" mnemonicParsing="false" styleClass="transparentButton" onAction="#handleAdd">
+            <graphic>
+                <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../utils/icons/search/add.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+      </Button>
+
+        <Button fx:id="addToCollection" layoutX="410.0" layoutY="331.0" mnemonicParsing="false" styleClass="transparentButton">
+            <graphic>
+                <ImageView fitHeight="48" fitWidth="48" layoutX="434.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../utils/icons/search/icons8-add-properties-48.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+
+
     </AnchorPane>
 
    <AnchorPane layoutX="14.0" layoutY="172.0" prefHeight="374.0" prefWidth="200.0" styleClass="explain-field">

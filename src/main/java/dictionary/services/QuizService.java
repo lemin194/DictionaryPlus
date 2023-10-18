@@ -1,6 +1,5 @@
 package dictionary.services;
 
-
 import dictionary.models.Dao.AllWord;
 import dictionary.models.Dao.WordsDao;
 import dictionary.models.Entity.Word;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,7 +9,7 @@
 
 <AnchorPane prefHeight="419.0" prefWidth="688.0" styleClass="sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.GameQuizController">
    <children>
-      <TextArea layoutX="21.0" layoutY="23.0" prefHeight="88.0" prefWidth="553.0" text="cau hoi" />
+      <TextArea layoutX="21.0" layoutY="23.0" prefHeight="60.0" prefWidth="492.0" text="cau hoi" />
       <VBox layoutX="21.0" layoutY="135.0" prefHeight="200.0" prefWidth="586.0">
          <children>
             <RadioButton mnemonicParsing="false" prefHeight="47.0" prefWidth="87.0" text="RadioButton" />
@@ -19,6 +20,8 @@
       </VBox>
       <Button layoutX="213.0" layoutY="350.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="131.0" text="next question" />
       <Button layoutX="371.0" layoutY="350.0" mnemonicParsing="false" text="replay" />
-      <Button layoutX="574.0" layoutY="25.0" mnemonicParsing="false" text="speaker" />
+      <Button layoutX="21.0" layoutY="88.0" mnemonicParsing="false" text="speaker" />
+      <ChoiceBox layoutX="515.0" layoutY="23.0" prefWidth="150.0" />
+      <Button layoutX="590.0" layoutY="67.0" mnemonicParsing="false" text="Button" />
    </children>
 </AnchorPane>

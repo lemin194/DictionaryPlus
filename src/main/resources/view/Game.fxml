@@ -15,7 +15,11 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="560" prefWidth="750" styleClass="container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.GameController">
-      <Label  layoutX="45.0" layoutY="27.0" styleClass="button" text="Label" />
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="53.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                  <Image url="@../utils/imgs/logo.png" />
+            </image>
+      </ImageView>
       <Button fx:id="quizBtn" layoutX="236.0" layoutY="23.0" mnemonicParsing="false" text="Button" />
       <Button fx:id="reviewBtn" layoutX="451.0" layoutY="23.0" mnemonicParsing="false" text="Button" />
       <AnchorPane fx:id="gameContainer" layoutX="33.0" layoutY="114.0" prefHeight="419.0" prefWidth="688.0" styleClass="sub-container" />

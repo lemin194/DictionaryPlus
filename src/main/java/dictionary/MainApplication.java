@@ -1,5 +1,7 @@
 package dictionary;
 
+import dictionary.models.Dao.WordCollectionDao;
+import dictionary.models.Dao.WordsDao;
 import dictionary.services.WordLookUpService;
 import dictionary.views.HelloApplication;
 import javafx.application.Application;
@@ -12,10 +14,13 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.Objects;
 
+import static dictionary.models.Entity.WordCollectionManagement.*;
+
 public class MainApplication extends Application {
     public static Stage mainStage;
     public static void main(String[]args) {
         System.out.println(new File("./src/main/java/Dictionary/Main.fxml").exists());
+        System.out.println(WordsDao.queryWord("","ive").size());
         launch(args);
     }
 //    private static void getAllFiles(File curDir) {
@@ -33,6 +38,8 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws Exception {
         System.out.println(HelloApplication.class);
         try {
+            Class.forName("dictionary.models.Dao.WordsDao");
+            Class.forName("dictionary.models.Dao.AllWord");
             WordLookUpService.start();
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Main.fxml")));
             Scene scene = new Scene(root, Color.web("1F1F1F"));

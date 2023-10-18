@@ -4,20 +4,20 @@
     -fx-border-radius: 30;
 }
 
-.transparent-button {
+.transparentButton {
     -fx-background-color: transparent;
     -fx-background-radius: 0;
     -fx-padding: 0;
 }
 
-.button {
+/*.button {
         -fx-padding: 8 15 15 15;
         -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
         -fx-background-radius: 8;
         -fx-background-color: linear-gradient(to top right,#d31027, #ea384d);
         -fx-font-weight: bold;
         -fx-font-size: 1.1em;
-}
+}*/
 
 .main-container {
     -fx-background-color:  #9eced9;
@@ -80,4 +80,10 @@
 
 .sos {
     -fx-background-color: #ffffff;
+}
+
+.labelWithText{
+    -fx-font-family: "Comic Sans MS";
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 17;
 }

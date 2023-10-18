@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 
 import java.awt.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import dictionary.services.WordLookUpService.*;
 import javafx.scene.control.Button;
@@ -23,30 +24,32 @@ public class EditController {
     @FXML
     private Label had = new Label();
     @FXML
-    private TextField getWord, getType, getPronounciation, getMeaning;
+    private TextField getWord = new TextField(), getType, getPronounciation, getMeaning;
     public void resetText() {
-        getWord.setText("");
         getType.setText("");
         getMeaning.setText("");
         getPronounciation.setText("");
         had.setText("");
     }
 
+
     public void checkExistent() {
-        String word = getWord.getText();
-        if (word.isEmpty() || word.isBlank()) {
+        String wordinBox = getWord.getText();
+        if (wordinBox.isEmpty() || wordinBox.isBlank()) {
             resetText();
             return;
         }
-        Word res = WordLookUpService.findWord(word,"anhviet").get(0);
-        if (res == null) {
+        ArrayList<Word> tmp = WordsDao.queryWord(wordinBox,"anhviet");
+
+        if (tmp.isEmpty()) {
             resetText();
             return;
         }
-        if (res != null) {
-            getMeaning.setText(res.getMeaning());
-            getType.setText(res.getType());
-            getPronounciation.setText(res.getPronunciation());
+        Word word = tmp.get(0);
+        if (word != null) {
+            getMeaning.setText(word.getMeaning());
+            getType.setText(word.getType());
+            getPronounciation.setText(word.getPronunciation());
             had.setText("bro we had this, move to search section to edit");
         }
     }
@@ -62,7 +65,7 @@ public class EditController {
             alert.setContentText("Word cannot be empty, please try again");
             alert.showAndWait();
         } else if (meaning.isEmpty() || meaning.isBlank()) {
-            alert.setContentText("type cannot be empty, please try again");
+            alert.setContentText("meaning cannot be empty, please try again");
             alert.showAndWait();
         } else {
             Word ye = new Word(word, pronounciation, type, meaning);
@@ -72,7 +75,6 @@ public class EditController {
                 alert.showAndWait();
                 resetText();
             }
-
         }
     }
 }

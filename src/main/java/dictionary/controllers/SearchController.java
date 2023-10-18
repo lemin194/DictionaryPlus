@@ -1,5 +1,6 @@
 package dictionary.controllers;
 
+import dictionary.services.TextToSpeech;
 import dictionary.services.WordLookUpService;
 import javafx.application.Application;
 import javafx.beans.Observable;
@@ -35,6 +36,8 @@ import static dictionary.MainApplication.mainStage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.scene.control.Button;
+
 public class SearchController implements Initializable {
     @FXML
     private TextField searchBox = new TextField();
@@ -54,7 +57,7 @@ public class SearchController implements Initializable {
     private Label wordDisplay = new Label();
 
     @FXML
-    private Button speaker, editBtn, deleteBtn;
+    private Button speaker, editBtn, deleteBtn, addBtn, addToCollection;
 
     @FXML
     public void initialize(URL location, ResourceBundle Resources) {
@@ -105,31 +108,30 @@ public class SearchController implements Initializable {
         }
     }
 
-    /*
-    public void updateWord() {
+    @FXML
+    public void handleEdit() {
         if (relatedResults.getItems().size() <=0){
             return;
         }
         Dialog<String> dialog = new Dialog<>();
         dialog.setHeaderText(null);
 
-        Label nameLabel = new Label("Word:");
-        TextField nameField = new TextField(wordToFind.getWord());
+        Label wordLabel = new Label("Word: ");
+        Label display = new Label(wordToFind.getWord());
 
         Label meaningLabel = new Label("Definition:");
         TextArea meaningField = new TextArea(wordToFind.getMeaning());
         meaningField.setWrapText(true);
 
-        Label typeLabel = new Label("Part of speech:");
+        Label typeLabel = new Label("Type:");
         TextField typeField = new TextField(wordToFind.getType());
 
         Label pronunciationLabel = new Label("Pronunciation:");
         TextField pronunciationField = new TextField(wordToFind.getPronunciation());
 
-
         GridPane gridPane = new GridPane();
-        gridPane.add(nameLabel, 1, 1);
-        gridPane.add(nameField, 2, 1);
+        gridPane.add(display, 2, 1);
+        gridPane.add(wordLabel, 1, 1);
         gridPane.add(meaningLabel, 1, 2);
         gridPane.add(meaningField, 2, 2);
         gridPane.add(typeLabel, 1, 3);
@@ -155,12 +157,11 @@ public class SearchController implements Initializable {
 
         dialog.showAndWait().ifPresent(response -> {
             if (response.equals("OK")) {
-                String word = nameField.getText();
                 String meaning = meaningField.getText();
                 String type = typeField.getText();
                 String pronunciation = pronunciationField.getText();
 
-                WordsDao.modifyWord(word, "meaning", meaning, "anhviet");
+                WordsDao.modifyWord(wordToFind.getWord(), "meaning", meaning, "anhviet");
                 Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                 successAlert.setContentText("Word information updated successfully!");
                 successAlert.showAndWait();
@@ -172,7 +173,92 @@ public class SearchController implements Initializable {
             }
         });
 
-    }*/
+    }
+
+    @FXML
+    public void handleDelete() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if(WordsDao.deleteWord(wordToFind.getWord(),"anhviet")) {
+            alert.setContentText("delete successfully");
+            alert.showAndWait();
+        }
+    }
+    @FXML
+    public void handleAdd() {
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setHeaderText(null);
+
+        Label newWordLabel = new Label("New word: ");
+        TextField newWordField = new TextField();
+        // newWordField.setWrapText(true);
+
+        Label meaningLabel = new Label("Meaning:");
+        TextField meaningField = new TextField();
+        // meaningField.setWrapText(true);
+
+        Label typeLabel = new Label("Type:");
+        TextField typeField = new TextField();
+        //typeField.setWrapText(true);
+
+        Label pronunciationLabel = new Label("Pronunciation:");
+        TextField pronunciationField = new TextField();
+        //pronunciationField.setWrapText(true);
+
+        GridPane gridPane = new GridPane();
+        gridPane.add(newWordLabel, 1, 1);
+        gridPane.add(newWordField, 2, 1);
+        gridPane.add(meaningLabel, 1, 2);
+        gridPane.add(meaningField, 2, 2);
+        gridPane.add(typeLabel, 1, 3);
+        gridPane.add(typeField, 2, 3);
+        gridPane.add(pronunciationLabel, 1, 4);
+        gridPane.add(pronunciationField, 2, 4);
+
+        dialog.getDialogPane().setContent(gridPane);
+
+        ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButton, cancelButton);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == okButton) {
+                return "OK";
+            } else if (dialogButton == cancelButton) {
+                return "Cancel";
+            } else {
+                return null;
+            }
+        });
+
+        dialog.showAndWait().ifPresent(response -> {
+            if (response.equals("OK")) {
+                String word = newWordField.getText();
+                String meaning = meaningField.getText();
+                String type = typeField.getText();
+                String pronunciation = pronunciationField.getText();
+                Word ye = new Word(word, pronunciation, type, meaning);
+                int id = AllWord.leftMostIndex(word);
+                if (id != -1) {
+                    System.out.println("This word already in dictionary");
+                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                    successAlert.setContentText("This word already in dictionary");
+                    successAlert.showAndWait();
+                }
+                else if (WordsDao.addWord(ye,"anhviet")) {
+                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                    successAlert.setContentText("Word information updated successfully!");
+                    successAlert.showAndWait();
+                }
+            }
+            else {
+                dialog.close();
+            }
+        });
+    }
+    @FXML
+    public void handleSpeaker() {
+        TextToSpeech.TTS(wordToFind.getWord(),"en");
+    }
     public void clearSearchResultsView() {
         relatedResults.getItems().clear();
         wordDefinition.setText("");
@@ -183,10 +269,4 @@ public class SearchController implements Initializable {
     public void initializeWithStage(Stage stage) {
         this.initializeWithStage(stage);
     }
-
-
-
-
-
-
 }
