@@ -30,6 +30,14 @@ public class WordLookUpService {
     public static void close() {
         cache.write();
     }
+
+    public static void main(String[] args) {
+        WordLookUpService wlkService = new WordLookUpService();
+        for (Word word : wlkService.retrieveLastSearch()) {
+            System.out.println(word);
+        }
+        wlkService.close();
+    }
 }
 
 // cache LIFO
