@@ -33,6 +33,8 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws Exception {
         System.out.println(HelloApplication.class);
         try {
+            Class.forName("dictionary.models.Dao.WordsDao");
+            Class.forName("dictionary.models.Dao.AllWord");
             WordLookUpService.start();
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Main.fxml")));
             Scene scene = new Scene(root, Color.web("1F1F1F"));
