@@ -1,6 +1,5 @@
 package dictionary;
 
-import dictionary.models.Dao.WordsDao;
 import dictionary.services.WordLookUpService;
 import dictionary.views.HelloApplication;
 import javafx.application.Application;
@@ -33,10 +32,7 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         System.out.println(HelloApplication.class);
-
         try {
-            Class.forName("dictionary.models.Dao.WordsDao");
-            Class.forName("dictionary.models.Dao.AllWord");
             WordLookUpService.start();
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Main.fxml")));
             Scene scene = new Scene(root, Color.web("1F1F1F"));
