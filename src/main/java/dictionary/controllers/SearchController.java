@@ -61,7 +61,7 @@ public class SearchController implements Initializable {
                 Word english = WordLookUpService.findWord(selectedWord, "anhviet").get(0);
                 if (english != null) {
                     wordToFind = english;
-                    wordDefinition.setText("Type:\n" + english.getType() + "\n" + "Meaning:\n" +english.getMeaning() );
+                    wordDefinition.setText("Type:\n" + english.getType() + "\n" + "Meaning:\n" + english.getMeaning() );
                     wordDisplay.setText(english.getWord() + "\n" + english.getPronunciation());
                 
                 } else {
@@ -94,7 +94,6 @@ public class SearchController implements Initializable {
         wordDefinition.setText("Type:\n" + wordToFind.getType()+ "\nMeaning:\n" + wordToFind.getMeaning());
         wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
         for (Word english : list) {
-            System.out.println(english.getWord());
             relatedResults.getItems().add(english.getWord());
         }
     }

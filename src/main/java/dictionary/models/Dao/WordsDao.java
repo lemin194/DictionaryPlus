@@ -1,6 +1,8 @@
 package dictionary.models.Dao;
 
 import dictionary.models.Entity.Word;
+import javafx.beans.DefaultProperty;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -26,6 +28,7 @@ public class WordsDao {
     private static ResultSet resultSet = null;
     private static Connection conn = null;
 
+    private static final int maximumShowWord = 30;
     /**
      * Adding word into specific table.
      */
@@ -88,7 +91,7 @@ public class WordsDao {
     public static ArrayList<Word> queryWord(String pref, String table) {
         ArrayList<Integer> bound = AllWord.wordsContainPrefix(pref);
         int leftIndex = bound.get(0);
-        int rightIndex = bound.get(1);
+        int rightIndex = Math.min(bound.get(1), leftIndex + maximumShowWord - 1);
         ArrayList<Word> wordList = new ArrayList<>();
         if (leftIndex == -1) {
             return wordList;
