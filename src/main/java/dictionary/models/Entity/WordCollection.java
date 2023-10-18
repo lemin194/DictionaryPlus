@@ -4,8 +4,8 @@ import java.util.*;
 public class WordCollection {
 
     private String collectionName;
-    private List<Word> wordList;
-    private Set<String> wordSet;
+    private List<Word> wordList = new ArrayList<>();
+    private Set<String> wordSet = new HashSet<>();
     public WordCollection(String collectionName) {
         wordList = new ArrayList<>();
         wordSet = new HashSet<>();

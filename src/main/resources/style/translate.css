@@ -50,7 +50,12 @@
   -fx-font-size: 14px; /* Change the font size of menu items */
   -fx-text-fill: -text-language-select; /* Change the text color of menu items */
 }
-
+.container{
+  -fx-background-color:  #9eced9;
+  -fx-background-radius: 30;
+  -fx-border-radius: 30;
+  -fx-effect: dropshadow(gaussian, #545454, 5, 0, 0, 3) ;
+}
 .choicebox-language .menu-item:hover {
   -fx-background-color: #f0f0f0; /* Change the background color of the hovered menu item */
 }

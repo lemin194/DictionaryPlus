@@ -2,9 +2,11 @@ package dictionary.models.Entity;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
 
 public class WordCollectionManagement {
 
@@ -29,6 +31,31 @@ public class WordCollectionManagement {
         if (!isExist(collectionName)) {
             collectionNameList.add(collectionName);
             allCollection.add(new WordCollection(collectionName));
+        }
+        try {
+            String filePATH = "src/main/resources/data/Collection.txt";
+            /*FileWriter fileWriter = new FileWriter(filePATH);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePATH));
+            String text = "";
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                text += line + "\n";
+            }
+
+            bufferedReader.close();
+
+            text += collectionName;
+
+            fileWriter.write(text);
+            fileWriter.close();*/
+
+            Writer output;
+            output = new BufferedWriter(new FileWriter(filePATH, true));
+            output.append("\n" + collectionName);
+            output.close();
+
+        } catch (Exception e) {
+            System.out.println("Something went wrong: " + e);
         }
     }
 
@@ -76,4 +103,5 @@ public class WordCollectionManagement {
         }
         return -1;
     }
+
 }

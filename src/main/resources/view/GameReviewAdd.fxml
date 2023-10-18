@@ -6,21 +6,29 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="317.0" prefWidth="623.0" styleClass="sub-sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.GameReviewAddController">
+<AnchorPane prefHeight="272.0" prefWidth="623.0" styleClass="sub-sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.GameReviewAddController">
    <children>
-      <Label layoutX="51.0" layoutY="30.0" prefHeight="17.0" prefWidth="239.0" text="CHOOSE THE COLLECTION TO EDIT" />
-      <ChoiceBox layoutX="51.0" layoutY="59.0" prefWidth="150.0" />
-      <Label layoutX="371.0" layoutY="30.0" text="ADD THE COLLECTION:" />
-      <Label layoutX="51.0" layoutY="95.0" prefHeight="46.0" prefWidth="239.0" text="EDIT THE WORD THAT IS ALREADY IN THE COLLECTION" wrapText="true" />
-      <TextField layoutX="354.0" layoutY="57.0" prefHeight="29.0" prefWidth="157.0" promptText="TYPE HERE DAMN" />
-      <Button layoutX="521.0" layoutY="51.0" mnemonicParsing="false" text="ADD" />
-      <TextField layoutX="52.0" layoutY="141.0" text="WORD HERE" />
-      <TextField layoutX="52.0" layoutY="183.0" text="TYPE HERE" />
-      <TextField layoutX="290.0" layoutY="177.0" prefHeight="29.0" prefWidth="193.0" text="PRONOUN HERE" />
-      <TextField layoutX="52.0" layoutY="214.0" prefHeight="73.0" prefWidth="428.0" text="MEANING HERE" />
-      <Button layoutX="515.0" layoutY="171.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="EDIT" />
-      <Button layoutX="514.0" layoutY="266.0" mnemonicParsing="false" text="DEL" />
-      <Button layoutX="514.0" layoutY="221.0" mnemonicParsing="false" text="ADD" />
+      <Label layoutX="23.0" layoutY="6.0" prefHeight="17.0" prefWidth="239.0" styleClass="instruction" text="Choose the collection to edit" />
+      <Label layoutX="391.0" layoutY="6.0" styleClass="instruction" text="Add a new collection" />
+      <Label layoutX="192.0" layoutY="62.0" prefHeight="13.0" prefWidth="239.0" styleClass="instruction" text="Edit words in this collection" wrapText="true" />
+      <Button fx:id="addCollection" layoutX="565.0" layoutY="34.0" mnemonicParsing="false" onAction="#addColllection" text="ADD" />
+      <TextField fx:id="wordToEdit" layoutX="37.0" layoutY="86.0" prefHeight="24.0" prefWidth="548.0" styleClass="sos" text="Word" />
+      <TextField fx:id="typeToEdit" layoutX="37.0" layoutY="122.0" prefHeight="29.0" prefWidth="264.0" styleClass="sos" text="Type of the word" />
+      <TextField fx:id="pronounciationToEdit" layoutX="312.0" layoutY="122.0" prefHeight="29.0" prefWidth="273.0" styleClass="sos" text="Pronunciation of the word" />
+      <TextField fx:id="meaningToEdit" layoutX="37.0" layoutY="158.0" prefHeight="61.0" prefWidth="548.0" styleClass="sos" text="Meaning of the word" />
+      <Button fx:id="edit" layoutX="217.0" layoutY="229.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="41.0" text="EDIT" />
+      <Button fx:id="delete" layoutX="348.0" layoutY="229.0" mnemonicParsing="false" text="DELETE" />
+      <Button fx:id="add" layoutX="281.0" layoutY="229.0" mnemonicParsing="false" onAction="#addWordCollection" text="ADD" />
+      <Button fx:id="deleteCollection" layoutX="262.0" layoutY="35.0" mnemonicParsing="false" onAction="#deleteCollection" prefHeight="25.0" prefWidth="59.0" text="DELETE" />
+      <AnchorPane layoutX="388.0" layoutY="32.0" prefHeight="29.0" prefWidth="169.0" styleClass="sub-container">
+         <children>
+            <TextField fx:id="collectionToAdd" layoutY="1.0" prefHeight="29.0" prefWidth="165.0" promptText="Name new collection" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="27.0" layoutY="33.0" prefHeight="27.0" prefWidth="200.0" styleClass="sub-container">
+         <children>
+            <ChoiceBox fx:id="collectionsToEdit" prefHeight="25.0" prefWidth="231.0" styleClass="list-view" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
