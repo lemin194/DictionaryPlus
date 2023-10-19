@@ -1,0 +1,11 @@
+Flask, just like all other Python libraries, is installable
+from the Python Package Index (PPI) and is really easy
+to setup and start developing with, it only takes a few
+minutes to getting started with Flask. To be able to
+follow this book, you should be familiar with Python,
+command line (or at least PIP), and MySQL.
+
+Competitive.
+
+Banh bao kep thit.
+
