@@ -30,6 +30,16 @@ public class WordCollectionManagement {
             collectionNameList.add(collectionName);
             allCollection.add(new WordCollection(collectionName));
         }
+        try {
+            String filePATH = "src/main/resources/data/Collection.txt";
+            FileWriter fileWriter = new FileWriter(filePATH);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(collectionName);
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+        } catch (Exception e) {
+            System.out.println("Something went wrong: " + e);
+        }
     }
 
     public static void deleteCollection(String collectionName) {
