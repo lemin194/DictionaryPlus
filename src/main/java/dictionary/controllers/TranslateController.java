@@ -1,6 +1,7 @@
 package dictionary.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
 import dictionary.services.SpeechToText;
 import dictionary.services.TextToSpeech;
 import dictionary.services.Translation;
@@ -33,30 +34,21 @@ public class TranslateController implements Initializable {
 
   @FXML
   private TextArea fromTextArea = new TextArea(), toTextArea = new TextArea();
-  private String fromLanguage = "en";
+  private String fromLanguage = "en", toLanguage = "vi";
 
-  private HashMap<String, String> mapAbbr = new HashMap<>();
-  private HashMap<String, String> mapLang = new HashMap<>();
+  private final HashMap<String, String> mapAbbr = new HashMap<>(),
+      mapLang = new HashMap<>();
   private boolean recording = false;
   @FXML
   private ImageView recordingButtonIcon = new ImageView();
   private Image recordBtnImage, stopBtnImage;
   private PauseTransition recordingDuration;
+  private PauseTransition translateDelay;
 
-  @Override
-  public void initialize(URL url, ResourceBundle resourceBundle) {
-    File recordImageFile = new File("src/main/resources/utils/icons/translate/micro.png");
-    File stopImageFile = new File("src/main/resources/utils/icons/translate/attach.png");
-    recordBtnImage = new Image(recordImageFile.toURI().toString());
-    stopBtnImage = new Image(stopImageFile.toURI().toString());
-    recordingButtonIcon.setImage(recordBtnImage);
+//  @FXML
+//  private JFXButton reverseButton = new JFXButton();
 
-    fromLanguageChoice.getItems().addAll("English", "Vietnamese", "French", "German", "Russian");
-    toLanguageChoice.getItems().addAll("English", "Vietnamese", "French", "German", "Russian");
-
-    fromLanguageChoice.setValue("English");
-    toLanguageChoice.setValue("Vietnamese");
-
+  private void initLanguageMap() {
     mapAbbr.put("en", "English");
     mapAbbr.put("vi", "Vietnamese");
     mapAbbr.put("fr", "French");
@@ -68,24 +60,34 @@ public class TranslateController implements Initializable {
     mapLang.put("French", "fr");
     mapLang.put("German", "de");
     mapLang.put("Russian", "ru");
+  }
 
-    PauseTransition inputWait = new PauseTransition(Duration.seconds(0.5f));
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {
+    initLanguageMap();
+    File recordImageFile = new File("src/main/resources/utils/icons/translate/micro.png");
+    File stopImageFile = new File("src/main/resources/utils/icons/translate/stop.png");
+    recordBtnImage = new Image(recordImageFile.toURI().toString());
+    stopBtnImage = new Image(stopImageFile.toURI().toString());
+    recordingButtonIcon.setImage(recordBtnImage);
+
+    fromLanguageChoice.getItems().addAll("English", "Vietnamese", "French", "German", "Russian");
+    toLanguageChoice.getItems().addAll("English", "Vietnamese", "French", "German", "Russian");
+
+    fromLanguage = "en";
+    toLanguage = "vi";
+
+    fromLanguageChoice.setValue(mapAbbr.get(fromLanguage));
+    toLanguageChoice.setValue(mapAbbr.get(toLanguage));
+
     recordingDuration = new PauseTransition(Duration.seconds(12.0f));
     recordingDuration.setOnFinished(actionEvent -> StopRecord());
+    translateDelay = new PauseTransition(Duration.seconds(0.5f));
+    translateDelay.setOnFinished(actionEvent -> handleTranslate());
     fromTextArea.textProperty().addListener(new ChangeListener<String>() {
       @Override
-      public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-//        if (t1.equals("abc")) {
-//          fromLanguageChoice.setValue("testing");
-//        } else {
-//          System.out.println(fromLanguageChoice.getValue());
-//        }
-        inputWait.stop();
-        inputWait.setOnFinished(finishEvent -> {
-          handleTranslate();
-        });
-        // Start the pause transition
-        inputWait.play();
+      public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+        waitTranslate();
       }
     });
 
@@ -95,7 +97,15 @@ public class TranslateController implements Initializable {
 
           } else {
             fromLanguage = mapLang.get(fromLanguageChoice.getItems().get((Integer) t1));
-            handleTranslate();
+            if (fromLanguage.equals(toLanguage)) {
+              if (fromLanguage.equals("vi")) {
+                toLanguage = "en";
+              } else {
+                toLanguage = "vi";
+              }
+              toLanguageChoice.setValue(mapAbbr.get(toLanguage));
+            }
+            waitTranslate();
           }
         });
 
@@ -104,17 +114,31 @@ public class TranslateController implements Initializable {
           if ((Integer) t1 < 0 || (Integer) t1 > toLanguageChoice.getItems().size()) {
 
           } else {
-            handleTranslate();
+            toLanguage = mapLang.get(toLanguageChoice.getItems().get((Integer) t1));
+            if (fromLanguage.equals(toLanguage)) {
+              if (toLanguage.equals("vi")) {
+                fromLanguage = "en";
+              } else {
+                fromLanguage = "vi";
+              }
+              fromLanguageChoice.setValue(mapAbbr.get(fromLanguage));
+            }
+            waitTranslate();
           }
         });
+
+  }
+
+  private void waitTranslate() {
+    System.out.println("ok");
+    translateDelay.stop();
+    translateDelay.play();
   }
 
   private void handleTranslate() {
     System.out.println("Translating...");
     String t1 = fromTextArea.getText();
 
-    String fromLanguage = mapLang.get(fromLanguageChoice.getValue());
-    String toLanguage = mapLang.get(toLanguageChoice.getValue());
     List<String> ret = Translation.TranslateText(t1, fromLanguage, toLanguage);
 
     String translated = ret.get(0);
@@ -145,7 +169,9 @@ public class TranslateController implements Initializable {
   }
 
   private void StopRecord() {
-    if (!recording) return;
+    if (!recording) {
+      return;
+    }
     recording = false;
     SpeechToText.stopRecording();
     recordingButtonIcon.setImage(recordBtnImage);
@@ -155,5 +181,17 @@ public class TranslateController implements Initializable {
     if (res.get("status").equals("OK")) {
       fromTextArea.setText(res.get("content"));
     }
+  }
+
+  @FXML
+  private void ReverseLanguage() {
+    String l1 = fromLanguageChoice.getValue();
+    String l2 = toLanguageChoice.getValue();
+    String t1 = fromTextArea.getText();
+    String t2 = toTextArea.getText();
+    fromTextArea.setText(t2);
+//    toTextArea.setText(t1);
+    fromLanguageChoice.setValue(l2);
+    toLanguageChoice.setValue(l1);
   }
 }

@@ -1,13 +1,16 @@
-target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 ### Oasis
 .idea/
-temp/
 target/
 out/
+
+temp/
+**/temp/
+
+
 
 
 ### IntelliJ IDEA ###
@@ -43,3 +46,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
+

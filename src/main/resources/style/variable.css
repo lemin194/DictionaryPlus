@@ -1,9 +1,12 @@
 * {
   -primary: #9ECED9;
   -secondary: #FDE2AC;
-  -tertiary: #BEA2C2;
+  -tertiary: #FFC6D9;
+  -button-color: #edf1f3;
   -text-language-select: #000000;
   -texture: #000000;
   -text-highlight-fill: #4E4B5C;
   -text-fill: #181818;
+  -text-box-color: #FFFFFF;
+  -border-1: #2d2d42;
 }

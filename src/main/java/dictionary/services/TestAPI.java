@@ -16,7 +16,7 @@ public class TestAPI {
         System.out.println("Begin connecting");
         List<String> ret = Translation.TranslateText(
                 "Ich bin Strauss",
-                "auto", "de");
+                "auto", "vi");
         String detectedLang = ret.get(1);
         String translated = ret.get(0);
         System.out.println("Translated: \n" + translated);
@@ -24,10 +24,10 @@ public class TestAPI {
     }
     public static void main(String[] args) {
         System.out.println("Hello");
-//        TestTranslate();
+        TestTranslate();
 //        TestTTS();
 //        SpeechToText.beginRecord();
 //        SpeechToText.stopRecording();
-        System.out.println(SpeechToText.STT("ru"));
+//        System.out.println(SpeechToText.STT("ru"));
     }
 }

@@ -18,21 +18,19 @@ public class MainApplication extends Application {
         System.out.println(new File("./src/main/java/Dictionary/Main.fxml").exists());
         launch(args);
     }
-//    private static void getAllFiles(File curDir) {
-//
-//        File[] filesList = curDir.listFiles();
-//        for (File f : filesList) {
-//            if (f.isDirectory())
-//                getAllFiles(f);
-//            if (f.isFile()) {
-//                System.out.println(f.getPath());
-//            }
-//        }
-//    }
     @Override
     public void start(Stage stage) throws Exception {
         System.out.println(HelloApplication.class);
         try {
+
+//            System.setProperty("jdk.gtk.verbose", "true");
+//
+//            System.setProperty("jdk.gtk.version", "3");
+
+
+            String gtkVersion = System.getProperty("jdk.gtk.version");
+            System.out.println("GTK Version: " + gtkVersion);
+
             Class.forName("dictionary.models.Dao.WordsDao");
             Class.forName("dictionary.models.Dao.AllWord");
             WordLookUpService.start();
