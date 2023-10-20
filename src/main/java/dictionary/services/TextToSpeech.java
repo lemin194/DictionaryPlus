@@ -41,11 +41,11 @@ public class TextToSpeech {
                         // Delete the file after playing the audio
                         File file_to_delete = new File(tts_audio_path);
                         if (file_to_delete.exists()) {
-//                                if (file_to_delete.delete()) {
-////                                    System.out.println("File deleted successfully.");
-//                                } else {
-//                                    System.err.println("Failed to delete file.");
-//                                }
+                                if (file_to_delete.delete()) {
+//                                    System.out.println("File deleted successfully.");
+                                } else {
+                                    System.err.println("Failed to delete file.");
+                                }
                         }
                     }
                 }

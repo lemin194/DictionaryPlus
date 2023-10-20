@@ -21,10 +21,26 @@
   -fx-highlight-fill: -text-highlight-fill;
 }
 
-.translate-box {
+.translate-box-whole {
   -fx-background-color: -tertiary;
-  -fx-background-radius: 32px;
+  -fx-background-radius: 16px;
 }
+
+
+.translate-box {
+  -fx-background-color: -text-box-color;
+  -fx-background-radius: 16px;
+}
+.reverse-button {
+  -fx-border-radius: 16pt;
+  -fx-background-radius: 16pt;
+  -fx-border-width: 2;
+  -fx-border-color: -border-1;
+  -fx-background-color: -button-color;
+}
+
+
+
 .button-translate-service {
   -fx-background-radius: 64pt;
 }

@@ -296,11 +296,11 @@ public class SpeechToText {
       ret.put("content", "");
     } finally {
       if (audioFile.exists()) {
-//        if (audioFile.delete()) {
-////                                    System.out.println("File deleted successfully.");
-//        } else {
-//          System.err.println("Failed to delete file.");
-//        }
+        if (audioFile.delete()) {
+//                                    System.out.println("File deleted successfully.");
+        } else {
+          System.err.println("Failed to delete file.");
+        }
       }
     }
     return ret;

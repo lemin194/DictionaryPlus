@@ -1,7 +1,5 @@
 package dictionary;
 
-import dictionary.models.Dao.WordCollectionDao;
-import dictionary.models.Dao.WordsDao;
 import dictionary.services.WordLookUpService;
 import dictionary.views.HelloApplication;
 import javafx.application.Application;
@@ -14,29 +12,25 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.Objects;
 
-import static dictionary.models.Entity.WordCollectionManagement.*;
-
 public class MainApplication extends Application {
     public static Stage mainStage;
     public static void main(String[]args) {
         System.out.println(new File("./src/main/java/Dictionary/Main.fxml").exists());
         launch(args);
     }
-//    private static void getAllFiles(File curDir) {
-//
-//        File[] filesList = curDir.listFiles();
-//        for (File f : filesList) {
-//            if (f.isDirectory())
-//                getAllFiles(f);
-//            if (f.isFile()) {
-//                System.out.println(f.getPath());
-//            }
-//        }
-//    }
     @Override
     public void start(Stage stage) throws Exception {
         System.out.println(HelloApplication.class);
         try {
+
+//            System.setProperty("jdk.gtk.verbose", "true");
+//
+//            System.setProperty("jdk.gtk.version", "3");
+
+
+            String gtkVersion = System.getProperty("jdk.gtk.version");
+            System.out.println("GTK Version: " + gtkVersion);
+
             Class.forName("dictionary.models.Dao.WordsDao");
             Class.forName("dictionary.models.Dao.AllWord");
             WordLookUpService.start();
