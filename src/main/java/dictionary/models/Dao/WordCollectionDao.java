@@ -1,12 +1,7 @@
 package dictionary.models.Dao;
 
 import dictionary.models.Entity.Word;
-import dictionary.models.Entity.WordCollection;
-import dictionary.models.Entity.WordCollectionManagement;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +25,6 @@ public class WordCollectionDao {
         try {
             Statement stmt = conn.createStatement();
             stmt.execute(createStmt.toString());
-            WordCollectionManagement.addCollection(collectionName);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -42,7 +36,6 @@ public class WordCollectionDao {
         if (!checkCollectionExist(collectionName)) {
             return;
         }
-        WordCollectionManagement.deleteCollection(collectionName);
         conn = DatabaseConnection.getConnection();
         String deleteStmt = String.format("DROP TABLE %s;", collectionName);
         try {
