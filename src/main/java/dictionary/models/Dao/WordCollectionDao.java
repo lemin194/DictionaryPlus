@@ -55,6 +55,26 @@ public class WordCollectionDao {
         }
     }
 
+    public static List<String> queryCollectionName () {
+        List<String> collectionNameList = new ArrayList<>();
+        String stmt = "SELECT name FROM sqlite_master WHERE type='table'";
+        conn = DatabaseConnection.getConnection();
+        try {
+            Statement call = conn.createStatement();
+            resultSet = call.executeQuery(stmt);
+            while (resultSet.next()) {
+                String collectionName = resultSet.getString(1);
+                if (!collectionName.equals("sqlite_sequence") && !collectionName.equals("anhviet")) {
+                    collectionNameList.add(collectionName);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
+        }
+        return collectionNameList;
+    }
     public static void addWordForCollection(Word word, String collectionName) {
         if (!checkCollectionExist(collectionName)) {
             return;
@@ -140,5 +160,7 @@ public class WordCollectionDao {
         return result;
     }
     public static void main(String[] args) {
+        List<String> res = queryCollectionName();
+        for (String name : res) System.out.println(name);
     }
 }
