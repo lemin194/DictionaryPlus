@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WordCollectionDao {
@@ -106,12 +107,38 @@ public class WordCollectionDao {
             resultSet = call.executeQuery(stmt);
             return resultSet.getInt(1) > 0;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         } finally {
             DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
         }
+        return false;
     }
 
+    public static List<Word> queryWordInCollection(String collectionName) {
+        List<Word> result = new ArrayList<>();
+        if (!checkCollectionExist(collectionName)) {
+            return result;
+        }
+        conn = DatabaseConnection.getConnection();
+        String query = String.format("SELECT * FROM %s", collectionName);
+
+        try {
+            Statement call = conn.createStatement();
+            resultSet = call.executeQuery(query);
+            while (resultSet.next()) {
+                String word = resultSet.getString(2);
+                String pronunciation = resultSet.getString(3);
+                String type = resultSet.getString(4);
+                String meaning = resultSet.getString(5);
+                result.add(new Word(word, pronunciation, type, meaning));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
+        }
+        return result;
+    }
     public static void main(String[] args) {
     }
 }
