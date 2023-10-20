@@ -13,10 +13,10 @@ import java.util.List;
 public class WordCollectionDao {
     private static Connection conn = null;
     private static PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
+    private static ResultSet resultSet = null;
 
     public static void addCollection(String collectionName){
-        if (WordCollectionManagement.isExist(collectionName)) {
+        if (checkCollectionExist(collectionName)) {
             return;
         }
         conn = DatabaseConnection.getConnection();
@@ -38,7 +38,7 @@ public class WordCollectionDao {
     }
 
     public static void deleteCollection(String collectionName){
-        if (!WordCollectionManagement.isExist(collectionName)) {
+        if (!checkCollectionExist(collectionName)) {
             return;
         }
         WordCollectionManagement.deleteCollection(collectionName);
@@ -55,29 +55,63 @@ public class WordCollectionDao {
     }
 
     public static void addWordForCollection(Word word, String collectionName) {
-        if (!WordCollectionManagement.isExist(collectionName)) {
+        if (!checkCollectionExist(collectionName)) {
             return;
         }
-        int tableIndex = WordCollectionManagement.findCollectionByName(collectionName);
-        WordCollectionManagement.allCollection.get(tableIndex).addNewWord(word);
         WordsDao.addWord(word, collectionName);
     }
 
     public static void deleteWordFromCollection(String word, String collectionName) {
-        if (!WordCollectionManagement.isExist(collectionName)) {
+        if (!checkCollectionExist(collectionName)) {
+            System.out.println("khong ton tai bang nay (trong luc xoa)");
             return;
         }
-        int tableIndex = WordCollectionManagement.findCollectionByName(collectionName);
-        WordCollectionManagement.allCollection.get(tableIndex).deleteWord(word);
-        WordsDao.deleteWord(word, collectionName);
+        conn = DatabaseConnection.getConnection();
+        String stmt = "DELETE FROM " + collectionName + " WHERE word = ?;";
+        try {
+            preparedStatement = conn.prepareStatement(stmt);
+            preparedStatement.setString(1, word);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
+        }
+        System.out.println("xoa thanh cong");
     }
 
     public static void modifyWordFromCollection(String word, String modifyType, String modifyStr, String collectionName) {
-        if (!WordCollectionManagement.isExist(collectionName)) {
+        if (!checkCollectionExist(collectionName)) {
             return;
         }
-        int tableIndex = WordCollectionManagement.findCollectionByName(collectionName);
-        WordCollectionManagement.allCollection.get(tableIndex).modifyWord(word, modifyType, modifyStr);
+        conn = DatabaseConnection.getConnection();
+        String stmt = "UPDATE " + collectionName + " SET " + modifyType + " = ? WHERE word = ?";
+        try {
+            preparedStatement = conn.prepareStatement(stmt);
+            preparedStatement.setString(1, modifyStr);
+            preparedStatement.setString(2, word);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
+        }
     }
 
+    public static boolean checkCollectionExist(String collectionName) {
+        String stmt = String.format("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='%s'", collectionName);
+        conn = DatabaseConnection.getConnection();
+        try {
+            Statement call = conn.createStatement();
+            resultSet = call.executeQuery(stmt);
+            return resultSet.getInt(1) > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
+        }
+    }
+
+    public static void main(String[] args) {
+    }
 }
