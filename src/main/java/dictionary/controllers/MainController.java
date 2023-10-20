@@ -22,7 +22,7 @@ public class MainController implements Initializable{
     @FXML
     private Label logo = new Label();
     @FXML
-    private Button searchBtn, translateBtn, reviewBtn, wikiBtn, exitBtn;
+    private Button searchBtn, translateBtn, reviewBtn, editBtn, exitBtn;
 
     @FXML
     public AnchorPane container = new AnchorPane();
@@ -35,7 +35,7 @@ public class MainController implements Initializable{
 
         translateBtn.setOnAction(event -> showComponent("/view/Translate.fxml"));
 
-        wikiBtn.setOnAction(event -> showComponent("/view/Wiki.fxml"));
+        editBtn.setOnAction(event -> showComponent("/view/Edit.fxml"));
 
         showComponent("/view/Search.fxml");
 
