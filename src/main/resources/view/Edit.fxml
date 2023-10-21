@@ -3,19 +3,33 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="560" prefWidth="750" styleClass="main-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.EditController">
-      <Label layoutX="47.0" layoutY="53.0" styleClass="button" text="damn logo" />
-      <Label layoutX="66.0" layoutY="198.0" prefHeight="17.0" prefWidth="143.0" text="word" />
-      <Label layoutX="47.0" layoutY="129.0" styleClass="button" text="type the word that you want to add" />
-      <Label  layoutX="66.0" layoutY="263.0" text="type" />
-      <TextField fx:id="getWord" layoutX="60.0" layoutY="223.0" onKeyReleased="#checkExistent" prefHeight="29.0" prefWidth="605.0" styleClass="sos" />
-      <TextField fx:id="getType" layoutX="60.0" layoutY="290.0" prefHeight="29.0" prefWidth="298.0" styleClass="sos" />
-      <TextField fx:id="getPronounciation" layoutX="369.0" layoutY="290.0" prefHeight="29.0" prefWidth="298.0" styleClass="sos" />
-      <Label layoutX="369.0" layoutY="263.0" text="pronoun" />
-      <TextField fx:id="getMeaning" layoutX="63.0" layoutY="357.0" prefHeight="99.0" prefWidth="605.0" styleClass="sos" />
-      <Label layoutX="64.0" layoutY="328.0" text="meaning" />
-      <Button fx:id="addBtn" layoutX="583.0" layoutY="482.0" mnemonicParsing="false" onAction="#handleAddBtn" text="add" />
-   <Label fx:id="had" layoutX="421.0" layoutY="142.0" text="Label" />
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="53.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                  <Image url="@../utils/imgs/logo.png" />
+            </image>
+      </ImageView>
+      <Label layoutX="88.0" layoutY="171.0" prefHeight="17.0" prefWidth="177" styleClass="labelWithText" text="Word" />
+      <Label layoutX="60.0" layoutY="127.0" styleClass="labelWithText" text="Type the word that you want to add to the dictionary or the collection" />
+      <Label layoutX="88.0" layoutY="233.0" styleClass="labelWithText" text="Type of word" />
+      <TextField fx:id="getWord" layoutX="63.0" layoutY="195.0" onKeyReleased="#checkExistent" prefHeight="29.0" prefWidth="605.0" styleClass="sos" />
+      <TextField fx:id="getType" layoutX="63.0" layoutY="266.0" prefHeight="29.0" prefWidth="298.0" styleClass="sos" />
+      <TextField fx:id="getPronounciation" layoutX="369.0" layoutY="266.0" prefHeight="29.0" prefWidth="298.0" styleClass="sos" />
+      <Label layoutX="389.0" layoutY="233.0" styleClass="labelWithText" text="Pronounciation" />
+      <TextField fx:id="getMeaning" layoutX="63.0" layoutY="336.0" prefHeight="99.0" prefWidth="605.0" styleClass="sos" />
+      <Label layoutX="88.0" layoutY="304.0" styleClass="labelWithText" text="Meaning" />
+      <Button fx:id="addBtn" layoutX="583.0" layoutY="482.0" mnemonicParsing="false" onAction="#handleAddBtn" styleClass="transparentButton">
+            <graphic>
+                  <ImageView fitHeight="48" fitWidth="48" layoutX="434.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                              <Image url="@../utils/icons/edit/add.png" />
+                        </image>
+                  </ImageView>
+            </graphic>
+      </Button>
+   <Label fx:id="had" layoutX="490.0" layoutY="93.0" text="Label" />
 </AnchorPane>

@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="419.0" prefWidth="688.0" styleClass="sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.GameReviewController">
+<AnchorPane prefHeight="360" prefWidth="688.0" styleClass="sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.GameReviewController">
     <children>
-        <Button fx:id="editCollectionBtn" layoutX="190.0" layoutY="20.0" mnemonicParsing="false" text="add/edit" />
-        <Button fx:id="playBtn" layoutX="399.0" layoutY="20.0" mnemonicParsing="false" text="play" />
-        <AnchorPane fx:id="reviewContainer" layoutX="38.0" layoutY="77.0" prefHeight="317.0" prefWidth="623.0" styleClass="sub-sub-container" />
+        <Button fx:id="editCollectionBtn" layoutX="151.0" layoutY="26.0" mnemonicParsing="false" styleClass="transparentButton">
+            <graphic>
+                <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../utils/icons/review/icons8-edit-property-48.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="playBtn" layoutX="486.0" layoutY="26.0"  mnemonicParsing="false" styleClass="transparentButton">
+            <graphic>
+                <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../utils/icons/review/icons8-study-48.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+
+
+        <AnchorPane fx:id="reviewContainer" layoutX="33.0" layoutY="74.0" prefHeight="272.0" prefWidth="623.0" styleClass="sub-sub-container" />
+      <Label layoutX="65.0" layoutY="8.0" styleClass="instruction" text="Edit/Add/Delete a collection." />
+      <Label layoutX="450.0" layoutY="8.0" styleClass="instruction" text="Start Studying" />
+
     </children>
 </AnchorPane>

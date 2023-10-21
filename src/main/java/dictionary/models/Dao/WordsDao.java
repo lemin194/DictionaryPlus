@@ -53,6 +53,7 @@ public class WordsDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("add word to collection failed");
         } finally {
             DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
         }
@@ -69,6 +70,7 @@ public class WordsDao {
      */
     public static boolean deleteWord(String word, String table) {
         int index = AllWord.leftMostIndex(word);
+        System.out.println(index);
         if (index == -1) {
             return false;
         }

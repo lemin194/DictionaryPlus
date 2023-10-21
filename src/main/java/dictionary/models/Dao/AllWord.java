@@ -46,6 +46,7 @@ public class AllWord {
                         resultSet.getString(2)));
                 maxIndex = Math.max(maxIndex, resultSet.getInt(1));
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
