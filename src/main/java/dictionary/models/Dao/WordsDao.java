@@ -57,7 +57,11 @@ public class WordsDao {
         } finally {
             DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
         }
-        AllWord.addWord(word.getWord());
+
+        // just in case anhviet dictionary, no need for collection to use AllWord
+        if (table.equals("anhviet")) {
+            AllWord.addWord(word.getWord());
+        }
         return isSuccess;
     }
 
