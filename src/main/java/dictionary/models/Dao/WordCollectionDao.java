@@ -68,6 +68,27 @@ public class WordCollectionDao {
         }
         return collectionNameList;
     }
+    public static boolean havePrefix(String name, String prefix) {
+        if (name.length() < prefix.length()) {
+            return false;
+        }
+        for (int i = 0; i < prefix.length(); i++) {
+            if (name.charAt(i) != prefix.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static List<String> findCollectionName(String prefix) {
+        List<String> collectionNameList = queryCollectionName();
+        List<String> res = new ArrayList<>();
+        for (String name : collectionNameList) {
+            if (havePrefix(name, prefix)) {
+                res.add(name);
+            }
+        }
+        return res;
+    }
     public static void addWordForCollection(Word word, String collectionName) {
         if (!checkCollectionExist(collectionName)) {
             return;
