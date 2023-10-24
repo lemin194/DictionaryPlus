@@ -1,5 +1,6 @@
 package dictionary.controllers;
 
+import dictionary.models.Dao.WordCollectionDao;
 import dictionary.models.Dao.WordsDao;
 import dictionary.models.Entity.Word;
 import dictionary.services.TextToSpeech;
@@ -9,13 +10,13 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import dictionary.models.Dao.WordCollectionDao.*;
 
 
 import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static dictionary.models.Entity.WordCollectionManagement.collectionNameList;
 
 public class GameReviewPlayController implements Initializable {
     @FXML
@@ -52,9 +53,9 @@ public class GameReviewPlayController implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle Resources) {
-        int n = collectionNameList.size();
+        int n = WordCollectionDao.queryCollectionName().size();
         for (int i = 0; i < n; i++) {
-            collectionsToStudy.getItems().add(collectionNameList.get(i));
+            collectionsToStudy.getItems().add(WordCollectionDao.queryCollectionName().get(i));
         }
     }
     @FXML
@@ -68,7 +69,7 @@ public class GameReviewPlayController implements Initializable {
         currentWord.setText("");
         pronounciation.setText("");
         infoOfWord.setText("");
-        progress.setText("0/" + fakeNumberOfWordsinCollection);
+        progress.setText(wordsLeft + "/" + fakeNumberOfWordsinCollection);
     }
     @FXML
     public void playVoice() {
@@ -82,12 +83,10 @@ public class GameReviewPlayController implements Initializable {
     }
     @FXML
     public void easyButton() {
-        System.out.println("here it is" + displayWord.getWord());
-        System.out.println("here it iso" + currentCollection);
-
-
-        if(WordsDao.deleteWord(displayWord.getWord(), currentCollection))
-            System.out.println("ye this work");
+        System.out.println(displayWord.getWord());
+        System.out.println(currentCollection);
+        WordCollectionDao.deleteWordFromCollection(displayWord.getWord(), currentCollection);
+        System.out.println("ye this work");
         wordsLeft--;
         realNumberOfWordsinCollection--;
         progress.setText(wordsLeft + "/" + fakeNumberOfWordsinCollection);
@@ -98,7 +97,7 @@ public class GameReviewPlayController implements Initializable {
     }
     @FXML
     public void normalButton() {
-        WordsDao.deleteWord(displayWord.getWord(), currentCollection);
+        WordCollectionDao.deleteWordFromCollection(displayWord.getWord(), currentCollection);
         wordsLeft--;
         realNumberOfWordsinCollection--;
         progress.setText(wordsLeft + "/" + fakeNumberOfWordsinCollection);
@@ -117,8 +116,8 @@ public class GameReviewPlayController implements Initializable {
         idOfDisplayWord++;
         if(idOfDisplayWord >= len) idOfDisplayWord = 0;
         displayWord = WordsDao.queryWord("",currentCollection).get(idOfDisplayWord);
-        /*currentWord.setText(displayWord.getWord());
+        currentWord.setText(displayWord.getWord());
         pronounciation.setText(displayWord.getPronunciation());
-        infoOfWord.setText(displayWord.getMeaning());*/
+        infoOfWord.setText(displayWord.getMeaning());
     }
 }

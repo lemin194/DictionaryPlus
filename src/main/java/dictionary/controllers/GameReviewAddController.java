@@ -4,8 +4,6 @@ import dictionary.models.Dao.WordCollectionDao;
 import dictionary.models.Dao.WordsDao;
 import dictionary.models.Entity.Word;
 import dictionary.models.Entity.WordCollection;
-import dictionary.models.Entity.WordCollectionManagement;
-import dictionary.services.CollectionLookUpService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -19,7 +17,6 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
-import static dictionary.models.Entity.WordCollectionManagement.*;
 
 public class GameReviewAddController implements Initializable {
     @FXML
@@ -51,9 +48,9 @@ public class GameReviewAddController implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle Resources) {
-        int n = collectionNameList.size();
+        int n = WordCollectionDao.queryCollectionName().size();
         for (int i = 0; i < n; i++) {
-            collectionsToEdit.getItems().add(collectionNameList.get(i));
+            collectionsToEdit.getItems().add(WordCollectionDao.queryCollectionName().get(i));
         }
     }
     @FXML
@@ -63,12 +60,11 @@ public class GameReviewAddController implements Initializable {
         if (collectionName.isEmpty() || collectionName.isBlank()) {
             alert.setContentText("please type the name of the collection");
             alert.showAndWait();
-        } else if (!CollectionLookUpService.findCollection(collectionName).isEmpty()) {
+        } else if (!WordCollectionDao.findCollectionName(collectionName).isEmpty()) {
             alert.setContentText("had");
             alert.showAndWait();
         } else {
             WordCollectionDao.addCollection(collectionName);
-            System.out.println(allCollection.size());
             collectionsToEdit.getItems().add(collectionName);
             alert.setContentText("yi");
             alert.showAndWait();
@@ -77,7 +73,7 @@ public class GameReviewAddController implements Initializable {
 
     @FXML
     public void deleteCollection() {
-        currentCollection = CollectionLookUpService.findCollection(collectionsToEdit.getValue()).get(0);
+        currentCollection = WordCollectionDao.findCollectionName(collectionsToEdit.getValue()).get(0);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("bro u made it");
         alert.showAndWait();
@@ -88,7 +84,7 @@ public class GameReviewAddController implements Initializable {
     @FXML
     public void addWordCollection() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        currentCollection = CollectionLookUpService.findCollection(collectionsToEdit.getValue()).get(0);
+        currentCollection = WordCollectionDao.findCollectionName(collectionsToEdit.getValue()).get(0);
         String word = wordToEdit.getText();
         String type = typeToEdit.getText();
         String pronounciation = pronounciationToEdit.getText();
