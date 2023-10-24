@@ -26,7 +26,7 @@ public class WikiController implements Initializable {
     private WebView webView;
     private WebHistory history;
     @FXML
-            private ChoiceBox<String> historyURL = new ChoiceBox<>();
+    private ChoiceBox<String> historyURL = new ChoiceBox<>();
     WebEngine engine = null;
     @FXML
     private Button load = new Button();
@@ -51,7 +51,8 @@ public class WikiController implements Initializable {
 
     @FXML
     public void loadPage(ActionEvent event) {
-        engine.load("https://en.wikipedia.org/wiki/" + searchBox.getText());
+        //engine.load("https://en.wikipedia.org/wiki/" + searchBox.getText());
+        engine.load("https://www.pinterest.com/search/pins/?q="+searchBox.getText()+"&rs=typed");
 
     }
     @FXML

@@ -193,7 +193,8 @@ public class SearchController implements Initializable {
         // newWordField.setWrapText(true);
 
         Label meaningLabel = new Label("Meaning:");
-        TextField meaningField = new TextField();
+        TextArea meaningField = new TextArea();
+        meaningField.setWrapText(true);
         // meaningField.setWrapText(true);
 
         Label typeLabel = new Label("Type:");
@@ -207,12 +208,12 @@ public class SearchController implements Initializable {
         GridPane gridPane = new GridPane();
         gridPane.add(newWordLabel, 1, 1);
         gridPane.add(newWordField, 2, 1);
-        gridPane.add(meaningLabel, 1, 2);
-        gridPane.add(meaningField, 2, 2);
-        gridPane.add(typeLabel, 1, 3);
-        gridPane.add(typeField, 2, 3);
-        gridPane.add(pronunciationLabel, 1, 4);
-        gridPane.add(pronunciationField, 2, 4);
+        gridPane.add(meaningLabel, 1, 4);
+        gridPane.add(meaningField, 2, 4);
+        gridPane.add(typeLabel, 1, 2);
+        gridPane.add(typeField, 2, 2);
+        gridPane.add(pronunciationLabel, 1, 3);
+        gridPane.add(pronunciationField, 2, 3);
 
         dialog.getDialogPane().setContent(gridPane);
 
@@ -255,6 +256,48 @@ public class SearchController implements Initializable {
             }
         });
     }
+    @FXML
+    public void handleAddCollection() {
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setHeaderText(null);
+
+        Label INSTRUCTION=new Label("Please choose the collection to add this word.");
+        ChoiceBox<String> allCollections=new ChoiceBox<>();
+        int n = WordCollectionDao.queryCollectionName().size();
+        for (int i = 0; i < n; i++) {
+            allCollections.getItems().add(WordCollectionDao.queryCollectionName().get(i));
+        }
+        GridPane gridPane = new GridPane();
+        gridPane.add(INSTRUCTION, 1, 1);
+        gridPane.add(allCollections, 1, 2);
+
+        dialog.getDialogPane().setContent(gridPane);
+
+        ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButton, cancelButton);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == okButton) {
+                return "OK";
+            } else if (dialogButton == cancelButton) {
+                return "Cancel";
+            } else {
+                return null;
+            }
+        });
+
+        dialog.showAndWait().ifPresent(response -> {
+            if (response.equals("OK")) {
+                String collectionToAdd = allCollections.getValue();
+                WordCollectionDao.addWordForCollection(wordToFind,collectionToAdd);
+            }
+            else {
+                dialog.close();
+            }
+        });
+    }
+
     @FXML
     public void handleSpeaker() {
         TextToSpeech.TTS(wordToFind.getWord(),"en");

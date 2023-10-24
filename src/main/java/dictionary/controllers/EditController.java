@@ -38,6 +38,7 @@ public class EditController {
         if (wordinBox.isEmpty() || wordinBox.isBlank()) {
             resetText();
             return;
+
         }
         ArrayList<Word> tmp = WordsDao.queryWord(wordinBox,"anhviet");
 

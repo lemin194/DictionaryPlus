@@ -4,13 +4,13 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <AnchorPane prefHeight="272.0" prefWidth="623.0" styleClass="sub-sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.GameReviewPlayController">
    <children>
-      <Button fx:id="speaker" onAction="#playVoice" layoutX="40.0" layoutY="16.0" mnemonicParsing="false" styleClass="transparentButton">
+      <Button fx:id="speaker" layoutX="40.0" layoutY="16.0" mnemonicParsing="false" onAction="#playVoice" styleClass="transparentButton">
          <graphic>
                <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -19,18 +19,22 @@
                </ImageView>
          </graphic>
       </Button>
-      <Label fx:id="progress" layoutX="550.0" layoutY="49.0" styleClass="instruction" text="19/70" />
+      <Label fx:id="progress" layoutX="405.0" layoutY="52.0" styleClass="instruction" text="Played: 0/n words" />
       <Label fx:id="currentWord" layoutX="138.0" layoutY="16.0" styleClass="instruction" text="current word" />
-      <Button fx:id="easy" layoutX="432.0" layoutY="79.0" mnemonicParsing="false" onAction="#easyButton" prefHeight="42.0" prefWidth="111.0" text="easy" />
-      <Button fx:id="hard" layoutX="432.0" layoutY="134.0" mnemonicParsing="false" onAction="#hardButton" prefHeight="42.0" prefWidth="111.0" text="hard" />
-      <Button fx:id="medium" layoutX="432.0" layoutY="189.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="111.0" text="medium" />
       <Label fx:id="pronounciation" layoutX="97.0" layoutY="49.0" styleClass="instruction" text="label: word pronounciation" />
-      <TextArea fx:id="infoOfWord" layoutX="20.0" layoutY="79.0" prefHeight="152.0" prefWidth="360.0" promptText="I AM BREAKING FREE FROM THESE MEMORIES" styleClass="sos" />
+      <TextArea fx:id="infoOfWord" layoutX="20.0" layoutY="79.0" prefHeight="152.0" prefWidth="385.0" promptText="I AM BREAKING FREE FROM THESE MEMORIES" styleClass="card" />
       <Button fx:id="startGame" layoutX="554.0" layoutY="16.0" mnemonicParsing="false" onAction="#startGame" text="start" />
       <Button fx:id="answer" layoutX="148.0" layoutY="239.0" mnemonicParsing="false" onAction="#showAnswer" text="Show answer" />
       <AnchorPane layoutX="332.0" layoutY="15.0" prefHeight="25.0" prefWidth="200.0" styleClass="sub-container">
          <children>
             <ChoiceBox fx:id="collectionsToStudy" layoutX="22.0" prefHeight="27.0" prefWidth="194.0" styleClass="list-view" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="transfer" layoutX="417.0" layoutY="74.0" prefHeight="152.0" prefWidth="133.0">
+         <children>
+            <Button fx:id="easy" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#easyButton" prefHeight="27.0" prefWidth="111.0" text="easy" />
+            <Button fx:id="medium" layoutX="14.0" layoutY="76.0" mnemonicParsing="false" onAction="#easyButton" prefHeight="12.0" prefWidth="111.0" text="medium" />
+            <Button fx:id="hard" layoutX="14.0" layoutY="135.0" mnemonicParsing="false" onAction="#hardButton" prefHeight="27.0" prefWidth="111.0" text="hard" />
          </children>
       </AnchorPane>
    </children>

@@ -79,12 +79,23 @@
 }
 
 .sos {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #9eced9;
 }
+.card{
+    -fx-font-family: "Comic Sans MS";
+    -fx-text-fill: #000000;
+    -fx-font-size: 17;
+    -fx-background-color: #ffffff;
 
+}
 .labelWithText{
     -fx-font-family: "Comic Sans MS";
     -fx-text-fill: #ffffff;
+    -fx-font-size: 17;
+}
+.label2WithText{
+    -fx-font-family: "Comic Sans MS";
+    -fx-text-fill: #000000;
     -fx-font-size: 17;
 }
 .instruction{

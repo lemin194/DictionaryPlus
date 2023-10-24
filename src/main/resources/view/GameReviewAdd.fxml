@@ -12,10 +12,10 @@
       <Label layoutX="391.0" layoutY="6.0" styleClass="instruction" text="Add a new collection" />
       <Label layoutX="192.0" layoutY="62.0" prefHeight="13.0" prefWidth="239.0" styleClass="instruction" text="Edit words in this collection" wrapText="true" />
       <Button fx:id="addCollection" layoutX="565.0" layoutY="34.0" mnemonicParsing="false" onAction="#addColllection" text="ADD" />
-      <TextField fx:id="wordToEdit" layoutX="37.0" layoutY="86.0" prefHeight="24.0" prefWidth="548.0" styleClass="sos" text="Word" />
-      <TextField fx:id="typeToEdit" layoutX="37.0" layoutY="122.0" prefHeight="29.0" prefWidth="264.0" styleClass="sos" text="Type of the word" />
-      <TextField fx:id="pronounciationToEdit" layoutX="312.0" layoutY="122.0" prefHeight="29.0" prefWidth="273.0" styleClass="sos" text="Pronunciation of the word" />
-      <TextField fx:id="meaningToEdit" layoutX="37.0" layoutY="158.0" prefHeight="61.0" prefWidth="548.0" styleClass="sos" text="Meaning of the word" />
+      <TextField fx:id="wordToEdit" layoutX="37.0" layoutY="86.0" onKeyReleased="#checkExistentofWordinCollection" prefHeight="24.0" prefWidth="548.0" styleClass="card" text="" />
+      <TextField fx:id="typeToEdit" layoutX="37.0" layoutY="122.0" prefHeight="29.0" prefWidth="264.0" styleClass="card" text="" />
+      <TextField fx:id="pronounciationToEdit" layoutX="312.0" layoutY="122.0" prefHeight="29.0" prefWidth="273.0" styleClass="card" text="" />
+      <TextField fx:id="meaningToEdit" layoutX="37.0" layoutY="158.0" prefHeight="61.0" prefWidth="548.0" styleClass="card" text="" />
       <Button fx:id="edit" layoutX="217.0" layoutY="229.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="41.0" text="EDIT" />
       <Button fx:id="delete" layoutX="348.0" layoutY="229.0" mnemonicParsing="false" text="DELETE" />
       <Button fx:id="add" layoutX="281.0" layoutY="229.0" mnemonicParsing="false" onAction="#addWordCollection" text="ADD" />
