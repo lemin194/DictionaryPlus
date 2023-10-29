@@ -20,7 +20,6 @@ public class MainApplication extends Application {
     private double yOffset = 0;
     public static Stage mainStage;
     public static void main(String[]args) {
-        System.out.println(new File("./src/main/java/Dictionary/Main.fxml").exists());
         launch(args);
     }
     @Override

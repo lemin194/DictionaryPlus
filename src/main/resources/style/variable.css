@@ -1,12 +1,15 @@
 * {
   -primary: #9ECED9;
   -secondary: #FDE2AC;
-  -tertiary: #FFC6D9;
-  -button-color: #edf1f3;
+  -tertiary: rgb(246, 148, 193);
+  -button-2: #edf1f3;
+  -button-1: #56b0ee;
+  -button-2-hover: rgba(245, 113, 157, 0.18);
   -text-language-select: #000000;
   -texture: #000000;
   -text-highlight-fill: #4E4B5C;
-  -text-fill: #181818;
   -text-box-color: #FFFFFF;
   -border-1: #2d2d42;
+  -border-2: #456990;
+
 }

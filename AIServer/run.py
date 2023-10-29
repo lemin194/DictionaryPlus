@@ -44,7 +44,6 @@ async def route_translateimage():
    # print(bytes.decode(file))
 
    image = load_from_bytes(file)
-   img_test = load_from_file("temp/words.png")
    print(image.shape)
    ret_image, ret_content = translate_image(image)
    return jsonify({

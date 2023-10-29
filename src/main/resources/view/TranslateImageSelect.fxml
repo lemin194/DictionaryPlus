@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="271.0" prefWidth="720.0" style="-fx-background-color: -tertiary; -fx-background-radius: 64pt;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.TranslateImageController">
+   <children>
+      <VBox alignment="CENTER" layoutX="21.0" prefHeight="350.0" prefWidth="674.0" spacing="4.0">
+         <children>
+            <AnchorPane prefHeight="260.0" prefWidth="674.0" styleClass="translate-box">
+               <children>
+                  <HBox alignment="CENTER" layoutX="12.0" layoutY="5.0" prefHeight="269.0" prefWidth="650.0" spacing="4.0">
+                     <children>
+                        <AnchorPane fx:id="dragTarget" prefHeight="290.0" prefWidth="307.0">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="54.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../utils/icons/translate/drag_and_drop.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="95.0" layoutY="232.0" text="Drag and Drop">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <Line endX="100.0" fill="#ababab" startX="100.0" startY="-250.0" stroke="#dddddd" />
+                        <AnchorPane prefHeight="290.0" prefWidth="307.0">
+                           <children>
+                              <JFXButton fx:id="btnBrowseFile" layoutX="74.0" layoutY="124.0" prefHeight="28.0" prefWidth="160.0" style="-fx-background-color: #165BE9; -fx-background-radius: 4;" text="Browse your file" textAlignment="CENTER" textFill="WHITE" />
+                              <Label layoutX="103.0" layoutY="79.0" text="Or choose a file" />
+                              <JFXButton fx:id="btnClipboard" layoutX="74.0" layoutY="160.0" prefHeight="28.0" prefWidth="160.0" style="-fx-border-radius: 4; -fx-border-width: 1; -fx-border-color: DDDDDD;" text="Paste from clipboard" textAlignment="CENTER" textFill="#165be9" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../style/translate.css" />
+      <URL value="@../style/variable.css" />
+   </stylesheets>
+</AnchorPane>
