@@ -173,6 +173,17 @@ public class WordCollectionDao {
         }
         return result;
     }
+
+    public static List<Word> findWordInCollection(String prefix, String collectionName) {
+        List<Word> res = new ArrayList<>();
+        List<Word> allWord = queryWordInCollection(collectionName);
+        for (Word word : allWord) {
+            if (havePrefix(word.getWord(), prefix)) {
+                res.add(word);
+            }
+        }
+        return res;
+    }
     public static void main(String[] args) {
         List<String> res = queryCollectionName();
         for (String name : res) System.out.println(name);

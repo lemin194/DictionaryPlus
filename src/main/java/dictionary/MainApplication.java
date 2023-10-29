@@ -3,16 +3,21 @@ package dictionary;
 import dictionary.services.WordLookUpService;
 import dictionary.views.HelloApplication;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.util.Objects;
 
 public class MainApplication extends Application {
+    private double xOffset = 0;
+    private double yOffset = 0;
     public static Stage mainStage;
     public static void main(String[]args) {
         System.out.println(new File("./src/main/java/Dictionary/Main.fxml").exists());
@@ -35,12 +40,33 @@ public class MainApplication extends Application {
             Class.forName("dictionary.models.Dao.AllWord");
             WordLookUpService.start();
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Main.fxml")));
-            Scene scene = new Scene(root, Color.web("1F1F1F"));
 
+            stage.initStyle(StageStyle.TRANSPARENT);
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                }
+            });
+
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    stage.setX(event.getScreenX() - xOffset);
+                    stage.setY(event.getScreenY() - yOffset);
+                }
+            });
+
+
+
+            Scene scene = new Scene(root, Color.web("1F1F1F"));
+            scene.setFill(Color.TRANSPARENT);
             scene.getStylesheets().add(getClass().getResource("/style/main.css").toExternalForm());
 
             stage.setTitle("Dictionary Plus");
             stage.setScene(scene);
+            stage.initStyle(StageStyle.TRANSPARENT);
 
             stage.show();
             mainStage = stage;

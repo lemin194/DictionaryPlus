@@ -54,21 +54,24 @@
             </graphic>
       </Button>
       <Button fx:id="addBtn" layoutX="338.0" layoutY="28.0" mnemonicParsing="false" onAction="#handleAdd" styleClass="transparentButton">
-            <graphic>
+              <graphic>
                 <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../utils/icons/search/add.png" />
                     </image>
                 </ImageView>
-            </graphic>
+              </graphic>
       </Button>
 
-        <Button fx:id="addToCollection" layoutX="410.0" layoutY="331.0" mnemonicParsing="false" styleClass="transparentButton" />
-          <ImageView fitHeight="48" fitWidth="48" layoutX="398.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+        <Button fx:id="addToCollection" onAction="#handleAddCollection" layoutX="398" layoutY="316.0" mnemonicParsing="false" styleClass="transparentButton">
+          <graphic>
+            <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
               <image>
                   <Image url="@../utils/icons/search/icons8-add-properties-48.png" />
               </image>
           </ImageView>
+          </graphic>
+        </Button>
 
 
 

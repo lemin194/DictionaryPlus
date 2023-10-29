@@ -19,13 +19,15 @@ public class GameController implements Initializable {
     @FXML
     private AnchorPane gameContainer = new AnchorPane();
     @FXML
-    private Button reviewBtn, quizBtn;
+    private Button reviewBtn, quizBtn, quiz2Btn;
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         quizBtn.setOnAction(event -> showComponent("/view/GameQuiz.fxml"));
 
         reviewBtn.setOnAction(event -> showComponent("/view/GameReview.fxml"));
+
+        quiz2Btn.setOnAction(actionEvent -> showComponent("/view/GameQuiz2.fxml"));
 
         showComponent("/view/GameReview.fxml");
     }

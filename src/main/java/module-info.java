@@ -12,8 +12,9 @@ module com.dictionary.dictionaryplus {
   requires org.apache.httpcomponents.httpcore;
   requires org.apache.httpcomponents.httpclient;
   requires org.apache.httpcomponents.httpmime;
+    requires javafx.web;
 
-  exports dictionary;
+    exports dictionary;
   exports dictionary.controllers;
 
   opens dictionary to javafx.fxml;

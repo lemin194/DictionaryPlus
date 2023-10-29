@@ -1,6 +1,5 @@
 package dictionary.models.Dao;
 
-import dictionary.models.Entity.WordCollectionManagement;
 import dictionary.services.WordLookUpService;
 
 import java.io.BufferedWriter;
@@ -13,7 +12,7 @@ public class Utils {
             // storing wordCollection for next use
             String filePATH = "src/main/resources/data/Collection.txt";
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePATH))) {
-                for (String collectionName : WordCollectionManagement.collectionNameList) {
+                for (String collectionName : WordCollectionDao.queryCollectionName()) {
                     writer.write(collectionName + "\n");
                 }
             }

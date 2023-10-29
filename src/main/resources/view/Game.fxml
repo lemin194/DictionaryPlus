@@ -12,7 +12,7 @@
                   <Image url="@../utils/imgs/logo.png" />
             </image>
       </ImageView>
-      <Button fx:id="quizBtn" layoutX="425.0" layoutY="104.0" mnemonicParsing="false" styleClass="transparentButton" >
+      <Button fx:id="quizBtn" layoutX="425.0" layoutY="104.0" mnemonicParsing="false" styleClass="transparentButton">
           <graphic>
               <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -21,7 +21,7 @@
               </ImageView>
           </graphic>
       </Button>
-      <Button fx:id="reviewBtn" layoutX="240.0" layoutY="100.0"  mnemonicParsing="false" styleClass="transparentButton" >
+      <Button fx:id="reviewBtn" layoutX="240.0" layoutY="100.0" mnemonicParsing="false" styleClass="transparentButton">
         <graphic>
             <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
                 <image>
@@ -37,4 +37,5 @@
 
 
    <Label layoutX="428.0" layoutY="76.0" styleClass="labelWithText" text="Game" />
+   <Button fx:id="quiz2Btn" layoutX="563.0" layoutY="112.0" mnemonicParsing="false" text="Hangman" />
 </AnchorPane>

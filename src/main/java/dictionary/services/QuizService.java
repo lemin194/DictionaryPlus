@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Random;
 
 public class QuizService {
-    private final int quizChoice = 4;
+    private final int quizChoice = 3;
     //We just need 4 words
-    public List<Word> generateOneQuiz(String collectionName) {
+    public List<Word> generateOneQuiz(String collectionName, Word answer) {
         // if collectionName is null then we randomly choose from past searching results
         List<Word> quizWords = new ArrayList<>();
         if (collectionName == null) {
@@ -24,7 +24,8 @@ public class QuizService {
                     Word randWord = WordsDao.queryWordByIndex(randIndex, "anhviet");
                     boolean canAdd = true;
                     for (Word word : quizWords) {
-                        if (word.getWord().equals(randWord.getWord())) {
+                        if (word.getWord().equals(randWord.getWord())
+                                || word.getWord().equals(answer.getWord())) {
                             canAdd = false;
                             break;
                         }
@@ -38,7 +39,29 @@ public class QuizService {
         } else {
             List<Word> collectionWords = WordLookUpService.findWord("", collectionName);
             if (quizChoice > collectionWords.size()) {
-                System.out.printf("sorry this collection just have %d words\n", collectionWords.size());
+                for (int i = 0; i < Math.min(collectionWords.size(), quizChoice); i++) {
+                    if (!collectionWords.get(i).equals(answer.getWord()))
+                      quizWords.add(collectionWords.get(i));
+                }
+                Random rand = new Random();
+                for (int i = 0; i < quizChoice - collectionWords.size(); i++) {
+                    while (true) {
+                        int randIndex = rand.nextInt(AllWord.amountWord());
+                        if (randIndex == 0) randIndex++;
+                        Word randWord = WordsDao.queryWordByIndex(randIndex, "anhviet");
+                        boolean canAdd = true;
+                        for (Word word : quizWords) {
+                            if (word.getWord().equals(randWord.getWord())) {
+                                canAdd = false;
+                                break;
+                            }
+                        }
+                        if (canAdd) {
+                            quizWords.add(randWord);
+                            break;
+                        }
+                    }
+                }
             }
             Collections.shuffle(collectionWords);
             for (int i = 0; i < Math.min(collectionWords.size(), quizChoice); i++) {
@@ -48,20 +71,20 @@ public class QuizService {
         return quizWords;
     }
 
-    public List<List<Word>> generateManyQuizs(String collectionName, int amountQuiz) {
+    /*public List<List<Word>> generateManyQuizs(String collectionName, int amountQuiz) {
         List<List<Word>> quizList = new ArrayList<>();
         for (int i = 0; i < amountQuiz; i++) {
             quizList.add(generateOneQuiz(collectionName));
         }
         return quizList;
-    }
+    }*/
     public static void main(String[] args) {
         QuizService quizSer = new QuizService();
-        List<List<Word>> testQuizList = quizSer.generateManyQuizs(null, 2);
+        /*List<List<Word>> testQuizList = quizSer.generateManyQuizs(null, 2);
         for (List<Word> quiz : testQuizList) {
             for (Word word : quiz) {
                 System.out.println(word);
             }
-        }
+        }*/
     }
 }
