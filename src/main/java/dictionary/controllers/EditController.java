@@ -48,6 +48,7 @@ public class EditController {
         }
         Word word = tmp.get(0);
         if (word != null) {
+            //
             getMeaning.setText(word.getMeaning());
             getType.setText(word.getType());
             getPronounciation.setText(word.getPronunciation());
