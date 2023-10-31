@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -38,6 +39,8 @@ public class TranslateTextController implements Initializable {
   private PauseTransition recordingDuration;
   private PauseTransition translateDelay;
   private PauseTransition suggestionDelay;
+
+  private Thread sttThread;
 
 
   private void initLanguageMap() {
@@ -84,6 +87,18 @@ public class TranslateTextController implements Initializable {
 
       waitSuggest();
     });
+
+
+    sttThread = new Thread(() -> {
+      var res = SpeechToText.STT(fromLanguage);
+      Platform.runLater(() -> {
+        System.out.println(res.get("status") + res.get("stderr"));
+        if (res.get("status").equals("OK")) {
+          fromTextArea.setText(res.get("content"));
+        }
+      });
+    });
+
 
     fromLanguageChoice.getSelectionModel().selectedIndexProperty().addListener(
         (observableValue, number, t1) -> {
@@ -179,12 +194,9 @@ public class TranslateTextController implements Initializable {
     recording = false;
     SpeechToText.stopRecording();
     recordingButtonIcon.setImage(recordBtnImage);
-    System.out.println(fromLanguage);
-    var res = SpeechToText.STT(fromLanguage);
-    System.out.println(res.get("status") + res.get("stderr"));
-    if (res.get("status").equals("OK")) {
-      fromTextArea.setText(res.get("content"));
-    }
+
+    sttThread.interrupt();
+    sttThread.start();
   }
 
   @FXML

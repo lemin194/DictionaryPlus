@@ -28,6 +28,7 @@ public class TestAPI {
         System.out.println("Hello");
         TestTranslate();
         System.out.println(Autocorrect.correct("Đứcc rấttt đẹpp trai", "vi"));
+        SpeechToText.STT("en");
 //        TestTTS();
 //        SpeechToText.beginRecord();
 //        SpeechToText.stopRecording();
