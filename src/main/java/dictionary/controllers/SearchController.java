@@ -263,9 +263,9 @@ public class SearchController implements Initializable {
 
         Label INSTRUCTION=new Label("Please choose the collection to add this word.");
         ChoiceBox<String> allCollections=new ChoiceBox<>();
-        int n = WordCollectionDao.queryCollectionName().size();
-        for (int i = 0; i < n; i++) {
-            allCollections.getItems().add(WordCollectionDao.queryCollectionName().get(i));
+        List<String> collectionNames = WordCollectionDao.queryCollectionName();
+        for (String name : collectionNames) {
+            allCollections.getItems().add(name);
         }
         GridPane gridPane = new GridPane();
         gridPane.add(INSTRUCTION, 1, 1);
