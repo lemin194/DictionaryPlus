@@ -37,7 +37,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.Button;
-
 public class SearchController implements Initializable {
     @FXML
     private TextField searchBox = new TextField();

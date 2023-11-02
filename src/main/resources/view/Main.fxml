@@ -7,9 +7,20 @@
 
 <AnchorPane prefHeight="600" prefWidth="900" styleClass="root" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.MainController">
 
-      <AnchorPane fx:id="container" layoutX="130.0" layoutY="20.0" minHeight="400.0" minWidth="500.0" prefHeight="560" prefWidth="750" styleClass="container" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <AnchorPane fx:id="container" layoutX="130.0" layoutY="112.0" minHeight="400.0" minWidth="500.0" prefHeight="560.0" prefWidth="750" styleClass="container" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <children>
+         <Button fx:id="home" layoutX="59.0" layoutY="32.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css" text="Button">
+               <graphic>
+                     <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                                 <Image url="@../utils/imgs/logo.png" />
+                           </image>
+                     </ImageView>
+               </graphic>
+         </Button>
+      </children></AnchorPane>
 
-      <Button fx:id="searchBtn" layoutX="5" layoutY="5" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparentButton">
+      <Button fx:id="searchBtn" layoutX="14.0" layoutY="34.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
             <graphic>
                   <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -20,7 +31,7 @@
       </Button>
 
 
-      <Button fx:id="translateBtn" layoutX="5" layoutY="105" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparentButton">
+      <Button fx:id="translateBtn" layoutX="14.0" layoutY="140.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
             <graphic>
                   <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -30,7 +41,7 @@
             </graphic>
       </Button>
 
-      <Button fx:id="reviewBtn" layoutX="5" layoutY="205" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparentButton">
+      <Button fx:id="reviewBtn" layoutX="14.0" layoutY="240.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
             <graphic>
                   <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -40,26 +51,16 @@
             </graphic>
       </Button>
 
-      <Button fx:id="editBtn" layoutX="5" layoutY="305" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparentButton">
+      <Button fx:id="gameBtn" layoutX="14.0" layoutY="356.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
             <graphic>
                   <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
                         <image>
-                              <Image url="@../utils/icons/main/edit.png" />
+                              <Image url="@../utils/icons/main/game.png" />
                         </image>
                   </ImageView>
             </graphic>
       </Button>
-
-      <Button fx:id="wikiBtn" layoutX="5" layoutY="405" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparentButton">
-            <graphic>
-                  <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                              <Image url="@../utils/icons/main/icons8-storytelling-100.png" />
-                        </image>
-                  </ImageView>
-            </graphic>
-      </Button>
-      <Button fx:id="exitBtn" layoutX="5" layoutY="505" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparentButton">
+      <Button fx:id="exitBtn" layoutX="14.0" layoutY="469.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
             <graphic>
                   <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
                         <image>

@@ -1,0 +1,98 @@
+@font-face {
+    src: url("../font/Adagio_Slab-Light.ttf");
+}
+.easyBtn{
+    -fx-background-color: #73D7CE;
+    -fx-font-family: "Adagio Slab Light";
+    -fx-font-size: 17;
+    -fx-background-radius: 5;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
+    -fx-cursor: hand;
+}
+.hardBtn{
+    -fx-background-color: #E71D36;
+    -fx-font-family: "Adagio Slab Light";
+    -fx-font-size: 17;
+    -fx-background-radius: 5;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
+    -fx-cursor: hand;
+}
+.deck{
+    -fx-font-family: "Adagio Slab Light";
+    -fx-text-fill: #000000;
+    -fx-font-size: 17;
+    -fx-background-color: #B8EBE6;
+    -fx-background-radius: 5;
+}
+.normal-button{
+    -fx-background-color: #2EC4B6;
+    -fx-font-family: "Adagio Slab Light";
+    -fx-font-size: 17;
+    -fx-background-radius: 5;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
+    -fx-cursor: hand;
+}
+.label{
+    -fx-text-fill: #000000;
+    -fx-font-size: 17;
+    -fx-font-family: "Adagio Slab Light";
+}
+
+.toggle-button {
+    -fx-font-family: "Adagio Slab Light";
+    -fx-border-width: 1px;
+    -fx-border-color: #808080;
+    -fx-background-color: white;
+    -fx-font-size: 17;
+    -fx-border-radius: 15px;
+    -fx-padding: 3px;
+}
+.toggle-button:selected {
+    -fx-background-color: white;
+}
+.toggle-button:armed {
+    -fx-background-color: white;
+}
+.toggle-button:determinate {
+    -fx-background-color: white;
+}
+.toggle-button:indeterminate {
+    -fx-background-color: white;
+}
+.toggle-button.dot {
+    -fx-background-radius: 15px;
+    -fx-padding: 8px;
+}
+.smallBtn{
+    -fx-background-color: #f57f17;
+    -fx-font-family: "Adagio Slab Light";
+    -fx-font-size: 15;
+    -fx-background-radius: 5;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
+    -fx-cursor: hand;
+}
+
+.transparent-button {
+    -fx-font-family: "Adagio Slab Light";
+    -fx-font-size: 15;
+    -fx-background-color: transparent;
+    -fx-border-radius: 15;
+    -fx-background-radius: 16pt;
+    -fx-padding: 0;
+}
+.transparent-button:hover {
+    -fx-background-color: #808080; /* Set the background color with some transparency */
+}
+.transparent-button:pressed {
+    -fx-background-color: #d4d4d4; /* Set the background color with some transparency */
+}
+.transparent-button-selected {
+    -fx-font-family: "Adagio Slab Light";
+    -fx-background-color: #d4d4d4; /* Set the background color with some transparency */
+    -fx-border-radius: 16pt;
+    -fx-background-radius: 10pt;
+}

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="271.0" prefWidth="720.0" style="-fx-background-color: -tertiary; -fx-background-radius: 48pt;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.TranslateTextController">
+   <children>
+      <HBox layoutX="21.0" spacing="10.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="350.0" prefWidth="334.0" spacing="4.0">
+               <children>
+                  <ChoiceBox fx:id="fromLanguageChoice" prefWidth="150.0" styleClass="choicebox-language" />
+                  <AnchorPane prefHeight="252.0" prefWidth="284.0" styleClass="translate-box">
+                     <children>
+                        <TextArea fx:id="fromTextArea" layoutX="7.0" layoutY="14.0" prefHeight="200.0" prefWidth="320.0" styleClass="translate-text-box" />
+                        <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="204.0" prefHeight="48.0">
+                           <children>
+                              <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#ToggleRecord" prefHeight="48.0" prefWidth="48.0" styleClass="button-translate-utils" text="Button">
+                                 <graphic>
+                                    <ImageView fx:id="recordingButtonIcon" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../utils/icons/translate/micro.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#PlayTextFrom" prefHeight="48.0" prefWidth="48.0" styleClass="button-translate-utils" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../utils/icons/translate/speaker.png" />
+                                       </image>
+                                       <viewport>
+                                          <Rectangle2D />
+                                       </viewport>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="350.0" prefWidth="334.0" spacing="4.0">
+               <children>
+                  <ChoiceBox fx:id="toLanguageChoice" prefWidth="150.0" styleClass="choicebox-language" />
+                  <AnchorPane prefHeight="252.0" prefWidth="284.0" styleClass="translate-box">
+                     <children>
+                        <TextArea fx:id="toTextArea" layoutX="7.0" layoutY="14.0" prefHeight="200.0" prefWidth="320.0" styleClass="translate-text-box" />
+                        <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="204.0" maxWidth="-Infinity" prefHeight="48.0">
+                           <children>
+                              <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#PlayTextTo" prefHeight="48.0" prefWidth="48.0" styleClass="button-translate-utils" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../utils/icons/translate/speaker.png" />
+                                       </image>
+                                       <viewport>
+                                          <Rectangle2D />
+                                       </viewport>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <JFXButton fx:id="reverseButton" contentDisplay="GRAPHIC_ONLY" layoutX="331.0" layoutY="144.0" onAction="#ReverseLanguage" prefHeight="58.0" prefWidth="58.0" styleClass="reverse-button" text="Button">
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../utils/icons/translate/reverse.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+   </children>
+   <stylesheets>
+      <URL value="@../style/translate.css" />
+      <URL value="@../style/variable.css" />
+   </stylesheets>
+</AnchorPane>

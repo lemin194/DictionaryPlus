@@ -3,21 +3,24 @@
     -fx-background-radius: 30;
     -fx-border-radius: 30;
 }
-/*.button {*/
-/*    -fx-padding: 8 15 15 15;*/
-/*    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;*/
-/*    -fx-background-radius: 8;*/
-/*    -fx-background-color: linear-gradient(to top right,#79ceed, #c5e7f1);*/
-/*    -fx-font-weight: bold;*/
-/*    -fx-font-size: 1.1em;*/
-/*}*/
 
-.transparentButton {
+.transparent-button {
     -fx-background-color: transparent;
-    -fx-background-radius: 0;
+    -fx-border-radius: 16pt;
+    -fx-background-radius: 16pt;
     -fx-padding: 0;
 }
-
+.transparent-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Set the background color with some transparency */
+}
+.transparent-button:pressed {
+    -fx-background-color: #d4d4d4; /* Set the background color with some transparency */
+}
+.transparent-button-selected {
+    -fx-background-color: #d4d4d4; /* Set the background color with some transparency */
+    -fx-border-radius: 16pt;
+    -fx-background-radius: 10pt;
+}
 .border {
     -fx-background-color: #809ccc;
 }

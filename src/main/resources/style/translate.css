@@ -17,37 +17,53 @@
 
 .translate-text-box .content {
   -fx-padding: 16px;
-  -fx-text-fill: -text-fill;
+  -fx-text-fill: #181818;
   -fx-highlight-fill: -text-highlight-fill;
 }
 
 .translate-box-whole {
   -fx-background-color: -tertiary;
-  -fx-background-radius: 16px;
+  -fx-background-radius: 32pt;
 }
 
 
 .translate-box {
   -fx-background-color: -text-box-color;
-  -fx-background-radius: 16px;
+  -fx-background-radius: 28pt;
 }
 .reverse-button {
   -fx-border-radius: 16pt;
   -fx-background-radius: 16pt;
   -fx-border-width: 2;
   -fx-border-color: -border-1;
-  -fx-background-color: -button-color;
+  -fx-background-color: -button-2;
 }
-
-
 
 .button-translate-service {
+  -fx-text-fill: #eaeaea;
+  -fx-background-radius: 8pt 8pt 2pt 2pt;
+}
+
+.button-translate-service:hover {
+  -fx-text-fill: #f8f8f8;
+  -fx-background-color: -button-2-hover;
+}
+
+.button-translate-service-selected {
+  -fx-text-fill: -border-2;
+  -fx-border-style: hidden hidden solid hidden;
+  -fx-background-radius: 8pt 8pt 2pt 2pt;
+  -fx-border-width: 3;
+  -fx-border-color: -border-2;
+}
+
+.button-translate-utils {
   -fx-background-radius: 64pt;
 }
-.button-translate-service:hover {
+.button-translate-utils:hover {
   -fx-background-color: #EEEEEE;
 }
-.button-translate-service:pressed {
+.button-translate-utils:pressed {
   -fx-background-color: #E0E0E0;
 }
 
@@ -74,4 +90,36 @@
 }
 .choicebox-language .menu-item:hover {
   -fx-background-color: #f0f0f0; /* Change the background color of the hovered menu item */
+}
+
+.drag-box {
+  -fx-background-color: rgba(0, 0, 0, 0);
+  -fx-border-width: 0px; /* Border width */
+}
+
+.drag-box-dragged {
+  -fx-background-color: rgba(0, 0, 0, 0.14);
+  -fx-border-style: dashed; /* Dashed border style */
+  -fx-border-width: 3px; /* Border width */
+  -fx-border-color: rgba(0, 0, 0, 0.47);
+  -fx-border-dash-array: 8 8;
+  -fx-background-radius: 4pt;
+  -fx-border-radius: 4pt;
+}
+
+.button-confirm {
+  -fx-background-radius: 24pt;
+  -fx-background-color: -button-1;
+  -fx-text-fill: #FFFFFF;
+  -fx-focus-traversable: false;
+}
+
+.button-titlebar {
+  -fx-background-color: rgba(0, 0, 0, 0.11);
+  -fx-background-radius: 32pt;
+  -fx-focus-traversable: false;
+}
+
+.titlebar {
+  -fx-background-color: rgba(0, 0, 0, 0.01);
 }

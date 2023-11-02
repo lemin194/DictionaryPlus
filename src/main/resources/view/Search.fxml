@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="560" prefWidth="750" styleClass="container" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.SearchController">
+<AnchorPane prefHeight="560" prefWidth="750" styleClass="main-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.SearchController">
 
 
     <AnchorPane layoutX="236.0" layoutY="172.0" prefHeight="374.0" prefWidth="500" styleClass="explain-field">
         <Pane layoutX="24.0" layoutY="74.0" prefHeight="4.0" prefWidth="452.0" styleClass="bar" />
-        <Button fx:id="speaker" layoutX="14" layoutY="20" mnemonicParsing="false" onAction="#handleSpeaker" prefHeight="64" prefWidth="64" styleClass="transparentButton">
+        <Button fx:id="speaker" layoutX="14" layoutY="20" mnemonicParsing="false" onAction="#handleSpeaker" prefHeight="54" prefWidth="54" styleClass="transparent-button">
             <graphic>
                 <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -35,7 +35,7 @@
                 <Font name="System Bold Italic" size="19" />
             </font>
         </Label>
-      <Button fx:id="deleteBtn" layoutX="386.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="48.0" prefWidth="48.0" styleClass="transparentButton">
+      <Button fx:id="deleteBtn" layoutX="377.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="54.0" prefWidth="54.0" styleClass="transparent-button">
             <graphic>
                 <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -44,7 +44,7 @@
                 </ImageView>
             </graphic>
       </Button>
-      <Button fx:id="editBtn" layoutX="434.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleEdit" prefHeight="48.0" prefWidth="48.0" styleClass="transparentButton">
+      <Button fx:id="editBtn" layoutX="425.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleEdit" prefHeight="54.0" prefWidth="54.0" styleClass="transparent-button">
             <graphic>
                 <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -53,7 +53,7 @@
                 </ImageView>
             </graphic>
       </Button>
-      <Button fx:id="addBtn" layoutX="338.0" layoutY="28.0" mnemonicParsing="false" onAction="#handleAdd" styleClass="transparentButton">
+      <Button fx:id="addBtn" layoutX="323.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="54.0" prefWidth="54.0" styleClass="transparent-button">
               <graphic>
                 <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -63,7 +63,7 @@
               </graphic>
       </Button>
 
-        <Button fx:id="addToCollection" onAction="#handleAddCollection" layoutX="398" layoutY="316.0" mnemonicParsing="false" styleClass="transparentButton">
+        <Button fx:id="addToCollection" layoutX="398" layoutY="316.0" mnemonicParsing="false" onAction="#handleAddCollection" prefHeight="54.0" prefWidth="54.0" styleClass="transparent-button">
           <graphic>
             <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
               <image>

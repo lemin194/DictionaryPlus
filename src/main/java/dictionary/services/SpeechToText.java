@@ -1,33 +1,17 @@
 package dictionary.services;
 
-import static org.json.HTTP.CRLF;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -39,19 +23,13 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.TargetDataLine;
 import javax.sound.sampled.AudioFormat;
-import org.apache.http.NameValuePair;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -164,6 +142,7 @@ public class SpeechToText {
     ret.put("status", "OK");
     ret.put("stderr", "");
     ret.put("content", "");
+    ret.put("confident", "0");
     int status = 1000;
 
     File audioFile = new File(recordPath);
@@ -288,6 +267,20 @@ public class SpeechToText {
           ret.put("status", "OK");
           ret.put("stderr", "");
           ret.put("content", new JSONObject(responseString).get("text").toString());
+          JSONObject fullRes = new JSONObject(responseString);
+//          JSONArray confident = new JSONArray();
+          JSONArray segments = new JSONArray(fullRes.get("segments").toString());
+
+//          for (Object segObj : segments) {
+//            JSONObject seg = new JSONObject(segObj.toString());
+//            JSONArray timestamps = new JSONArray(seg.get("whole_word_timestamps").toString());
+//            for (Object timestamp : timestamps) {
+//              JSONObject word = new JSONObject(timestamp.toString());
+//              confident.put(word.toString());
+//            }
+//          }
+//          ret.put("confident", String.valueOf(confident));
+//          System.out.println(ret.get("confident"));
         }
       }
     } catch (Exception e) {
@@ -296,11 +289,11 @@ public class SpeechToText {
       ret.put("content", "");
     } finally {
       if (audioFile.exists()) {
-        if (audioFile.delete()) {
-//                                    System.out.println("File deleted successfully.");
-        } else {
-          System.err.println("Failed to delete file.");
-        }
+//        if (audioFile.delete()) {
+////                                    System.out.println("File deleted successfully.");
+//        } else {
+//          System.err.println("Failed to delete file.");
+//        }
       }
     }
     return ret;

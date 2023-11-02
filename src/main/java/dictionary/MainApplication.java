@@ -20,7 +20,6 @@ public class MainApplication extends Application {
     private double yOffset = 0;
     public static Stage mainStage;
     public static void main(String[]args) {
-        System.out.println(new File("./src/main/java/Dictionary/Main.fxml").exists());
         launch(args);
     }
     @Override
@@ -63,7 +62,7 @@ public class MainApplication extends Application {
             Scene scene = new Scene(root, Color.web("1F1F1F"));
             scene.setFill(Color.TRANSPARENT);
             scene.getStylesheets().add(getClass().getResource("/style/main.css").toExternalForm());
-
+            scene.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
             stage.setTitle("Dictionary Plus");
             stage.setScene(scene);
             stage.initStyle(StageStyle.TRANSPARENT);
