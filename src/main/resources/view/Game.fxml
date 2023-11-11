@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,27 +12,23 @@
                   <Image url="@../utils/imgs/logo.png" />
             </image>
       </ImageView>
-   <AnchorPane layoutX="31.0" layoutY="117.0" prefHeight="397.0" prefWidth="688.0" styleClass="sub-container">
+   <AnchorPane layoutX="31.0" layoutY="98.0" prefHeight="416.0" prefWidth="688.0" styleClass="sub-container">
       <children>
-            <AnchorPane fx:id="gameContainer" layoutY="71.0" prefHeight="360.0" prefWidth="688.0" />
-            <Button fx:id="quizBtn" layoutX="33.0" layoutY="14.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" styleClass="transparent-button" stylesheets="@../style/review.css" text="Quizzes">
-            <graphic>
-                    <ImageView fitHeight="48" fitWidth="48" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" x="1.0" y="1.0">
-                        <image>
-                            <Image url="@../utils/icons/review/icons8-game-48.png" />
-                        </image>
-                    </ImageView>
-            </graphic>
-            </Button>
-         <Button fx:id="quiz2Btn" layoutX="158.0" layoutY="14.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="124.0" styleClass="transparent-button" stylesheets="@../style/review.css" text="Hangman">
-             <graphic>
-                 <ImageView fitHeight="48" fitWidth="48" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" x="1.0" y="1.0">
-                     <image>
-                         <Image url="@../utils/icons/review/icons8-game-48.png" />
-                     </image>
-                 </ImageView>
-             </graphic>
-         </Button>
+            <Button fx:id="quizBtn" layoutX="520.0" layoutY="107.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="117.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
+         <Button fx:id="quiz3Btn" layoutX="517.0" layoutY="181.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="124.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
+         <Button fx:id="quiz3Btn" layoutX="517.0" layoutY="252.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="124.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
+         <AnchorPane layoutX="13.0" layoutY="58.0" prefHeight="5.0" prefWidth="662.0" styleClass="bar" stylesheets="@../style/main.css" />
+         <Label layoutX="84.0" layoutY="14.0" prefHeight="34.0" prefWidth="322.0" stylesheets="@../style/review.css" text="Challenge yourself with our games!" />
+         <Label layoutX="92.0" layoutY="87.0" prefHeight="72.0" prefWidth="412.0" stylesheets="@../style/review.css" text="Game 1: Normal quiz game with your collections" />
+         <Label layoutX="92.0" layoutY="164.0" prefHeight="72.0" prefWidth="412.0" stylesheets="@../style/review.css" text="Game 2: Wordle. Guess 5-letter word in 6 chances." />
+         <Label layoutX="92.0" layoutY="236.0" prefHeight="72.0" prefWidth="412.0" stylesheets="@../style/review.css" text="Game 3: Check your pronunciations with our AI grading system." wrapText="true" />
+         <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="28.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../utils/icons/review/icons8-game-48.png" />
+            </image>
+         </ImageView>
+         <Button fx:id="quiz4Btn" layoutX="517.0" layoutY="327.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="124.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
+         <Label layoutX="92.0" layoutY="308.0" prefHeight="72.0" prefWidth="412.0" stylesheets="@../style/review.css" text="Game 4: Having a conversation with our AI teacher." wrapText="true" />
       </children>
    </AnchorPane>
 </AnchorPane>

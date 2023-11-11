@@ -109,12 +109,17 @@ public class SearchController implements Initializable {
 
     @FXML
     public void handleEdit() {
+        // khi nguoi dung chua nhap gi
+        if (searchBox.getText().isEmpty() || searchBox.getText().isBlank()) return;
+        if (wordToFind.getWord().isBlank() || wordToFind.getWord().isEmpty()) return;
+        // khi tu nay khong co trong tu dien
         if (relatedResults.getItems().size() <=0){
             return;
         }
         Dialog<String> dialog = new Dialog<>();
-        dialog.setHeaderText(null);
-
+        dialog.setTitle("Edit word");
+        DialogPane tmp = dialog.getDialogPane();
+        tmp.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
         Label wordLabel = new Label("Word: ");
         Label display = new Label(wordToFind.getWord());
 
@@ -140,6 +145,7 @@ public class SearchController implements Initializable {
 
         dialog.getDialogPane().setContent(gridPane);
 
+
         ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
         ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().addAll(okButton, cancelButton);
@@ -162,10 +168,13 @@ public class SearchController implements Initializable {
 
                 WordsDao.modifyWord(wordToFind.getWord(), "meaning", meaning, "anhviet");
                 Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                DialogPane tmp1 = successAlert.getDialogPane();
+                tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
+                successAlert.setTitle("Success");
                 successAlert.setContentText("Word information updated successfully!");
                 successAlert.showAndWait();
                 wordDefinition.setText("Type:\n" + wordToFind.getType()+ "\nMeaning:\n" + wordToFind.getMeaning());
-
+                wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
             }
             else {
                 dialog.close();
@@ -176,7 +185,16 @@ public class SearchController implements Initializable {
 
     @FXML
     public void handleDelete() {
+        // khi nguoi dung chua nhap gi
+        if (searchBox.getText().isEmpty() || searchBox.getText().isBlank()) return;
+        // khi tu nay chua co trong tu dien
+        if (relatedResults.getItems().size() <=0) {
+            return;
+        }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Add a new word");
+        DialogPane tmp = alert.getDialogPane();
+        tmp.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
         if(WordsDao.deleteWord(wordToFind.getWord(),"anhviet")) {
             alert.setContentText("delete successfully");
             alert.showAndWait();
@@ -185,6 +203,10 @@ public class SearchController implements Initializable {
     @FXML
     public void handleAdd() {
         Dialog<String> dialog = new Dialog<>();
+        dialog.setHeaderText("Add a new word");
+        DialogPane tmp = dialog.getDialogPane();
+        tmp.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
+        //tmp.getStyleClass().add("dialog");
         dialog.setHeaderText(null);
 
         Label newWordLabel = new Label("New word: ");
@@ -241,11 +263,17 @@ public class SearchController implements Initializable {
                 if (id != -1) {
                     System.out.println("This word already in dictionary");
                     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                    DialogPane tmp1 = successAlert.getDialogPane();
+                    tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
+                    successAlert.setTitle("Success");
                     successAlert.setContentText("This word already in dictionary");
                     successAlert.showAndWait();
                 }
                 else if (WordsDao.addWord(ye,"anhviet")) {
                     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                    DialogPane tmp1 = successAlert.getDialogPane();
+                    tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
+                    successAlert.setTitle("Success");
                     successAlert.setContentText("Word information updated successfully!");
                     successAlert.showAndWait();
                 }
@@ -257,18 +285,29 @@ public class SearchController implements Initializable {
     }
     @FXML
     public void handleAddCollection() {
+        // khi nguoi dung chua nhap gi
+        if (searchBox.getText().isEmpty() || searchBox.getText().isBlank()) return;
+        if (wordToFind.getWord().isBlank() || wordToFind.getWord().isEmpty()) return;
+        // khi tu nay khong co trong tu dien
+        if (relatedResults.getItems().size() <=0){
+            return;
+        }
         Dialog<String> dialog = new Dialog<>();
         dialog.setHeaderText(null);
 
         Label INSTRUCTION=new Label("Please choose the collection to add this word.");
         ChoiceBox<String> allCollections=new ChoiceBox<>();
-        int n = WordCollectionDao.queryCollectionName().size();
-        for (int i = 0; i < n; i++) {
-            allCollections.getItems().add(WordCollectionDao.queryCollectionName().get(i));
+        List<String> collectionNames = WordCollectionDao.queryCollectionName();
+        for (String name : collectionNames) {
+            allCollections.getItems().add(name);
         }
         GridPane gridPane = new GridPane();
         gridPane.add(INSTRUCTION, 1, 1);
         gridPane.add(allCollections, 1, 2);
+
+        dialog.setHeaderText("Add this word into a collection");
+        DialogPane tmp = dialog.getDialogPane();
+        tmp.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
 
         dialog.getDialogPane().setContent(gridPane);
 

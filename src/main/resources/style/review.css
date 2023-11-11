@@ -1,7 +1,7 @@
 @font-face {
-    src: url("../font/Adagio_Slab-Light.ttf");
+    src: url("../font/Caudex-Regular.ttf");
 }
-.easyBtn{
+/*.easyBtn{
     -fx-background-color: #73D7CE;
     -fx-font-family: "Adagio Slab Light";
     -fx-font-size: 17;
@@ -18,31 +18,76 @@
     -fx-text-fill: #ffffff;
     -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
     -fx-cursor: hand;
+}*/
+.easyBtn{
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: #c7eff5;
+    -fx-font-family: "Caudex";
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
 }
+.hardBtn {
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color: #E71D36;
+    -fx-font-family: "Caudex";
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+.easyBtn:hover {
+    -fx-background-color:
+            #12bceb;
+
+}
+.easyBtn:pressed{
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+.hardBtn:hover{
+    -fx-background-color:
+            #E71D36;
+}
+.hardBtn:pressed{
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
 .deck{
-    -fx-font-family: "Adagio Slab Light";
+    -fx-font-family: "Caudex";
     -fx-text-fill: #000000;
     -fx-font-size: 17;
-    -fx-background-color: #B8EBE6;
+    -fx-background-color: #2EC4B6;
     -fx-background-radius: 5;
 }
 .normal-button{
     -fx-background-color: #2EC4B6;
-    -fx-font-family: "Adagio Slab Light";
+    -fx-font-family: "Caudex";
     -fx-font-size: 17;
     -fx-background-radius: 5;
     -fx-text-fill: #ffffff;
     -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
     -fx-cursor: hand;
 }
+.normal-button:hover{
+    -fx-background-color: #2EC4B6;
+}
+.normal-button:pressed{
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
 .label{
     -fx-text-fill: #000000;
     -fx-font-size: 17;
-    -fx-font-family: "Adagio Slab Light";
+    -fx-font-family: "Caudex";
 }
 
 .toggle-button {
-    -fx-font-family: "Adagio Slab Light";
+    -fx-font-family: "Caudex";
     -fx-border-width: 1px;
     -fx-border-color: #808080;
     -fx-background-color: white;
@@ -68,7 +113,7 @@
 }
 .smallBtn{
     -fx-background-color: #f57f17;
-    -fx-font-family: "Adagio Slab Light";
+    -fx-font-family: "Caudex";
     -fx-font-size: 15;
     -fx-background-radius: 5;
     -fx-text-fill: #ffffff;
@@ -77,7 +122,7 @@
 }
 
 .transparent-button {
-    -fx-font-family: "Adagio Slab Light";
+    -fx-font-family: "Caudex";
     -fx-font-size: 15;
     -fx-background-color: transparent;
     -fx-border-radius: 15;
@@ -91,8 +136,50 @@
     -fx-background-color: #d4d4d4; /* Set the background color with some transparency */
 }
 .transparent-button-selected {
-    -fx-font-family: "Adagio Slab Light";
+    -fx-font-family: "Caudex";
     -fx-background-color: #d4d4d4; /* Set the background color with some transparency */
     -fx-border-radius: 16pt;
     -fx-background-radius: 10pt;
+}
+.whenFalse{
+    -fx-border-radius: 10px;
+    -fx-background-color: #FEDEDF;
+    -fx-font-family: "Caudex";
+    -fx-text-fill: #EF6163;
+    -fx-font-size: 20px ;
+}
+.whenTrue{
+    -fx-border-radius: 10px;
+    -fx-background-color: #D6FEB8;
+    -fx-font-family: "Caudex";
+    -fx-text-fill: #6BB52C;
+    -fx-font-size: 20px;
+}
+.pop-up-scene{
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Caudex";
+    -fx-font-size: 17;
+    -fx-border-radius: 16pt;
+    -fx-background-radius: 10pt;
+}
+.tmpPane{
+    -fx-background-color: #daf5f1;
+    -fx-font-family: "Caudex";
+    -fx-font-size: 17;
+    -fx-background-radius: 5;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
+    -fx-cursor: hand;
+}
+.choice-box{
+    -fx-background-color: #f9fefb;
+    -fx-font-family: "Caudex";
+    -fx-font-size: 17;
+    -fx-background-radius: 5;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+}
+.labelTmp{
+    -fx-font-family: "Caudex";
+    -fx-font-size: 25;
 }

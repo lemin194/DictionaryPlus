@@ -11,7 +11,7 @@ public class WordCollectionDao {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
-    public static void addCollection(String collectionName){
+    public static void addCollection(String collectionName) {
         if (checkCollectionExist(collectionName)) {
             return;
         }
@@ -32,7 +32,7 @@ public class WordCollectionDao {
         }
     }
 
-    public static void deleteCollection(String collectionName){
+    public static void deleteCollection(String collectionName) {
         if (!checkCollectionExist(collectionName)) {
             return;
         }
@@ -48,7 +48,7 @@ public class WordCollectionDao {
         }
     }
 
-    public static List<String> queryCollectionName () {
+    public static List<String> queryCollectionName() {
         List<String> collectionNameList = new ArrayList<>();
         String stmt = "SELECT name FROM sqlite_master WHERE type='table'";
         conn = DatabaseConnection.getConnection();
@@ -68,6 +68,7 @@ public class WordCollectionDao {
         }
         return collectionNameList;
     }
+
     public static boolean havePrefix(String name, String prefix) {
         if (name.length() < prefix.length()) {
             return false;
@@ -79,6 +80,7 @@ public class WordCollectionDao {
         }
         return true;
     }
+
     public static List<String> findCollectionName(String prefix) {
         List<String> collectionNameList = queryCollectionName();
         List<String> res = new ArrayList<>();
@@ -89,11 +91,21 @@ public class WordCollectionDao {
         }
         return res;
     }
-    public static void addWordForCollection(Word word, String collectionName) {
+
+    public static boolean addWordForCollection(Word word, String collectionName) {
         if (!checkCollectionExist(collectionName)) {
-            return;
+            return false;
         }
-        WordsDao.addWord(word, collectionName);
+        List<Word> words = findWordInCollection(word.getWord(), collectionName);
+        boolean exist = false;
+        for (Word wd : words) {
+            if (wd.getWord().equals(word.getWord())) {
+                exist = true;
+                break;
+            }
+        }
+        if (!exist) WordsDao.addWord(word, collectionName);
+        return !exist;
     }
 
     public static void deleteWordFromCollection(String word, String collectionName) {
@@ -184,6 +196,7 @@ public class WordCollectionDao {
         }
         return res;
     }
+
     public static void main(String[] args) {
         List<String> res = queryCollectionName();
         for (String name : res) System.out.println(name);

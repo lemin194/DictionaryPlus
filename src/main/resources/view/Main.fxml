@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="600" prefWidth="900" styleClass="root" stylesheets="@../style/main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.MainController">
-
       <AnchorPane fx:id="container" layoutX="130.0" layoutY="112.0" minHeight="400.0" minWidth="500.0" prefHeight="560.0" prefWidth="750" styleClass="container" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
       <children>
          <Button fx:id="home" layoutX="59.0" layoutY="32.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css" text="Button">
