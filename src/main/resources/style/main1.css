@@ -1,3 +1,6 @@
+@font-face {
+    src: url("../font/Caudex-Regular.ttf");
+}
 .root{
     -fx-background-color: #fde2ac;
     -fx-background-radius: 30;
@@ -12,10 +15,10 @@
 }
 
 .transparent-button:hover {
-    -fx-background-color: #f0f0f0; /* Set the background color with some transparency */
+    -fx-background-color: #f0f0f0;
 }
 .transparent-button:pressed {
-    -fx-background-color: #d4d4d4; /* Set the background color with some transparency */
+    -fx-background-color: #d4d4d4;
 }
 
 /*.button {
@@ -90,24 +93,24 @@
     -fx-background-color: #9eced9;
 }
 .card{
-    -fx-font-family: "Comic Sans MS";
+    -fx-font-family: "Caudex";
     -fx-text-fill: #000000;
     -fx-font-size: 17;
     -fx-background-color: #ffffff;
 
 }
 .labelWithText{
-    -fx-font-family: "Comic Sans MS";
+    -fx-font-family: "Caudex";
     -fx-text-fill: #ffffff;
     -fx-font-size: 17;
 }
 .label2WithText{
-    -fx-font-family: "Comic Sans MS";
+    -fx-font-family: "Caudex";
     -fx-text-fill: #000000;
     -fx-font-size: 17;
 }
 .instruction{
-        -fx-font-family: "Comic Sans MS";
+        -fx-font-family: "Caudex";
         -fx-text-fill: #000000;
         -fx-font-size: 17;
 }

@@ -2,8 +2,8 @@ package dictionary.alerts;
 
 import javafx.scene.control.Alert;
 
-public class Alerts {
-    public void showAlertInfo(String title, String content) {
+public class alerts {
+    public void showAlertConfirm(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);

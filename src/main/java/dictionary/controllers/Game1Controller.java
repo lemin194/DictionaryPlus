@@ -46,6 +46,10 @@ public class Game1Controller implements Initializable {
     private String answer;
     private int idOfDisplayWord;
     private List<Word> currentCollectionChoice = new ArrayList<>();
+    private int score = 0;
+    @FXML
+    public Label Score = new Label();
+
 
 
     @Override
@@ -60,10 +64,13 @@ public class Game1Controller implements Initializable {
         for (ToggleButton button : List.of(ansA, ansB, ansC, ansD)) {
             button.setOnAction(this::whenSelected);
         }
+        rightOrFalse.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
+        rightOrFalse.setVisible(false);
     }
     @FXML
     public void startGame() {
         currentCollectionName = collectionsToPlay.getValue();
+
         currentCollectionList = WordCollectionDao.queryWordInCollection(currentCollectionName);
         realAnswer = currentCollectionList.get(idOfDisplayWord);
         //currentCollectionList = quiz.generateOneQuiz(currentCollectionName, realAnswer);
@@ -99,6 +106,7 @@ public class Game1Controller implements Initializable {
     }
     @FXML
     public void nextQuestion() {
+        rightOrFalse.setVisible(false);
         idOfDisplayWord++;
         if (idOfDisplayWord >= currentCollectionList.size()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -125,9 +133,18 @@ public class Game1Controller implements Initializable {
             }
         });
         if (selectedToggleButton.getText().equals(realAnswer.getMeaning())) {
+            score++;
+            Score.setText("Score: " + score + "/" + currentCollectionList.size());
+            rightOrFalse.getStyleClass().clear();
+            rightOrFalse.getStyleClass().add("whenTrue");
             rightOrFalse.setText("Correct!");
+            rightOrFalse.setVisible(true);
         } else {
+            Score.setText("Score: "+ score + "/" + currentCollectionList.size());
+            rightOrFalse.getStyleClass().clear();
+            rightOrFalse.getStyleClass().add("whenFalse");
             rightOrFalse.setText("Wrong");
+            rightOrFalse.setVisible(true);
         }
     }
 

@@ -40,11 +40,20 @@ public class Game2Controller implements Initializable {
     @FXML
     private Label currentTrack;
     private int wordLeft;
-
-    private String currentCollection = "";
-    private List<Word> current = new ArrayList<>();
-    private Word displayWord;
+    private int hintLeft;
+    @FXML
+    public Label hintLeftDisplay;
+    @FXML
+    public Button clickToHint;
+    @FXML
+    public Label hintInfo;
+    private String currentCollectionName = "";
+    private List<Word> currentCollectionList = new ArrayList<>();
+    private Word currentWord;
     private int idOfDisplayWord;
+    private int correct;
+    @FXML
+    public Label warnWrongInput = new Label("");
     @FXML
     private Button submit;
 
@@ -118,18 +127,18 @@ public class Game2Controller implements Initializable {
 
     @FXML
     public void startGame() {
-        currentCollection = collectionsToPlay.getValue();
-        current = WordCollectionDao.queryWordInCollection(currentCollection);
+        correct = 0;
+        currentCollectionName = collectionsToPlay.getValue();
+        currentCollectionList = WordCollectionDao.queryWordInCollection(currentCollectionName);
         idOfDisplayWord = 0;
         hangMan.setText(FIGURE[7-chanceLeft]);
-        genLabel(idOfDisplayWord);
         currentResult.setText(currentResultString.toString());
-        displayWord = current.get(idOfDisplayWord);
+        currentWord = currentCollectionList.get(idOfDisplayWord);
+        genLabel();
     }
 
-    public void genLabel(int idOfDisplayWord) {
-        Word tmp = current.get(idOfDisplayWord);
-        for (int i = 0; i < tmp.getWord().length(); i++) {
+    public void genLabel() {
+        for (int i = 0; i < currentWord.getWord().length(); i++) {
             currentResultString.append('_');
         }
     }
@@ -137,13 +146,21 @@ public class Game2Controller implements Initializable {
     @FXML
     public void handleGame() {
         String CHAR = typeUserGuess.getText();
-        String word = displayWord.getWord();
+        String word = currentWord.getWord();
+        if (CHAR.length() == 1) {
+            warnWrongInput.setText("");
+        } else {
+            // vi neu cho phep nhieu character thi duoc phep nhieu lan sai??
+            warnWrongInput.setText("We currently only support 1 character and will take your first character.");
+            warnWrongInput.setWrapText(true);
+        }
         if (word.indexOf(CHAR.charAt(0)) >= 0) {
             for (int i = word.length() - 1; i >= 0; i--) {
                 if (word.charAt(i) == CHAR.charAt(0)) {
-                        currentResultString.setCharAt(i, CHAR.charAt(0));
+                    currentResultString.setCharAt(i, CHAR.charAt(0));
                 }
             }
+            correct++;
             currentResult.setText(currentResultString.toString());
         } else {
             chanceLeft--;

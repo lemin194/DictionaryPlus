@@ -13,8 +13,7 @@
       </ImageView>
    <AnchorPane layoutX="31.0" layoutY="117.0" prefHeight="397.0" prefWidth="688.0" styleClass="sub-container">
       <children>
-            <AnchorPane fx:id="gameContainer" layoutY="71.0" prefHeight="360.0" prefWidth="688.0" />
-            <Button fx:id="quizBtn" layoutX="33.0" layoutY="14.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" styleClass="transparent-button" stylesheets="@../style/review.css" text="Quizzes">
+            <Button fx:id="quizBtn" layoutX="41.0" layoutY="14.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" styleClass="transparent-button" stylesheets="@../style/review.css" text="Quizzes">
             <graphic>
                     <ImageView fitHeight="48" fitWidth="48" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" x="1.0" y="1.0">
                         <image>
@@ -32,6 +31,7 @@
                  </ImageView>
              </graphic>
          </Button>
+         <Button fx:id="quiz3Btn" layoutX="318.0" layoutY="26.0" mnemonicParsing="false" text="game3" />
       </children>
    </AnchorPane>
 </AnchorPane>

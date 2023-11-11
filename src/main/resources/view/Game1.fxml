@@ -6,7 +6,7 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="360.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.Game1Controller">
+<AnchorPane prefHeight="360.0" prefWidth="688.0" styleClass="sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.Game1Controller">
    <children>
       <Label fx:id="question" layoutX="21.0" layoutY="79.0" prefHeight="60.0" prefWidth="640.0" stylesheets="@../style/review.css" text="Question:" />
       <ChoiceBox fx:id="collectionsToPlay" layoutX="503.0" layoutY="14.0" onAction="#startGame" prefHeight="25.0" prefWidth="171.0" styleClass="normal-button" stylesheets="@../style/review.css" />
@@ -18,6 +18,6 @@
       <ToggleButton fx:id="ansC" layoutX="21.0" layoutY="214.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="314.0" stylesheets="@../style/review.css" text="RadioButton" />
       <ToggleButton fx:id="ansB" layoutX="346.0" layoutY="155.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="314.0" stylesheets="@../style/review.css" text="RadioButton" />
       <ToggleButton fx:id="ansD" layoutX="21.0" layoutY="155.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="314.0" stylesheets="@../style/review.css" text="RadioButton" />
-      <Label layoutX="21.0" layoutY="59.0" prefHeight="17.0" prefWidth="240.0" stylesheets="@../style/review.css" text="Score:" />
+      <Label fx:id="Score" layoutX="21.0" layoutY="59.0" prefHeight="17.0" prefWidth="240.0" stylesheets="@../style/review.css" text="Score:" />
    </children>
 </AnchorPane>
