@@ -36,6 +36,8 @@ public class processClassic implements Initializable {
     private AnchorPane transfer = new AnchorPane();
     @FXML
     private Button back = new Button();
+    @FXML
+    private Label done = new Label();
 
     // FIXED COLLECTION SO USER CAN'T CHANGE THE COLLECTION ONCE A SESSION IS STARTED
     private String fixedNameCollection = new String("");
@@ -66,7 +68,8 @@ public class processClassic implements Initializable {
         wordsLeft = fakeNumberOfWordsinCollection;
         progress.setText(wordsLeft + "/" + fakeNumberOfWordsinCollection);
         displayWord = current.get(idOfDisplayWord);
-        currentWord.setText(displayWord.getWord() + "/" + displayWord.getPronunciation());
+        currentWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
+        done.setVisible(false);
     }
     @FXML
     public void playVoice() {
@@ -91,16 +94,18 @@ public class processClassic implements Initializable {
             }
             if (wordsLeft > 0) {
                 displayWord = current.get(idOfDisplayWord);
-                currentWord.setText(displayWord.getWord() + "/" + displayWord.getPronunciation());
+                currentWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
                 infoOfWord.setText("");
                 transfer.setVisible(false);
                 showAnswer.setVisible(true); }
             else {
+                speaker.setVisible(false);
+                currentWord.setVisible(false);
+                infoOfWord.setVisible(false);
+                progress.setVisible(false);
                 transfer.setVisible(false);
                 showAnswer.setVisible(false);
-                infoOfWord.setVisible(false);
-                currentWord.setVisible(false);
-                progress.setText("Nothing left to learn!");
+                done.setVisible(true);
             }
             //currentWord.setText("");
             //infoOfWord.setText("");
@@ -116,10 +121,8 @@ public class processClassic implements Initializable {
         idOfDisplayWord++;
         if(idOfDisplayWord >= len) idOfDisplayWord = 0;
         displayWord = current.get(idOfDisplayWord);
-        currentWord.setText(displayWord.getWord() + "/" + displayWord.getPronunciation());
+        currentWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
         infoOfWord.setText("");
-
-        infoOfWord.setText(displayWord.getMeaning());
         transfer.setVisible(false);
         showAnswer.setVisible(true);
     }

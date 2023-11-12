@@ -8,9 +8,9 @@
 
 <AnchorPane prefHeight="360.0" prefWidth="417.0" styleClass="pop-up-scene" stylesheets="@../style/review.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.processClassic">
    <children>
-      <Label fx:id="currentWord" layoutX="141.0" layoutY="23.0" prefHeight="48.0" prefWidth="168.0" text="Current word /n Pronunciation" wrapText="true" />
+      <Label fx:id="currentWord" layoutX="141.0" layoutY="23.0" prefHeight="48.0" prefWidth="168.0" wrapText="true" />
       <Label fx:id="infoOfWord" layoutX="66.0" layoutY="80.0" prefHeight="200.0" prefWidth="285.0" styleClass="deck" stylesheets="@../style/review.css" />
-      <Button fx:id="speaker" layoutX="85.0" layoutY="23.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css">
+      <Button fx:id="speaker" layoutX="85.0" layoutY="23.0" mnemonicParsing="false" onAction="#playVoice" styleClass="transparent-button" stylesheets="@../style/review.css">
          <graphic>
             <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -19,14 +19,14 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="showAnswer" layoutX="146.0" layoutY="299.0" mnemonicParsing="false" styleClass="normal-button" stylesheets="@../style/review.css" text="Show answer" />
+      <Button fx:id="showAnswer" layoutX="146.0" layoutY="299.0" mnemonicParsing="false" onAction="#showAnswer" styleClass="normal-button" stylesheets="@../style/review.css" text="Show answer" />
       <AnchorPane fx:id="transfer" layoutX="109.0" layoutY="257.0" prefHeight="85.0" prefWidth="200.0" stylesheets="@../style/review.css">
          <children>
-            <Button fx:id="easy" layoutY="37.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="68.0" styleClass="easyBtn" stylesheets="@../style/review.css" text="easy" />
-            <Button fx:id="hard" layoutX="129.0" layoutY="37.0" mnemonicParsing="false" styleClass="hardBtn" stylesheets="@../style/review.css" text="hard" />
+            <Button fx:id="easy" layoutY="37.0" mnemonicParsing="false" onAction="#easyButton" prefHeight="34.0" prefWidth="68.0" styleClass="easyBtn" stylesheets="@../style/review.css" text="easy" />
+            <Button fx:id="hard" layoutX="129.0" layoutY="37.0" mnemonicParsing="false" onAction="#hardButton" styleClass="hardBtn" stylesheets="@../style/review.css" text="hard" />
          </children>
       </AnchorPane>
-      <Button fx:id="back" layoutX="8.0" layoutY="299.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css">
+      <Button fx:id="back" layoutX="8.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleBack" styleClass="transparent-button" stylesheets="@../style/review.css">
          <graphic>
             <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -35,6 +35,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label fx:id="progress" layoutX="351.0" layoutY="30.0" text="Label" />
+      <Label fx:id="progress" layoutX="351.0" layoutY="30.0" />
+      <Label fx:id="done" layoutX="129.0" layoutY="158.0" text="Nothing left to learn!" />
    </children>
 </AnchorPane>

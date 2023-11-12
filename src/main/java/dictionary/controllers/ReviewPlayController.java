@@ -62,6 +62,7 @@ public class ReviewPlayController implements Initializable {
     }
     @FXML
     public void startGame() {
+        if(collectionsToStudy.getValue() == null) return;
         currentCollection = collectionsToStudy.getValue();
         currentStudyMode = studyMode.getValue();
         //currentSortBy = sortBy.getValue();
