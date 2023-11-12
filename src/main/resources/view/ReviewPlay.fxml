@@ -3,56 +3,43 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="344.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.ReviewPlayController">
    <children>
-      <Button fx:id="answer" layoutX="303.0" layoutY="262.0" mnemonicParsing="false" onAction="#showAnswer" styleClass="normal-button" stylesheets="@../style/review.css" text="Show answer" />
-      <AnchorPane fx:id="transfer" layoutX="275.0" layoutY="241.0" prefHeight="48.0" prefWidth="179.0">
+      <Button fx:id="startGame" layoutX="271.0" layoutY="286.0" mnemonicParsing="false" onAction="#startGame" prefHeight="32.0" prefWidth="150.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start studying" />
+      <AnchorPane layoutX="21.0" layoutY="72.0" prefHeight="200.0" prefWidth="319.0" styleClass="tmpPane" stylesheets="@../style/review.css">
          <children>
-            <Button fx:id="easy" layoutY="8.0" mnemonicParsing="false" onAction="#easyButton" prefHeight="32.0" prefWidth="59.0" styleClass="easyBtn" stylesheets="@../style/review.css" text="easy" />
-            <Button fx:id="hard" layoutX="120.0" layoutY="8.0" mnemonicParsing="false" onAction="#hardButton" prefHeight="32.0" prefWidth="59.0" styleClass="hardBtn" stylesheets="@../style/review.css" text="hard" />
+            <TextField layoutX="156.0" layoutY="126.0" prefHeight="34.0" prefWidth="81.0" styleClass="choice-box" stylesheets="@../style/review.css" />
+            <ChoiceBox fx:id="collectionsToStudy" layoutX="14.0" layoutY="45.0" prefHeight="34.0" prefWidth="293.0" stylesheets="@../style/review.css" />
+            <Label layoutX="14.0" layoutY="14.0" stylesheets="@../style/review.css" text="Collection:" />
+            <Label layoutX="14.0" layoutY="92.0" text="Words available:" />
+            <Label layoutX="156.0" layoutY="92.0" text="Label" />
+            <Label layoutX="14.0" layoutY="132.0" text="Cards per session:" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="tmpStart" layoutX="1.0" layoutY="1.0" prefHeight="182.0" prefWidth="691.0">
+      <AnchorPane layoutX="358.0" layoutY="72.0" prefHeight="200.0" prefWidth="319.0" styleClass="tmpPane" stylesheets="@../style/review.css">
          <children>
-            <Label layoutX="14.0" layoutY="21.0" stylesheets="@../style/review.css" text="Collection:" />
-            <ChoiceBox fx:id="collectionsToStudy" layoutX="104.0" layoutY="14.0" prefHeight="34.0" prefWidth="277.0" styleClass="normal-button" stylesheets="@../style/review.css" />
-            <Label layoutX="412.0" layoutY="21.0" stylesheets="@../style/review.css" text="Study mode:" />
-            <Label layoutX="412.0" layoutY="64.0" stylesheets="@../style/review.css" text="Sort by:" />
-            <ChoiceBox layoutX="514.0" layoutY="15.0" prefWidth="150.0" styleClass="normal-button" stylesheets="@../style/review.css" />
-            <ChoiceBox layoutX="514.0" layoutY="58.0" prefWidth="150.0" styleClass="normal-button" stylesheets="@../style/review.css" />
-            <Button fx:id="startGame" layoutX
-                    ="292.0" layoutY="142.0" mnemonicParsing="false" onAction="#startGame" prefHeight="32.0" prefWidth="150.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start studying" />
+            <ChoiceBox fx:id="studyMode" layoutX="123.0" layoutY="111.0" prefWidth="150.0" stylesheets="@../style/review.css" />
+            <ChoiceBox fx:id="sortBy" layoutX="123.0" layoutY="31.0" prefWidth="150.0" stylesheets="@../style/review.css" />
+            <Label layoutX="22.0" layoutY="37.0" stylesheets="@../style/review.css" text="Sort by:" />
+            <Label layoutX="14.0" layoutY="117.0" stylesheets="@../style/review.css" text="Study mode:" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="tmpEnd" layoutX="273.0" layoutY="265.0" prefHeight="57.0" prefWidth="200.0">
-         <children>
-            <Label layoutX="20.0" stylesheets="@../style/review.css" text="Nothing left to learn!" />
-            <Button layoutX="58.0" layoutY="27.0" mnemonicParsing="false" styleClass="normal-button" stylesheets="@../style/review.css" text="Return" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="tmpContent" layoutX="123.0" layoutY="3.0" prefHeight="251.0" prefWidth="464.0">
-         <children>
-            <Button fx:id="speaker" layoutX="9.0" layoutY="28.0" mnemonicParsing="false" onAction="#playVoice" styleClass="transparent-button">
-               <graphic>
-                     <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../utils/icons/review/icons8-speaker-48.png" />
-                        </image>
-                     </ImageView>
-               </graphic>
-            </Button>
-            <Label fx:id="currentWord" layoutX="69.0" layoutY="32.0" styleClass="label" stylesheets="@../style/review.css" text="current word" />
-            <Label fx:id="pronounciation" layoutX="69.0" layoutY="56.0" prefHeight="20.0" prefWidth="238.0" stylesheets="@../style/review.css" text="label: word pronounciation" />
-            <Label fx:id="progress" layoutX="371.0" layoutY="56.0" stylesheets="@../style/review.css" text="0/n words" />
-            <TextArea fx:id="infoOfWord" layoutX="9.0" layoutY="85.0" prefHeight="152.0" prefWidth="447.0" promptText="Meaning of word" styleClass="deck" stylesheets="@../style/review.css" />
-            <Label fx:id="tmpCurrentCollection" layoutX="69.0" layoutY="6.0" stylesheets="@../style/review.css" text="Label" />
-         </children>
-      </AnchorPane>
-      <Button fx:id="restart" layoutX="568.0" layoutY="262.0" mnemonicParsing="false" styleClass="normal-button" stylesheets="@../style/review.css" text="Restart" />
+      <Label layoutX="147.0" layoutY="25.0" styleClass="labelTmp" stylesheets="@../style/review.css" text="Decks" />
+      <Label layoutX="450.0" layoutY="25.0" styleClass="labelTmp" stylesheets="@../style/review.css" text="Learning mode" />
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="89.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../utils/icons/review/icons8-flashcards-48.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="393.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../utils/icons/review/icons8-education-48.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
