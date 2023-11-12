@@ -14,11 +14,14 @@ module com.dictionary.dictionaryplus {
   requires org.apache.httpcomponents.httpmime;
     requires javafx.web;
   requires javafx.swing;
+  requires javafx.media;
 
   exports dictionary;
   exports dictionary.controllers;
 
   opens dictionary to javafx.fxml;
   opens dictionary.controllers to javafx.fxml;
+  exports dictionary.services;
+  opens dictionary.services to javafx.fxml;
 
 }

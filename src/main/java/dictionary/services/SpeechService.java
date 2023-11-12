@@ -1,21 +1,30 @@
 package dictionary.services;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioFileFormat.Type;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -37,7 +46,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 
-public class SpeechToText {
+public class SpeechService {
 
   private static boolean recording = false;
   private static AudioFormat format;
@@ -297,5 +306,45 @@ public class SpeechToText {
       }
     }
     return ret;
+  }
+
+  public static Map<String, Object> SpeechAnalysis(String src) {
+    Map<String, Object> ret = new HashMap<>();
+    ret.put("content", null);
+    ret.put("status", "1000");
+
+
+    JSONObject body = new JSONObject();
+    try {
+      body.put("file", encodeFileToBase64("temp/record_tmp.mp3"));
+      body.put("src", src);
+      JSONObject res = BackendUtils.request("http://127.0.0.1:9876/speechanalysis/", "POST", body);
+      ret.put("status", res.get("status").toString());
+      if ((int)res.get("status") == 200) {
+        JSONArray analysisArr = new JSONArray(new JSONObject(res.get("content").toString()).get("content").toString());
+        List<List<String>> analysis = new ArrayList<>();
+        for (Object wordObj : analysisArr) {
+          JSONArray wordProb = (JSONArray) wordObj;
+          String word = wordProb.get(0).toString();
+          String prob = wordProb.get(1).toString();
+          analysis.add(List.of(word, prob));
+        }
+        ret.put("content", analysis);
+      }
+
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    return ret;
+  }
+
+  private static String encodeFileToBase64(String fileName) throws IOException {
+    try {
+      byte[] fileContent = Files.readAllBytes(Path.of(fileName));
+      return Base64.getEncoder().encodeToString(fileContent);
+    } catch (IOException e) {
+      throw new IllegalStateException("could not read file " + fileName, e);
+    }
   }
 }

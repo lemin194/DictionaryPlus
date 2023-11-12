@@ -1,10 +1,14 @@
 .translate-text-box {
   -fx-background-insets: 0;
   -fx-background-color: transparent;
+  -fx-wrap-text: true;
 }
 
 .translate-text-box .content {
   -fx-background-color: transparent, white, transparent, white;
+  -fx-padding: 16px;
+  -fx-text-fill: #181818;
+  -fx-highlight-fill: -text-highlight-fill;
 }
 
 .translate-text-box:focused .content {
@@ -15,11 +19,6 @@
   -fx-highlight-fill: -text-highlight-fill;
 }
 
-.translate-text-box .content {
-  -fx-padding: 16px;
-  -fx-text-fill: #181818;
-  -fx-highlight-fill: -text-highlight-fill;
-}
 
 .translate-box-whole {
   -fx-background-color: -tertiary;
@@ -67,29 +66,39 @@
   -fx-background-color: #E0E0E0;
 }
 
-.choicebox-language .arrow-button {
-  -fx-background-color: -fx; /* Change the arrow button background color */
-  -fx-shape: "M0,0 L7,10 L14,0 Z"; /* Change the arrow icon */
-  -fx-background-insets: 0;
+
+
+.choice-box {
+  -fx-background-color: white;
+  -fx-background-radius: 5px;
+  -fx-border-radius: 5px;
+  -fx-border-color: #dbdee3;
+  -fx-mark-color: #5A667F;
+}
+.choice-box:selected {
+  -fx-border-color: red;
+}
+.choice-box:hover {
+  -fx-mark-color: #0077FF;
+}
+.choice-box .context-menu {
+  -fx-background-color: white;
+}
+.choice-box .menu-item:focused {
+   -fx-background-color: #223254;
+}
+.choice-box .menu-item > .label {
+   /*-fx-text-fill: white; */
+}
+.choice-box .menu-item:focused > .label {
+   /*-fx-text-fill: black;*/
 }
 
-.choicebox-language .label {
-  -fx-font-size: 14px; /* Change the font size of the selected item label */
-  -fx-text-fill: -text-language-select; /* Change the text color of the selected item label */
-}
-
-.choicebox-language .menu-item {
-  -fx-font-size: 14px; /* Change the font size of menu items */
-  -fx-text-fill: -text-language-select; /* Change the text color of menu items */
-}
 .container{
   -fx-background-color:  #9eced9;
   -fx-background-radius: 30;
   -fx-border-radius: 30;
   -fx-effect: dropshadow(gaussian, #545454, 5, 0, 0, 3) ;
-}
-.choicebox-language .menu-item:hover {
-  -fx-background-color: #f0f0f0; /* Change the background color of the hovered menu item */
 }
 
 .drag-box {
