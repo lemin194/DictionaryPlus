@@ -1,7 +1,7 @@
 package dictionary.controllers;
 
 import dictionary.services.Autocorrect;
-import dictionary.services.SpeechToText;
+import dictionary.services.SpeechService;
 import dictionary.services.TextToSpeech;
 import dictionary.services.Translation;
 import java.io.File;
@@ -89,15 +89,7 @@ public class TranslateTextController implements Initializable {
     });
 
 
-    sttThread = new Thread(() -> {
-      var res = SpeechToText.STT(fromLanguage);
-      Platform.runLater(() -> {
-        System.out.println(res.get("status") + res.get("stderr"));
-        if (res.get("status").equals("OK")) {
-          fromTextArea.setText(res.get("content"));
-        }
-      });
-    });
+    sttThread = new Thread(this::sttThreadFunc);
 
 
     fromLanguageChoice.getSelectionModel().selectedIndexProperty().addListener(
@@ -135,6 +127,16 @@ public class TranslateTextController implements Initializable {
             waitTranslate();
           }
         });
+  }
+
+  private void sttThreadFunc() {
+    var res = SpeechService.STT(fromLanguage);
+    Platform.runLater(() -> {
+      System.out.println(res.get("status") + res.get("stderr"));
+      if (res.get("status").equals("OK")) {
+        fromTextArea.setText(res.get("content"));
+      }
+    });
   }
 
   private void waitTranslate() {
@@ -179,7 +181,7 @@ public class TranslateTextController implements Initializable {
   private void ToggleRecord() {
     if (!recording) {
       recording = true;
-      SpeechToText.beginRecord();
+      SpeechService.beginRecord();
       recordingButtonIcon.setImage(stopBtnImage);
       recordingDuration.play();
       return;
@@ -192,10 +194,13 @@ public class TranslateTextController implements Initializable {
       return;
     }
     recording = false;
-    SpeechToText.stopRecording();
+    SpeechService.stopRecording();
     recordingButtonIcon.setImage(recordBtnImage);
 
-    sttThread.interrupt();
+    if (sttThread != null) {
+      sttThread.interrupt();
+    }
+    sttThread = new Thread(this::sttThreadFunc);
     sttThread.start();
   }
 

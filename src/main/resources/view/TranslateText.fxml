@@ -18,7 +18,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="350.0" prefWidth="334.0" spacing="4.0">
                <children>
-                  <ChoiceBox fx:id="fromLanguageChoice" prefWidth="150.0" styleClass="choicebox-language" />
+                  <ChoiceBox fx:id="fromLanguageChoice" prefWidth="176.0" styleClass="choice-box-languague" />
                   <AnchorPane prefHeight="252.0" prefWidth="284.0" styleClass="translate-box">
                      <children>
                         <TextArea fx:id="fromTextArea" layoutX="7.0" layoutY="14.0" prefHeight="200.0" prefWidth="320.0" styleClass="translate-text-box" />
@@ -56,10 +56,10 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="350.0" prefWidth="334.0" spacing="4.0">
                <children>
-                  <ChoiceBox fx:id="toLanguageChoice" prefWidth="150.0" styleClass="choicebox-language" />
+                  <ChoiceBox fx:id="toLanguageChoice" prefWidth="176.0" styleClass="choice-box-languague" />
                   <AnchorPane prefHeight="252.0" prefWidth="284.0" styleClass="translate-box">
                      <children>
-                        <TextArea fx:id="toTextArea" layoutX="7.0" layoutY="14.0" prefHeight="200.0" prefWidth="320.0" styleClass="translate-text-box" />
+                        <TextArea fx:id="toTextArea" editable="false" layoutX="7.0" layoutY="14.0" prefHeight="200.0" prefWidth="320.0" styleClass="translate-text-box" />
                         <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="204.0" maxWidth="-Infinity" prefHeight="48.0">
                            <children>
                               <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#PlayTextTo" prefHeight="48.0" prefWidth="48.0" styleClass="button-translate-utils" text=" ">

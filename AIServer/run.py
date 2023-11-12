@@ -36,6 +36,11 @@ from image_services import (
    translate_image,
    load_from_bytes, load_from_file, save_to_bytes)
 
+from speech_services import (
+   speech_analysis,
+   load_from_bytes as load_speech_from_bytes
+)
+
 @app.route("/translateimage/", methods=['POST'])
 async def route_translateimage():
    data = request.get_json()
@@ -49,6 +54,17 @@ async def route_translateimage():
    return jsonify({
       "file": save_to_bytes(ret_image),
       "content": ret_content,
+   })
+
+@app.route("/speechanalysis/", methods=['POST'])
+async def route_speechanalysis():
+   data = request.get_json()
+   file = data.get("file", "")
+   src = data.get("src", "")
+   if (len(file) == 0): return "No file sent.", 400
+   load_speech_from_bytes(file)
+   return jsonify({
+      'content': speech_analysis(src)
    })
 
 

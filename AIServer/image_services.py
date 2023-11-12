@@ -24,7 +24,6 @@ print(font.getbbox("a"))
 def draw_text_lines(img, bbox, lines, fontpath, fill):
 	if (max(len(line) for line in lines) == 0
 		or len(lines) == 0): return img
-	print(lines)
 	x, y, w, h = bbox
 	font = ImageFont.truetype(fontpath, 64)
 	fontsize = 64
@@ -98,6 +97,7 @@ def translate_image(img):
 		cropped = ret_img[y:y+h, x:x+w]
 		
 		text = pytesseract.image_to_string(cropped)
+		print(text)
 		lines = get_lines(text)
 		
 
