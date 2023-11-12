@@ -34,7 +34,7 @@ public class WordsDao {
     public static boolean addWord(Word word, String table) {
         boolean isSuccess = false;
         int id = AllWord.leftMostIndex(word.getWord());
-        if (id != -1) {
+        if (table.equals("anhviet") && id != -1) {
             System.out.println("This word already in dictionary");
             return isSuccess;
         }

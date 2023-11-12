@@ -14,4 +14,3 @@ hihih
 main
 nu
 nono
-dongvat

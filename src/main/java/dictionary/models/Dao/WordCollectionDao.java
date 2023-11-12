@@ -4,6 +4,8 @@ import dictionary.models.Entity.Word;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class WordCollectionDao {
@@ -197,8 +199,20 @@ public class WordCollectionDao {
         return res;
     }
 
+    public static void sortWord(List<Word> words)  {
+        Comparator<Word> comparator = Comparator.comparing(Word::getWord);
+        words.sort(comparator);
+    }
+
     public static void main(String[] args) {
-        List<String> res = queryCollectionName();
-        for (String name : res) System.out.println(name);
+        List<Word> words = new ArrayList<>();
+        words.add(new Word("cfhajsdfasd", "asdfasdf", "asdfasd", "asfasdf"));
+        words.add(new Word("adfasdfdfasd", "asdfasdf", "asdfasd", "asfasdf"));
+        words.add(new Word("lmnfhajsdfasd", "asdfasdf", "asdfasd", "asfasdf"));
+        words.add(new Word("bhfhajsdfasd", "asdfasdf", "asdfasd", "asfasdf"));
+        sortWord(words);
+        for (Word word : words) {
+            System.out.println(word.getWord());
+        }
     }
 }
