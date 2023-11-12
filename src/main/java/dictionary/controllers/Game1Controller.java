@@ -110,6 +110,9 @@ public class Game1Controller implements Initializable {
         idOfDisplayWord++;
         if (idOfDisplayWord >= currentCollectionList.size()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            DialogPane tmp1 = successAlert.getDialogPane();
+            tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
             alert.setContentText("You finished this collection, wanna restart?");
             alert.showAndWait();
             idOfDisplayWord=0;

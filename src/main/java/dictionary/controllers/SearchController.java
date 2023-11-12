@@ -109,8 +109,10 @@ public class SearchController implements Initializable {
 
     @FXML
     public void handleEdit() {
+        // khi nguoi dung chua nhap gi
         if (searchBox.getText().isEmpty() || searchBox.getText().isBlank()) return;
         if (wordToFind.getWord().isBlank() || wordToFind.getWord().isEmpty()) return;
+        // khi tu nay khong co trong tu dien
         if (relatedResults.getItems().size() <=0){
             return;
         }
@@ -183,7 +185,12 @@ public class SearchController implements Initializable {
 
     @FXML
     public void handleDelete() {
+        // khi nguoi dung chua nhap gi
         if (searchBox.getText().isEmpty() || searchBox.getText().isBlank()) return;
+        // khi tu nay chua co trong tu dien
+        if (relatedResults.getItems().size() <=0) {
+            return;
+        }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Add a new word");
         DialogPane tmp = alert.getDialogPane();
@@ -278,8 +285,13 @@ public class SearchController implements Initializable {
     }
     @FXML
     public void handleAddCollection() {
+        // khi nguoi dung chua nhap gi
         if (searchBox.getText().isEmpty() || searchBox.getText().isBlank()) return;
         if (wordToFind.getWord().isBlank() || wordToFind.getWord().isEmpty()) return;
+        // khi tu nay khong co trong tu dien
+        if (relatedResults.getItems().size() <=0){
+            return;
+        }
         Dialog<String> dialog = new Dialog<>();
         dialog.setHeaderText(null);
 

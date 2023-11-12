@@ -29,11 +29,6 @@ public class GameController implements Initializable {
     private Button quiz3Btn = new Button();
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        quizBtn.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
-        quiz2Btn.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
-        quiz3Btn.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
-
-
         quizBtn.setOnAction(event -> handleGame1Button());
 
         quiz2Btn.setOnAction(actionEvent -> handleGame2Button());

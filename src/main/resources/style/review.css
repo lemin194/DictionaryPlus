@@ -23,7 +23,7 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color: #73D7CE;
+    -fx-background-color: #c7eff5;
     -fx-font-family: "Caudex";
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
     -fx-font-weight: bold;
@@ -61,7 +61,7 @@
     -fx-font-family: "Caudex";
     -fx-text-fill: #000000;
     -fx-font-size: 17;
-    -fx-background-color: #B8EBE6;
+    -fx-background-color: #2EC4B6;
     -fx-background-radius: 5;
 }
 .normal-button{
@@ -72,6 +72,13 @@
     -fx-text-fill: #ffffff;
     -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
     -fx-cursor: hand;
+}
+.normal-button:hover{
+    -fx-background-color: #2EC4B6;
+}
+.normal-button:pressed{
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
 }
 .label{
     -fx-text-fill: #000000;
@@ -147,4 +154,32 @@
     -fx-font-family: "Caudex";
     -fx-text-fill: #6BB52C;
     -fx-font-size: 20px;
+}
+.pop-up-scene{
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Caudex";
+    -fx-font-size: 17;
+    -fx-border-radius: 16pt;
+    -fx-background-radius: 10pt;
+}
+.tmpPane{
+    -fx-background-color: #daf5f1;
+    -fx-font-family: "Caudex";
+    -fx-font-size: 17;
+    -fx-background-radius: 5;
+    -fx-text-fill: #ffffff;
+    -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
+    -fx-cursor: hand;
+}
+.choice-box{
+    -fx-background-color: #f9fefb;
+    -fx-font-family: "Caudex";
+    -fx-font-size: 17;
+    -fx-background-radius: 5;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: hand;
+}
+.labelTmp{
+    -fx-font-family: "Caudex";
+    -fx-font-size: 25;
 }

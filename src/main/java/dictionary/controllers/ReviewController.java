@@ -26,7 +26,7 @@ public class ReviewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         playBtn.setOnAction(event -> showComponent("/view/ReviewPlay.fxml"));
 
-        editCollectionBtn.setOnAction(event -> handleAddButton());
+        editCollectionBtn.setOnAction(event -> showComponent("/view/ReviewAdd.fxml"));
 
         showComponent("/view/ReviewPlay.fxml");
     }
@@ -62,20 +62,5 @@ public class ReviewController implements Initializable {
             e.printStackTrace();
         }
     }
-    @FXML
-    public void handleAddButton() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/ReviewPlay.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("test");
-            Scene scene = new Scene(root1);
-            scene.getStylesheets().add(getClass().getResource("/style/reviewAdd.css").toExternalForm());
-            stage.setScene(scene);
-            stage.show();
-            System.out.println("hihi");
-        } catch (Exception e){
-            System.out.println("Can't load new windows");
-        }
-    }
+
 }
