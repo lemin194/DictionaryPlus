@@ -35,13 +35,19 @@ public class ReviewPlayController implements Initializable {
     @FXML
     private ChoiceBox<String> sortBy = new ChoiceBox<>();
     @FXML
-    private TextField numCardPerSessions = new TextField();
-
+    private TextField numCardPerSession = new TextField();
+    @FXML
+    private Label numWordsInChosenCollection = new Label();
+    @FXML
+    private Label warningEmptyCollection = new Label();
+    @FXML
+    private Label warningInvalidNumCards = new Label();
     @FXML
     private Button startGame = new Button();
     public static String currentCollection = new String("");
     public static String currentStudyMode = new String("");
     public static String currentSortBy = new String("");
+
 
     public static int numCards;
 
@@ -59,16 +65,40 @@ public class ReviewPlayController implements Initializable {
         sortBy.getItems().add("Alphabetically");
         sortBy.getItems().add("Randomly");
         sortBy.getItems().add("History");
+        studyMode.setValue("Classic");
+        sortBy.setValue("History");
+        warningEmptyCollection.setVisible(false);
+        warningInvalidNumCards.setVisible(false);
+    }
+    @FXML
+    public void setInfoChosenCollection(){
+        currentCollection = collectionsToStudy.getValue();
+        numCards = WordCollectionDao.queryWordInCollection(currentCollection).size();
+        numWordsInChosenCollection.setText(numCards + " words.");
+        numCardPerSession.setText(String.valueOf(numCards));
+        if(numCards == 0) warningEmptyCollection.setVisible(true);
+        else warningEmptyCollection.setVisible(false);
     }
     @FXML
     public void startGame() {
         if(collectionsToStudy.getValue() == null) return;
+        List<Word> checkB4Play = WordCollectionDao.queryWordInCollection(currentCollection);
+        if (checkB4Play.isEmpty()) {
+            warningEmptyCollection.setVisible(true);
+            return;
+        } else {
+            warningEmptyCollection.setVisible(false);
+        }
+        numCards = Integer.parseInt(numCardPerSession.getText());
+        if (numCards <= 0 || numCards > checkB4Play.size()) {
+            warningInvalidNumCards.setVisible(true);
+            return;
+        } else {
+            warningInvalidNumCards.setVisible(false);
+        }
         currentCollection = collectionsToStudy.getValue();
         currentStudyMode = studyMode.getValue();
-        //currentSortBy = sortBy.getValue();
-        //numCards = Integer.parseInt(numCardPerSessions.getText());
-        System.out.println(currentStudyMode);
-
+        currentSortBy = sortBy.getValue();
         if (currentStudyMode.equals("Classic")) {
             try {
                 Stage stage = new Stage();
@@ -83,6 +113,21 @@ public class ReviewPlayController implements Initializable {
                 stage.show();
             } catch (IOException e) {
                 System.out.println("Can't create new scene for Learning mode: Classic");
+            }
+        } else if (currentStudyMode.equals("Typing")) {
+            try {
+                Stage stage = new Stage();
+                stage.setTitle("Learning mode: Typing");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/ReviewProcessTyping.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                Scene scene = new Scene(root1, Color.web("FFFFFF"));
+                scene.setFill(Color.TRANSPARENT);
+                scene.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                System.out.println("Can't create new scene for Learning mode: Typing");
             }
         }
     }

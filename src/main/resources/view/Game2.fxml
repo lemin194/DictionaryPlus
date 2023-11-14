@@ -1,35 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="360.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.Game2Controller">
-   <children>
-      <Label fx:id="hangMan" layoutX="434.0" layoutY="69.0" prefHeight="184.0" prefWidth="217.0" text="Label" />
-      <ChoiceBox fx:id="collectionsToPlay" layoutX="122.0" layoutY="22.0" onAction="#startGame" prefHeight="32.0" prefWidth="229.0" styleClass="normal-button" stylesheets="@../style/review.css" />
-      <Label fx:id="currentResult" layoutX="41.0" layoutY="149.0" prefHeight="25.0" prefWidth="217.0" stylesheets="@../style/review.css" text="Guessed words" />
-      <TextField fx:id="typeUserGuess" layoutX="39.0" layoutY="214.0" prefHeight="39.0" prefWidth="222.0" styleClass="deck" stylesheets="@../style/review.css" />
-      <Button fx:id="nextWord" layoutX="102.0" layoutY="262.0" mnemonicParsing="false" styleClass="easyBtn" stylesheets="@../style/review.css" text="Next word" />
-      <Button fx:id="restart" layoutX="493.0" layoutY="262.0" mnemonicParsing="false" styleClass="hardBtn" stylesheets="@../style/review.css" text="Replay this collection" />
-      <Label fx:id="currentTrack" layoutX="572.0" layoutY="50.0" stylesheets="@../style/review.css" text="0/n words" />
-      <Button fx:id="submit" layoutX="270.0" layoutY="218.0" mnemonicParsing="false" onAction="#handleGame" styleClass="normal-button" stylesheets="@../style/review.css" text="Confirm" />
-      <Label layoutX="29.0" layoutY="28.0" stylesheets="@../style/review.css" text="Collection:" />
-      <Button fx:id="clickToHint" layoutX="29.0" layoutY="78.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="49.0" styleClass="transparent-button" stylesheets="@../style/review.css">
-         <graphic>
-            <ImageView fitHeight="48" fitWidth="48" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" x="1.0" y="1.0">
-               <image>
-                  <Image url="@../utils/icons/review/icons8-hint-48.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Label fx:id="hintLeftDisplay" layoutX="87.0" layoutY="87.0" stylesheets="@../style/review.css" text="0/n hints" />
-      <Label fx:id="hintInfo" layoutX="175.0" layoutY="71.0" prefHeight="51.0" prefWidth="241.0" stylesheets="@../style/review.css" text="Label" />
-      <Label fx:id="warnWrongInput" layoutX="41.0" layoutY="319.0" prefHeight="20.0" prefWidth="318.0" stylesheets="@../style/review.css" text="" />
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="715" prefWidth="500" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.Game2Controller">
+
+    <stylesheets>
+        <URL value="@../style/game2.css" />
+    </stylesheets>
+
+    <top>
+        <VBox alignment="TOP_CENTER" minWidth="480.0">
+         <AnchorPane prefHeight="0.0" prefWidth="500.0">
+            <children>
+               <Button fx:id="restart" alignment="CENTER" layoutX="371.0" layoutY="1.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css">
+                  <graphic>
+                     <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../utils/icons/review/icons8-restart-48.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css">
+                  <graphic>
+                     <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../utils/icons/review/icons8-back-48.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Label fx:id="information" layoutX="219.0" layoutY="16.0" text="Information" />
+            </children>
+         </AnchorPane>
+         <Pane prefHeight="5.0" prefWidth="500.0" />
+        </VBox>
+    </top>
+
+    <center>
+        <GridPane fx:id="userGuess" alignment="CENTER" hgap="5" onKeyPressed="#handleKeyPressed" prefHeight="501.0" prefWidth="480.0" vgap="5">
+            <BorderPane.margin>
+                <Insets bottom="15.0" top="15.0" />
+            </BorderPane.margin>
+        </GridPane>
+    </center>
+
+    <bottom>
+        <VBox>
+            <GridPane fx:id="keyboardRow1" alignment="BOTTOM_CENTER" hgap="4" vgap="2">
+                <padding>
+                    <Insets top="10.0" />
+                </padding>
+            </GridPane>
+
+            <GridPane fx:id="keyboardRow2" alignment="BOTTOM_CENTER" hgap="4" vgap="2" />
+
+            <GridPane fx:id="keyboardRow3" alignment="BOTTOM_CENTER" hgap="4" vgap="2">
+                <padding>
+                    <Insets bottom="10.0" />
+                </padding>
+            </GridPane>
+        </VBox>
+    </bottom>
+
+</BorderPane>

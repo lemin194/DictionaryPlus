@@ -19,7 +19,7 @@
          </Button>
       </children></AnchorPane>
 
-      <Button fx:id="searchBtn" layoutX="14.0" layoutY="34.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
+      <Button fx:id="searchBtn" layoutX="14.0" layoutY="100.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
             <graphic>
                   <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -30,7 +30,7 @@
       </Button>
 
 
-      <Button fx:id="translateBtn" layoutX="14.0" layoutY="140.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
+      <Button fx:id="translateBtn" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
             <graphic>
                   <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -40,7 +40,7 @@
             </graphic>
       </Button>
 
-      <Button fx:id="reviewBtn" layoutX="14.0" layoutY="240.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
+      <Button fx:id="reviewBtn" layoutX="14.0" layoutY="300.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
             <graphic>
                   <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -50,7 +50,7 @@
             </graphic>
       </Button>
 
-      <Button fx:id="gameBtn" layoutX="14.0" layoutY="356.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
+      <Button fx:id="gameBtn" layoutX="14.0" layoutY="400.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
             <graphic>
                   <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -59,7 +59,7 @@
                   </ImageView>
             </graphic>
       </Button>
-      <Button fx:id="exitBtn" layoutX="14.0" layoutY="469.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
+      <Button fx:id="exitBtn" layoutX="14.0" layoutY="500.0" mnemonicParsing="false" prefHeight="64" prefWidth="64" styleClass="transparent-button">
             <graphic>
                   <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -68,4 +68,13 @@
                   </ImageView>
             </graphic>
       </Button>
+   <Button layoutX="14.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css">
+      <graphic>
+         <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../utils/icons/main/icons8-home-app-100.png" />
+            </image>
+         </ImageView>
+      </graphic>
+   </Button>
 </AnchorPane>

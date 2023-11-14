@@ -6,10 +6,7 @@ import dictionary.models.Entity.Word;
 import dictionary.services.WordLookUpService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 
 import java.net.URL;
@@ -42,18 +39,26 @@ public class ReviewAddController implements Initializable {
     private Button deleteCollection = new Button();
     @FXML
     private Button renameCollection = new Button();
-    public String currentCollection;
-
+    public String currentCollection = new String("");
     @FXML
     public void initialize(URL location, ResourceBundle Resources) {
         int n = WordCollectionDao.queryCollectionName().size();
         for (int i = 0; i < n; i++) {
             collectionsToEdit.getItems().add(WordCollectionDao.queryCollectionName().get(i));
         }
+        collectionsToEdit.setOnAction(e -> setCurrentCollection());
     }
+    @FXML
+    public void setCurrentCollection(){
+        currentCollection = collectionsToEdit.getValue();
+    }
+
     @FXML
     public void addColllection() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        DialogPane tmp1 = alert.getDialogPane();
+        tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
+        alert.setTitle("Success");
         String collectionName = collectionToAdd.getText();
         if (collectionName.isEmpty() || collectionName.isBlank()) {
             alert.setContentText("Please type the name of the collection.");
@@ -76,6 +81,9 @@ public class ReviewAddController implements Initializable {
         WordCollectionDao.deleteCollection(currentCollection);
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        DialogPane tmp1 = alert.getDialogPane();
+        tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
+        alert.setTitle("Success");
         alert.setContentText("Delete successfully!");
         alert.showAndWait();
         currentCollection = "";
@@ -84,7 +92,11 @@ public class ReviewAddController implements Initializable {
     @FXML
     public void addWordCollection() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        DialogPane tmp1 = alert.getDialogPane();
+        tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
+        alert.setTitle("Success");
         currentCollection = WordCollectionDao.findCollectionName(collectionsToEdit.getValue()).get(0);
+        System.out.println(currentCollection);
         String word = wordToEdit.getText();
         String type = typeToEdit.getText();
         String pronounciation = pronounciationToEdit.getText();
@@ -93,15 +105,17 @@ public class ReviewAddController implements Initializable {
             alert.setContentText("Word cannot be empty, please try again");
             alert.showAndWait();
         } else if (meaning.isEmpty() || meaning.isBlank()) {
-            alert.setContentText("meaning cannot be empty, please try again");
+            alert.setContentText("Meaning cannot be empty, please try again");
             alert.showAndWait();
         } else {
             Word wordy = new Word(word, pronounciation,type,meaning);
-            WordsDao.addWord(wordy,currentCollection);
-            alert.setContentText("Word: " + word + " has been added successfully");
-            alert.showAndWait();
+            if(WordCollectionDao.addWordForCollection(wordy,currentCollection)) {
+                alert.setContentText("Word: " + word + " has been added successfully");
+                alert.showAndWait();
+            }
         }
     }
+    @FXML
     public void checkExistentofWordinCollection() {
         String w = wordToEdit.getText();
         if (w.isEmpty() || w.isBlank()) {
@@ -109,12 +123,15 @@ public class ReviewAddController implements Initializable {
             return;
         }
         if(!WordCollectionDao.queryWordInCollection(currentCollection).isEmpty()) {
-            List<Word> tmp = WordLookUpService.findWord(w,currentCollection);
+            List<Word> tmp = WordCollectionDao.findWordInCollection(w,currentCollection);
             if(!tmp.isEmpty()) {
                 Word word = tmp.get(0);
+                //System.out.println("it works! " + word.getWord() + "/" + word.getMeaning());
                 meaningToEdit.setText(word.getMeaning());
                 typeToEdit.setText(word.getType());
                 pronounciationToEdit.setText(word.getPronunciation());
+            } else {
+                resetText();
             }
         }
     }

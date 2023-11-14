@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -53,13 +54,16 @@ public class processClassic implements Initializable {
     public void initialize(URL location, ResourceBundle Resources) {
         fixedNameCollection = ReviewPlayController.currentCollection;
         current = WordCollectionDao.queryWordInCollection(fixedNameCollection);
-        System.out.println("hihi");
         if(ReviewPlayController.currentSortBy.equals("Alphabetically")) {
-
+            WordCollectionDao.sortWord(current);
         } else if (ReviewPlayController.currentSortBy.equals("History")) {
 
         } else if (ReviewPlayController.currentSortBy.equals("Randomly")) {
-
+            Collections.shuffle(current);
+        }
+        int tmp = current.size();
+        for (int i = 0; i < tmp - ReviewPlayController.numCards; i++) {
+            current.remove(tmp - 1 - i);
         }
         showAnswer.setVisible(true);
         transfer.setVisible(false);

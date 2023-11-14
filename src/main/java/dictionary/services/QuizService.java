@@ -15,7 +15,6 @@ public class QuizService {
     public List<Word> generateOneQuiz(String collectionName, Word answer) {
         // if collectionName is null then we randomly choose from past searching results
         List<Word> quizWords = new ArrayList<>();
-        // case 1: never happened. Theo bon m, co nen cho phep choi ma k can chon collection k?
         if (collectionName == null) {
             Random rand = new Random();
             for (int i = 0; i < quizChoice; i++) {
