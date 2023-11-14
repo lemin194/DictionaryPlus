@@ -92,7 +92,7 @@ public class SearchController implements Initializable {
         }
 
         relatedResults.getItems().clear();
-        List<Word> list = WordsDao.queryWord(searchTerm, "anhviet");
+        List<Word> list = WordLookUpService.findWord(searchTerm, "anhviet");
         if (list.isEmpty()) {
             clearSearchResultsView();
             notAvailable.setText("We don't have this word!");

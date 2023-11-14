@@ -39,7 +39,6 @@ public class WordsDao {
             return isSuccess;
         }
 
-        isSuccess = true;
         conn = DatabaseConnection.getConnection();
         String stmt = "INSERT INTO " + table + "(word,pronunciation,type,meaning) VALUES (?,?,?,?)";
         try {
@@ -188,4 +187,8 @@ public class WordsDao {
 //
 //        return contentList;
 //    }
+
+    public static void main(String[] args) {
+        
+    }
 }
