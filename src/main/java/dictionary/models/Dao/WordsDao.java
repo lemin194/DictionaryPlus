@@ -3,6 +3,7 @@ package dictionary.models.Dao;
 import dictionary.models.Entity.Word;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /* How to use ?
 - If you want to add word to specific table, using addWord method
@@ -39,7 +40,6 @@ public class WordsDao {
             return isSuccess;
         }
 
-        isSuccess = true;
         conn = DatabaseConnection.getConnection();
         String stmt = "INSERT INTO " + table + "(word,pronunciation,type,meaning) VALUES (?,?,?,?)";
         try {
@@ -188,4 +188,20 @@ public class WordsDao {
 //
 //        return contentList;
 //    }
+
+    public static List<String> getAllWord() {
+        List<String> res = new ArrayList<>();
+        for (IndexWord indexWord : AllWord.getWords()) {
+            res.add(indexWord.getWord());
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+
+        for (IndexWord indexWord : AllWord.getWords()) {
+            System.out.println(indexWord.getWord());
+        }
+
+    }
 }
