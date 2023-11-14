@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -117,7 +118,7 @@ public class Game3Controller implements Initializable {
       permutation.add(i);
     }
 
-    Collections.shuffle(permutation);
+    Collections.shuffle(permutation, new Random(System.currentTimeMillis()));
 
     return permutation;
   }

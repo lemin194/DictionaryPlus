@@ -175,7 +175,7 @@ public class SpeechService {
 
         connection.setRequestProperty("api-key", "F3t6WZhg3DGu6FBBDeaXGHceUUZYx4n8");
 
-        connection.setConnectTimeout(5000);
+        connection.setConnectTimeout(15000);
         connection.setReadTimeout(5000);
 
         connection.setDoInput(true);
@@ -318,7 +318,7 @@ public class SpeechService {
     try {
       body.put("file", encodeFileToBase64("temp/record_tmp.mp3"));
       body.put("src", src);
-      JSONObject res = BackendUtils.request("http://127.0.0.1:9876/speechanalysis/", "POST", body);
+      JSONObject res = BackendUtils.request("http://0.0.0.0:9876/speechanalysis/", "POST", body);
       ret.put("status", res.get("status").toString());
       if ((int)res.get("status") == 200) {
         JSONArray analysisArr = new JSONArray(new JSONObject(res.get("content").toString()).get("content").toString());

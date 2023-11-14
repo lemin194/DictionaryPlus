@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 public class BackendUtils {
 
-  private static final int readTimeout = 5000;
+  private static final int readTimeout = 20000;
   private static final int connectTimeout = 5000;
 
   public static JSONObject request(String url, String method, JSONObject body) {
