@@ -61,7 +61,7 @@
     -fx-font-family: "Caudex";
     -fx-text-fill: #000000;
     -fx-font-size: 17;
-    -fx-background-color: #2EC4B6;
+    -fx-background-color: #b8ebe6;
     -fx-background-radius: 5;
 }
 .normal-button{
@@ -176,10 +176,16 @@
     -fx-font-family: "Caudex";
     -fx-font-size: 17;
     -fx-background-radius: 5;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #000000;
     -fx-cursor: hand;
 }
 .labelTmp{
     -fx-font-family: "Caudex";
     -fx-font-size: 25;
+}
+.textInDeck{
+    -fx-text-fill: #6ac4bd;
+    -fx-font-family: "Caudex";
+    -fx-font-style: italic;
+
 }

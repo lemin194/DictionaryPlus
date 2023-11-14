@@ -6,7 +6,9 @@
     -fx-background-radius: 30;
     -fx-border-radius: 30;
 }
-
+.transparent-area {
+    -fx-background-color: transparent;
+}
 .transparent-button {
     -fx-background-color: transparent;
     -fx-border-radius: 16pt;

@@ -1,0 +1,164 @@
+.root {
+    -white-color: white;
+    -wrong-color: #787c7e;
+    -text-fill-color: black;
+    -empty-border-color: #d3d6da;
+    -unlocked-border-color: #878a8c;
+    -background-color: white;
+    -key-background-color: #d3d6da;
+    -present-color: #c9b458;
+    -correct-color: #6aaa64;
+}
+
+.default-tile {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d3d6da;
+    -fx-text-fill: #000000;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-border-width: 2px;
+    -fx-min-width: 62px;
+    -fx-min-height: 62px;
+    -fx-pref-width: 65px;
+    -fx-pref-height: 65px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.tile-with-letter {
+    -fx-border-color: -unlocked-border-color;
+}
+
+.present-letter {
+    -fx-background-color: -present-color;
+    -fx-border-color: -present-color;
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-border-width: 2px;
+    -fx-min-width: 62px;
+    -fx-min-height: 62px;
+    -fx-pref-width: 65px;
+    -fx-pref-height: 65px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.wrong-letter {
+    -fx-background-color: -wrong-color;
+    -fx-border-color: -wrong-color;
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-border-width: 2px;
+    -fx-min-width: 62px;
+    -fx-min-height: 62px;
+    -fx-pref-width: 65px;
+    -fx-pref-height: 65px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.correct-letter {
+    -fx-background-color: -correct-color;
+    -fx-border-color: -correct-color;
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-border-width: 2px;
+    -fx-min-width: 62px;
+    -fx-min-height: 62px;
+    -fx-pref-width: 65px;
+    -fx-pref-height: 65px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.main-screen {
+    -fx-background-color: -background-color;
+    -fx-padding: 10px;
+}
+
+.keyboardTile {
+    -fx-background-color: -key-background-color;
+    -fx-text-fill: -text-fill-color;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-min-width: 43px;
+    -fx-min-height: 58px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-background-radius: 4px;
+}
+
+.keyboardCorrectColor {
+    -fx-background-color: -correct-color;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-min-width: 43px;
+    -fx-min-height: 58px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-background-radius: 4px;
+}
+
+.keyboardPresentColor {
+    -fx-background-color: -present-color;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-min-width: 43px;
+    -fx-min-height: 58px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-background-radius: 4px;
+}
+
+.keyboardWrongColor {
+    -fx-background-color: -wrong-color;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-min-width: 43px;
+    -fx-min-height: 58px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-background-radius: 4px;
+}
+
+.keyboardTileSymbol {
+    -fx-background-color: -key-background-color;
+    -fx-text-fill: -text-fill-color;
+    -fx-font-size: 25px;
+    -fx-min-width: 58px;
+    -fx-min-height: 58px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-background-radius: 4px;
+}
+
+.big-font {
+    -fx-font-size: 22px;
+}
+
+.image-dimensions {
+    -fx-pref-height: 20;
+    -fx-pref-width: 20;
+}
+
+.correct-letter-example {
+    -fx-background-color: -correct-color;
+    -fx-border-color: -correct-color;
+    -fx-text-fill: white;
+    -fx-font-size: 27px;
+    -fx-font-weight: bold;
+    -fx-border-width: 1px;
+    -fx-min-width: 45px;
+    -fx-min-height: 45px;
+    -fx-pref-width: 45px;
+    -fx-pref-height: 45px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+

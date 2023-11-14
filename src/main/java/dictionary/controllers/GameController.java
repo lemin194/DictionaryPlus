@@ -87,11 +87,19 @@ public class GameController implements Initializable {
         try {
             Stage stage = new Stage();
             stage.setTitle("Game 2: Hangman");
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Game2.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            URL url = new URL("file:/C:/Users/Administrator/Documents/GitHub/DictionaryPlus/target/classes/view/Game2.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            Parent root1 =  fxmlLoader.load();
+
+            Game2Controller game2Controller = fxmlLoader.getController();
+            game2Controller.createUI();
+
             Scene scene = new Scene(root1, Color.web("FFFFFF"));
             scene.setFill(Color.TRANSPARENT);
             scene.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
+
+            game2Controller.userGuessFocus();
+
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

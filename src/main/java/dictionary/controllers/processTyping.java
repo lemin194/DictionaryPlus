@@ -1,14 +1,16 @@
 package dictionary.controllers;
 
 import dictionary.models.Dao.WordCollectionDao;
-import dictionary.models.Dao.WordsDao;
 import dictionary.models.Entity.Word;
 import dictionary.services.TextToSpeech;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -18,32 +20,54 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class processClassic implements Initializable {
-    @FXML
-    private Label currentWord = new Label();
-    @FXML
-    private Button speaker = new Button();
-    @FXML
-    private Label infoOfWord = new Label();
-    @FXML
-    private Label progress = new Label();
-    @FXML
-    private Button easy = new Button();
-    @FXML
-    private Button hard = new Button();
+public class processTyping implements Initializable {
+
     @FXML
     private Button showAnswer = new Button();
+
+    @FXML
+    private Button back;
+
+    @FXML
+    private Label currentWord = new Label();
+
+    @FXML
+    private Button easy;
+
+    @FXML
+    private AnchorPane firstDeck = new AnchorPane();
+
+    @FXML
+    private Button hard = new Button();
+
+    @FXML
+    private ImageView imgOnDeck = new ImageView();
+
+    @FXML
+    private Label progress = new Label();
+
+    @FXML
+    private Label realAnswer = new Label();
+
+    @FXML
+    private AnchorPane secondDeck = new AnchorPane();
+
+    @FXML
+    private Button speaker = new Button();
+
     @FXML
     private AnchorPane transfer = new AnchorPane();
+
     @FXML
-    private Button back = new Button();
+    private Label userAnswer = new Label();
+
+    @FXML
+    private TextField userAnswerTextField = new TextField();
+
     @FXML
     private Label done = new Label();
 
-    // FIXED COLLECTION SO USER CAN'T CHANGE THE COLLECTION ONCE A SESSION IS STARTED
     private String fixedNameCollection = new String("");
-
-
     public List<Word> current = new ArrayList<>();
     public Word displayWord;
     public int idOfDisplayWord;
@@ -65,15 +89,22 @@ public class processClassic implements Initializable {
         for (int i = 0; i < tmp - ReviewPlayController.numCards; i++) {
             current.remove(tmp - 1 - i);
         }
-        showAnswer.setVisible(true);
-        transfer.setVisible(false);
         idOfDisplayWord = 0;
         fakeNumberOfWordsinCollection = current.size();
         wordsLeft = fakeNumberOfWordsinCollection;
         progress.setText(wordsLeft + "/" + fakeNumberOfWordsinCollection);
+        firstDeck.setVisible(true);
+        secondDeck.setVisible(false);
+        showAnswer.setVisible(true);
+        transfer.setVisible(false);
         displayWord = current.get(idOfDisplayWord);
         currentWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
         done.setVisible(false);
+        userAnswerTextField.setOnKeyPressed(event -> {
+            if( event.getCode() == KeyCode.ENTER ) {
+                showAnswer();
+            }
+        } );
     }
     @FXML
     public void playVoice() {
@@ -81,11 +112,20 @@ public class processClassic implements Initializable {
     }
     @FXML
     public void showAnswer() {
-        if (current.size() != 0) {
-            infoOfWord.setText(displayWord.getMeaning());
-            transfer.setVisible(true);
-            showAnswer.setVisible(false);
+        secondDeck.setVisible(true);
+        userAnswer.setText(userAnswerTextField.getText());
+        realAnswer.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
+        if(userAnswerTextField.getText().equals(displayWord.getMeaning())) {
+            imgOnDeck.setImage(new Image(getClass().getResourceAsStream("/utils/icons/review/correctDeck.png")));
+        } else {
+            imgOnDeck.setImage(new Image(getClass().getResourceAsStream("/utils/icons/review/incorrectDeck.png")));
         }
+
+        firstDeck.setVisible(false);
+        userAnswerTextField.setText("");
+
+        transfer.setVisible(true);
+        showAnswer.setVisible(false);
     }
     @FXML
     public void easyButton() {
@@ -99,13 +139,14 @@ public class processClassic implements Initializable {
             if (wordsLeft > 0) {
                 displayWord = current.get(idOfDisplayWord);
                 currentWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
-                infoOfWord.setText("");
+                secondDeck.setVisible(false);
+                firstDeck.setVisible(true);
                 transfer.setVisible(false);
-                showAnswer.setVisible(true); }
+                showAnswer.setVisible(true);
+            }
             else {
                 speaker.setVisible(false);
                 currentWord.setVisible(false);
-                infoOfWord.setVisible(false);
                 progress.setVisible(false);
                 transfer.setVisible(false);
                 showAnswer.setVisible(false);
@@ -126,7 +167,8 @@ public class processClassic implements Initializable {
         if(idOfDisplayWord >= len) idOfDisplayWord = 0;
         displayWord = current.get(idOfDisplayWord);
         currentWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
-        infoOfWord.setText("");
+        secondDeck.setVisible(false);
+        firstDeck.setVisible(true);
         transfer.setVisible(false);
         showAnswer.setVisible(true);
     }

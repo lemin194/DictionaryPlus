@@ -13,7 +13,7 @@
                 <Image url="@../utils/imgs/logo.png" />
             </image>
         </ImageView>
-      <AnchorPane layoutX="31.0" layoutY="117.0" prefHeight="397.0" prefWidth="688.0" styleClass="sub-container">
+      <AnchorPane layoutX="31.0" layoutY="117.0" prefHeight="430" prefWidth="688.0" styleClass="sub-container">
          <children>
               <Button fx:id="editCollectionBtn" layoutX="33.0" layoutY="14.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css" text="Edit your collections">
                   <graphic>

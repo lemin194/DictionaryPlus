@@ -12,10 +12,10 @@
                   <Image url="@../utils/imgs/logo.png" />
             </image>
       </ImageView>
-   <AnchorPane layoutX="31.0" layoutY="98.0" prefHeight="416.0" prefWidth="688.0" styleClass="sub-container">
+   <AnchorPane layoutX="31.0" layoutY="117.0" prefHeight="430.0" prefWidth="688.0" styleClass="sub-container">
       <children>
             <Button fx:id="quizBtn" layoutX="520.0" layoutY="107.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="117.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
-         <Button fx:id="quiz3Btn" layoutX="517.0" layoutY="181.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="124.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
+         <Button fx:id="quiz2Btn" layoutX="517.0" layoutY="181.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="124.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
          <Button fx:id="quiz3Btn" layoutX="517.0" layoutY="252.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="124.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
          <AnchorPane layoutX="13.0" layoutY="58.0" prefHeight="5.0" prefWidth="662.0" styleClass="bar" stylesheets="@../style/main.css" />
          <Label layoutX="84.0" layoutY="14.0" prefHeight="34.0" prefWidth="322.0" stylesheets="@../style/review.css" text="Challenge yourself with our games!" />

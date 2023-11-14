@@ -59,6 +59,7 @@ public class TranslateTextController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+    fromTextArea.setWrapText(true);
 
     initLanguageMap();
     File recordImageFile = new File("src/main/resources/utils/icons/translate/micro.png");
