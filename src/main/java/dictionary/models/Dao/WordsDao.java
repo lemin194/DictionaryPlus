@@ -199,7 +199,9 @@ public class WordsDao {
 
     public static void main(String[] args) {
 
-        Long startTime = System.nanoTime();
+        for (IndexWord indexWord : AllWord.getWords()) {
+            System.out.println(indexWord.getWord());
+        }
 
     }
 }

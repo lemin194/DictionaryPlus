@@ -2,6 +2,8 @@ package dictionary.services;
 
 import dictionary.models.Dao.WordsDao;
 
+import java.io.*;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,30 +33,67 @@ public class AutoCorrectWordService {
         return f[n][m];
     }
 
+    public int lengthDiff(String a, String b) {
+        int dif = a.length() - b.length();
+        if (dif < 0) {
+            dif *= -1;
+        }
+        return dif;
+    }
+
+    public double value(double fre, int dis, int lenDif) {
+        return (fre + 1) * (dis + lenDif);
+    }
     /**
      * Finding the word with minimum distance from the incorrect word.
      */
     public String getCorrectWord(String incorrectWord) {
         List<String> wordList = WordsDao.getAllWord();
+        double[] freq = new double[wordList.size()];
+        FileReader fileReader = null;
+        try {
+            int id = 0;
+            fileReader = new FileReader(new File("src/main/resources/data/frequencyword.txt"));
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
 
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                freq[id] = Float.parseFloat(line);
+//                System.out.println(freq[id]);
+            }
+            bufferedReader.close();
+            fileReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String replaceWord = null;
-        int minDistance = Integer.MAX_VALUE;
-
+        double minDistance = Float.MAX_VALUE;
+        int i = 0;
         for (String word : wordList) {
             if (minDistance == Integer.MAX_VALUE) {
                 replaceWord = word;
-                minDistance = LevenshteinDistance(incorrectWord, replaceWord);
+                minDistance = value(freq[i],
+                        LevenshteinDistance(incorrectWord, replaceWord),
+                        lengthDiff(word, incorrectWord));
                 continue;
             }
 
-            int currentDistance = LevenshteinDistance(incorrectWord, word);
+            double currentDistance = value(freq[i],
+                    LevenshteinDistance(incorrectWord, word),
+                    lengthDiff(incorrectWord, word));
 
             if (currentDistance < minDistance) {
                 minDistance = currentDistance;
                 replaceWord = word;
             }
+            i++;
         }
 
         return replaceWord;
+    }
+
+    public static void main(String[] args) {
+        AutoCorrectWordService autoCorrectWordService = new AutoCorrectWordService();
+        System.out.println(autoCorrectWordService.getCorrectWord("dgo"));
     }
 }
