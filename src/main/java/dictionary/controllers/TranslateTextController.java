@@ -34,8 +34,8 @@ public class TranslateTextController implements Initializable {
       mapLang = new HashMap<>();
   private boolean recording = false;
   @FXML
-  private ImageView recordingButtonIcon = new ImageView();
-  private Image recordBtnImage, stopBtnImage;
+  private ImageView iconRecordBtn = new ImageView();
+  private Image imageRecord, imageStop, imageWait;
   private PauseTransition recordingDuration;
   private PauseTransition translateDelay;
   private PauseTransition suggestionDelay;
@@ -64,9 +64,11 @@ public class TranslateTextController implements Initializable {
     initLanguageMap();
     File recordImageFile = new File("src/main/resources/utils/icons/translate/micro.png");
     File stopImageFile = new File("src/main/resources/utils/icons/translate/stop.png");
-    recordBtnImage = new Image(recordImageFile.toURI().toString());
-    stopBtnImage = new Image(stopImageFile.toURI().toString());
-    recordingButtonIcon.setImage(recordBtnImage);
+    File waitImageFile = new File("src/main/resources/utils/icons/translate/wait.png");
+    imageRecord = new Image(recordImageFile.toURI().toString());
+    imageStop = new Image(stopImageFile.toURI().toString());
+    imageWait = new Image(waitImageFile.toURI().toString());
+    iconRecordBtn.setImage(imageRecord);
 
     fromLanguageChoice.getItems().addAll("English", "Vietnamese", "French", "German", "Russian");
     toLanguageChoice.getItems().addAll("English", "Vietnamese", "French", "German", "Russian");
@@ -131,8 +133,10 @@ public class TranslateTextController implements Initializable {
   }
 
   private void sttThreadFunc() {
+    iconRecordBtn.setImage(imageWait);
     var res = SpeechService.STT(fromLanguage);
     Platform.runLater(() -> {
+      iconRecordBtn.setImage(imageRecord);
       System.out.println(res.get("status") + res.get("stderr"));
       if (res.get("status").equals("OK")) {
         fromTextArea.setText(res.get("content"));
@@ -183,7 +187,7 @@ public class TranslateTextController implements Initializable {
     if (!recording) {
       recording = true;
       SpeechService.beginRecord();
-      recordingButtonIcon.setImage(stopBtnImage);
+      iconRecordBtn.setImage(imageStop);
       recordingDuration.play();
       return;
     }
@@ -196,7 +200,7 @@ public class TranslateTextController implements Initializable {
     }
     recording = false;
     SpeechService.stopRecording();
-    recordingButtonIcon.setImage(recordBtnImage);
+    iconRecordBtn.setImage(imageRecord);
 
     if (sttThread != null) {
       sttThread.interrupt();

@@ -26,7 +26,7 @@
                            <children>
                               <JFXButton contentDisplay="GRAPHIC_ONLY" onAction="#ToggleRecord" prefHeight="48.0" prefWidth="48.0" styleClass="button-translate-utils" text="Button">
                                  <graphic>
-                                    <ImageView fx:id="recordingButtonIcon" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="iconRecordBtn" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../utils/icons/translate/micro.png" />
                                        </image>

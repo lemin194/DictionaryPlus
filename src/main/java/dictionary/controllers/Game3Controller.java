@@ -46,7 +46,7 @@ public class Game3Controller implements Initializable {
   private boolean recording = false;
   @FXML
   private ImageView iconRecord = new ImageView();
-  private Image imageRecord, imageStop;
+  private Image imageRecord, imageStop, imageWait;
   private PauseTransition recordingDuration;
 
   private Thread sttThread;
@@ -66,8 +66,10 @@ public class Game3Controller implements Initializable {
   public void initialize(URL location, ResourceBundle Resources) {
     File recordImageFile = new File("src/main/resources/utils/icons/translate/micro.png");
     File stopImageFile = new File("src/main/resources/utils/icons/translate/stop.png");
+    File waitImageFile = new File("src/main/resources/utils/icons/translate/wait.png");
     imageRecord = new Image(recordImageFile.toURI().toString());
     imageStop = new Image(stopImageFile.toURI().toString());
+    imageWait = new Image(waitImageFile.toURI().toString());
     iconRecord.setImage(imageRecord);
     recordingDuration = new PauseTransition(Duration.seconds(30.0f));
     recordingDuration.setOnFinished(actionEvent -> StopRecord());
@@ -86,12 +88,14 @@ public class Game3Controller implements Initializable {
   private void speechAnalysisThread() {
     Object res = null;
     System.out.println("Analysing");
+    iconRecord.setImage(imageWait);
     res = SpeechService.SpeechAnalysis(sentence).get("content");
     if (res == null) {
       System.out.println("Error analysing speech!");
     }
     Object finalRes = res;
     Platform.runLater(() -> {
+      iconRecord.setImage(imageRecord);
       if (finalRes == null) {
         return;
       }
