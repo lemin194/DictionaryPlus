@@ -3,6 +3,7 @@ package dictionary.models.Dao;
 import dictionary.models.Entity.Word;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /* How to use ?
 - If you want to add word to specific table, using addWord method
@@ -188,7 +189,17 @@ public class WordsDao {
 //        return contentList;
 //    }
 
+    public static List<String> getAllWord() {
+        List<String> res = new ArrayList<>();
+        for (IndexWord indexWord : AllWord.getWords()) {
+            res.add(indexWord.getWord());
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
-        
+
+        Long startTime = System.nanoTime();
+
     }
 }

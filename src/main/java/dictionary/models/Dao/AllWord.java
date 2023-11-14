@@ -56,6 +56,10 @@ public class AllWord {
 //        for (IndexWord word : words) System.out.println(word.getWord());
     }
 
+    public static ArrayList<IndexWord> getWords() {
+        return words;
+    }
+    
     /**
      * Check if a string contain prefix or not.
      */
@@ -136,4 +140,6 @@ public class AllWord {
     public static int amountWord() {
         return words.size();
     }
+
+
 }
