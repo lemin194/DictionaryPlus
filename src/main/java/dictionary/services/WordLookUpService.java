@@ -9,6 +9,7 @@ import java.util.List;
 
 public class WordLookUpService {
     private static final int cacheSize = 10;
+    private static final int maxShowWords = 30;
     private static Cache cache = new Cache(cacheSize);
 
     public static List<Word> retrieveLastSearch() {
@@ -17,7 +18,7 @@ public class WordLookUpService {
 
     public static List<Word> findWord(String prefix, String tableName) {
         prefix = prefix.toLowerCase();
-        return WordsDao.queryWord(prefix, tableName);
+        return WordsDao.queryWord(prefix, tableName, maxShowWords);
     }
 
     public static void addWord(Word word) {
@@ -94,6 +95,10 @@ class Cache {
         } else {
             cache.add(0, word);
         }
+    }
+
+    public void modifyWord(Word word) {
+
     }
 
     public void removeOldest() {

@@ -113,7 +113,7 @@ public class SearchController implements Initializable {
         if (searchBox.getText().isEmpty() || searchBox.getText().isBlank()) return;
         if (wordToFind.getWord().isBlank() || wordToFind.getWord().isEmpty()) return;
         // khi tu nay khong co trong tu dien
-        if (relatedResults.getItems().size() <=0){
+        if (relatedResults.getItems().isEmpty()){
             return;
         }
         Dialog<String> dialog = new Dialog<>();
@@ -259,8 +259,7 @@ public class SearchController implements Initializable {
                 String type = typeField.getText();
                 String pronunciation = pronunciationField.getText();
                 Word ye = new Word(word, pronunciation, type, meaning);
-                int id = AllWord.leftMostIndex(word);
-                if (id != -1) {
+                if (!WordsDao.addWord(ye, "anhviet")) {
                     System.out.println("This word already in dictionary");
                     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                     DialogPane tmp1 = successAlert.getDialogPane();
@@ -269,7 +268,7 @@ public class SearchController implements Initializable {
                     successAlert.setContentText("This word already in dictionary");
                     successAlert.showAndWait();
                 }
-                else if (WordsDao.addWord(ye,"anhviet")) {
+                else {
                     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                     DialogPane tmp1 = successAlert.getDialogPane();
                     tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
