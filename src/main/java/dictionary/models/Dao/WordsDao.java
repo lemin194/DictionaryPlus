@@ -27,21 +27,40 @@ public class WordsDao {
     private static ResultSet resultSet = null;
     private static Connection conn = null;
 
-    private static final int maxShowWords = 30;
-
+    /**
+     * Check if this word exists in table.
+     */
+    public static boolean checkWordExist(String word, String table) {
+        conn = DatabaseConnection.getConnection();
+        String countStmt = String.format("SELECT COUNT(*) FROM %s WHERE word = \"%s\"",
+                                    table,
+                                    word);
+        int cnt = 0;
+        try {
+            Statement stmt = conn.createStatement();
+            resultSet  = stmt.executeQuery(countStmt);
+            cnt = resultSet.getInt(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
+        }
+        return cnt == 1;
+    }
     /**
      * Adding word into specific table.
      */
     public static boolean addWord(Word word, String table) {
         boolean isSuccess = false;
         int id = AllWord.leftMostIndex(word.getWord());
-        if (table.equals("anhviet") && id != -1) {
+
+        if (checkWordExist(word.getWord(), table)) {
             System.out.println("This word already in dictionary");
-            return isSuccess;
+            return false;
         }
 
         conn = DatabaseConnection.getConnection();
-        String stmt = "INSERT INTO " + table + "(word,pronunciation,type,meaning) VALUES (?,?,?,?)";
+        String stmt = "INSERT INTO " + table + "(word, pronunciation, type, meaning) VALUES (?, ?, ?, ?)";
         try {
             preparedStatement = conn.prepareStatement(stmt);
             preparedStatement.setString(1, word.getWord());
@@ -62,6 +81,7 @@ public class WordsDao {
         if (table.equals("anhviet")) {
             AllWord.addWord(word.getWord());
         }
+
         return isSuccess;
     }
 
@@ -70,13 +90,13 @@ public class WordsDao {
      */
     public static boolean deleteWord(String word, String table) {
         int index = AllWord.leftMostIndex(word);
-        System.out.println(index);
         if (index == -1) {
             return false;
         }
         AllWord.deleteWord(index);
         index = AllWord.tableID(index);
         conn = DatabaseConnection.getConnection();
+
         String stmt = "DELETE FROM " + table + " WHERE id = ?;";
         try {
             preparedStatement = conn.prepareStatement(stmt);
@@ -93,7 +113,7 @@ public class WordsDao {
     /**
      * Query word from specific table.
      */
-    public static ArrayList<Word> queryWord(String pref, String table) {
+    public static ArrayList<Word> queryWord(String pref, String table, int maxShowWords) {
         ArrayList<Integer> bound = AllWord.wordsContainPrefix(pref);
         int leftIndex = bound.get(0);
         int rightIndex = Math.min(bound.get(1), leftIndex + maxShowWords - 1);
@@ -169,25 +189,6 @@ public class WordsDao {
         }
         return result;
     }
-//    just method using to get clean db.
-//    private static ArrayList<String> convertFromHTML(String initString) {
-//        Document doc = (org.jsoup.nodes.Document) Jsoup.parse(initString);
-//        String pronunciation = doc.select("h3 i").text();
-//        String type = doc.select("h2").text();
-//        StringBuilder meaning = new StringBuilder();
-//        Elements allEle = doc.select("ul li");
-//        for (Element ele : allEle) {
-//            meaning.append(ele.text());
-//            meaning.append("\n");
-//        }
-//
-//        ArrayList<String> contentList = new ArrayList<>();
-//        contentList.add(pronunciation);
-//        contentList.add(type);
-//        contentList.add(meaning.toString());
-//
-//        return contentList;
-//    }
 
     public static List<String> getAllWord() {
         List<String> res = new ArrayList<>();
@@ -197,11 +198,8 @@ public class WordsDao {
         return res;
     }
 
+
     public static void main(String[] args) {
-
-        for (IndexWord indexWord : AllWord.getWords()) {
-            System.out.println(indexWord.getWord());
-        }
-
+        System.out.println(checkWordExist("duc","anhviet"));
     }
 }
