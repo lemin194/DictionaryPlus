@@ -1,7 +1,6 @@
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-!**/src/main/resources/data/dict_hh.db
 !**/src/main/resources/data/Collection.txt
 ### Oasis
 .idea/
