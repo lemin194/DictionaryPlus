@@ -2,7 +2,7 @@ package dictionary.controllers;
 
 import dictionary.models.Dao.WordCollectionDao;
 import dictionary.models.Entity.Word;
-import dictionary.services.TextToSpeech;
+import dictionary.apiservices.TTSService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -108,7 +108,7 @@ public class processTyping implements Initializable {
     }
     @FXML
     public void playVoice() {
-        TextToSpeech.TTS(displayWord.getWord(),"en");
+        TTSService.TTS(displayWord.getWord(),"en");
     }
     @FXML
     public void showAnswer() {

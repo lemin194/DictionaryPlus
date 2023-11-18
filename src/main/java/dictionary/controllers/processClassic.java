@@ -1,14 +1,12 @@
 package dictionary.controllers;
 
 import dictionary.models.Dao.WordCollectionDao;
-import dictionary.models.Dao.WordsDao;
 import dictionary.models.Entity.Word;
-import dictionary.services.TextToSpeech;
+import dictionary.apiservices.TTSService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -77,7 +75,7 @@ public class processClassic implements Initializable {
     }
     @FXML
     public void playVoice() {
-        TextToSpeech.TTS(displayWord.getWord(),"en");
+        TTSService.TTS(displayWord.getWord(),"en");
     }
     @FXML
     public void showAnswer() {

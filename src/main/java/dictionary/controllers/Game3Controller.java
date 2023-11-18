@@ -3,21 +3,19 @@ package dictionary.controllers;
 import com.jfoenix.controls.JFXButton;
 import dictionary.services.AnimatedGif;
 import dictionary.services.Animation;
-import dictionary.services.SpeechService;
-import dictionary.services.TextToSpeech;
+import dictionary.apiservices.SpeechService;
+import dictionary.apiservices.TTSService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
-import javafx.animation.Interpolator;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -26,7 +24,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 import javafx.util.Duration;
@@ -81,7 +78,7 @@ public class Game3Controller implements Initializable {
     nextSentence();
 
     btnNext.setOnAction(e -> nextSentence());
-    btnPlay.setOnAction(e -> TextToSpeech.TTS(sentence, "en"));
+    btnPlay.setOnAction(e -> TTSService.TTS(sentence, "en"));
     btnRecord.setOnAction(e -> ToggleRecord());
   }
 

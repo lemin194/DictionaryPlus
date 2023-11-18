@@ -1,9 +1,7 @@
 package dictionary.controllers;
 
 import dictionary.models.Dao.WordCollectionDao;
-import dictionary.models.Dao.WordsDao;
 import dictionary.models.Entity.Word;
-import dictionary.services.TextToSpeech;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,8 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -21,7 +17,6 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import java.util.ResourceBundle;
