@@ -14,7 +14,7 @@
          <children>
             <Label layoutX="179.0" layoutY="3.0" styleClass="textInDeck" stylesheets="@../style/review.css" text="Your answer" />
             <Label fx:id="userAnswer" layoutX="121.0" layoutY="47.0" text="Label" />
-            <Label fx:id="realAnswer" layoutX="121.0" layoutY="135.0" text="Label" />
+            <Label fx:id="infoOfWord" layoutX="121.0" layoutY="135.0" text="Label" />
             <Label layoutX="164.0" layoutY="107.0" styleClass="textInDeck" stylesheets="@../style/review.css" text="Correct answer" />
             <Button fx:id="speaker" onAction="#playVoice" layoutX="64.0" layoutY="128.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css">
                <graphic>

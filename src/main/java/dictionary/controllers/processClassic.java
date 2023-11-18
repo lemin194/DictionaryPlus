@@ -18,38 +18,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class processClassic implements Initializable {
-    @FXML
-    private Label currentWord = new Label();
-    @FXML
-    private Button speaker = new Button();
-    @FXML
-    private Label infoOfWord = new Label();
-    @FXML
-    private Label progress = new Label();
-    @FXML
-    private Button easy = new Button();
-    @FXML
-    private Button hard = new Button();
-    @FXML
-    private Button showAnswer = new Button();
-    @FXML
-    private AnchorPane transfer = new AnchorPane();
-    @FXML
-    private Button back = new Button();
-    @FXML
-    private Label done = new Label();
-
-    // FIXED COLLECTION SO USER CAN'T CHANGE THE COLLECTION ONCE A SESSION IS STARTED
-    private String fixedNameCollection = new String("");
-
-
-    public List<Word> current = new ArrayList<>();
-    public Word displayWord;
-    public int idOfDisplayWord;
-    public int fakeNumberOfWordsinCollection;
-    public int wordsLeft;
-
+public class processClassic extends process {
     @FXML
     public void initialize(URL location, ResourceBundle Resources) {
         fixedNameCollection = ReviewPlayController.currentCollection;
@@ -76,10 +45,6 @@ public class processClassic implements Initializable {
         done.setVisible(false);
     }
     @FXML
-    public void playVoice() {
-        TextToSpeech.TTS(displayWord.getWord(),"en");
-    }
-    @FXML
     public void showAnswer() {
         if (current.size() != 0) {
             infoOfWord.setText(displayWord.getMeaning());
@@ -92,9 +57,9 @@ public class processClassic implements Initializable {
         try {
             if (!WordCollectionDao.queryWordInCollection(fixedNameCollection).isEmpty()) {
                 WordCollectionDao.deleteWordFromCollection(displayWord.getWord(), fixedNameCollection);
-                wordsLeft--;
-                progress.setText(wordsLeft + "/" + fakeNumberOfWordsinCollection);
                 current.remove(idOfDisplayWord);
+                wordsLeft = current.size();
+                progress.setText(wordsLeft + "/" + fakeNumberOfWordsinCollection);
             }
             if (wordsLeft > 0) {
                 displayWord = current.get(idOfDisplayWord);
@@ -129,11 +94,5 @@ public class processClassic implements Initializable {
         infoOfWord.setText("");
         transfer.setVisible(false);
         showAnswer.setVisible(true);
-    }
-    @FXML
-    public void handleBack(){
-        Stage stage = (Stage) back.getScene().getWindow();
-        // do what you have to do
-        stage.close();
     }
 }

@@ -4,6 +4,7 @@ import dictionary.models.Dao.WordCollectionDao;
 import dictionary.models.Dao.WordsDao;
 import dictionary.models.Entity.Word;
 import dictionary.services.TextToSpeech;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -28,6 +30,8 @@ import java.util.ResourceBundle;
 
 
 public class ReviewPlayController implements Initializable {
+    double xOffset = 0;
+    double yOffset = 0;
     @FXML
     private ChoiceBox<String> collectionsToStudy = new ChoiceBox<>();
     @FXML
@@ -99,36 +103,44 @@ public class ReviewPlayController implements Initializable {
         currentCollection = collectionsToStudy.getValue();
         currentStudyMode = studyMode.getValue();
         currentSortBy = sortBy.getValue();
-        if (currentStudyMode.equals("Classic")) {
-            try {
-                Stage stage = new Stage();
-                stage.setTitle("Learning mode: Classic");
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/ReviewProcessClassic.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
-                Scene scene = new Scene(root1, Color.web("FFFFFF"));
-                scene.setFill(Color.TRANSPARENT);
-                scene.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                System.out.println("Can't create new scene for Learning mode: Classic");
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Learning mode: Typing");
+            FXMLLoader fxmlLoader;
+            if (currentStudyMode.equals("Classic")) {
+                fxmlLoader = new FXMLLoader(getClass().getResource("/view/ReviewProcessClassic.fxml"));
+            } else if (currentStudyMode.equals("Typing")) {
+                fxmlLoader = new FXMLLoader(getClass().getResource("/view/ReviewProcessTyping.fxml"));
             }
-        } else if (currentStudyMode.equals("Typing")) {
-            try {
-                Stage stage = new Stage();
-                stage.setTitle("Learning mode: Typing");
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/ReviewProcessTyping.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
-                Scene scene = new Scene(root1, Color.web("FFFFFF"));
-                scene.setFill(Color.TRANSPARENT);
-                scene.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                System.out.println("Can't create new scene for Learning mode: Typing");
+            else if (currentStudyMode.equals("Reverse")) {
+                fxmlLoader = new FXMLLoader(getClass().getResource("/view/ReviewProcessReverse.fxml"));
+            } else {
+                fxmlLoader = new FXMLLoader(getClass().getResource("/view/ReviewProcessListening.fxml"));
             }
+            Parent root = (Parent) fxmlLoader.load();
+            Scene scene = new Scene(root, Color.web("FFFFFF"));
+            scene.setFill(Color.TRANSPARENT);
+            scene.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                }
+            });
+
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    stage.setX(event.getScreenX() - xOffset);
+                    stage.setY(event.getScreenY() - yOffset);
+                }
+            });
+        } catch (IOException e) {
+            System.out.println("Can't create new scene for Learning mode: Typing");
         }
     }
 }

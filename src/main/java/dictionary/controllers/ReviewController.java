@@ -41,14 +41,14 @@ public class ReviewController implements Initializable {
             editCollectionBtn.getStyleClass().clear();
             playBtn.getStyleClass().clear();
 
-            editCollectionBtn.getStyleClass().add("transparent-button-selected");
+            editCollectionBtn.getStyleClass().add("buttonReviewAddSelected");
             playBtn.getStyleClass().add("transparent-button");
         } else if (mode.equals("/view/ReviewPlay.fxml")) {
             editCollectionBtn.getStyleClass().clear();
             playBtn.getStyleClass().clear();
 
             editCollectionBtn.getStyleClass().add("transparent-button");
-            playBtn.getStyleClass().add("transparent-button-selected");
+            playBtn.getStyleClass().add("buttonReviewAddSelected");
         }
     }
     @FXML
@@ -57,7 +57,6 @@ public class ReviewController implements Initializable {
             AnchorPane component = FXMLLoader.load(Objects.requireNonNull(MainController.class.getResource(path)));
             setNode(component);
             setMode(path);
-            System.out.println("HIIH");
         } catch (IOException e) {
             e.printStackTrace();
         }

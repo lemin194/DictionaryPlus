@@ -23,7 +23,7 @@
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
-    -fx-background-color: #c7eff5;
+    -fx-background-color: #12bceb;
     -fx-font-family: "Caudex";
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
     -fx-font-weight: bold;
@@ -41,18 +41,21 @@
 }
 .easyBtn:hover {
     -fx-background-color:
-            #12bceb;
+            #08D8D8 ;
 
 }
 .easyBtn:pressed{
+    -fx-background-color:#05B8BD;
     -fx-padding: 10 15 13 15;
     -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
 }
 .hardBtn:hover{
     -fx-background-color:
-            #E71D36;
+            #E80B40;
 }
 .hardBtn:pressed{
+    -fx-background-color:
+            #AA0029;
     -fx-padding: 10 15 13 15;
     -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
 }
@@ -74,9 +77,10 @@
     -fx-cursor: hand;
 }
 .normal-button:hover{
-    -fx-background-color: #2EC4B6;
+    -fx-background-color: #05B8BD;
 }
 .normal-button:pressed{
+    -fx-background-color: #00A5AA;
     -fx-padding: 10 15 13 15;
     -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
 }
@@ -120,7 +124,13 @@
     -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
     -fx-cursor: hand;
 }
-
+.smallBtn:hover{
+    -fx-background-color: #ED3109 ;
+}
+.smallBtn:pressed{
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
 .transparent-button {
     -fx-font-family: "Caudex";
     -fx-font-size: 15;
@@ -137,9 +147,10 @@
 }
 .transparent-button-selected {
     -fx-font-family: "Caudex";
+    -fx-font-size: 15;
     -fx-background-color: #d4d4d4; /* Set the background color with some transparency */
-    -fx-border-radius: 16pt;
-    -fx-background-radius: 10pt;
+    -fx-border-radius: 15;
+    -fx-background-radius: 16pt;
 }
 .whenFalse{
     -fx-border-radius: 10px;
@@ -166,10 +177,18 @@
     -fx-background-color: #daf5f1;
     -fx-font-family: "Caudex";
     -fx-font-size: 17;
-    -fx-background-radius: 5;
+    -fx-background-radius: 16;
     -fx-text-fill: #ffffff;
     -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
-    -fx-cursor: hand;
+}
+.textAreaCustom{
+    -fx-font-family: "Caudex";
+    -fx-text-fill: #000000;
+    -fx-background-color: #ffffff;
+    -fx-font-size: 17;
+    -fx-border-radius: 16pt;
+    -fx-background-radius: 10pt;
+
 }
 .choice-box{
     -fx-background-color: #f9fefb;
@@ -188,4 +207,39 @@
     -fx-font-family: "Caudex";
     -fx-font-style: italic;
 
+}
+.autocorrect{
+    -fx-font-family: "Caudex";
+    -fx-font-size: 17;
+    -fx-underline: true;
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+    -fx-alignment: center-left;
+}
+.autocorrect:pressed{
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+.text-field{
+    -fx-font-family: "Caudex";
+    -fx-font-size: 17;
+    -fx-underline: true;
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+}
+.text-field2{
+    -fx-font-family: "Caudex";
+    -fx-font-size: 17;
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+}
+.buttonReviewAddSelected{
+    -fx-text-fill: #000000;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 3;
+    -fx-border-color: #809ccc;
+    -fx-font-family: "Caudex";
+    -fx-font-size: 15;
+    -fx-background-color: #d4d4d4; /* Set the background color with some transparency */
+    -fx-background-radius: 8pt 8pt 2pt 2pt;
 }

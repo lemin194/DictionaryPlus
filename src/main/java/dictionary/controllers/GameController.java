@@ -1,11 +1,13 @@
 package dictionary.controllers;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.awt.event.ActionEvent;
@@ -19,19 +21,19 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class GameController implements Initializable {
+    double xOffset = 0;
+    double yOffset = 0;
     @FXML
     private AnchorPane gameContainer = new AnchorPane();
     @FXML
     private Button quizBtn = new Button();
-    @FXML
-    private Button quiz2Btn = new Button();
+
     @FXML
     private Button quiz3Btn = new Button();
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         quizBtn.setOnAction(event -> handleGame1Button());
 
-        quiz2Btn.setOnAction(actionEvent -> handleGame2Button());
 
         quiz3Btn.setOnAction(actionEvent -> handleGame3Button());
     }
@@ -72,8 +74,25 @@ public class GameController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Game 1: Quiz");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Game1.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Scene scene = new Scene(root1, Color.web("1F1F1F"));
+            Parent root = (Parent) fxmlLoader.load();
+            stage.initStyle(StageStyle.TRANSPARENT);
+
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                }
+            });
+
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    stage.setX(event.getScreenX() - xOffset);
+                    stage.setY(event.getScreenY() - yOffset);
+                }
+            });
+            Scene scene = new Scene(root, Color.web("1F1F1F"));
             scene.setFill(Color.TRANSPARENT);
             scene.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
             stage.setScene(scene);
@@ -82,31 +101,6 @@ public class GameController implements Initializable {
             System.out.println("Can't create new scene for game1");
         }
     }
-    @FXML
-    public void handleGame2Button() {
-        try {
-            Stage stage = new Stage();
-            stage.setTitle("Game 2: Hangman");
-            URL url = new URL("file:/C:/Users/Administrator/Documents/GitHub/DictionaryPlus/target/classes/view/Game2.fxml");
-            FXMLLoader fxmlLoader = new FXMLLoader(url);
-            Parent root1 =  fxmlLoader.load();
-
-            Game2Controller game2Controller = fxmlLoader.getController();
-            game2Controller.createUI();
-
-            Scene scene = new Scene(root1, Color.web("FFFFFF"));
-            scene.setFill(Color.TRANSPARENT);
-            scene.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
-
-            game2Controller.userGuessFocus();
-
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            System.out.println("Can't create new scene for game2");
-        }
-    }
-
     /* Duc write your code here. Controller file for your code can be written in Game3 and Game3Controller.*/
     @FXML
     public void handleGame3Button() {
