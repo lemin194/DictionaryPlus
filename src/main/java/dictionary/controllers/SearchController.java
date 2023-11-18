@@ -186,19 +186,25 @@ public class SearchController implements Initializable {
     @FXML
     public void handleDelete() {
         // khi nguoi dung chua nhap gi
-        if (searchBox.getText().isEmpty() || searchBox.getText().isBlank()) return;
+        if (searchBox.getText().isEmpty() || searchBox.getText().isBlank()) {
+            return;
+        }
         // khi tu nay chua co trong tu dien
         if (relatedResults.getItems().size() <=0) {
             return;
         }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText("Add a new word");
+        alert.setHeaderText("Delete this word");
         DialogPane tmp = alert.getDialogPane();
         tmp.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
-        if(WordsDao.deleteWord(wordToFind.getWord(),"anhviet")) {
+        String wordDelete = wordToFind.getWord();
+
+        if(WordsDao.deleteWord(wordDelete,"anhviet")) {
             alert.setContentText("delete successfully");
             alert.showAndWait();
+            WordLookUpService.deleteWord(wordDelete);
         }
+
     }
     @FXML
     public void handleAdd() {

@@ -29,6 +29,11 @@ class IndexWord {
     public void setWord(String word) {
         this.word = word;
     }
+
+    @Override
+    public String toString() {
+        return index + " " + word;
+    }
 }
 public class AllWord {
     private static ArrayList<IndexWord> words;
@@ -42,9 +47,11 @@ public class AllWord {
             Statement stmt = conn.createStatement();
             resultSet = stmt.executeQuery(query);
             while (resultSet.next()) {
-                words.add(new IndexWord(resultSet.getInt(1),
-                        resultSet.getString(2)));
-                maxIndex = Math.max(maxIndex, resultSet.getInt(1));
+                int id = resultSet.getInt(1);
+                words.add(
+                        new IndexWord(id, resultSet.getString(2))
+                );
+                maxIndex = Math.max(maxIndex, id);
             }
 
         } catch (SQLException e) {
@@ -141,5 +148,8 @@ public class AllWord {
         return words.size();
     }
 
+    public static void main(String[] args) {
+        words.forEach(System.out::println);
+    }
 
 }
