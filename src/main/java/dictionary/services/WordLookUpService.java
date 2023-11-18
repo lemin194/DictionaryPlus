@@ -5,6 +5,7 @@ import dictionary.models.Dao.WordsDao;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class WordLookUpService {
@@ -21,6 +22,9 @@ public class WordLookUpService {
         return WordsDao.queryWord(prefix, tableName, maxShowWords);
     }
 
+    public static void deleteWord(String word) {
+        cache.remove(word);
+    }
     public static void addWord(Word word) {
         cache.add(word);
     }
@@ -97,8 +101,15 @@ class Cache {
         }
     }
 
-    public void modifyWord(Word word) {
-
+    public void remove(String word) {
+        Iterator<Word> iterator = cache.iterator();
+        while (iterator.hasNext()) {
+            String wd = iterator.next().getWord();
+            if (wd.equals(word)) {
+                iterator.remove();
+                return;
+            }
+        }
     }
 
     public void removeOldest() {
