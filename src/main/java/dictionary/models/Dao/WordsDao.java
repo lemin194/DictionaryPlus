@@ -93,15 +93,15 @@ public class WordsDao {
         if (index == -1) {
             return false;
         }
-        AllWord.deleteWord(index);
-        index = AllWord.tableID(index);
+        int tableID = AllWord.tableID(index);
         conn = DatabaseConnection.getConnection();
 
         String stmt = "DELETE FROM " + table + " WHERE id = ?;";
         try {
             preparedStatement = conn.prepareStatement(stmt);
-            preparedStatement.setInt(1, index);
+            preparedStatement.setInt(1, tableID);
             preparedStatement.execute();
+            AllWord.deleteWord(index);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -200,6 +200,6 @@ public class WordsDao {
 
 
     public static void main(String[] args) {
-        System.out.println(checkWordExist("duc","anhviet"));
+        deleteWord("meoudangiu", "anhviet");
     }
 }

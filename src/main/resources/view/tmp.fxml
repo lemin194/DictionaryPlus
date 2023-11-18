@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="360.0" prefWidth="688.0" stylesheets="@../style/review.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.ReviewAddController">
+    <children>
+        <AnchorPane fx:id="wordsSetting" layoutX="54.0" layoutY="11.0" prefHeight="335.0" prefWidth="580.0" styleClass="tmpPane" stylesheets="@../style/review.css">
+            <children>
+                <Label layoutX="35.0" layoutY="29.0" text="Word:" />
+                <Label layoutX="38.0" layoutY="92.0" text="Type:" />
+                <Label layoutX="320.0" layoutY="92.0" stylesheets="@../style/review.css" text="Pronunciation:" />
+                <Label layoutX="35.0" layoutY="155.0" text="Meaning:" />
+            <AnchorPane layoutX="21.0" layoutY="177.0" prefHeight="116.0" prefWidth="538.0" styleClass="textAreaCustom" stylesheets="@../style/review.css">
+               <children>
+                      <TextArea fx:id="meaningToEdit" layoutX="3.0" layoutY="4.0" prefHeight="108.0" prefWidth="532.0" styleClass="text-field2" stylesheets="@../style/review.css" />
+               </children>
+            </AnchorPane>
+                <AnchorPane layoutX="21.0" layoutY="119.0" prefHeight="34.0" prefWidth="200.0" styleClass="textAreaCustom" stylesheets="@../style/review.css">
+                    <children>
+                        <TextField fx:id="typeToEdit" prefHeight="29.0" prefWidth="231.0" promptText="Type new word's type here" styleClass="textAreaCustom" stylesheets="@../style/review.css" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="307.0" layoutY="119.0" prefHeight="34.0" prefWidth="200.0" styleClass="textAreaCustom">
+                    <children>
+                        <TextField fx:id="pronunciationToEdit" prefHeight="34.0" prefWidth="253.0" promptText="Type new word's pronunciation here" styleClass="card" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="21.0" layoutY="53.0" prefHeight="34.0" prefWidth="200.0" styleClass="textAreaCustom" stylesheets="@../style/review.css">
+                    <children>
+                        <TextField fx:id="wordToEdit" onKeyReleased="#checkExistentofWordinCollection" prefHeight="34.0" prefWidth="538.0" promptText="Type new word here" styleClass="textAreaCustom" stylesheets="@../style/review.css" />
+                    </children>
+                </AnchorPane>
+                <Label layoutX="21.0" layoutY="3.0" text="Start editing for collection: " />
+                <Label fx:id="displayCurrentCollectionSetting" layoutX="231.0" layoutY="14.0" />
+                <Button fx:id="doneEditCollectionSetting" layoutX="518.0" layoutY="3.0" mnemonicParsing="false" onAction="#backToCollectionSetting" styleClass="transparent-button" stylesheets="@../style/review.css">
+                    <graphic>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../utils/icons/review/icons8-back-48.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="add" layoutX="152.0" layoutY="296.0" mnemonicParsing="false" prefWidth="78.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="ADD" />
+                <Button fx:id="edit" layoutX="266.0" layoutY="296.0" mnemonicParsing="false" prefWidth="78.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="EDIT" />
+                <Button fx:id="delete" layoutX="377.0" layoutY="296.0" mnemonicParsing="false" prefWidth="78.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="DELETE" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

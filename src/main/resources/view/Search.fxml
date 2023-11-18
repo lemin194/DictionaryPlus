@@ -25,7 +25,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <TextArea fx:id="wordDefinition" editable="false" layoutX="24.0" layoutY="93.0" prefHeight="224.0" prefWidth="452.0" styleClass="text-area" wrapText="true">
+        <TextArea fx:id="wordDefinition" editable="false" layoutX="24.0" layoutY="93.0" onInputMethodTextChanged="#handleEdit" prefHeight="224.0" prefWidth="452.0" styleClass="text-area" stylesheets="@../style/review.css" wrapText="true">
             <font>
                 <Font size="15.0" />
             </font>
@@ -63,7 +63,7 @@
               </graphic>
       </Button>
 
-        <Button fx:id="addToCollection" layoutX="398" layoutY="316.0" mnemonicParsing="false" onAction="#handleAddCollection" prefHeight="54.0" prefWidth="54.0" styleClass="transparent-button">
+        <Button fx:id="addToCollection" layoutX="346.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleAddCollection" prefHeight="48.0" prefWidth="48.0" styleClass="transparent-button">
           <graphic>
             <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -72,6 +72,15 @@
           </ImageView>
           </graphic>
         </Button>
+      <Button fx:id="info" layoutX="398.0" layoutY="316.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="transparent-button" stylesheets="@../style/review.css">
+         <graphic>
+            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../utils/icons/search/info.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
 
 
 
@@ -80,7 +89,7 @@
    <AnchorPane layoutX="14.0" layoutY="172.0" prefHeight="374.0" prefWidth="200.0" styleClass="explain-field">
        <ListView fx:id="relatedResults" layoutX="8.75" layoutY="12" prefHeight="354.0" prefWidth="184" styleClass="search-area" />
    </AnchorPane>
-   <AnchorPane layoutX="236.0" layoutY="110.0" prefHeight="43.0" prefWidth="500.0" styleClass="explain-field">
+   <AnchorPane layoutX="236.0" layoutY="114.0" prefHeight="45.0" prefWidth="500.0" styleClass="explain-field">
        <ImageView fitHeight="48" fitWidth="48" layoutX="15" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
            <image>
                <Image url="@../utils/icons/search/icons8-book-48.png" />
@@ -92,7 +101,7 @@
            </font>
        </Label>
    </AnchorPane>
-   <AnchorPane layoutX="14.0" layoutY="110.0" prefHeight="43.0" prefWidth="200.0" styleClass="explain-field">
+   <AnchorPane layoutX="14.0" layoutY="114.0" prefHeight="43.0" prefWidth="200.0" styleClass="explain-field">
        <ImageView fitHeight="48" fitWidth="48" layoutX="8" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
            <image>
                <Image url="@../utils/icons/search/icons8-filter-48.png" />
@@ -120,10 +129,12 @@
           </image>
       </ImageView>
 
-    <Label fx:id="notAvailable" layoutX="585" layoutY="20" prefHeight="57.0" prefWidth="177" styleClass="alert" wrapText="true">
+    <Label fx:id="notAvailable" layoutX="585" layoutY="20" prefHeight="57.0" prefWidth="177" styleClass="alert" stylesheets="@../style/review.css" text="We don't have this word!" wrapText="true">
         <font>
             <Font size="17" />
         </font>
     </Label>
+   <Label fx:id="labelAutocorrect" layoutX="224.0" layoutY="79.5" stylesheets="@../style/review.css" text="Do you mean:" />
+   <Button fx:id="infoAutocorrect" layoutX="322.0" layoutY="74.0" mnemonicParsing="false" onAction="#setAutocorrect" prefHeight="31.0" prefWidth="233.0" styleClass="autocorrect" stylesheets="@../style/review.css" text="" />
 
 </AnchorPane>

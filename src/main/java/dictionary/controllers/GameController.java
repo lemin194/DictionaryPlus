@@ -23,15 +23,13 @@ public class GameController implements Initializable {
     private AnchorPane gameContainer = new AnchorPane();
     @FXML
     private Button quizBtn = new Button();
-    @FXML
-    private Button quiz2Btn = new Button();
+
     @FXML
     private Button quiz3Btn = new Button();
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         quizBtn.setOnAction(event -> handleGame1Button());
 
-        quiz2Btn.setOnAction(actionEvent -> handleGame2Button());
 
         quiz3Btn.setOnAction(actionEvent -> handleGame3Button());
     }
@@ -82,31 +80,6 @@ public class GameController implements Initializable {
             System.out.println("Can't create new scene for game1");
         }
     }
-    @FXML
-    public void handleGame2Button() {
-        try {
-            Stage stage = new Stage();
-            stage.setTitle("Game 2: Hangman");
-            URL url = new URL("file:/C:/Users/Administrator/Documents/GitHub/DictionaryPlus/target/classes/view/Game2.fxml");
-            FXMLLoader fxmlLoader = new FXMLLoader(url);
-            Parent root1 =  fxmlLoader.load();
-
-            Game2Controller game2Controller = fxmlLoader.getController();
-            game2Controller.createUI();
-
-            Scene scene = new Scene(root1, Color.web("FFFFFF"));
-            scene.setFill(Color.TRANSPARENT);
-            scene.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
-
-            game2Controller.userGuessFocus();
-
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            System.out.println("Can't create new scene for game2");
-        }
-    }
-
     /* Duc write your code here. Controller file for your code can be written in Game3 and Game3Controller.*/
     @FXML
     public void handleGame3Button() {

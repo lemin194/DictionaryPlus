@@ -1,5 +1,6 @@
 package dictionary.services;
 
+import dictionary.models.Entity.Word;
 import java.util.List;
 
 public class TestAPI {
@@ -25,12 +26,13 @@ public class TestAPI {
   public static void main(String[] args) {
     System.out.println("Hello");
     TestTranslate();
-    System.out.println(SpeechService.SpeechAnalysis(
-        "Embarking on a winter holiday, my friends and I are planning a ski "
-            + "trip to the mountains to make the most of the snowy weather.").get("content"));
-//        TestTTS();
-//        SpeechToText.beginRecord();
-//        SpeechToText.stopRecording();
-//        System.out.println(SpeechToText.STT("ru"));
+//    System.out.println(SpeechService.SpeechAnalysis(
+//        "Embarking on a winter holiday, my friends and I are planning a ski "
+//            + "trip to the mountains to make the most of the snowy weather.").get("content"));
+    List<Word> words = WordLookUpService.findWord("kit", "anhviet");
+    int id = 12;
+    System.out.println(words.get(id).getMeaning());
+    //System.out.println(StringUtils.getFirstMeaning(words.get(id)));
+
   }
 }

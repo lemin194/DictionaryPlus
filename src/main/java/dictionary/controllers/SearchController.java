@@ -1,5 +1,7 @@
 package dictionary.controllers;
 
+import dictionary.services.AutoCorrectWordService;
+import dictionary.services.Autocorrect;
 import dictionary.services.TextToSpeech;
 import dictionary.services.WordLookUpService;
 import javafx.application.Application;
@@ -37,14 +39,25 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.Button;
+import javafx.stage.StageStyle;
+
 public class SearchController implements Initializable {
+
+    @FXML
+    private Button info = new Button();
+
+    @FXML
+    private Button infoAutocorrect;
+
+    @FXML
+    private Label labelAutocorrect;
     @FXML
     private TextField searchBox = new TextField();
     @FXML
     private ListView<String> relatedResults = new ListView<>();
 
     @FXML
-    private Label notAvailable = new Label();
+    private Label notAvailable = new Label("We don't have this word!");
 
     @FXML
     private TextArea wordDefinition = new TextArea();
@@ -58,22 +71,37 @@ public class SearchController implements Initializable {
     @FXML
     private Button speaker, editBtn, deleteBtn, addBtn, addToCollection;
 
+    public AutoCorrectWordService autocorrect;
     @FXML
     public void initialize(URL location, ResourceBundle Resources) {
+        autocorrect = new AutoCorrectWordService();
+        List<Word> pastWords = WordLookUpService.retrieveLastSearch();
+        for (Word word : pastWords) relatedResults.getItems().add(word.getWord());
+        System.out.println(relatedResults.getItems().size());
+        labelAutocorrect.setVisible(false);
+        notAvailable.setVisible(false);
         relatedResults.setOnMouseClicked(event -> {
             String selectedWord = relatedResults.getSelectionModel().getSelectedItem();
-            if (selectedWord != null) {
-                Word english = WordLookUpService.findWord(selectedWord, "anhviet").get(0);
-                if (english != null) {
-                    wordToFind = english;
-                    wordDefinition.setText("Type:\n" + english.getType() + "\n" + "Meaning:\n" +english.getMeaning() );
-                    wordDisplay.setText(english.getWord() + "\n" + english.getPronunciation());
-                
-                } else {
-                    wordDefinition.setText("Definition not found for: " + selectedWord);
+            // need to FIX CACHE BUG
+
+                if (selectedWord != null) {
+                    System.out.println(selectedWord);
+                    System.out.println(WordLookUpService.findWord(selectedWord, "anhviet").size());
+                    Word english = WordLookUpService.findWord(selectedWord, "anhviet").get(0);
+                    try {
+                        if (english != null) {
+                            wordToFind = english;
+                            wordDefinition.setText("Type:\n" + english.getType() + "\n" + "Meaning:\n" + english.getMeaning());
+                            wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
+
+                        } else {
+                            wordDefinition.setText("");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("han tu dien");
+                    }
+                    WordLookUpService.addWord(english);
                 }
-                WordLookUpService.addWord(english);
-            }
         });
     }
 
@@ -82,48 +110,49 @@ public class SearchController implements Initializable {
         String searchTerm = searchBox.getText();
         if (searchTerm.isEmpty() || searchTerm.isBlank()) {
             clearSearchResultsView();
-
             List<Word> pastWords = WordLookUpService.retrieveLastSearch();
             for (Word word : pastWords) relatedResults.getItems().add(word.getWord());
             Word tmp = pastWords.get(0);
             wordDefinition.setText("Type:\n" + tmp.getType()+ "\nMeaning:\n" + tmp.getMeaning());
             wordDisplay.setText(tmp.getWord() + "\n" + tmp.getPronunciation());
+            resetAutocorrect();
             return;
         }
-
         relatedResults.getItems().clear();
         List<Word> list = WordLookUpService.findWord(searchTerm, "anhviet");
         if (list.isEmpty()) {
             clearSearchResultsView();
-            notAvailable.setText("We don't have this word!");
+            notAvailable.setVisible(true);
+            autocorrect();
             return;
         }
         wordToFind = list.get(0);
         wordDefinition.setText("Type:\n" + wordToFind.getType()+ "\nMeaning:\n" + wordToFind.getMeaning());
         wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
         for (Word english : list) {
-            System.out.println(english.getWord());
+            //System.out.println(english.getWord());
             relatedResults.getItems().add(english.getWord());
         }
+
     }
 
     @FXML
     public void handleEdit() {
         // khi nguoi dung chua nhap gi
-        if (searchBox.getText().isEmpty() || searchBox.getText().isBlank()) return;
-        if (wordToFind.getWord().isBlank() || wordToFind.getWord().isEmpty()) return;
+        if (wordToFind.equals(null) && (searchBox.getText().isEmpty() || searchBox.getText().isBlank())) return;
         // khi tu nay khong co trong tu dien
         if (relatedResults.getItems().isEmpty()){
             return;
         }
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Edit word");
+        dialog.setHeaderText("Type the information for the word that you want to edit below.");
         DialogPane tmp = dialog.getDialogPane();
         tmp.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
         Label wordLabel = new Label("Word: ");
         Label display = new Label(wordToFind.getWord());
 
-        Label meaningLabel = new Label("Definition:");
+        Label meaningLabel = new Label("Meaning:");
         TextArea meaningField = new TextArea(wordToFind.getMeaning());
         meaningField.setWrapText(true);
 
@@ -136,12 +165,12 @@ public class SearchController implements Initializable {
         GridPane gridPane = new GridPane();
         gridPane.add(display, 2, 1);
         gridPane.add(wordLabel, 1, 1);
-        gridPane.add(meaningLabel, 1, 2);
-        gridPane.add(meaningField, 2, 2);
-        gridPane.add(typeLabel, 1, 3);
-        gridPane.add(typeField, 2, 3);
-        gridPane.add(pronunciationLabel, 1, 4);
-        gridPane.add(pronunciationField, 2, 4);
+        gridPane.add(meaningLabel, 1, 4);
+        gridPane.add(meaningField, 2, 4);
+        gridPane.add(typeLabel, 1, 2);
+        gridPane.add(typeField, 2, 2);
+        gridPane.add(pronunciationLabel, 1, 3);
+        gridPane.add(pronunciationField, 2, 3);
 
         dialog.getDialogPane().setContent(gridPane);
 
@@ -167,47 +196,62 @@ public class SearchController implements Initializable {
                 String pronunciation = pronunciationField.getText();
 
                 WordsDao.modifyWord(wordToFind.getWord(), "meaning", meaning, "anhviet");
+                WordsDao.modifyWord(wordToFind.getWord(), "type", type, "anhviet");
+                WordsDao.modifyWord(wordToFind.getWord(), "pronunciation", pronunciation, "anhviet");
+
                 Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                 DialogPane tmp1 = successAlert.getDialogPane();
                 tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
+                wordDefinition.setText("Type:\n" + wordToFind.getType()+ "\nMeaning:\n" + wordToFind.getMeaning());
+                wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
                 successAlert.setTitle("Success");
                 successAlert.setContentText("Word information updated successfully!");
                 successAlert.showAndWait();
-                wordDefinition.setText("Type:\n" + wordToFind.getType()+ "\nMeaning:\n" + wordToFind.getMeaning());
-                wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
+
             }
             else {
                 dialog.close();
             }
         });
-
+        wordDefinition.setText("Type:\n" + wordToFind.getType()+ "\nMeaning:\n" + wordToFind.getMeaning());
+        wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
     }
 
     @FXML
     public void handleDelete() {
         // khi nguoi dung chua nhap gi
-        if (searchBox.getText().isEmpty() || searchBox.getText().isBlank()) return;
+        if (wordToFind.equals(null) && (searchBox.getText().isEmpty() || searchBox.getText().isBlank())) return;
         // khi tu nay chua co trong tu dien
         if (relatedResults.getItems().size() <=0) {
             return;
         }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText("Add a new word");
         DialogPane tmp = alert.getDialogPane();
         tmp.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
         if(WordsDao.deleteWord(wordToFind.getWord(),"anhviet")) {
-            alert.setContentText("delete successfully");
+            for (String x : relatedResults.getItems())
+            {
+                // assume that no word is duplicate
+                if (x.equals(wordToFind.getWord())) {
+                    relatedResults.getItems().remove(x);
+                    break;
+                }
+            }
+            if (searchBox.getText().equals(wordToFind.getWord())) searchBox.setText("");
+            alert.setTitle("Success");
+            alert.setContentText("Delete successfully");
             alert.showAndWait();
         }
     }
     @FXML
     public void handleAdd() {
         Dialog<String> dialog = new Dialog<>();
-        dialog.setHeaderText("Add a new word");
+        dialog.setTitle("Add a new word");
+        dialog.setHeaderText("Please type in the information you want to add below");
+        dialog.initStyle(StageStyle.UTILITY);
         DialogPane tmp = dialog.getDialogPane();
         tmp.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
         //tmp.getStyleClass().add("dialog");
-        dialog.setHeaderText(null);
 
         Label newWordLabel = new Label("New word: ");
         TextField newWordField = new TextField();
@@ -255,26 +299,35 @@ public class SearchController implements Initializable {
         dialog.showAndWait().ifPresent(response -> {
             if (response.equals("OK")) {
                 String word = newWordField.getText();
+                word = word.toLowerCase();
                 String meaning = meaningField.getText();
                 String type = typeField.getText();
                 String pronunciation = pronunciationField.getText();
                 Word ye = new Word(word, pronunciation, type, meaning);
-                if (!WordsDao.addWord(ye, "anhviet")) {
-                    System.out.println("This word already in dictionary");
+                if (word.isEmpty() || word.isBlank()) {
                     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                     DialogPane tmp1 = successAlert.getDialogPane();
                     tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
-                    successAlert.setTitle("Success");
-                    successAlert.setContentText("This word already in dictionary");
+                    successAlert.setTitle("Failed");
+                    successAlert.setContentText("Word can't be empty; please type in!");
                     successAlert.showAndWait();
-                }
-                else {
-                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-                    DialogPane tmp1 = successAlert.getDialogPane();
-                    tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
-                    successAlert.setTitle("Success");
-                    successAlert.setContentText("Word information updated successfully!");
-                    successAlert.showAndWait();
+                } else {
+                    if (!WordsDao.addWord(ye, "anhviet")) {
+                        System.out.println("This word already in dictionary");
+                        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                        DialogPane tmp1 = successAlert.getDialogPane();
+                        tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
+                        successAlert.setTitle("Failed");
+                        successAlert.setContentText("This word already in dictionary");
+                        successAlert.showAndWait();
+                    } else {
+                        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                        DialogPane tmp1 = successAlert.getDialogPane();
+                        tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
+                        successAlert.setTitle("Success");
+                        successAlert.setContentText("Word added successfully!");
+                        successAlert.showAndWait();
+                    }
                 }
             }
             else {
@@ -285,26 +338,24 @@ public class SearchController implements Initializable {
     @FXML
     public void handleAddCollection() {
         // khi nguoi dung chua nhap gi
-        if (searchBox.getText().isEmpty() || searchBox.getText().isBlank()) return;
-        if (wordToFind.getWord().isBlank() || wordToFind.getWord().isEmpty()) return;
+        if (wordToFind.equals(null) && (searchBox.getText().isEmpty() || searchBox.getText().isBlank())) return;
         // khi tu nay khong co trong tu dien
         if (relatedResults.getItems().size() <=0){
             return;
         }
         Dialog<String> dialog = new Dialog<>();
-        dialog.setHeaderText(null);
+        dialog.setTitle("Add new word into a collection.");
 
-        Label INSTRUCTION=new Label("Please choose the collection to add this word.");
+        dialog.setHeaderText("Please choose the collection to add this word.");
+
         ChoiceBox<String> allCollections=new ChoiceBox<>();
         List<String> collectionNames = WordCollectionDao.queryCollectionName();
         for (String name : collectionNames) {
             allCollections.getItems().add(name);
         }
         GridPane gridPane = new GridPane();
-        gridPane.add(INSTRUCTION, 1, 1);
         gridPane.add(allCollections, 1, 2);
 
-        dialog.setHeaderText("Add this word into a collection");
         DialogPane tmp = dialog.getDialogPane();
         tmp.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
 
@@ -343,10 +394,46 @@ public class SearchController implements Initializable {
         relatedResults.getItems().clear();
         wordDefinition.setText("");
         wordDisplay.setText("");
-        notAvailable.setText("");
+        notAvailable.setVisible(false);
     }
 
-    public void initializeWithStage(Stage stage) {
+    public void autocorrect() {
+        if (autocorrect.getCorrectWord(searchBox.getText()).equals(searchBox.getText()))
+            return;
+        else {
+            String correct = autocorrect.getCorrectWord(searchBox.getText());
+            labelAutocorrect.setVisible(true);
+            infoAutocorrect.setVisible(true);
+            infoAutocorrect.setText(correct);
+        }
+    }
+    public void resetAutocorrect() {
+        labelAutocorrect.setVisible(false);
+        infoAutocorrect.setVisible(false);
+        infoAutocorrect.setText("");
+    }
+    @FXML
+    public void setAutocorrect() {
+        searchBox.setText(autocorrect.getCorrectWord(searchBox.getText()));
+        List<Word> list = WordLookUpService.findWord(searchBox.getText(), "anhviet");
+        if (list.isEmpty()) {
+            clearSearchResultsView();
+            notAvailable.setVisible(true);
+            return;
+        }
+        else {
+            notAvailable.setVisible(false);
+            wordToFind = list.get(0);
+            wordDefinition.setText("Type:\n" + wordToFind.getType() + "\nMeaning:\n" + wordToFind.getMeaning());
+            wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
+            for (Word english : list) {
+                System.out.println(english.getWord());
+                relatedResults.getItems().add(english.getWord());
+            }
+        }
+        resetAutocorrect();
+    }
+        public void initializeWithStage(Stage stage) {
         this.initializeWithStage(stage);
     }
 }

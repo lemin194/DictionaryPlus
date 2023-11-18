@@ -6,35 +6,68 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="344.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.ReviewAddController">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.TextArea?>
+<AnchorPane prefHeight="360.0" prefWidth="688.0" stylesheets="@../style/review.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.ReviewAddController">
+<children>
+<AnchorPane fx:id="collectionSetting" layoutX="54.0" layoutY="11.0" prefHeight="335.0" prefWidth="580.0" styleClass="tmpPane" stylesheets="@../style/review.css">
    <children>
-      <Label layoutX="15.0" layoutY="24.0" prefHeight="20.0" prefWidth="83.0" stylesheets="@../style/review.css" text="Collection:" />
-      <Label layoutX="373.0" layoutY="24.0" styleClass="instruction" stylesheets="@../style/review.css" text="New collection:" />
-      <Label layoutX="15.0" layoutY="125.0" prefHeight="91.0" prefWidth="83.0" stylesheets="@../style/review.css" text="edit words in this collection." wrapText="true" />
-      <Button fx:id="addCollection" layoutX="625.0" layoutY="61.0" mnemonicParsing="false" onAction="#addColllection" styleClass="smallBtn" stylesheets="@../style/review.css" text="ADD" />
-      <AnchorPane layoutX="106.0" layoutY="115.0" prefHeight="183.0" prefWidth="571.0" styleClass="deck" stylesheets="@../style/review.css">
+      <Label layoutX="26.0" layoutY="207.0" styleClass="instruction" stylesheets="@../style/review.css" text="Add a new collection:" />
+      <Button fx:id="addCollection" layoutX="486.0" layoutY="203.0" mnemonicParsing="false" onAction="#addColllection" prefWidth="80.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="ADD" />
+      <AnchorPane layoutX="232.0" layoutY="201.0" prefHeight="35.0" prefWidth="217.0" styleClass="textAreaCustom" stylesheets="@../style/review.css">
          <children>
-            <TextField fx:id="meaningToEdit" layoutX="251.0" layoutY="30.0" prefHeight="140.0" prefWidth="310.0" styleClass="card" text="" />
-            <TextField fx:id="pronounciationToEdit" layoutX="7.0" layoutY="140.0" prefHeight="29.0" prefWidth="231.0" styleClass="card" text="" />
-            <TextField fx:id="wordToEdit" layoutX="7.0" layoutY="24.0" onKeyReleased="#checkExistentofWordinCollection" prefHeight="26.0" prefWidth="231.0" styleClass="card" text="" />
-            <TextField fx:id="typeToEdit" layoutX="7.0" layoutY="83.0" prefHeight="29.0" prefWidth="231.0" styleClass="card" text="" />
-            <Label layoutX="14.0" layoutY="4.0" text="Word:" />
-            <Label layoutX="14.0" layoutY="58.0" text="Type:" />
-            <Label layoutX="14.0" layoutY="117.0" text="Pronunciation:" />
-            <Label layoutX="249.0" layoutY="4.0" text="Meaning:" />
+            <TextField fx:id="collectionToAdd" prefHeight="35.0" prefWidth="240.0" promptText="Name new collection" styleClass="textAreaCustom" stylesheets="@../style/review.css" />
          </children>
       </AnchorPane>
-      <Button fx:id="edit" layoutX="259.0" layoutY="304.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="EDIT" />
-      <Button fx:id="delete" layoutX="416.0" layoutY="305.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="83.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="DELETE" />
-      <Button fx:id="add" layoutX="346.0" layoutY="304.0" mnemonicParsing="false" onAction="#addWordCollection" styleClass="smallBtn" stylesheets="@../style/review.css" text="ADD" />
-      <Button fx:id="deleteCollection" layoutX="124.0" layoutY="59.0" mnemonicParsing="false" onAction="#deleteCollection" prefHeight="20.0" prefWidth="186.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="Delete this collection" />
-      <AnchorPane layoutX="370.0" layoutY="58.0" prefHeight="34.0" prefWidth="247.0" styleClass="deck" stylesheets="@../style/review.css">
-         <children>
-            <TextField fx:id="collectionToAdd" prefHeight="35.0" prefWidth="240.0" promptText="Name new collection" styleClass="transparent-button" stylesheets="@../style/review.css" />
-         </children>
-      </AnchorPane>
-      <ChoiceBox fx:id="collectionsToEdit" layoutX="116.0" layoutY="14.0" prefHeight="25.0" prefWidth="231.0" styleClass="normal-button" stylesheets="@../style/review.css" />
-      <Label layoutX="15.0" layoutY="95.0" stylesheets="@../style/review.css" text="You can:" />
-      <Label layoutX="90.0" layoutY="63.0" stylesheets="@../style/review.css" text="or" />
+      <ChoiceBox fx:id="collectionsToEdit" layoutX="236.0" layoutY="85.0" prefHeight="25.0" prefWidth="231.0" />
+      <Label layoutX="26.0" layoutY="79.0" prefHeight="45.0" prefWidth="216.0" stylesheets="@../style/review.css" text="Choose to edit existing collections:" wrapText="true" />
+      <Label layoutX="14.0" layoutY="32.0" stylesheets="@../style/review.css" text="Welcome to the editing collection section. Here you can:" />
+      <Button fx:id="deleteCollection" layoutX="236.0" layoutY="141.0" mnemonicParsing="false" prefWidth="80.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="DELETE" />
+      <Button fx:id="editCollection" layoutX="387.0" layoutY="141.0" mnemonicParsing="false" onAction="#changeToCollectionWordEdit" prefWidth="80.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="EDIT" />
    </children>
+</AnchorPane>
+   <AnchorPane fx:id="wordsSetting" layoutX="54.0" layoutY="11.0" prefHeight="335.0" prefWidth="580.0" styleClass="tmpPane" stylesheets="@../style/review.css">
+      <children>
+         <Label layoutX="35.0" layoutY="29.0" text="Word:" />
+         <Label layoutX="38.0" layoutY="92.0" text="Type:" />
+         <Label layoutX="320.0" layoutY="92.0" stylesheets="@../style/review.css" text="Pronunciation:" />
+         <Label layoutX="35.0" layoutY="155.0" text="Meaning:" />
+         <AnchorPane layoutX="21.0" layoutY="177.0" prefHeight="116.0" prefWidth="538.0" styleClass="textAreaCustom" stylesheets="@../style/review.css">
+            <children>
+               <TextArea fx:id="meaningToEdit" layoutX="3.0" layoutY="4.0" prefHeight="108.0" prefWidth="532.0" styleClass="text-field2" stylesheets="@../style/review.css" />
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutX="21.0" layoutY="119.0" prefHeight="34.0" prefWidth="200.0" styleClass="textAreaCustom" stylesheets="@../style/review.css">
+            <children>
+               <TextField fx:id="typeToEdit" prefHeight="29.0" prefWidth="231.0" promptText="Type new word's type here" styleClass="textAreaCustom" stylesheets="@../style/review.css" />
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutX="307.0" layoutY="119.0" prefHeight="34.0" prefWidth="200.0" styleClass="textAreaCustom">
+            <children>
+               <TextField fx:id="pronunciationToEdit" prefHeight="34.0" prefWidth="253.0" promptText="Type new word's pronunciation here" styleClass="card" />
+            </children>
+         </AnchorPane>
+         <AnchorPane layoutX="21.0" layoutY="53.0" prefHeight="34.0" prefWidth="200.0" styleClass="textAreaCustom" stylesheets="@../style/review.css">
+            <children>
+               <TextField fx:id="wordToEdit" onKeyReleased="#checkExistentofWordinCollection" prefHeight="34.0" prefWidth="538.0" promptText="Type new word here" styleClass="textAreaCustom" stylesheets="@../style/review.css" />
+            </children>
+         </AnchorPane>
+         <Label layoutX="21.0" layoutY="3.0" text="Start editing for collection: " />
+         <Label fx:id="displayCurrentCollectionSetting" layoutX="231.0" layoutY="14.0" />
+         <Button fx:id="doneEditCollectionSetting" layoutX="518.0" layoutY="3.0" mnemonicParsing="false" onAction="#backToCollectionSetting" styleClass="transparent-button" stylesheets="@../style/review.css">
+            <graphic>
+               <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../utils/icons/review/icons8-back-48.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+         </Button>
+         <Button fx:id="add" onAction="#addWordCollection" layoutX="152.0" layoutY="296.0" mnemonicParsing="false" prefWidth="78.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="ADD" />
+         <Button fx:id="edit" onAction="#editWordCollection" layoutX="266.0" layoutY="296.0" mnemonicParsing="false" prefWidth="78.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="EDIT" />
+         <Button fx:id="delete" onAction="#deleteWordCollection" layoutX="377.0" layoutY="296.0" mnemonicParsing="false" prefWidth="78.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="DELETE" />
+      </children>
+   </AnchorPane>
+</children>
 </AnchorPane>

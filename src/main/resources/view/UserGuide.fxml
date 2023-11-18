@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="560" prefWidth="750" styleClass="main-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.SearchController">
+    <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="53.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../utils/imgs/logo.png" />
+        </image>
+    </ImageView>
+    <AnchorPane layoutX="31.0" layoutY="117.0" prefHeight="430.0" prefWidth="688.0" styleClass="sub-container">
+      <children>
+         <TextArea editable="false" layoutX="21.0" layoutY="22.0" prefHeight="382.0" prefWidth="646.0" styleClass="instruction" stylesheets="@../style/review.css" wrapText="true" />
+      </children></AnchorPane>
+    </AnchorPane>

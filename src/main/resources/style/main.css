@@ -88,6 +88,7 @@
 }
 
 .search-area{
+    -fx-font-family: "Caudex";
     -fx-background-color: transparent; /* Transparent background */
     -fx-border-color: transparent; /* Transparent border */
     -fx-padding: 0 5 0 5; /* Adjust padding as needed */
