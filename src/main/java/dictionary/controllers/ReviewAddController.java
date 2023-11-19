@@ -73,6 +73,10 @@ public class ReviewAddController implements Initializable {
     }
     @FXML
     public void backToCollectionSetting() {
+        wordToEdit.setText("");
+        typeToEdit.setText("");
+        pronunciationToEdit.setText("");
+        meaningToEdit.setText("");
         collectionSetting.setVisible(true);
         wordsSetting.setVisible(false);
     }
@@ -114,6 +118,12 @@ public class ReviewAddController implements Initializable {
         currentCollection = WordCollectionDao.findCollectionName(collectionsToEdit.getValue()).get(0);
         collectionsToEdit.getItems().remove(currentCollection);
         WordCollectionDao.deleteCollection(currentCollection);
+        for (String x : collectionsToEdit.getItems()) {
+            if(x.equals(currentCollection)) {
+                collectionsToEdit.getItems().remove(x);
+                break;
+            }
+        }
 
         alert.setContentText("Delete successfully!");
         alert.setHeaderText(null);
@@ -203,6 +213,10 @@ public class ReviewAddController implements Initializable {
         }
         else {
             WordCollectionDao.deleteWordFromCollection(word,currentCollection);
+            wordToEdit.setText("");
+            typeToEdit.setText("");
+            pronunciationToEdit.setText("");
+            meaningToEdit.setText("");
             alert.setContentText("Word: " + word + " in the collection " + currentCollection
                     + " has been deleted successfully!");
             alert.showAndWait();
@@ -219,10 +233,19 @@ public class ReviewAddController implements Initializable {
             List<Word> tmp = WordCollectionDao.findWordInCollection(w,currentCollection);
             if(!tmp.isEmpty()) {
                 Word word = tmp.get(0);
-                //System.out.println("it works! " + word.getWord() + "/" + word.getMeaning());
-                meaningToEdit.setText(word.getMeaning());
-                typeToEdit.setText(word.getType());
-                pronunciationToEdit.setText(word.getPronunciation());
+                for (Word x : tmp) {
+                    // this maybe cause to be slow
+                    if (x.getWord().equals(w)) {
+                        word = x;
+                        break;
+                    }
+                }
+                if (word.getWord().equals(w)) {
+                    //System.out.println("it works! " + word.getWord() + "/" + word.getMeaning());
+                    meaningToEdit.setText(word.getMeaning());
+                    typeToEdit.setText(word.getType());
+                    pronunciationToEdit.setText(word.getPronunciation());
+                }
             } else {
                 resetText();
             }

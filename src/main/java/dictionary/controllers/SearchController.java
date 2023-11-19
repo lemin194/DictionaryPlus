@@ -106,7 +106,7 @@ public class SearchController implements Initializable {
 
     @FXML
     public void handleSearch(KeyEvent keyEvent) {
-        String searchTerm = searchBox.getText();
+        String searchTerm = searchBox.getText().toLowerCase();
         if (searchTerm.isEmpty() || searchTerm.isBlank()) {
             clearSearchResultsView();
             List<Word> pastWords = WordLookUpService.retrieveLastSearch();
@@ -138,7 +138,7 @@ public class SearchController implements Initializable {
     @FXML
     public void handleEdit() {
         // khi nguoi dung chua nhap gi
-        if (wordToFind.equals(null) && (searchBox.getText().isEmpty() || searchBox.getText().isBlank())) return;
+        if (wordToFind == null && (searchBox.getText().isEmpty() || searchBox.getText().isBlank())) return;
         // khi tu nay khong co trong tu dien
         if (relatedResults.getItems().isEmpty()){
             return;
@@ -219,7 +219,7 @@ public class SearchController implements Initializable {
     @FXML
     public void handleDelete() {
         // khi nguoi dung chua nhap gi
-        if (wordToFind.equals(null) && (searchBox.getText().isEmpty() || searchBox.getText().isBlank())) return;
+        if (wordToFind == null && (searchBox.getText().isEmpty() || searchBox.getText().isBlank())) return;
         // khi tu nay chua co trong tu dien
         if (relatedResults.getItems().size() <=0) {
             return;
@@ -236,6 +236,8 @@ public class SearchController implements Initializable {
                     break;
                 }
             }
+            wordDisplay.setText("");
+            wordDefinition.setText("");
             if (searchBox.getText().equals(wordToFind.getWord())) searchBox.setText("");
             alert.setTitle("Success");
             alert.setContentText("Delete successfully");
@@ -308,6 +310,7 @@ public class SearchController implements Initializable {
                     DialogPane tmp1 = successAlert.getDialogPane();
                     tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
                     successAlert.setTitle("Failed");
+                    successAlert.setHeaderText(null);
                     successAlert.setContentText("Word can't be empty; please type in!");
                     successAlert.showAndWait();
                 } else {
@@ -317,6 +320,7 @@ public class SearchController implements Initializable {
                         DialogPane tmp1 = successAlert.getDialogPane();
                         tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
                         successAlert.setTitle("Failed");
+                        successAlert.setHeaderText(null);
                         successAlert.setContentText("This word already in dictionary");
                         successAlert.showAndWait();
                     } else {
@@ -324,6 +328,7 @@ public class SearchController implements Initializable {
                         DialogPane tmp1 = successAlert.getDialogPane();
                         tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
                         successAlert.setTitle("Success");
+                        successAlert.setHeaderText(null);
                         successAlert.setContentText("Word added successfully!");
                         successAlert.showAndWait();
                     }
@@ -337,7 +342,7 @@ public class SearchController implements Initializable {
     @FXML
     public void handleAddCollection() {
         // khi nguoi dung chua nhap gi
-        if (wordToFind.equals(null) && (searchBox.getText().isEmpty() || searchBox.getText().isBlank())) return;
+        if (wordToFind == null && (searchBox.getText().isEmpty() || searchBox.getText().isBlank())) return;
         // khi tu nay khong co trong tu dien
         if (relatedResults.getItems().size() <=0){
             return;
@@ -349,12 +354,15 @@ public class SearchController implements Initializable {
 
         ChoiceBox<String> allCollections=new ChoiceBox<>();
         List<String> collectionNames = WordCollectionDao.queryCollectionName();
+        Label warning = new Label();
+        warning.setText("Please choose a collection to add!");
+        warning.setVisible(false);
         for (String name : collectionNames) {
             allCollections.getItems().add(name);
         }
         GridPane gridPane = new GridPane();
         gridPane.add(allCollections, 1, 2);
-
+        gridPane.add(warning,1,3);
         DialogPane tmp = dialog.getDialogPane();
         tmp.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
 
@@ -377,7 +385,20 @@ public class SearchController implements Initializable {
         dialog.showAndWait().ifPresent(response -> {
             if (response.equals("OK")) {
                 String collectionToAdd = allCollections.getValue();
-                WordCollectionDao.addWordForCollection(wordToFind,collectionToAdd);
+                if (collectionToAdd == null) {
+                    warning.setVisible(true);
+                }
+                else {
+                    WordCollectionDao.addWordForCollection(wordToFind, collectionToAdd);
+                    warning.setVisible(false);
+                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                    DialogPane tmp1 = successAlert.getDialogPane();
+                    tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
+                    successAlert.setTitle("Success");
+                    successAlert.setHeaderText(null);
+                    successAlert.setContentText("Word " + wordToFind.getWord() + " added successfully to the collection:" + collectionToAdd);
+                    successAlert.showAndWait();
+                }
             }
             else {
                 dialog.close();

@@ -57,7 +57,6 @@ public class ReviewController implements Initializable {
             AnchorPane component = FXMLLoader.load(Objects.requireNonNull(MainController.class.getResource(path)));
             setNode(component);
             setMode(path);
-            System.out.println("HIIH");
         } catch (IOException e) {
             e.printStackTrace();
         }

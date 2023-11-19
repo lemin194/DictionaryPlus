@@ -4,20 +4,31 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="360.0" prefWidth="688.0" styleClass="sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.Game1Controller">
    <children>
       <Label fx:id="question" layoutX="21.0" layoutY="79.0" prefHeight="60.0" prefWidth="640.0" stylesheets="@../style/review.css" text="Question:" />
-      <ChoiceBox fx:id="collectionsToPlay" layoutX="503.0" layoutY="14.0" onAction="#startGame" prefHeight="25.0" prefWidth="171.0" styleClass="normal-button" stylesheets="@../style/review.css" />
-      <Button fx:id="next" layoutX="279.0" layoutY="307.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="25.0" prefWidth="131.0" styleClass="normal-button" stylesheets="@../style/review.css" text="next question" />
+      <ChoiceBox fx:id="collectionsToPlay" layoutX="108.0" layoutY="10.0" onAction="#startGame" prefHeight="25.0" prefWidth="171.0" styleClass="normal-button" stylesheets="@../style/review.css" />
+      <Button fx:id="btnNext" layoutX="279.0" layoutY="307.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="25.0" prefWidth="131.0" styleClass="normal-button" stylesheets="@../style/review.css" text="next question" />
       <Label fx:id="rightOrFalse" layoutX="21.0" layoutY="282.0" prefHeight="25.0" prefWidth="144.0" stylesheets="@../style/review.css" text="Correct or wrong" />
       <Label fx:id="progress" layoutX="503.0" layoutY="59.0" prefHeight="17.0" prefWidth="110.0" styleClass="label2WithText" stylesheets="@../style/review.css" text="0/n words" />
-      <Label layoutX="410.0" layoutY="20.0" stylesheets="@../style/review.css" text="Collection:" />
+      <Label layoutX="21.0" layoutY="16.0" stylesheets="@../style/review.css" text="Collection:" />
       <ToggleButton fx:id="ansA" layoutX="346.0" layoutY="214.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="314.0" stylesheets="@../style/review.css" text="RadioButton" />
       <ToggleButton fx:id="ansC" layoutX="21.0" layoutY="214.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="314.0" stylesheets="@../style/review.css" text="RadioButton" />
       <ToggleButton fx:id="ansB" layoutX="346.0" layoutY="155.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="314.0" stylesheets="@../style/review.css" text="RadioButton" />
       <ToggleButton fx:id="ansD" layoutX="21.0" layoutY="155.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="314.0" stylesheets="@../style/review.css" text="RadioButton" />
       <Label fx:id="Score" layoutX="21.0" layoutY="59.0" prefHeight="17.0" prefWidth="240.0" stylesheets="@../style/review.css" text="Score:" />
+      <Button fx:id="btnClose" onAction="#handleClose" layoutX="626.0" layoutY="7.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css">
+         <graphic>
+            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../utils/icons/game/icons8-quit-48.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

@@ -1,11 +1,13 @@
 package dictionary.controllers;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.awt.event.ActionEvent;
@@ -19,6 +21,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class GameController implements Initializable {
+    double xOffset = 0;
+    double yOffset = 0;
     @FXML
     private AnchorPane gameContainer = new AnchorPane();
     @FXML
@@ -70,8 +74,25 @@ public class GameController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Game 1: Quiz");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Game1.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Scene scene = new Scene(root1, Color.web("1F1F1F"));
+            Parent root = (Parent) fxmlLoader.load();
+            stage.initStyle(StageStyle.TRANSPARENT);
+
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                }
+            });
+
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    stage.setX(event.getScreenX() - xOffset);
+                    stage.setY(event.getScreenY() - yOffset);
+                }
+            });
+            Scene scene = new Scene(root, Color.web("1F1F1F"));
             scene.setFill(Color.TRANSPARENT);
             scene.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
             stage.setScene(scene);

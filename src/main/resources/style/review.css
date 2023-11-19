@@ -241,6 +241,5 @@
     -fx-font-family: "Caudex";
     -fx-font-size: 15;
     -fx-background-color: #d4d4d4; /* Set the background color with some transparency */
-    -fx-border-radius: 15;
-    -fx-background-radius: 16pt;
+    -fx-background-radius: 8pt 8pt 2pt 2pt;
 }

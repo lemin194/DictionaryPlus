@@ -4,10 +4,11 @@ import dictionary.models.Dao.WordCollectionDao;
 import dictionary.models.Entity.Word;
 import dictionary.services.QuizService;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,9 +16,21 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class Game1Controller implements Initializable {
-    ToggleGroup group = new ToggleGroup();
+public class Game1Controller extends game {
+    /* in game3 it is btnNext.*/
+    @FXML
+    public Button btnNext;
 
+    /* close the window.*/
+    @FXML
+    public Button btnClose;
+
+    /* in game 3; it's btnPlay*/
+    @FXML
+    public Button btnSpeaker;
+    @FXML
+    private Label question = new Label();
+    ToggleGroup group = new ToggleGroup();
     @FXML
     private ToggleButton ansA = new ToggleButton();
     @FXML
@@ -27,30 +40,10 @@ public class Game1Controller implements Initializable {
     @FXML
     private ToggleButton ansD = new ToggleButton();
     @FXML
-    private Label question = new Label();
-    @FXML
-    private Button confirmThisCollection = new Button();
-    @FXML
-    private Button next = new Button();
-    @FXML
-    ChoiceBox<String> collectionsToPlay = new ChoiceBox<>();
-    @FXML
     private Label rightOrFalse = new Label();
-    @FXML
-    private Label progress=new Label("");
-
-    private List<Word> currentCollectionList = new ArrayList<>();
-    private Word realAnswer;
     private final QuizService quiz = new QuizService();
-    private String currentCollectionName = "";
     private String answer;
-    private int idOfDisplayWord;
     private List<Word> currentCollectionChoice = new ArrayList<>();
-    private int score = 0;
-    @FXML
-    public Label Score = new Label();
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle Resources) {
@@ -71,20 +64,20 @@ public class Game1Controller implements Initializable {
     public void startGame() {
         currentCollectionName = collectionsToPlay.getValue();
 
-        currentCollectionList = WordCollectionDao.queryWordInCollection(currentCollectionName);
-        realAnswer = currentCollectionList.get(idOfDisplayWord);
+        currentWordList = WordCollectionDao.queryWordInCollection(currentCollectionName);
+        currentWord = currentWordList.get(idOfDisplayWord);
         //currentCollectionList = quiz.generateOneQuiz(currentCollectionName, realAnswer);
-        currentCollectionChoice = quiz.generateOneQuiz(currentCollectionName, realAnswer);
-        currentCollectionChoice.add(realAnswer);
+        currentCollectionChoice = quiz.generateOneQuiz(currentCollectionName, currentWord);
+        currentCollectionChoice.add(currentWord);
         Collections.shuffle(currentCollectionChoice);
         setQuestion();
         clearSelected();
-        progress.setText("0/"+currentCollectionList.size()+" words");
+        progress.setText("0/"+ currentWordList.size()+" words");
     }
 
     public void setQuestion() {
-        realAnswer = currentCollectionList.get(idOfDisplayWord);
-        question.setText("What is the meaning of " + realAnswer.getWord() + " ?");
+        currentWord = currentWordList.get(idOfDisplayWord);
+        question.setText("What is the meaning of " + currentWord.getWord() + " ?");
         question.setWrapText(true);
         ansA.setDisable(false);
         ansB.setDisable(false);
@@ -108,7 +101,7 @@ public class Game1Controller implements Initializable {
     public void nextQuestion() {
         rightOrFalse.setVisible(false);
         idOfDisplayWord++;
-        if (idOfDisplayWord >= currentCollectionList.size()) {
+        if (idOfDisplayWord >= currentWordList.size()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
             DialogPane tmp1 = successAlert.getDialogPane();
@@ -117,11 +110,11 @@ public class Game1Controller implements Initializable {
             alert.showAndWait();
             idOfDisplayWord=0;
         }
-        realAnswer = currentCollectionList.get(idOfDisplayWord);
-        currentCollectionChoice = quiz.generateOneQuiz(currentCollectionName, realAnswer);
-        currentCollectionChoice.add(realAnswer);
+        currentWord = currentWordList.get(idOfDisplayWord);
+        currentCollectionChoice = quiz.generateOneQuiz(currentCollectionName, currentWord);
+        currentCollectionChoice.add(currentWord);
         rightOrFalse.setText("");
-        progress.setText((idOfDisplayWord+1)+"/"+currentCollectionList.size()+" words");
+        progress.setText((idOfDisplayWord+1)+"/"+ currentWordList.size()+" words");
         setQuestion();
     }
 
@@ -135,20 +128,25 @@ public class Game1Controller implements Initializable {
                 toggleButton.setDisable(true);
             }
         });
-        if (selectedToggleButton.getText().equals(realAnswer.getMeaning())) {
-            score++;
-            Score.setText("Score: " + score + "/" + currentCollectionList.size());
+        if (selectedToggleButton.getText().equals(currentWord.getMeaning())) {
+            finalScore++;
+            Score.setText("Score: " + finalScore + "/" + currentWordList.size());
             rightOrFalse.getStyleClass().clear();
             rightOrFalse.getStyleClass().add("whenTrue");
             rightOrFalse.setText("Correct!");
             rightOrFalse.setVisible(true);
         } else {
-            Score.setText("Score: "+ score + "/" + currentCollectionList.size());
+            Score.setText("Score: "+ finalScore + "/" + currentWordList.size());
             rightOrFalse.getStyleClass().clear();
             rightOrFalse.getStyleClass().add("whenFalse");
             rightOrFalse.setText("Wrong");
             rightOrFalse.setVisible(true);
         }
     }
-
+    @FXML
+    public void handleClose(){
+        Stage stage = (Stage) btnClose.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+    }
 }

@@ -63,7 +63,7 @@
               </graphic>
       </Button>
 
-        <Button fx:id="addToCollection" layoutX="346.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleAddCollection" prefHeight="48.0" prefWidth="48.0" styleClass="transparent-button">
+        <Button fx:id="addToCollection" layoutX="398.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleAddCollection" prefHeight="48.0" prefWidth="48.0" styleClass="transparent-button">
           <graphic>
             <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
               <image>
@@ -72,15 +72,6 @@
           </ImageView>
           </graphic>
         </Button>
-      <Button fx:id="info" layoutX="398.0" layoutY="316.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="transparent-button" stylesheets="@../style/review.css">
-         <graphic>
-            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../utils/icons/search/info.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
 
 
 
