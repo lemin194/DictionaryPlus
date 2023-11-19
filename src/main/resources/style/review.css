@@ -128,7 +128,7 @@
     -fx-background-color: #ED3109 ;
 }
 .smallBtn:pressed{
-    -fx-padding: 10 15 13 15;
+    -fx-padding: 5 10 8 10;
     -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
 }
 .transparent-button {
@@ -140,10 +140,10 @@
     -fx-padding: 0;
 }
 .transparent-button:hover {
-    -fx-background-color: #808080; /* Set the background color with some transparency */
+    -fx-background-color: #D3D3D3; /* Set the background color with some transparency */
 }
 .transparent-button:pressed {
-    -fx-background-color: #d4d4d4; /* Set the background color with some transparency */
+    -fx-background-color: #BEBEBE; /* Set the background color with some transparency */
 }
 .transparent-button-selected {
     -fx-font-family: "Caudex";
@@ -190,13 +190,22 @@
     -fx-background-radius: 10pt;
 
 }
-.choice-box{
-    -fx-background-color: #f9fefb;
+.choiceBox1{
+    -fx-background-color: #2EC4B6;
+    -fx-font-family: "Caudex";
+    -fx-font-size: 17;
+    -fx-border-radius: 16pt;
+    -fx-background-radius: 10pt;
+    -fx-text-fill: #000000;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
+}
+.inputUser{
+    -fx-background-color: #ffffff;
     -fx-font-family: "Caudex";
     -fx-font-size: 17;
     -fx-background-radius: 5;
     -fx-text-fill: #000000;
-    -fx-cursor: hand;
 }
 .labelTmp{
     -fx-font-family: "Caudex";
@@ -232,6 +241,22 @@
     -fx-font-size: 17;
     -fx-background-color: transparent;
     -fx-text-fill: #000000;
+}
+.buttonReviewAdd{
+    -fx-font-family: "Caudex";
+    -fx-font-size: 15;
+    -fx-background-color: transparent;
+    -fx-border-radius: 15;
+    -fx-background-radius: 8pt 8pt 2pt 2pt;
+    -fx-padding: 0;
+}
+.buttonReviewAdd:hover {
+    -fx-background-radius: 8pt 8pt 2pt 2pt;
+    -fx-background-color: #D3D3D3; /* Set the background color with some transparency */
+}
+.buttonReviewAdd:pressed {
+    -fx-background-radius: 8pt 8pt 2pt 2pt;
+    -fx-background-color: #BEBEBE; /* Set the background color with some transparency */
 }
 .buttonReviewAddSelected{
     -fx-text-fill: #000000;

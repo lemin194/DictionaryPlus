@@ -8,20 +8,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="360.0" prefWidth="688.0" styleClass="sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.Game1Controller">
+<AnchorPane prefHeight="489.0" prefWidth="688.0" styleClass="sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.Game1Controller">
    <children>
-      <Label fx:id="question" layoutX="21.0" layoutY="79.0" prefHeight="60.0" prefWidth="640.0" stylesheets="@../style/review.css" text="Question:" />
-      <ChoiceBox fx:id="collectionsToPlay" layoutX="108.0" layoutY="10.0" onAction="#startGame" prefHeight="25.0" prefWidth="171.0" styleClass="normal-button" stylesheets="@../style/review.css" />
-      <Button fx:id="btnNext" layoutX="279.0" layoutY="307.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="25.0" prefWidth="131.0" styleClass="normal-button" stylesheets="@../style/review.css" text="next question" />
-      <Label fx:id="rightOrFalse" layoutX="21.0" layoutY="282.0" prefHeight="25.0" prefWidth="144.0" stylesheets="@../style/review.css" text="Correct or wrong" />
-      <Label fx:id="progress" layoutX="503.0" layoutY="59.0" prefHeight="17.0" prefWidth="110.0" styleClass="label2WithText" stylesheets="@../style/review.css" text="0/n words" />
+      <Label fx:id="question" layoutX="21.0" layoutY="84.0" prefHeight="60.0" prefWidth="640.0" stylesheets="@../style/review.css" text="Question:" />
+      <ChoiceBox fx:id="collectionsToPlay" layoutX="108.0" layoutY="10.0" onAction="#startGame" prefHeight="25.0" prefWidth="171.0" styleClass="choiceBox1" stylesheets="@../style/review.css" />
+      <Button fx:id="btnNext" layoutX="279.0" layoutY="432.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="25.0" prefWidth="131.0" styleClass="normal-button" stylesheets="@../style/review.css" text="NEXT" />
+      <Label fx:id="rightOrFalse" layoutX="21.0" layoutY="395.0" prefHeight="25.0" prefWidth="144.0" stylesheets="@../style/review.css" text="Correct or wrong" />
+      <Label fx:id="progress" layoutX="540.0" layoutY="62.0" prefHeight="17.0" prefWidth="110.0" styleClass="label2WithText" stylesheets="@../style/review.css" />
       <Label layoutX="21.0" layoutY="16.0" stylesheets="@../style/review.css" text="Collection:" />
-      <ToggleButton fx:id="ansA" layoutX="346.0" layoutY="214.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="314.0" stylesheets="@../style/review.css" text="RadioButton" />
-      <ToggleButton fx:id="ansC" layoutX="21.0" layoutY="214.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="314.0" stylesheets="@../style/review.css" text="RadioButton" />
-      <ToggleButton fx:id="ansB" layoutX="346.0" layoutY="155.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="314.0" stylesheets="@../style/review.css" text="RadioButton" />
-      <ToggleButton fx:id="ansD" layoutX="21.0" layoutY="155.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="314.0" stylesheets="@../style/review.css" text="RadioButton" />
-      <Label fx:id="Score" layoutX="21.0" layoutY="59.0" prefHeight="17.0" prefWidth="240.0" stylesheets="@../style/review.css" text="Score:" />
-      <Button fx:id="btnClose" onAction="#handleClose" layoutX="626.0" layoutY="7.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css">
+      <ToggleButton fx:id="ansA" layoutX="23.0" layoutY="272.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="640.0" stylesheets="@../style/review.css" text="Choice 3rd" />
+      <ToggleButton fx:id="ansC" layoutX="21.0" layoutY="214.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="640.0" stylesheets="@../style/review.css" text="Choice 2nd" />
+      <ToggleButton fx:id="ansB" layoutX="23.0" layoutY="330.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="640.0" stylesheets="@../style/review.css" text="Choice 4th" />
+      <ToggleButton fx:id="ansD" layoutX="21.0" layoutY="155.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="640.0" stylesheets="@../style/review.css" text="Choice 1st" />
+      <Label fx:id="Score" layoutX="21.0" layoutY="62.0" prefHeight="22.0" prefWidth="144.0" stylesheets="@../style/review.css" text="Score:" />
+      <Button fx:id="btnClose" layoutX="626.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleClose" styleClass="transparent-button" stylesheets="@../style/review.css">
          <graphic>
             <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -30,5 +30,15 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button fx:id="btnRestart" layoutX="626.0" layoutY="384.0" mnemonicParsing="false" onAction="#restart" styleClass="transparent-button" stylesheets="@../style/review.css">
+         <graphic>
+            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../utils/icons/game/replay.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="warning" layoutX="180.0" layoutY="62.0" stylesheets="@../style/review.css" text="Empty collection, please add word to play" />
    </children>
 </AnchorPane>
