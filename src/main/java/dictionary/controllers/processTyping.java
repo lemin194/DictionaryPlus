@@ -3,6 +3,7 @@ package dictionary.controllers;
 import dictionary.models.Dao.WordCollectionDao;
 import dictionary.models.Entity.Word;
 import dictionary.apiservices.TTSService;
+import dictionary.services.StringUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -73,7 +74,7 @@ public class processTyping extends process {
         secondDeck.setVisible(true);
         userAnswer.setText(userAnswerTextField.getText());
         infoOfWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
-        if(userAnswerTextField.getText().equals(displayWord.getMeaning())) {
+        if(userAnswerTextField.getText().equals(displayWord.getWord())) {
             imgOnDeck.setImage(new Image(getClass().getResourceAsStream("/utils/icons/review/correctDeck.png")));
         } else {
             imgOnDeck.setImage(new Image(getClass().getResourceAsStream("/utils/icons/review/incorrectDeck.png")));
@@ -96,7 +97,7 @@ public class processTyping extends process {
             }
             if (wordsLeft > 0) {
                 displayWord = current.get(idOfDisplayWord);
-                currentWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
+                currentWord.setText(StringUtils.getFirstMeaning(displayWord) + "\n" + displayWord.getPronunciation());
                 secondDeck.setVisible(false);
                 firstDeck.setVisible(true);
                 transfer.setVisible(false);
@@ -124,7 +125,7 @@ public class processTyping extends process {
         idOfDisplayWord++;
         if(idOfDisplayWord >= len) idOfDisplayWord = 0;
         displayWord = current.get(idOfDisplayWord);
-        currentWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
+        currentWord.setText(StringUtils.getFirstMeaning(displayWord) + "\n" + displayWord.getPronunciation());
         secondDeck.setVisible(false);
         firstDeck.setVisible(true);
         transfer.setVisible(false);
