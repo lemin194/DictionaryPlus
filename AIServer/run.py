@@ -58,7 +58,9 @@ async def route_translateimage():
 
 @app.route("/speechanalysis/", methods=['POST'])
 async def route_speechanalysis():
+   print('received request')
    data = request.get_json()
+   print('DATA:',data)
    file = data.get("file", "")
    src = data.get("src", "")
    if (len(file) == 0): return "No file sent.", 400

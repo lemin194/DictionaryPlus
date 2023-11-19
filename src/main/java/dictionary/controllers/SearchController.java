@@ -1,8 +1,7 @@
 package dictionary.controllers;
 
 import dictionary.services.AutoCorrectWordService;
-import dictionary.services.Autocorrect;
-import dictionary.services.TextToSpeech;
+import dictionary.apiservices.TTSService;
 import dictionary.services.WordLookUpService;
 import javafx.application.Application;
 import javafx.beans.Observable;
@@ -409,7 +408,7 @@ public class SearchController implements Initializable {
 
     @FXML
     public void handleSpeaker() {
-        TextToSpeech.TTS(wordToFind.getWord(),"en");
+        TTSService.TTS(wordToFind.getWord(),"en");
     }
     public void clearSearchResultsView() {
         relatedResults.getItems().clear();
