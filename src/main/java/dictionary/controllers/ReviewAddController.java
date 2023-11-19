@@ -90,12 +90,14 @@ public class ReviewAddController implements Initializable {
         String collectionName = collectionToAdd.getText();
         if (collectionName.isEmpty() || collectionName.isBlank()) {
             return;
-        } else if (!WordCollectionDao.findCollectionName(collectionName).isEmpty()) {
+        }
+        if (!WordCollectionDao.findCollectionName(collectionName).isEmpty()) {
             boolean check = false;
             List<String> res = WordCollectionDao.findCollectionName(collectionName);
             for (String tmp : res) {
                 if (tmp.equals(collectionName)) {
                     check = true;
+
                     break;
                 }
             }
@@ -110,6 +112,11 @@ public class ReviewAddController implements Initializable {
                 alert.setContentText("New collection: " + collectionName + " added successfully");
                 alert.showAndWait();
             }
+        } else {
+            WordCollectionDao.addCollection(collectionName);
+            collectionsToEdit.getItems().add(collectionName);
+            alert.setContentText("New collection: " + collectionName + " added successfully");
+            alert.showAndWait();
         }
     }
 
@@ -157,7 +164,8 @@ public class ReviewAddController implements Initializable {
         String meaning = meaningToEdit.getText();
         if (word.isEmpty() || word.isBlank()) {
             return;
-        } else if (!WordCollectionDao.findWordInCollection(word, currentCollection).isEmpty()) {
+        }
+        if (!WordCollectionDao.findWordInCollection(word, currentCollection).isEmpty()) {
             List<Word> res = WordCollectionDao.findWordInCollection(word, currentCollection);
             boolean check = false;
             for (Word tmp : res) {
@@ -177,6 +185,12 @@ public class ReviewAddController implements Initializable {
                     alert.setContentText("Word: " + word + " has been added successfully!");
                     alert.showAndWait();
                 }
+            }
+        } else {
+            Word wordy = new Word(word, pronunciation, type, meaning);
+            if (WordCollectionDao.addWordForCollection(wordy, currentCollection)) {
+                alert.setContentText("Word: " + word + " has been added successfully!");
+                alert.showAndWait();
             }
         }
     }
