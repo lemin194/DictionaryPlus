@@ -91,15 +91,25 @@ public class ReviewAddController implements Initializable {
         if (collectionName.isEmpty() || collectionName.isBlank()) {
             return;
         } else if (!WordCollectionDao.findCollectionName(collectionName).isEmpty()) {
-            alert.setTitle("Failed");
-            alert.setContentText("This collection has already existed.");
-            alert.showAndWait();
-            return;
-        } else {
-            WordCollectionDao.addCollection(collectionName);
-            collectionsToEdit.getItems().add(collectionName);
-            alert.setContentText("New collection: " + collectionName + " added successfully");
-            alert.showAndWait();
+            boolean check = false;
+            List<String> res = WordCollectionDao.findCollectionName(collectionName);
+            for (String tmp : res) {
+                if (tmp.equals(collectionName)) {
+                    check = true;
+                    break;
+                }
+            }
+            if (check) {
+                alert.setTitle("Failed");
+                alert.setContentText("This collection has already existed.");
+                alert.showAndWait();
+                return;
+            } else {
+                WordCollectionDao.addCollection(collectionName);
+                collectionsToEdit.getItems().add(collectionName);
+                alert.setContentText("New collection: " + collectionName + " added successfully");
+                alert.showAndWait();
+            }
         }
     }
 
@@ -148,15 +158,25 @@ public class ReviewAddController implements Initializable {
         if (word.isEmpty() || word.isBlank()) {
             return;
         } else if (!WordCollectionDao.findWordInCollection(word, currentCollection).isEmpty()) {
-            alert.setTitle("Failed");
-            alert.setContentText("This word already exists in the collection: " + currentCollection);
-            alert.showAndWait();
-            return;
-        } else {
-            Word wordy = new Word(word, pronunciation,type,meaning);
-            if(WordCollectionDao.addWordForCollection(wordy,currentCollection)) {
-                alert.setContentText("Word: " + word + " has been added successfully!");
+            List<Word> res = WordCollectionDao.findWordInCollection(word, currentCollection);
+            boolean check = false;
+            for (Word tmp : res) {
+                if (tmp.getWord().equals(word)) {
+                    check = true;
+                    break;
+                }
+            }
+            if (check) {
+                alert.setTitle("Failed");
+                alert.setContentText("This word already exists in the collection: " + currentCollection);
                 alert.showAndWait();
+                return;
+            } else {
+                Word wordy = new Word(word, pronunciation, type, meaning);
+                if (WordCollectionDao.addWordForCollection(wordy, currentCollection)) {
+                    alert.setContentText("Word: " + word + " has been added successfully!");
+                    alert.showAndWait();
+                }
             }
         }
     }

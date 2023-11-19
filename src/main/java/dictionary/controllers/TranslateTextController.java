@@ -1,9 +1,8 @@
 package dictionary.controllers;
 
-import dictionary.services.Autocorrect;
-import dictionary.services.SpeechService;
-import dictionary.services.TextToSpeech;
-import dictionary.services.Translation;
+import dictionary.apiservices.SpeechService;
+import dictionary.apiservices.TTSService;
+import dictionary.apiservices.GoogleTranslateService;
 import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
@@ -158,7 +157,7 @@ public class TranslateTextController implements Initializable {
     System.out.println("Translating...");
     String t1 = fromTextArea.getText();
 
-    List<String> ret = Translation.TranslateText(t1, fromLanguage, toLanguage);
+    List<String> ret = GoogleTranslateService.TranslateText(t1, fromLanguage, toLanguage);
 
     String translated = ret.get(0);
 
@@ -167,19 +166,17 @@ public class TranslateTextController implements Initializable {
 
   private void handleSuggestion() {
     if (!Arrays.asList("en", "vi").contains(fromLanguage)) return;
-    String suggestion = Autocorrect.correct(fromTextArea.getText(), fromLanguage);
-    if (suggestion.equals(fromTextArea.getText())) return;
-    System.out.println("suggesting:\n" + suggestion);
+
   }
 
   @FXML
   private void PlayTextFrom() {
-    TextToSpeech.TTS(fromTextArea.getText(), mapLang.get(fromLanguageChoice.getValue()));
+    TTSService.TTS(fromTextArea.getText(), mapLang.get(fromLanguageChoice.getValue()));
   }
 
   @FXML
   private void PlayTextTo() {
-    TextToSpeech.TTS(toTextArea.getText(), mapLang.get(toLanguageChoice.getValue()));
+    TTSService.TTS(toTextArea.getText(), mapLang.get(toLanguageChoice.getValue()));
   }
 
   @FXML

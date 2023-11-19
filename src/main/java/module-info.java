@@ -23,5 +23,9 @@ module com.dictionary.dictionaryplus {
   opens dictionary.controllers to javafx.fxml;
   exports dictionary.services;
   opens dictionary.services to javafx.fxml;
+  exports dictionary.apis;
+  opens dictionary.apis to javafx.fxml;
+  exports dictionary.apiservices;
+  opens dictionary.apiservices to javafx.fxml;
 
 }
