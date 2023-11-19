@@ -389,15 +389,31 @@ public class SearchController implements Initializable {
                     warning.setVisible(true);
                 }
                 else {
-                    WordCollectionDao.addWordForCollection(wordToFind, collectionToAdd);
-                    warning.setVisible(false);
-                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-                    DialogPane tmp1 = successAlert.getDialogPane();
+                    List<Word> res = WordCollectionDao.findWordInCollection(wordToFind.getWord(), collectionToAdd);
+                    boolean check = false;
+                    for (Word x : res) {
+                        if (x.getWord().equals(wordToFind.getWord())) {
+                            check = true;
+                            break;
+                        }
+                    }
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    DialogPane tmp1 = alert.getDialogPane();
                     tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
-                    successAlert.setTitle("Success");
-                    successAlert.setHeaderText(null);
-                    successAlert.setContentText("Word " + wordToFind.getWord() + " added successfully to the collection:" + collectionToAdd);
-                    successAlert.showAndWait();
+                    if (check) {
+                        alert.setTitle("Success");
+                        alert.setTitle("Failed");
+                        alert.setContentText("This word already exists in the collection: " + collectionToAdd);
+                        alert.showAndWait();
+                        return;
+                    } else {
+                        Word wordy = wordToFind;
+                        if (WordCollectionDao.addWordForCollection(wordy, collectionToAdd)) {
+                            alert.setContentText("Word: " + wordy.getWord() + " has been added successfully!");
+                            alert.showAndWait();
+                        }
+                    }
                 }
             }
             else {
