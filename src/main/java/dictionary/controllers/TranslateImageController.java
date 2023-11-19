@@ -1,7 +1,7 @@
 package dictionary.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import dictionary.services.TranslateImage;
+import dictionary.apiservices.TranslateImageService;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -129,7 +129,7 @@ public class TranslateImageController implements Initializable {
 
   private void translateImage(Image img) {
     Thread imageViewThread = new Thread(() -> {
-      Image translated = TranslateImage.translate(img);
+      Image translated = TranslateImageService.translate(img);
       Platform.runLater(() -> {
         createImageViewWindow(translated);
       });

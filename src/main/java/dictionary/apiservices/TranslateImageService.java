@@ -1,42 +1,38 @@
-package dictionary.services;
+package dictionary.apiservices;
 
+import dictionary.apis.FlaskAPIs;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Base64;
+import java.util.HashMap;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javax.imageio.ImageIO;
 import org.json.JSONObject;
 
-public class TranslateImage {
+public class TranslateImageService {
 
   public static Image translate(Image img) {
 
     Image ret = null;
     try {
       String content = encodeImageToBase64(img);
-      JSONObject body = new JSONObject();
+      HashMap<String, String> body = new HashMap<>();
       body.put("file", content);
-      JSONObject res = BackendUtils.request("http://127.0.0.1:9876/translateimage/", "POST", body);
+      FlaskAPIs req = new FlaskAPIs(30000, 30000);
+      HashMap<String, Object> res = req.requestJsonBody("http://127.0.0.1:9876/translateimage/", "POST", null, body);
 
-      if ((int)res.get("status") == 200) {
+      if (res.get("status").equals("OK")) {
         String encodedImage = new JSONObject(res.get("content").toString()).get("file").toString();
         ret = decodeImageFromBase64(encodedImage);
 //        System.out.println(new JSONObject(res.get("content").toString()).get("content").toString());
+      } else {
+        throw new Error(res.get("stderr").toString());
       }
     }
     catch (Exception e) {
+      e.printStackTrace();
+    } catch (Error e) {
       e.printStackTrace();
     }
     return ret;

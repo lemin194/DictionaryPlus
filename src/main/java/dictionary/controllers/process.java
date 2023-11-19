@@ -1,7 +1,7 @@
 package dictionary.controllers;
 
 import dictionary.models.Entity.Word;
-import dictionary.services.TextToSpeech;
+import dictionary.apiservices.TTSService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -45,7 +45,7 @@ public abstract class process implements Initializable {
     public abstract void initialize(URL location, ResourceBundle Resources);
     @FXML
     public void playVoice() {
-        TextToSpeech.TTS(displayWord.getWord(),"en");
+        TTSService.TTS(displayWord.getWord(),"en");
     }
     @FXML
     public abstract void showAnswer();
