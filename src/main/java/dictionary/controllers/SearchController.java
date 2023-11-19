@@ -402,7 +402,6 @@ public class SearchController implements Initializable {
                     DialogPane tmp1 = alert.getDialogPane();
                     tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
                     if (check) {
-                        alert.setTitle("Success");
                         alert.setTitle("Failed");
                         alert.setContentText("This word already exists in the collection: " + collectionToAdd);
                         alert.showAndWait();
@@ -410,6 +409,7 @@ public class SearchController implements Initializable {
                     } else {
                         Word wordy = wordToFind;
                         if (WordCollectionDao.addWordForCollection(wordy, collectionToAdd)) {
+                            alert.setTitle("Success");
                             alert.setContentText("Word: " + wordy.getWord() + " has been added successfully!");
                             alert.showAndWait();
                         }
