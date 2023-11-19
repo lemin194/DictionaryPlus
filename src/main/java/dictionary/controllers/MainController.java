@@ -26,7 +26,7 @@ public class MainController implements Initializable{
     @FXML
     private Button searchBtn, translateBtn, reviewBtn, exitBtn, gameBtn;
     @FXML
-    public static Button homeBtn;
+    private Button homeBtn;
     @FXML
     public AnchorPane container = new AnchorPane();
 
@@ -40,10 +40,11 @@ public class MainController implements Initializable{
 
         gameBtn.setOnAction(event -> showComponent("/view/Game.fxml"));
 
+        homeBtn.setOnAction(event -> showComponent("/view/UserGuide.fxml"));
 
         exitBtn.setOnMouseClicked(e -> exit());
 
-        showComponent("/view/Search.fxml");
+        showComponent("/view/UserGuide.fxml");
     }
 
     private void setMode(String mode) {
@@ -54,52 +55,71 @@ public class MainController implements Initializable{
                 gameBtn.getStyleClass().clear();
                 reviewBtn.getStyleClass().clear();
                 exitBtn.getStyleClass().clear();
+                homeBtn.getStyleClass().clear();
 
                 searchBtn.getStyleClass().add("transparent-button-selected");
                 translateBtn.getStyleClass().add("transparent-button");
                 gameBtn.getStyleClass().add("transparent-button");
                 reviewBtn.getStyleClass().add("transparent-button");
                 exitBtn.getStyleClass().add("transparent-button");
+                homeBtn.getStyleClass().add("transparent-button");
             } else if(mode.equals("/view/Translate.fxml")) {
                 searchBtn.getStyleClass().clear();
                 translateBtn.getStyleClass().clear();
                 gameBtn.getStyleClass().clear();
                 reviewBtn.getStyleClass().clear();
                 exitBtn.getStyleClass().clear();
+                homeBtn.getStyleClass().clear();
 
                 searchBtn.getStyleClass().add("transparent-button");
                 translateBtn.getStyleClass().add("transparent-button-selected");
                 gameBtn.getStyleClass().add("transparent-button");
                 reviewBtn.getStyleClass().add("transparent-button");
                 exitBtn.getStyleClass().add("transparent-button");
+                homeBtn.getStyleClass().add("transparent-button");
             } else if(mode.equals("/view/Game.fxml")) {
                 searchBtn.getStyleClass().clear();
                 translateBtn.getStyleClass().clear();
                 gameBtn.getStyleClass().clear();
                 reviewBtn.getStyleClass().clear();
                 exitBtn.getStyleClass().clear();
+                homeBtn.getStyleClass().clear();
 
                 searchBtn.getStyleClass().add("transparent-button");
                 translateBtn.getStyleClass().add("transparent-button");
                 gameBtn.getStyleClass().add("transparent-button-selected");
                 reviewBtn.getStyleClass().add("transparent-button");
                 exitBtn.getStyleClass().add("transparent-button");
+                homeBtn.getStyleClass().add("transparent-button");
             }   else if(mode.equals("/view/Review.fxml")) {
                 searchBtn.getStyleClass().clear();
                 translateBtn.getStyleClass().clear();
                 gameBtn.getStyleClass().clear();
                 reviewBtn.getStyleClass().clear();
                 exitBtn.getStyleClass().clear();
+                homeBtn.getStyleClass().clear();
 
                 searchBtn.getStyleClass().add("transparent-button");
                 translateBtn.getStyleClass().add("transparent-button");
                 gameBtn.getStyleClass().add("transparent-button");
                 reviewBtn.getStyleClass().add("transparent-button-selected");
                 exitBtn.getStyleClass().add("transparent-button");
+                homeBtn.getStyleClass().add("transparent-button");
+            } else if(mode.equals("/view/UserGuide.fxml")) {
+                searchBtn.getStyleClass().clear();
+                translateBtn.getStyleClass().clear();
+                gameBtn.getStyleClass().clear();
+                reviewBtn.getStyleClass().clear();
+                exitBtn.getStyleClass().clear();
+                homeBtn.getStyleClass().clear();
+
+                searchBtn.getStyleClass().add("transparent-button");
+                translateBtn.getStyleClass().add("transparent-button");
+                gameBtn.getStyleClass().add("transparent-button");
+                reviewBtn.getStyleClass().add("transparent-button");
+                exitBtn.getStyleClass().add("transparent-button");
+                homeBtn.getStyleClass().add("transparent-button-selected");
             }
-
-
-
     }
     public void exit() {
         Utils utils = new Utils();
@@ -109,13 +129,15 @@ public class MainController implements Initializable{
     }
 
     public void setNode(Node node) {
-        container.getChildren().clear();
-        container.getChildren().add(node);
+            container.getChildren().clear();
+            container.getChildren().add(node);
+
     }
     @FXML
     public void showComponent(String path) {
         try {
             AnchorPane component = FXMLLoader.load(Objects.requireNonNull(MainController.class.getResource(path)));
+            System.out.println("sap het loi roi");
             setMode(path);
             setNode(component);
         } catch (IOException e) {

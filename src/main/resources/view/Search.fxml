@@ -105,7 +105,7 @@
        </Label>
    </AnchorPane>
     <AnchorPane layoutX="213.0" layoutY="26" prefHeight="50" prefWidth="315.0" styleClass="explain-field">
-        <TextField fx:id="searchBox" layoutX="50.0" layoutY="1.0" onKeyReleased="#handleSearch" prefHeight="48.0" prefWidth="314.0" promptText="test" styleClass="text-field">
+        <TextField fx:id="searchBox" layoutX="50.0" layoutY="1.0" onKeyReleased="#handleSearch" prefHeight="48.0" prefWidth="314.0" promptText="Type your word here." styleClass="text-field">
             <font>
                 <Font size="15.0" />
             </font>

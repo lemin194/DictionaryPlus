@@ -5,7 +5,23 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="560" prefWidth="750" styleClass="main-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.SearchController">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="560" prefWidth="750" styleClass="main-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.UserGuideController">
+    <AnchorPane layoutX="269.0" layoutY="25.0" prefHeight="52.0" prefWidth="200.0" styleClass="sub-container" stylesheets="@../style/main.css">
+        <children>
+            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="14.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../utils/icons/search/icons8-book-48.png" />
+                </image>
+            </ImageView>
+            <Label layoutX="68.0" layoutY="12.0" text="User guide" stylesheets="@../style/main.css">
+                <font>
+                    <Font name="System Bold Italic" size="19.0" />
+                </font>
+            </Label>
+        </children>
+    </AnchorPane>
     <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="53.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
         <image>
             <Image url="@../utils/imgs/logo.png" />
@@ -13,6 +29,6 @@
     </ImageView>
     <AnchorPane layoutX="31.0" layoutY="117.0" prefHeight="430.0" prefWidth="688.0" styleClass="sub-container">
       <children>
-         <TextArea editable="false" layoutX="21.0" layoutY="22.0" prefHeight="382.0" prefWidth="646.0" styleClass="instruction" stylesheets="@../style/review.css" wrapText="true" />
+         <TextArea editable="false" layoutX="21.0" layoutY="24.0" prefHeight="382.0" prefWidth="646.0" styleClass="instruction" stylesheets="@../style/review.css" text="                               Welcome to Gratis - an English learning app.&#10;&#10;This is the project for class INT2204 23 - Oriented Object Programming of 3 students:&#10;•&#9;Le Minh Duc  (github: lemin194)&#10;•&#9;Ngo Le Hoang (github: armistcxy)&#10;•&#9;Tang Vinh Ha (github: hachane)&#10;under the instructions of teacher Tran Manh Cuong. Here is the quick guide to use the app&#10;&#10;1; Search section&#10;In this part, you can search English words for their Vietnamese meanings in the dictionary. Also; you can add a new word if it does not exist in the dictionary as well as edit words’ pronunciation, type, meaning or delete a word.&#10;We also support to add a new word into a your own studying collection.&#10;&#10;2; Review section&#10;You can create your own collections to study here, as well as delete collections and edit your collections (add new words, edit or delete words in the collection).&#10;After that you can study with our flash cards; this is inspired by Rememberry – an extension on Google.&#10;&#10;3; Translate section&#10;In this part we support 3 translating modes to translate your text in 4 languages (English, French, German, Spanish):&#10;•&#9;Translate with text&#10;•&#9;Translate with voice&#10;•&#9;Translate with images&#10;&#10;4; Game section&#10;There are 2 games provided. Please note that in the first game (quiz game) if your collection has less than 4 words; we pick some random words in the dictionary for the choices&#10;(Contact us if you have any ideas about new games in the future!)&#10;&#10;&#10;" wrapText="true" />
       </children></AnchorPane>
     </AnchorPane>

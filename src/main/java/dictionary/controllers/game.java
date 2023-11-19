@@ -37,6 +37,8 @@ public abstract class game implements Initializable {
     public Label progress;
 
     /*restart playing the collection */
+    @FXML
+    public Button btnRestart;
 
     public String currentCollectionName;
 

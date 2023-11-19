@@ -42,12 +42,12 @@ public class ReviewController implements Initializable {
             playBtn.getStyleClass().clear();
 
             editCollectionBtn.getStyleClass().add("buttonReviewAddSelected");
-            playBtn.getStyleClass().add("transparent-button");
+            playBtn.getStyleClass().add("buttonReviewAdd");
         } else if (mode.equals("/view/ReviewPlay.fxml")) {
             editCollectionBtn.getStyleClass().clear();
             playBtn.getStyleClass().clear();
 
-            editCollectionBtn.getStyleClass().add("transparent-button");
+            editCollectionBtn.getStyleClass().add("buttonReviewAdd");
             playBtn.getStyleClass().add("buttonReviewAddSelected");
         }
     }

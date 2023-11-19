@@ -68,7 +68,7 @@
                   </ImageView>
             </graphic>
       </Button>
-   <Button layoutX="14.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css">
+   <Button fx:id="homeBtn" layoutX="14.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css">
       <graphic>
          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
             <image>

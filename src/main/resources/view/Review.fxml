@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="560" prefWidth="750.0" styleClass="main-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.ReviewController">
     <children>
@@ -15,7 +17,7 @@
         </ImageView>
       <AnchorPane layoutX="31.0" layoutY="117.0" prefHeight="430" prefWidth="688.0" styleClass="sub-container">
          <children>
-              <Button fx:id="editCollectionBtn" layoutX="33.0" layoutY="14.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css" text="Edit your collections">
+              <Button fx:id="editCollectionBtn" layoutX="33.0" layoutY="14.0" mnemonicParsing="false" styleClass="buttonReviewAdd" stylesheets="@../style/review.css" text="Edit your collections">
                   <graphic>
                       <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -27,7 +29,7 @@
       
       
               <AnchorPane fx:id="reviewContainer" layoutY="71.0" prefHeight="360.0" prefWidth="688.0" />
-              <Button fx:id="playBtn" layoutX="238.0" layoutY="14.0" mnemonicParsing="false" styleClass="transparent-button" stylesheets="@../style/review.css" text="Start studying">
+              <Button fx:id="playBtn" layoutX="238.0" layoutY="14.0" mnemonicParsing="false" styleClass="buttonReviewAdd" stylesheets="@../style/review.css" text="Start studying">
                <graphic>
                       <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -36,6 +38,20 @@
                       </ImageView>
                </graphic>
               </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="269.0" layoutY="25.0" prefHeight="52.0" prefWidth="200.0" styleClass="sub-container" stylesheets="@../style/main.css">
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="14.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../utils/icons/search/icons8-book-48.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="68.0" layoutY="12.0" text="Review">
+               <font>
+                  <Font name="System Bold Italic" size="19.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
     </children>
