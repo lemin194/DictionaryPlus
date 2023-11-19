@@ -19,7 +19,6 @@ import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -29,7 +28,7 @@ import javafx.scene.text.TextFlow;
 import javafx.util.Duration;
 
 
-public class Game3Controller implements Initializable {
+public class Game3Controller extends game {
 
   @FXML
   JFXButton btnNext = new JFXButton(), btnPlay = new JFXButton(), btnRecord = new JFXButton();
@@ -47,10 +46,7 @@ public class Game3Controller implements Initializable {
   private PauseTransition recordingDuration;
 
   private Thread sttThread;
-  private float finalScore = -1;
 
-  @FXML
-  private Label lblScore = new Label();
   @FXML
   private VBox gifContainer = new VBox();
 

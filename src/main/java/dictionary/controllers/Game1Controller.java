@@ -147,13 +147,13 @@ public class Game1Controller extends game {
         });
         if (selectedToggleButton.getText().equals(currentWord.getMeaning())) {
             finalScore++;
-            Score.setText("Score: " + (int) finalScore + "/" + currentWordList.size());
+            lblScore.setText("Score: " + (int) finalScore + "/" + currentWordList.size());
             rightOrFalse.getStyleClass().clear();
             rightOrFalse.getStyleClass().add("whenTrue");
             rightOrFalse.setText("Correct!");
             rightOrFalse.setVisible(true);
         } else {
-            Score.setText("Score: "+ (int) finalScore + "/" + currentWordList.size());
+            lblScore.setText("Score: "+ (int) finalScore + "/" + currentWordList.size());
             rightOrFalse.getStyleClass().clear();
             rightOrFalse.getStyleClass().add("whenFalse");
             rightOrFalse.setText("Wrong");
@@ -169,7 +169,7 @@ public class Game1Controller extends game {
         currentChoiceList = quiz.generateOneQuiz(currentCollectionName, currentWord);
         currentChoiceList.add(currentWord);
         setQuestion();
-        Score.setText("Score: 0");
+        lblScore.setText("Score: 0");
         progress.setText("0/" + currentWordList.size() + " words");
         System.out.println("restart button does work");
         rightOrFalse.setVisible(false);

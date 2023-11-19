@@ -20,7 +20,7 @@
       <ToggleButton fx:id="ansC" layoutX="21.0" layoutY="214.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="640.0" stylesheets="@../style/review.css" text="Choice 2nd" />
       <ToggleButton fx:id="ansB" layoutX="23.0" layoutY="330.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="640.0" stylesheets="@../style/review.css" text="Choice 4th" />
       <ToggleButton fx:id="ansD" layoutX="21.0" layoutY="155.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="640.0" stylesheets="@../style/review.css" text="Choice 1st" />
-      <Label fx:id="Score" layoutX="21.0" layoutY="62.0" prefHeight="22.0" prefWidth="144.0" stylesheets="@../style/review.css" text="Score:" />
+      <Label fx:id="lblScore" layoutX="21.0" layoutY="62.0" prefHeight="22.0" prefWidth="144.0" stylesheets="@../style/review.css" text="Score:" />
       <Button fx:id="btnClose" layoutX="626.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleClose" styleClass="transparent-button" stylesheets="@../style/review.css">
          <graphic>
             <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">

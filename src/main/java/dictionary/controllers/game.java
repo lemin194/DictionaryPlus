@@ -6,10 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -26,10 +24,10 @@ public abstract class game implements Initializable {
 
     /* in game3 it is lblScore */
     @FXML
-    public Label Score;
+    protected Label lblScore;
 
     /* in game3 it is finalScore */
-    public float finalScore;
+    protected float finalScore;
 
     /*To show how many words user has reviewed in this collection for examples 2/4 words with 4 words
     is the number of word in collection.*/
