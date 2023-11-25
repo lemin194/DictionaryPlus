@@ -198,6 +198,8 @@ public class SearchController implements Initializable {
                 WordsDao.modifyWord(wordToFind.getWord(), "type", type, "anhviet");
                 WordsDao.modifyWord(wordToFind.getWord(), "pronunciation", pronunciation, "anhviet");
 
+                Word changeWord = new Word(wordToFind.getWord(), meaning, type, pronunciation);
+                WordLookUpService.modify(changeWord);
                 Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                 DialogPane tmp1 = successAlert.getDialogPane();
                 tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
@@ -233,6 +235,7 @@ public class SearchController implements Initializable {
                 // assume that no word is duplicate
                 if (x.equals(wordToFind.getWord())) {
                     relatedResults.getItems().remove(x);
+                    WordLookUpService.delete(x);
                     break;
                 }
             }

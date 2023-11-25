@@ -28,6 +28,14 @@ public class WordLookUpService {
         cache.read();
     }
 
+    public static void delete(String word) {
+        cache.deleteWord(word);
+    }
+
+    public static void modify(Word changeWord) {
+        cache.modifyWord(changeWord);
+    }
+
     public static void close() {
         cache.write();
     }
@@ -97,8 +105,17 @@ class Cache {
         }
     }
 
-    public void modifyWord(Word word) {
+    public void modifyWord(Word changeWord) {
+        for (Word word : cache) {
+            if (word.getWord().equals(changeWord.getWord())) {
+                word = changeWord;
+                return;
+            }
+        }
+    }
 
+    public void deleteWord(String word) {
+        cache.removeIf(s -> s.getWord().equals(word));
     }
 
     public void removeOldest() {
