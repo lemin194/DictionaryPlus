@@ -22,7 +22,7 @@ def init_db_and_table():
         conn.commit()
 
 
-def gen_db(lst):
+def add_row(lst):
     SQL_COMMAND = "INSERT INTO anhviet (word, pronunciation, type, meaning) VALUES (?, ?, ?, ?) "
     with sqlite3.connect('dict_hh.db') as conn:
         cursor = conn.cursor()
@@ -30,8 +30,7 @@ def gen_db(lst):
         conn.commit()
 
 
-
-if __name__ == '__main__':
+def gen_db():
     lst = convert_json_to_object('backup.json')
     data = []
     for word in lst:
@@ -43,4 +42,4 @@ if __name__ == '__main__':
         data.append(tp)
 
     init_db_and_table()
-    gen_db(data)
+    add_row(data)

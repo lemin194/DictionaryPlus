@@ -97,6 +97,7 @@ public class ReviewAddController implements Initializable {
             for (String tmp : res) {
                 if (tmp.equals(collectionName)) {
                     check = true;
+
                     break;
                 }
             }
