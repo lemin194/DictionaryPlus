@@ -19,6 +19,32 @@
     -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
     -fx-cursor: hand;
 }*/
+/*
+.raised-button {
+  -fx-padding: 8 15 15 15;
+  -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+  -fx-background-radius: 8;
+  -fx-background-color:
+      linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+      #9d4024,
+      #d86e3a,
+      radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+  -fx-font-weight: bold;
+  -fx-font-size: 1.1em;
+}
+.raised-button:hover {
+  -fx-background-color:
+      linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+      #9d4024,
+      #d86e3a,
+      radial-gradient(center 50% 50%, radius 100%, #ea7f4b, #c54e2c);
+}
+.raised-button:pressed {
+  -fx-padding: 10 15 13 15;
+  -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+*/
 .easyBtn{
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
@@ -68,21 +94,20 @@
     -fx-background-radius: 5;
 }
 .normal-button{
-    -fx-background-color: #2EC4B6;
+    -fx-padding: 8 8 8 8;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+    -fx-background-color: #0a938a, #2EC4B6;
     -fx-font-family: "Caudex";
     -fx-font-size: 17;
     -fx-background-radius: 5;
     -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.53), 4, 0, 0, 2);
     -fx-cursor: hand;
 }
-.normal-button:hover{
-    -fx-background-color: #05B8BD;
-}
 .normal-button:pressed{
-    -fx-background-color: #00A5AA;
-    -fx-padding: 10 15 13 15;
-    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+    -fx-background-color: #0a938a, #23beb1;
+    -fx-padding: 10 8 6 8;
+    -fx-background-insets: 2 0 0 0,2 0 1 0, 2 0 2 0, 2 0 3 0;
 }
 .label{
     -fx-text-fill: #000000;
@@ -116,20 +141,22 @@
     -fx-padding: 8px;
 }
 .smallBtn{
-    -fx-background-color: #f57f17;
+    -fx-padding: 8 15 8 15;
+    -fx-background-insets: 0,0 0 3 0, 0 0 4 0, 0 0 5 0;
+    -fx-background-color: #0a938a, #2EC4B6;
     -fx-font-family: "Caudex";
     -fx-font-size: 15;
     -fx-background-radius: 5;
     -fx-text-fill: #ffffff;
-    -fx-effect: dropshadow(one-pass-box, #545454, 5, 0, 0, 3);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
     -fx-cursor: hand;
 }
 .smallBtn:hover{
-    -fx-background-color: #ED3109 ;
+    -fx-background-color: #0a938a, #2EC4B6;
 }
 .smallBtn:pressed{
-    -fx-padding: 5 10 8 10;
-    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+    -fx-padding: 10 15 6 15;
+    -fx-background-insets: 2 0 0 0,2 0 1 0, 2 0 2 0, 2 0 3 0;
 }
 .transparent-button {
     -fx-font-family: "Caudex";
@@ -246,17 +273,13 @@
     -fx-font-family: "Caudex";
     -fx-font-size: 15;
     -fx-background-color: transparent;
-    -fx-border-radius: 15;
     -fx-background-radius: 8pt 8pt 2pt 2pt;
-    -fx-padding: 0;
 }
 .buttonReviewAdd:hover {
-    -fx-background-radius: 8pt 8pt 2pt 2pt;
-    -fx-background-color: #D3D3D3; /* Set the background color with some transparency */
+    -fx-background-color: rgba(0, 0, 0, 0.02); /* Set the background color with some transparency */
 }
 .buttonReviewAdd:pressed {
-    -fx-background-radius: 8pt 8pt 2pt 2pt;
-    -fx-background-color: #BEBEBE; /* Set the background color with some transparency */
+    -fx-background-color: rgba(0, 0, 0, 0.06); /* Set the background color with some transparency */
 }
 .buttonReviewAddSelected{
     -fx-text-fill: #000000;
@@ -265,6 +288,6 @@
     -fx-border-color: #809ccc;
     -fx-font-family: "Caudex";
     -fx-font-size: 15;
-    -fx-background-color: #d4d4d4; /* Set the background color with some transparency */
+    -fx-background-color: rgba(0, 0, 0, 0.09); /* Set the background color with some transparency */
     -fx-background-radius: 8pt 8pt 2pt 2pt;
 }

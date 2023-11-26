@@ -36,7 +36,6 @@
                         <TextField fx:id="wordToEdit" onKeyReleased="#checkExistentofWordinCollection" prefHeight="34.0" prefWidth="538.0" promptText="Type new word here" styleClass="textAreaCustom" stylesheets="@../style/review.css" />
                     </children>
                 </AnchorPane>
-                <Label layoutX="21.0" layoutY="3.0" text="Start editing for collection: " />
                 <Label fx:id="displayCurrentCollectionSetting" layoutX="231.0" layoutY="14.0" />
                 <Button fx:id="doneEditCollectionSetting" layoutX="518.0" layoutY="3.0" mnemonicParsing="false" onAction="#backToCollectionSetting" styleClass="transparent-button" stylesheets="@../style/review.css">
                     <graphic>
@@ -47,9 +46,9 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="add" layoutX="152.0" layoutY="296.0" mnemonicParsing="false" prefWidth="78.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="ADD" />
-                <Button fx:id="edit" layoutX="266.0" layoutY="296.0" mnemonicParsing="false" prefWidth="78.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="EDIT" />
-                <Button fx:id="delete" layoutX="377.0" layoutY="296.0" mnemonicParsing="false" prefWidth="78.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="DELETE" />
+                <Button fx:id="add" layoutX="107.0" layoutY="296.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="113.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="ADD" />
+                <Button fx:id="edit" layoutX="255.0" layoutY="296.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="104.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="EDIT" />
+                <Button fx:id="delete" layoutX="396.0" layoutY="296.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="113.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="DELETE" />
             </children>
         </AnchorPane>
     </children>
