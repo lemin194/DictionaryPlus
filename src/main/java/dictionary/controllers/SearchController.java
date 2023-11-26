@@ -122,17 +122,19 @@ public class SearchController implements Initializable {
         if (list.isEmpty()) {
             clearSearchResultsView();
             notAvailable.setVisible(true);
-            autocorrect();
+            autocorrect(searchTerm);
             return;
+        } else {
+            resetAutocorrect();
+            notAvailable.setVisible(false);
+            wordToFind = list.get(0);
+            wordDefinition.setText("Type:\n" + wordToFind.getType() + "\nMeaning:\n" + wordToFind.getMeaning());
+            wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
+            for (Word english : list) {
+                //System.out.println(english.getWord());
+                relatedResults.getItems().add(english.getWord());
+            }
         }
-        wordToFind = list.get(0);
-        wordDefinition.setText("Type:\n" + wordToFind.getType()+ "\nMeaning:\n" + wordToFind.getMeaning());
-        wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
-        for (Word english : list) {
-            //System.out.println(english.getWord());
-            relatedResults.getItems().add(english.getWord());
-        }
-
     }
 
     @FXML
@@ -436,11 +438,12 @@ public class SearchController implements Initializable {
         notAvailable.setVisible(false);
     }
 
-    public void autocorrect() {
-        if (autocorrect.getCorrectWord(searchBox.getText()).equals(searchBox.getText()))
+    public void autocorrect(String input) {
+        if (autocorrect.getCorrectWord(input).equals(input))
             return;
         else {
-            String correct = autocorrect.getCorrectWord(searchBox.getText());
+            String correct = autocorrect.getCorrectWord(input);
+            System.out.println("luc xu ly la ntn: " + correct);
             labelAutocorrect.setVisible(true);
             infoAutocorrect.setVisible(true);
             infoAutocorrect.setText(correct);
@@ -453,7 +456,8 @@ public class SearchController implements Initializable {
     }
     @FXML
     public void setAutocorrect() {
-        searchBox.setText(autocorrect.getCorrectWord(searchBox.getText()));
+        searchBox.setText(infoAutocorrect.getText());
+        System.out.println("luc set la ntn: " + autocorrect.getCorrectWord(searchBox.getText()));
         List<Word> list = WordLookUpService.findWord(searchBox.getText(), "anhviet");
         if (list.isEmpty()) {
             clearSearchResultsView();
