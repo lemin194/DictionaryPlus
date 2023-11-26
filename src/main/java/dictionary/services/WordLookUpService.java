@@ -72,8 +72,8 @@ class Cache {
             }
             String text = all.toString();
             String[] arr = text.split("\\$");
-            for (int i  = 0; i < arr.length; i++) {
-                String[] cur = arr[i].split("~");
+            for (String s : arr) {
+                String[] cur = s.split("~");
                 List<String> list = new ArrayList<>(Arrays.stream(cur).toList());
                 while (list.size() < 4) {
                     list.add("");
