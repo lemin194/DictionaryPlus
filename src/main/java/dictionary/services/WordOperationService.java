@@ -44,7 +44,10 @@ public class WordOperationService {
 
 }
 
-// cache LIFO
+/**
+ * Cache strategy implementation: FIFO
+ */
+
 class Cache {
     private final String filePATH = "src/main/resources/data/lastFind.txt";
     private final int maxSize;

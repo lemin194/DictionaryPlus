@@ -36,10 +36,9 @@ class IndexWord {
     }
 }
 public class AllWord {
-    private static ArrayList<IndexWord> words;
+    private static ArrayList<IndexWord> words = new ArrayList<>();
     private static int maxIndex = 0;
     static {
-        words = new ArrayList<>();
         Connection conn = DatabaseConnection.getConnection();
         ResultSet resultSet = null;
         try {

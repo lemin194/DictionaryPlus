@@ -236,7 +236,6 @@ public class SearchController implements Initializable {
                 // assume that no word is duplicate
                 if (x.equals(wordToFind.getWord())) {
                     relatedResults.getItems().remove(x);
-                    WordOperationService.delete(x);
                     break;
                 }
             }
