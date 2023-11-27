@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class WordLookUpService {
-    private static final int cacheSize = 10;
+    private static final int cacheSize = 20;
     private static final int maxShowWords = 30;
     private static Cache cache = new Cache(cacheSize);
 
@@ -106,9 +106,9 @@ class Cache {
     }
 
     public void modifyWord(Word changeWord) {
-        for (Word word : cache) {
-            if (word.getWord().equals(changeWord.getWord())) {
-                word = changeWord;
+        for (int i = 0; i < cache.size(); i++) {
+            if (cache.get(i).getWord().equals(changeWord.getWord())) {
+                cache.set(i, changeWord);
                 return;
             }
         }
