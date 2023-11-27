@@ -44,6 +44,7 @@ public class TranslateImageController implements Initializable {
   File imgFile = null;
   Image img = null;
 
+  boolean preview = false;
   private double xOffset = 0, yOffset = 0;
 
   @Override
@@ -128,13 +129,8 @@ public class TranslateImageController implements Initializable {
   }
 
   private void translateImage(Image img) {
-    Thread imageViewThread = new Thread(() -> {
-      Image translated = TranslateImageService.translate(img);
-      Platform.runLater(() -> {
-        createImageViewWindow(translated);
-      });
-    });
-    imageViewThread.start();
+    preview = true;
+    createImageViewWindow(img);
   }
 
   private void createImageViewWindow(Image img) {
@@ -167,10 +163,30 @@ public class TranslateImageController implements Initializable {
 
       btnClose.setOnAction(actionEvent -> {
         closeImageViewWindow();
+        if (preview) {
+          preview = false;
+          Thread imageViewThread = new Thread(() -> {
+            Image translated = TranslateImageService.translate(img);
+            Platform.runLater(() -> {
+              createImageViewWindow(translated);
+            });
+          });
+          imageViewThread.start();
+        }
       });
 
       btnTopbarClose.setOnAction(actionEvent -> {
         closeImageViewWindow();
+        if (preview) {
+          preview = false;
+          Thread imageViewThread = new Thread(() -> {
+            Image translated = TranslateImageService.translate(img);
+            Platform.runLater(() -> {
+              createImageViewWindow(translated);
+            });
+          });
+          imageViewThread.start();
+        }
       });
 
       btnMinimize.setOnAction(actionEvent -> {

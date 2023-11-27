@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Random;
 
 public class QuizService {
-    private final int quizChoice = 4;
+    private final int CHOICEAMOUNT = 4;
     //We just need 4 words
     public List<Word> generateOneQuiz(String collectionName, Word answer) {
         // if collectionName is null then we randomly choose from past searching results
         List<Word> quizWords = new ArrayList<>();
         if (collectionName == null) {
             Random rand = new Random();
-            for (int i = 0; i < quizChoice; i++) {
+            for (int i = 0; i < CHOICEAMOUNT; i++) {
                 while (true) {
                     int randIndex = rand.nextInt(AllWord.amountWord());
                     if (randIndex == 0) randIndex++;
@@ -41,16 +41,16 @@ public class QuizService {
 
             List<Word> collectionWords = WordLookUpService.findWord("", collectionName);
             // case 2.1: collection chi co 0,1,2,3 word => khong du de lam 4 dap an (3 word thi 1 tu lam answer roi thieu 1 dap an)
-            if (quizChoice > collectionWords.size() - 1) {
+            if (CHOICEAMOUNT > collectionWords.size() - 1) {
                 Collections.shuffle(collectionWords);
                 // n dap an gio day them thanh n - 1 dap an
-                for (int i = 0; i < collectionWords.size(); i++) {
-                    if (!collectionWords.get(i).getWord().equals(answer.getWord()))
-                      quizWords.add(collectionWords.get(i));
+                for (Word collectionWord : collectionWords) {
+                    if (!collectionWord.getWord().equals(answer.getWord()))
+                        quizWords.add(collectionWord);
                 }
                 Random rand = new Random();
                 //
-                for (int i = 0; i < quizChoice - collectionWords.size(); i++) {
+                for (int i = 0; i < CHOICEAMOUNT - collectionWords.size(); i++) {
                     while (true) {
                         int randIndex = rand.nextInt(AllWord.amountWord());
                         if (randIndex == 0) randIndex++;
@@ -72,32 +72,15 @@ public class QuizService {
             } else {
                 Collections.shuffle(collectionWords);
                 int added = 0;
-                for (int i = 0; i < collectionWords.size(); i++) {
-                    if (added == quizChoice) break;
-                    if (!collectionWords.get(i).getWord().equals(answer.getWord())) {
-                        quizWords.add(collectionWords.get(i));
+                for (Word collectionWord : collectionWords) {
+                    if (added == CHOICEAMOUNT) break;
+                    if (!collectionWord.getWord().equals(answer.getWord())) {
+                        quizWords.add(collectionWord);
                         added++;
                     }
                 }
             }
         }
         return quizWords;
-    }
-
-    /*public List<List<Word>> generateManyQuizs(String collectionName, int amountQuiz) {
-        List<List<Word>> quizList = new ArrayList<>();
-        for (int i = 0; i < amountQuiz; i++) {
-            quizList.add(generateOneQuiz(collectionName));
-        }
-        return quizList;
-    }*/
-    public static void main(String[] args) {
-        QuizService quizSer = new QuizService();
-        /*List<List<Word>> testQuizList = quizSer.generateManyQuizs(null, 2);
-        for (List<Word> quiz : testQuizList) {
-            for (Word word : quiz) {
-                System.out.println(word);
-            }
-        }*/
     }
 }

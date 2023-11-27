@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="560" prefWidth="750.0" styleClass="main-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.ReviewController">
@@ -17,27 +19,37 @@
         </ImageView>
       <AnchorPane layoutX="31.0" layoutY="117.0" prefHeight="430" prefWidth="688.0" styleClass="sub-container">
          <children>
-              <Button fx:id="editCollectionBtn" layoutX="33.0" layoutY="14.0" mnemonicParsing="false" styleClass="buttonReviewAdd" stylesheets="@../style/review.css" text="Edit your collections">
-                  <graphic>
-                      <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../utils/icons/review/icons8-edit-property-48.png" />
-                          </image>
-                      </ImageView>
-                  </graphic>
-              </Button>
+            <HBox layoutX="33.0" layoutY="14.0" spacing="10.0">
+               <children>
+                    <Button fx:id="editCollectionBtn" mnemonicParsing="false" styleClass="buttonReviewAdd" stylesheets="@../style/review.css" text="Edit your collections">
+                        <graphic>
+                            <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../utils/icons/review/icons8-edit-property-48.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                     <padding>
+                        <Insets left="8.0" right="8.0" />
+                     </padding>
+                    </Button>
+                    <Button fx:id="playBtn" mnemonicParsing="false" styleClass="buttonReviewAdd" stylesheets="@../style/review.css" text="Start studying">
+                     <graphic>
+                            <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../utils/icons/review/icons8-study-48.png" />
+                                </image>
+                            </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="8.0" right="8.0" />
+                     </padding>
+                    </Button>
+               </children>
+            </HBox>
       
       
               <AnchorPane fx:id="reviewContainer" layoutY="71.0" prefHeight="360.0" prefWidth="688.0" />
-              <Button fx:id="playBtn" layoutX="238.0" layoutY="14.0" mnemonicParsing="false" styleClass="buttonReviewAdd" stylesheets="@../style/review.css" text="Start studying">
-               <graphic>
-                      <ImageView fitHeight="48" fitWidth="48" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../utils/icons/review/icons8-study-48.png" />
-                          </image>
-                      </ImageView>
-               </graphic>
-              </Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="269.0" layoutY="25.0" prefHeight="52.0" prefWidth="200.0" styleClass="sub-container" stylesheets="@../style/main.css">

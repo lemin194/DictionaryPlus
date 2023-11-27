@@ -10,10 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static dictionary.services.StringUtils.getFirstMeaning;
 
@@ -63,7 +60,7 @@ public class Game1Controller extends game {
         for (ToggleButton button : List.of(ansA, ansB, ansC, ansD)) {
             button.setOnAction(this::whenSelected);
         }
-        rightOrFalse.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
+        rightOrFalse.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/style/review.css")).toExternalForm());
         rightOrFalse.setVisible(false);
         warning.setVisible(false);
     }
@@ -71,7 +68,7 @@ public class Game1Controller extends game {
     public void startGame() {
         currentCollectionName = collectionsToPlay.getValue();
         currentWordList = WordCollectionDao.queryWordInCollection(currentCollectionName);
-        if (currentWordList.size() == 0) {
+        if (currentWordList.isEmpty()) {
             warning.setVisible(true);
             return;
         } else {
@@ -111,7 +108,7 @@ public class Game1Controller extends game {
     }
     @FXML
     public void nextQuestion() {
-        if (currentWordList.size() == 0) return;
+        if (currentWordList.isEmpty()) return;
         rightOrFalse.setVisible(false);
         idOfDisplayWord++;
         if (idOfDisplayWord >= currentWordList.size()) {
@@ -135,7 +132,7 @@ public class Game1Controller extends game {
     }
 
     public void whenSelected(ActionEvent e) {
-        if (currentWordList.size() == 0) return;
+        if (currentWordList.isEmpty()) return;
         ToggleButton selectedToggleButton = (ToggleButton) e.getSource();
         System.out.println(selectedToggleButton.getText() + " selected");
 
@@ -162,7 +159,7 @@ public class Game1Controller extends game {
     }
     @FXML
     public void restart() {
-        if (currentWordList.size() == 0) return;
+        if (currentWordList.isEmpty()) return;
         Collections.shuffle(currentWordList);
         idOfDisplayWord = 0;
         currentWord = currentWordList.get(idOfDisplayWord);
@@ -177,7 +174,6 @@ public class Game1Controller extends game {
     @FXML
     public void handleClose(){
         Stage stage = (Stage) btnClose.getScene().getWindow();
-        // do what you have to do
         stage.close();
     }
 }
