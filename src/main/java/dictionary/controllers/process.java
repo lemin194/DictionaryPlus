@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -20,7 +21,7 @@ public abstract class process implements Initializable {
     @FXML
     public Button speaker;
     @FXML
-    public Label infoOfWord;
+    public TextArea infoOfWord;
     @FXML
     public Label progress;
     @FXML

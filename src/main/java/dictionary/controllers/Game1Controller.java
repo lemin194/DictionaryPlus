@@ -70,6 +70,10 @@ public class Game1Controller extends game {
         currentWordList = WordCollectionDao.queryWordInCollection(currentCollectionName);
         if (currentWordList.isEmpty()) {
             warning.setVisible(true);
+            question.setText("");
+            for (ToggleButton button : List.of(ansA, ansB, ansC, ansD)) {
+                button.setText("");
+            }
             return;
         } else {
             warning.setVisible(false);
@@ -112,6 +116,7 @@ public class Game1Controller extends game {
         rightOrFalse.setVisible(false);
         idOfDisplayWord++;
         if (idOfDisplayWord >= currentWordList.size()) {
+            progress.setText((idOfDisplayWord)+"/"+ currentWordList.size()+" words");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
             DialogPane tmp1 = alert.getDialogPane();
@@ -133,6 +138,7 @@ public class Game1Controller extends game {
 
     public void whenSelected(ActionEvent e) {
         if (currentWordList.isEmpty()) return;
+        System.out.println(currentWord.getMeaning());
         ToggleButton selectedToggleButton = (ToggleButton) e.getSource();
         System.out.println(selectedToggleButton.getText() + " selected");
 
@@ -142,7 +148,7 @@ public class Game1Controller extends game {
                 toggleButton.setDisable(true);
             }
         });
-        if (selectedToggleButton.getText().equals(currentWord.getMeaning())) {
+        if (selectedToggleButton.getText().equals(getFirstMeaning(currentWord))) {
             finalScore++;
             lblScore.setText("Score: " + (int) finalScore + "/" + currentWordList.size());
             rightOrFalse.getStyleClass().clear();

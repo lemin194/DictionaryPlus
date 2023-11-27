@@ -61,7 +61,7 @@ public class processTyping extends process {
         showAnswer.setVisible(true);
         transfer.setVisible(false);
         displayWord = current.get(idOfDisplayWord);
-        currentWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
+        infoOfWord.setText(StringUtils.getFirstMeaning(displayWord));
         done.setVisible(false);
         userAnswerTextField.setOnKeyPressed(event -> {
             if( event.getCode() == KeyCode.ENTER ) {
@@ -73,7 +73,8 @@ public class processTyping extends process {
     public void showAnswer() {
         secondDeck.setVisible(true);
         userAnswer.setText(userAnswerTextField.getText());
-        infoOfWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
+        //infoOfWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
+        currentWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
         if(userAnswerTextField.getText().equals(displayWord.getWord())) {
             imgOnDeck.setImage(new Image(getClass().getResourceAsStream("/utils/icons/review/correctDeck.png")));
         } else {
@@ -94,16 +95,18 @@ public class processTyping extends process {
                 wordsLeft--;
                 progress.setText(wordsLeft + "/" + fakeNumberOfWordsinCollection);
                 current.remove(idOfDisplayWord);
+                System.out.println("id la " + idOfDisplayWord + "; kich co collection la: " + current.size());
             }
-            if (wordsLeft > 0) {
+            if (current.size() > 0) {
                 displayWord = current.get(idOfDisplayWord);
-                currentWord.setText(StringUtils.getFirstMeaning(displayWord) + "\n" + displayWord.getPronunciation());
+                //infoOfWord.setText(StringUtils.getFirstMeaning(displayWord) + "\n" + displayWord.getPronunciation());
+                infoOfWord.setText(StringUtils.getFirstMeaning(displayWord));
                 secondDeck.setVisible(false);
                 firstDeck.setVisible(true);
                 transfer.setVisible(false);
                 showAnswer.setVisible(true);
             }
-            else {
+            else if (current.size() == 0){
                 speaker.setVisible(false);
                 currentWord.setVisible(false);
                 progress.setVisible(false);
@@ -125,7 +128,8 @@ public class processTyping extends process {
         idOfDisplayWord++;
         if(idOfDisplayWord >= len) idOfDisplayWord = 0;
         displayWord = current.get(idOfDisplayWord);
-        currentWord.setText(StringUtils.getFirstMeaning(displayWord) + "\n" + displayWord.getPronunciation());
+        //infoOfWord.setText(StringUtils.getFirstMeaning(displayWord) + "\n" + displayWord.getPronunciation());
+        infoOfWord.setText(StringUtils.getFirstMeaning(displayWord));
         secondDeck.setVisible(false);
         firstDeck.setVisible(true);
         transfer.setVisible(false);

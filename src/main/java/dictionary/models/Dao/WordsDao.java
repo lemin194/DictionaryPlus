@@ -1,6 +1,8 @@
 package dictionary.models.Dao;
 
 import dictionary.models.Entity.Word;
+import dictionary.services.WordOperationService;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +34,7 @@ public class WordsDao {
      */
     public static boolean checkWordExist(String word, String table) {
         conn = DatabaseConnection.getConnection();
-        String countStmt = String.format("SELECT COUNT(*) FROM %s WHERE word = \"%s\"",
-                                    table,
-                                    word);
+        String countStmt = String.format("SELECT COUNT(*) FROM %s WHERE word = \"%s\"", table, word);
         int cnt = 0;
         try {
             Statement stmt = conn.createStatement();
@@ -102,6 +102,7 @@ public class WordsDao {
             preparedStatement = conn.prepareStatement(stmt);
             preparedStatement.setInt(1, tableID);
             preparedStatement.execute();
+            WordOperationService.delete(word);
             AllWord.deleteWord(index);
         } catch (SQLException e) {
             e.printStackTrace();

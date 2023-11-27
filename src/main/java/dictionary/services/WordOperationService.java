@@ -1,16 +1,17 @@
 package dictionary.services;
 
-import dictionary.models.Entity.Word;
 import dictionary.models.Dao.WordsDao;
+import dictionary.models.Entity.Word;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class WordLookUpService {
+public class WordOperationService {
     private static final int cacheSize = 20;
     private static final int maxShowWords = 30;
-    private static Cache cache = new Cache(cacheSize);
+    private static final Cache cache = new Cache(cacheSize);
 
     public static List<Word> retrieveLastSearch() {
         return cache.retrieve();
@@ -24,6 +25,7 @@ public class WordLookUpService {
     public static void addWord(Word word) {
         cache.add(word);
     }
+
     public static void start() {
         cache.read();
     }
@@ -42,11 +44,15 @@ public class WordLookUpService {
 
 }
 
-// cache LIFO
+/**
+ * Cache strategy implementation: FIFO
+ */
+
 class Cache {
     private final String filePATH = "src/main/resources/data/lastFind.txt";
     private final int maxSize;
-    private List<Word> cache;
+    private final List<Word> cache;
+
     public Cache(int maxSize) {
         this.maxSize = maxSize;
         cache = new ArrayList<>();
@@ -59,10 +65,11 @@ class Cache {
                         + word.getType() + "~" + word.getMeaning() + "$";
                 writer.write(content);
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     void read() {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePATH))) {
             StringBuilder all = new StringBuilder();
@@ -75,7 +82,8 @@ class Cache {
             for (String s : arr) {
                 String[] cur = s.split("~");
                 List<String> list = new ArrayList<>(Arrays.stream(cur).toList());
-                while (list.size() < 4) {
+                int numberOfField = 4;
+                while (list.size() < numberOfField) {
                     list.add("");
                 }
                 Word word = new Word(list.get(0), list.get(1), list.get(2), list.get(3));
@@ -83,9 +91,10 @@ class Cache {
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
-        };
+        }
     }
-    public void add(Word word) {
+
+    void add(Word word) {
         for (Word wd : cache) {
             if (wd.getWord().equals(word.getWord())) {
                 cache.remove(wd);
@@ -105,7 +114,7 @@ class Cache {
         }
     }
 
-    public void modifyWord(Word changeWord) {
+    void modifyWord(Word changeWord) {
         for (int i = 0; i < cache.size(); i++) {
             if (cache.get(i).getWord().equals(changeWord.getWord())) {
                 cache.set(i, changeWord);
@@ -114,14 +123,15 @@ class Cache {
         }
     }
 
-    public void deleteWord(String word) {
+    void deleteWord(String word) {
         cache.removeIf(s -> s.getWord().equals(word));
     }
 
-    public void removeOldest() {
+    void removeOldest() {
         cache.remove(maxSize - 1);
     }
-    public List<Word> retrieve() {
+
+    List<Word> retrieve() {
         return cache;
     }
 

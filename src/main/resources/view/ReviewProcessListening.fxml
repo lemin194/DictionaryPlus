@@ -6,11 +6,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.control.TextArea?>
 <AnchorPane prefHeight="360.0" prefWidth="417.0" styleClass="pop-up-scene" stylesheets="@../style/review.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.processListening">
     <children>
-        <Label fx:id="currentWord" layoutX="141.0" layoutY="23.0" prefHeight="48.0" prefWidth="168.0" wrapText="true" />
-        <Label fx:id="infoOfWord" layoutX="66.0" layoutY="80.0" prefHeight="200.0" prefWidth="285.0" styleClass="deck" stylesheets="@../style/review.css" />
-        <Button fx:id="speaker" layoutX="85.0" layoutY="23.0" mnemonicParsing="false" onAction="#playVoice" styleClass="transparent-button" stylesheets="@../style/review.css">
+        <Label fx:id="currentWord" layoutX="119.0" layoutY="23.0" prefHeight="48.0" prefWidth="200.0" wrapText="true" />
+        <AnchorPane layoutX="66.0" layoutY="80.0" prefHeight="200.0" prefWidth="285.0" styleClass="deck" stylesheets="@../style/review.css">
+            <children>
+                <TextArea fx:id="infoOfWord" layoutY="25.0" prefHeight="150.0" prefWidth="285.0" styleClass="text-area1" editable="false" stylesheets="@../style/review.css" wrapText="true" />
+            </children>
+        </AnchorPane>        <Button fx:id="speaker" layoutX="66.0" layoutY="23.0" mnemonicParsing="false" onAction="#playVoice" styleClass="transparent-button" stylesheets="@../style/review.css">
             <graphic>
                 <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                     <image>

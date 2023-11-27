@@ -26,7 +26,7 @@
       <Label layoutX="14.0" layoutY="32.0" stylesheets="@../style/review.css" text="Welcome to the editing collection section. Here you can:" />
             <HBox alignment="CENTER" layoutX="232.0" layoutY="138.0" prefHeight="37.0" prefWidth="240.0" spacing="12.0">
                <children>
-            <Button fx:id="deleteCollection" mnemonicParsing="false" prefWidth="96.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="DELETE" />
+            <Button fx:id="deleteCollection" onAction="#deleteCollection" mnemonicParsing="false" prefWidth="96.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="DELETE" />
             <Button fx:id="editCollection" mnemonicParsing="false" onAction="#changeToCollectionWordEdit" prefWidth="96.0" styleClass="smallBtn" stylesheets="@../style/review.css" text="EDIT" />
                </children>
             </HBox>

@@ -39,7 +39,7 @@ public class QuizService {
         } //case 2: collection co ton tai va duoc nguoi choi chon
         else {
 
-            List<Word> collectionWords = WordLookUpService.findWord("", collectionName);
+            List<Word> collectionWords = WordOperationService.findWord("", collectionName);
             // case 2.1: collection chi co 0,1,2,3 word => khong du de lam 4 dap an (3 word thi 1 tu lam answer roi thieu 1 dap an)
             if (CHOICEAMOUNT > collectionWords.size() - 1) {
                 Collections.shuffle(collectionWords);
