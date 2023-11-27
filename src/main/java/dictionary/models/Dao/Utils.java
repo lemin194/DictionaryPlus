@@ -1,6 +1,6 @@
 package dictionary.models.Dao;
 
-import dictionary.services.WordLookUpService;
+import dictionary.services.WordOperationService;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -22,7 +22,7 @@ public class Utils {
     }
 
     public void storeLastFind() {
-        WordLookUpService.close();
+        WordOperationService.close();
     }
 
 }

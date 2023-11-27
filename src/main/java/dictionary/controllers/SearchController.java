@@ -2,7 +2,7 @@ package dictionary.controllers;
 
 import dictionary.services.AutoCorrectWordService;
 import dictionary.apiservices.TTSService;
-import dictionary.services.WordLookUpService;
+import dictionary.services.WordOperationService;
 import javafx.application.Application;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
@@ -26,7 +26,6 @@ import javafx.collections.FXCollections;
 
 import dictionary.models.Entity.*;
 import dictionary.models.Dao.*;
-import dictionary.services.WordLookUpService.*;
 
 import java.sql.SQLException;
 
@@ -74,7 +73,7 @@ public class SearchController implements Initializable {
     @FXML
     public void initialize(URL location, ResourceBundle Resources) {
         autocorrect = new AutoCorrectWordService();
-        List<Word> pastWords = WordLookUpService.retrieveLastSearch();
+        List<Word> pastWords = WordOperationService.retrieveLastSearch();
         for (Word word : pastWords) relatedResults.getItems().add(word.getWord());
         System.out.println(relatedResults.getItems().size());
         labelAutocorrect.setVisible(false);
@@ -85,8 +84,8 @@ public class SearchController implements Initializable {
 
                 if (selectedWord != null) {
                     System.out.println(selectedWord);
-                    System.out.println(WordLookUpService.findWord(selectedWord, "anhviet").size());
-                    Word english = WordLookUpService.findWord(selectedWord, "anhviet").get(0);
+                    System.out.println(WordOperationService.findWord(selectedWord, "anhviet").size());
+                    Word english = WordOperationService.findWord(selectedWord, "anhviet").get(0);
                     try {
                         if (english != null) {
                             wordToFind = english;
@@ -99,7 +98,7 @@ public class SearchController implements Initializable {
                     } catch (Exception e) {
                         System.out.println("han tu dien");
                     }
-                    WordLookUpService.addWord(english);
+                    WordOperationService.addWord(english);
                 }
         });
     }
@@ -109,7 +108,7 @@ public class SearchController implements Initializable {
         String searchTerm = searchBox.getText().toLowerCase();
         if (searchTerm.isEmpty() || searchTerm.isBlank()) {
             clearSearchResultsView();
-            List<Word> pastWords = WordLookUpService.retrieveLastSearch();
+            List<Word> pastWords = WordOperationService.retrieveLastSearch();
             for (Word word : pastWords) relatedResults.getItems().add(word.getWord());
             Word tmp = pastWords.get(0);
             wordDefinition.setText("Type:\n" + tmp.getType()+ "\nMeaning:\n" + tmp.getMeaning());
@@ -118,7 +117,7 @@ public class SearchController implements Initializable {
             return;
         }
         relatedResults.getItems().clear();
-        List<Word> list = WordLookUpService.findWord(searchTerm, "anhviet");
+        List<Word> list = WordOperationService.findWord(searchTerm, "anhviet");
         if (list.isEmpty()) {
             clearSearchResultsView();
             notAvailable.setVisible(true);
@@ -201,7 +200,7 @@ public class SearchController implements Initializable {
                 WordsDao.modifyWord(wordToFind.getWord(), "pronunciation", pronunciation, "anhviet");
 
                 Word changeWord = new Word(wordToFind.getWord(), meaning, type, pronunciation);
-                WordLookUpService.modify(changeWord);
+                WordOperationService.modify(changeWord);
                 Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                 DialogPane tmp1 = successAlert.getDialogPane();
                 tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
@@ -237,7 +236,7 @@ public class SearchController implements Initializable {
                 // assume that no word is duplicate
                 if (x.equals(wordToFind.getWord())) {
                     relatedResults.getItems().remove(x);
-                    WordLookUpService.delete(x);
+                    WordOperationService.delete(x);
                     break;
                 }
             }
@@ -458,7 +457,7 @@ public class SearchController implements Initializable {
     public void setAutocorrect() {
         searchBox.setText(infoAutocorrect.getText());
         System.out.println("luc set la ntn: " + autocorrect.getCorrectWord(searchBox.getText()));
-        List<Word> list = WordLookUpService.findWord(searchBox.getText(), "anhviet");
+        List<Word> list = WordOperationService.findWord(searchBox.getText(), "anhviet");
         if (list.isEmpty()) {
             clearSearchResultsView();
             notAvailable.setVisible(true);
@@ -468,6 +467,7 @@ public class SearchController implements Initializable {
             notAvailable.setVisible(false);
             wordToFind = list.get(0);
             wordDefinition.setText("Type:\n" + wordToFind.getType() + "\nMeaning:\n" + wordToFind.getMeaning());
+            WordOperationService.addWord(wordToFind);
             wordDisplay.setText(wordToFind.getWord() + "\n" + wordToFind.getPronunciation());
             for (Word english : list) {
                 System.out.println(english.getWord());

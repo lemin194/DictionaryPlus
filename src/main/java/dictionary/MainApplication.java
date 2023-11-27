@@ -1,6 +1,6 @@
 package dictionary;
 
-import dictionary.services.WordLookUpService;
+import dictionary.services.WordOperationService;
 import dictionary.views.HelloApplication;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -37,7 +37,7 @@ public class MainApplication extends Application {
 
             Class.forName("dictionary.models.Dao.WordsDao");
             Class.forName("dictionary.models.Dao.AllWord");
-            WordLookUpService.start();
+            WordOperationService.start();
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/Main.fxml")));
 
             stage.initStyle(StageStyle.TRANSPARENT);
