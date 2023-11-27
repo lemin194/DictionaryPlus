@@ -7,10 +7,6 @@ public class WordCollectionManagement {
   public static List<String> collectionNameList = new ArrayList<>();
   public static List<WordCollection> allCollection = new ArrayList<>();
 
-  static
-  {
-
-  }
   public static void addCollection(String collectionName) {
     if (!isExist(collectionName)) {
       collectionNameList.add(collectionName);

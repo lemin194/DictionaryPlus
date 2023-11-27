@@ -14,6 +14,7 @@ public class WordCollectionDao {
     private static ResultSet resultSet = null;
 
     public static void addCollection(String collectionName) {
+        collectionName = collectionName.replaceAll(" ", "_");
         if (checkCollectionExist(collectionName)) {
             return;
         }
@@ -205,14 +206,8 @@ public class WordCollectionDao {
     }
 
     public static void main(String[] args) {
-        List<Word> words = new ArrayList<>();
-        words.add(new Word("cfhajsdfasd", "asdfasdf", "asdfasd", "asfasdf"));
-        words.add(new Word("adfasdfdfasd", "asdfasdf", "asdfasd", "asfasdf"));
-        words.add(new Word("lmnfhajsdfasd", "asdfasdf", "asdfasd", "asfasdf"));
-        words.add(new Word("bhfhajsdfasd", "asdfasdf", "asdfasd", "asfasdf"));
-        sortWord(words);
-        for (Word word : words) {
-            System.out.println(word.getWord());
-        }
+        String o = "afdskj fdsafds kafdlfj";
+        o = o.replaceAll(" ", "_");
+        System.out.println(o);
     }
 }

@@ -41,12 +41,13 @@ public class WordsDao {
             resultSet  = stmt.executeQuery(countStmt);
             cnt = resultSet.getInt(1);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("There's no word like that");
         } finally {
             DatabaseClose.databaseClose(conn, preparedStatement, resultSet);
         }
         return cnt == 1;
     }
+
     /**
      * Adding word into specific table.
      */

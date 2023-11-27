@@ -3,6 +3,9 @@
 !**/src/test/**/target/
 !**/src/main/resources/data/Collection.txt
 !**/src/main/resources/data/dict_hh.db
+
+**/desktop.ini
+
 ### Oasis
 .idea/
 target/
