@@ -291,3 +291,22 @@
     -fx-background-color: rgba(0, 0, 0, 0.09); /* Set the background color with some transparency */
     -fx-background-radius: 8pt 8pt 2pt 2pt;
 }
+.labelWordReview{
+    -fx-alignment: center;
+}
+.text-area1 {
+    -fx-background-color: transparent
+}
+
+.text-area1 .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area1 .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+
+.text-area1 .scroll-pane .content{
+    -fx-background-color: transparent;
+}

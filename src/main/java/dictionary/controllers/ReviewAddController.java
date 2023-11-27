@@ -53,7 +53,11 @@ public class ReviewAddController implements Initializable {
         wordsSetting.setVisible(false);
         int n = WordCollectionDao.queryCollectionName().size();
         for (int i = 0; i < n; i++) {
-            collectionsToEdit.getItems().add(WordCollectionDao.queryCollectionName().get(i));
+            String tmp = WordCollectionDao.queryCollectionName().get(i);
+            System.out.println("b4 " + tmp);
+            tmp = tmp.replaceAll("_"," ");
+            System.out.println("after " + tmp);
+            collectionsToEdit.getItems().add(tmp);
         }
         collectionsToEdit.setOnAction(e -> setCurrentCollection());
     }
@@ -95,9 +99,8 @@ public class ReviewAddController implements Initializable {
             boolean check = false;
             List<String> res = WordCollectionDao.findCollectionName(collectionName);
             for (String tmp : res) {
-                if (tmp.equals(collectionName)) {
+                if (tmp.equals(collectionName.replaceAll(" ", "_"))) {
                     check = true;
-
                     break;
                 }
             }
@@ -109,13 +112,13 @@ public class ReviewAddController implements Initializable {
             } else {
                 WordCollectionDao.addCollection(collectionName);
                 collectionsToEdit.getItems().add(collectionName);
-                alert.setContentText("New collection: " + collectionName + " added successfully");
+                alert.setContentText("New collection: " + collectionName.replaceAll("_"," ") + " added successfully");
                 alert.showAndWait();
             }
         } else {
             WordCollectionDao.addCollection(collectionName);
             collectionsToEdit.getItems().add(collectionName);
-            alert.setContentText("New collection: " + collectionName + " added successfully");
+            alert.setContentText("New collection: " + collectionName.replaceAll("_"," ") + " added successfully");
             alert.showAndWait();
         }
     }
@@ -134,13 +137,14 @@ public class ReviewAddController implements Initializable {
         }
         currentCollection = WordCollectionDao.findCollectionName(collectionsToEdit.getValue()).get(0);
         collectionsToEdit.getItems().remove(currentCollection);
-        WordCollectionDao.deleteCollection(currentCollection);
+        collectionsToEdit.setValue(null);
         for (String x : collectionsToEdit.getItems()) {
             if(x.equals(currentCollection)) {
                 collectionsToEdit.getItems().remove(x);
                 break;
             }
         }
+        WordCollectionDao.deleteCollection(currentCollection);
 
         alert.setContentText("Delete successfully!");
         alert.setHeaderText(null);
@@ -176,7 +180,7 @@ public class ReviewAddController implements Initializable {
             }
             if (check) {
                 alert.setTitle("Failed");
-                alert.setContentText("This word already exists in the collection: " + currentCollection);
+                alert.setContentText("This word already exists in the collection: " + currentCollection.replaceAll("_", " "));
                 alert.showAndWait();
                 return;
             } else {
@@ -211,7 +215,7 @@ public class ReviewAddController implements Initializable {
             return;
         } else if (WordCollectionDao.findWordInCollection(word, currentCollection).isEmpty()) {
             alert.setTitle("Failed");
-            alert.setContentText("This word does not exist in the collection: " + currentCollection);
+            alert.setContentText("This word does not exist in the collection: " + currentCollection.replaceAll("_"," "));
             alert.showAndWait();
             return;
         }
@@ -219,7 +223,7 @@ public class ReviewAddController implements Initializable {
             WordCollectionDao.modifyWordFromCollection(word, "type", type, currentCollection);
             WordCollectionDao.modifyWordFromCollection(word, "pronunciation", pronunciation, currentCollection);
             WordCollectionDao.modifyWordFromCollection(word, "meaning", meaning, currentCollection);
-            alert.setContentText("Word: " + word + " in the collection " + currentCollection
+            alert.setContentText("Word: " + word + " in the collection " + currentCollection.replaceAll("_"," ")
                     + " has been edited successfully!");
             alert.showAndWait();
         }
@@ -241,7 +245,7 @@ public class ReviewAddController implements Initializable {
             return;
         } else if (WordCollectionDao.findWordInCollection(word, currentCollection).isEmpty()) {
             alert.setTitle("Failed");
-            alert.setContentText("This word does not exist in the collection: " + currentCollection);
+            alert.setContentText("This word does not exist in the collection: " + currentCollection.replaceAll("_"," "));
             alert.showAndWait();
             return;
         }
@@ -251,7 +255,7 @@ public class ReviewAddController implements Initializable {
             typeToEdit.setText("");
             pronunciationToEdit.setText("");
             meaningToEdit.setText("");
-            alert.setContentText("Word: " + word + " in the collection " + currentCollection
+            alert.setContentText("Word: " + word + " in the collection " + currentCollection.replaceAll("_"," ")
                     + " has been deleted successfully!");
             alert.showAndWait();
         }

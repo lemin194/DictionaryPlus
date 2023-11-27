@@ -22,7 +22,7 @@ public class GifDecoder {
   public static final int STATUS_OK = 0;
 
   /**
-   * File read status: Error decoding file (may be partially decoded)
+   * File read status: Error decoding file (maybe partially decoded)
    */
   public static final int STATUS_FORMAT_ERROR = 1;
 
