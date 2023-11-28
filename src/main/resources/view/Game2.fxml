@@ -11,12 +11,13 @@
     <children>
         <AnchorPane fx:id="question1" layoutX="21.0" layoutY="57.0" prefHeight="260.0" prefWidth="640.0" stylesheets="@../style/review.css">
          <children>
-            <ImageView fx:id="image" fitHeight="254.0" fitWidth="369.0" layoutX="262.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" >
+            <ImageView fx:id="image" fitHeight="254.0" fitWidth="369.0" layoutX="262.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                 <image>
                     <Image url="@../utils/icons/review/incorrectDeck.png" />
                 </image>
             </ImageView>
             <Label fx:id="question" layoutX="6.0" layoutY="23.0" prefHeight="34.0" prefWidth="256.0" text="Question: What is in this picture?" />
+            <Label fx:id="warning" layoutX="6.0" layoutY="113.0" text="Label" />
          </children></AnchorPane>
         <Button fx:id="btnNext" layoutX="279.0" layoutY="432.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="25.0" prefWidth="131.0" styleClass="normal-button" stylesheets="@../style/review.css" text="NEXT" />
         <Label fx:id="rightOrFalse" layoutX="21.0" layoutY="395.0" prefHeight="25.0" prefWidth="144.0" stylesheets="@../style/review.css" text="Correct or wrong" />
@@ -30,15 +31,6 @@
                 <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../utils/icons/game/icons8-quit-48.png" />
-                    </image>
-                </ImageView>
-            </graphic>
-        </Button>
-        <Button fx:id="btnRestart" layoutX="626.0" layoutY="384.0" mnemonicParsing="false" onAction="#restart" styleClass="transparent-button" stylesheets="@../style/review.css">
-            <graphic>
-                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../utils/icons/game/replay.png" />
                     </image>
                 </ImageView>
             </graphic>

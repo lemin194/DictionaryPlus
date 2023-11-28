@@ -53,8 +53,9 @@ public class Game2Controller extends game {
     private ImageView image = new ImageView();
     private final QuizService quiz = new QuizService();
     private String answer;
-    private List<Word> currentChoiceList = new ArrayList<>();
+    private List<String> currentChoiceList = new ArrayList<>();
     public ImageService imgService = new ImageService();
+    public String sol;
 
     @Override
     public void initialize(URL location, ResourceBundle Resources) {
@@ -65,46 +66,49 @@ public class Game2Controller extends game {
             button.setOnAction(this::whenSelected);
         }
         imgService = new ImageService();
-        image.setImage(imgService.loadImage("ability"));
-       // rightOrFalse.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/style/review.css")).toExternalForm());
-        //rightOrFalse.setVisible(false);
-        //warning.setVisible(false);
+        //image.setImage(imgService.loadImage("ability"));
+       setQuestion();
+        rightOrFalse.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/style/review.css")).toExternalForm());
+        rightOrFalse.setVisible(false);
+        warning.setVisible(false);
     }
-    @FXML
-    public void startGame() {
-        currentCollectionName = collectionsToPlay.getValue();
-        currentWordList = WordCollectionDao.queryWordInCollection(currentCollectionName);
-        if (currentWordList.isEmpty()) {
-            warning.setVisible(true);
-            question.setText("");
-            for (ToggleButton button : List.of(ansA, ansB, ansC, ansD)) {
-                button.setText("");
-            }
-            return;
-        } else {
-            warning.setVisible(false);
-            currentWord = currentWordList.get(idOfDisplayWord);
-            //currentCollectionList = quiz.generateOneQuiz(currentCollectionName, realAnswer);
-            currentChoiceList = quiz.generateOneQuiz(currentCollectionName, currentWord);
-            currentChoiceList.add(currentWord);
-            Collections.shuffle(currentChoiceList);
-            setQuestion();
-            clearSelected();
-            progress.setText("0/" + currentWordList.size() + " words");
-        }
-    }
+//    @FXML
+//    public void startGame() {
+//        currentCollectionName = collectionsToPlay.getValue();
+//        currentWordList = WordCollectionDao.queryWordInCollection(currentCollectionName);
+//        if (currentWordList.isEmpty()) {
+//            warning.setVisible(true);
+//            question.setText("");
+//            for (ToggleButton button : List.of(ansA, ansB, ansC, ansD)) {
+//                button.setText("");
+//            }
+//            return;
+//        } else {
+//            warning.setVisible(false);
+//            currentWord = currentWordList.get(idOfDisplayWord);
+//            //currentCollectionList = quiz.generateOneQuiz(currentCollectionName, realAnswer);
+//            currentChoiceList = quiz.generateOneQuiz(currentCollectionName, currentWord);
+//            currentChoiceList.add(currentWord);
+//            Collections.shuffle(currentChoiceList);
+//            setQuestion();
+//            clearSelected();
+//            progress.setText("0/" + currentWordList.size() + " words");
+//        }
+//    }
 
     public void setQuestion() {
-        currentWord = currentWordList.get(idOfDisplayWord);
-        question.setText("What is the meaning of " + currentWord.getWord() + " ?");
-        question.setWrapText(true);
+        currentChoiceList = ImageService.randWord();
+        Random rand = new Random();
+        int randIndex = rand.nextInt(4);
+        sol = currentChoiceList.get(randIndex);
+        image.setImage(imgService.loadImage(sol));
         ansA.setDisable(false);
         ansB.setDisable(false);
         ansC.setDisable(false);
         ansD.setDisable(false);
         int tmp = 0;
         for (ToggleButton button : List.of(ansA, ansB, ansC, ansD)) {
-            button.setText(getFirstMeaning(currentChoiceList.get(tmp)));
+            button.setText(currentChoiceList.get(tmp));
             button.setWrapText(true);
             tmp++;
         }
@@ -118,33 +122,12 @@ public class Game2Controller extends game {
     }
     @FXML
     public void nextQuestion() {
-        if (currentWordList.isEmpty()) return;
+        warning.setVisible(false);
         rightOrFalse.setVisible(false);
-        idOfDisplayWord++;
-        if (idOfDisplayWord >= currentWordList.size()) {
-            progress.setText((idOfDisplayWord)+"/"+ currentWordList.size()+" words");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            DialogPane tmp1 = alert.getDialogPane();
-            tmp1.getStylesheets().add(getClass().getResource("/style/dialog.css").toExternalForm());
-            alert.setContentText("You finished this collection with the score: " + (int) finalScore
-                    + ". Press the button below to start again");
-            alert.showAndWait();
-            finalScore = 0;
-            idOfDisplayWord=0;
-        }
-        currentWord = currentWordList.get(idOfDisplayWord);
-        currentChoiceList = quiz.generateOneQuiz(currentCollectionName, currentWord);
-        currentChoiceList.add(currentWord);
-        Collections.shuffle(currentChoiceList);
-        rightOrFalse.setText("");
-        progress.setText((idOfDisplayWord)+"/"+ currentWordList.size()+" words");
         setQuestion();
     }
 
     public void whenSelected(ActionEvent e) {
-        if (currentWordList.isEmpty()) return;
-        System.out.println(currentWord.getMeaning());
         ToggleButton selectedToggleButton = (ToggleButton) e.getSource();
         System.out.println(selectedToggleButton.getText() + " selected");
 
@@ -154,34 +137,23 @@ public class Game2Controller extends game {
                 toggleButton.setDisable(true);
             }
         });
-        if (selectedToggleButton.getText().equals(getFirstMeaning(currentWord))) {
-            finalScore++;
-            lblScore.setText("Score: " + (int) finalScore + "/" + currentWordList.size());
+        if (selectedToggleButton.getText().equals(sol)) {
+            //finalScore++;
+            //lblScore.setText("Score: " + (int) finalScore + "/" + currentWordList.size());
             rightOrFalse.getStyleClass().clear();
             rightOrFalse.getStyleClass().add("whenTrue");
             rightOrFalse.setText("Correct!");
             rightOrFalse.setVisible(true);
+            warning.setVisible(false);
         } else {
-            lblScore.setText("Score: "+ (int) finalScore + "/" + currentWordList.size());
+            //lblScore.setText("Score: "+ (int) finalScore + "/" + currentWordList.size());
             rightOrFalse.getStyleClass().clear();
             rightOrFalse.getStyleClass().add("whenFalse");
             rightOrFalse.setText("Wrong");
             rightOrFalse.setVisible(true);
+            warning.setText("The right answer is: " + sol);
+            warning.setVisible(true);
         }
-    }
-    @FXML
-    public void restart() {
-        if (currentWordList.isEmpty()) return;
-        Collections.shuffle(currentWordList);
-        idOfDisplayWord = 0;
-        currentWord = currentWordList.get(idOfDisplayWord);
-        currentChoiceList = quiz.generateOneQuiz(currentCollectionName, currentWord);
-        currentChoiceList.add(currentWord);
-        setQuestion();
-        lblScore.setText("Score: 0");
-        progress.setText("0/" + currentWordList.size() + " words");
-        System.out.println("restart button does work");
-        rightOrFalse.setVisible(false);
     }
     @FXML
     public void handleClose(){
