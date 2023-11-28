@@ -39,9 +39,9 @@ public class ReviewPlayController implements Initializable {
     @FXML
     private ChoiceBox<String> sortBy = new ChoiceBox<>();
     @FXML
-    private TextField numCardPerSession = new TextField();
+    public TextField numCardPerSession = new TextField();
     @FXML
-    private Label numWordsInChosenCollection = new Label();
+    public Label numWordsInChosenCollection = new Label();
     @FXML
     private Label warningEmptyCollection = new Label();
     @FXML

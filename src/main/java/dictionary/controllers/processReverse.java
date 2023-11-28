@@ -1,13 +1,17 @@
 package dictionary.controllers;
 
 import dictionary.models.Dao.WordCollectionDao;
+import dictionary.services.StringUtils;
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class processReverse extends process {
+    @FXML
+    public AnchorPane tmpAnchor = new AnchorPane();
     @Override
     public void initialize(URL location, ResourceBundle Resources){
         fixedNameCollection = ReviewPlayController.currentCollection;
@@ -23,6 +27,7 @@ public class processReverse extends process {
         for (int i = 0; i < tmp - ReviewPlayController.numCards; i++) {
             current.remove(tmp - 1 - i);
         }
+        tmpAnchor.setVisible(true);
         showAnswer.setVisible(true);
         transfer.setVisible(false);
         idOfDisplayWord = 0;
@@ -30,13 +35,13 @@ public class processReverse extends process {
         wordsLeft = fakeNumberOfWordsinCollection;
         progress.setText(wordsLeft + "/" + fakeNumberOfWordsinCollection);
         displayWord = current.get(idOfDisplayWord);
-        currentWord.setText(displayWord.getMeaning());
+        currentWord.setText(StringUtils.getFirstMeaning(displayWord));
         done.setVisible(false);
     }
     @Override
     public void showAnswer() {
         if (current.size() != 0) {
-            infoOfWord.setText(displayWord.getMeaning());
+            infoOfWord.setText(displayWord.getWord());
             transfer.setVisible(true);
             showAnswer.setVisible(false);
         }
@@ -46,18 +51,24 @@ public class processReverse extends process {
         try {
             if (!WordCollectionDao.queryWordInCollection(fixedNameCollection).isEmpty()) {
                 WordCollectionDao.deleteWordFromCollection(displayWord.getWord(), fixedNameCollection);
-                current.remove(idOfDisplayWord);
+                if (idOfDisplayWord == current.size() - 1) {
+                    current.remove(idOfDisplayWord);
+                    idOfDisplayWord--;
+                } else if (idOfDisplayWord < current.size() - 1) {
+                    current.remove(idOfDisplayWord);
+                }
                 wordsLeft = current.size();
                 progress.setText(wordsLeft + "/" + fakeNumberOfWordsinCollection);
             }
-            if (wordsLeft > 0) {
+            if (current.size() > 0) {
                 displayWord = current.get(idOfDisplayWord);
-                currentWord.setText(displayWord.getMeaning());
+                currentWord.setText(StringUtils.getFirstMeaning(displayWord));
                 infoOfWord.setText("");
                 transfer.setVisible(false);
                 showAnswer.setVisible(true);
             }
-            else {
+            else if (current.size() == 0){
+                tmpAnchor.setVisible(false);
                 speaker.setVisible(false);
                 currentWord.setVisible(false);
                 infoOfWord.setVisible(false);
@@ -80,7 +91,7 @@ public class processReverse extends process {
         idOfDisplayWord++;
         if(idOfDisplayWord >= len) idOfDisplayWord = 0;
         displayWord = current.get(idOfDisplayWord);
-        currentWord.setText(displayWord.getMeaning());
+        currentWord.setText(StringUtils.getFirstMeaning(displayWord));
         infoOfWord.setText("");
         transfer.setVisible(false);
         showAnswer.setVisible(true);

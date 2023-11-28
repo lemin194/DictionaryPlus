@@ -20,6 +20,8 @@ import java.util.ResourceBundle;
 
 public class processClassic extends process {
     @FXML
+    public AnchorPane tmpAnchor = new AnchorPane();
+    @FXML
     public void initialize(URL location, ResourceBundle Resources) {
         fixedNameCollection = ReviewPlayController.currentCollection;
         current = WordCollectionDao.queryWordInCollection(fixedNameCollection);
@@ -34,6 +36,7 @@ public class processClassic extends process {
         for (int i = 0; i < tmp - ReviewPlayController.numCards; i++) {
             current.remove(tmp - 1 - i);
         }
+        tmpAnchor.setVisible(true);
         showAnswer.setVisible(true);
         transfer.setVisible(false);
         idOfDisplayWord = 0;
@@ -57,17 +60,24 @@ public class processClassic extends process {
         try {
             if (!WordCollectionDao.queryWordInCollection(fixedNameCollection).isEmpty()) {
                 WordCollectionDao.deleteWordFromCollection(displayWord.getWord(), fixedNameCollection);
-                current.remove(idOfDisplayWord);
+                if (idOfDisplayWord == current.size() - 1) {
+                    current.remove(idOfDisplayWord);
+                    idOfDisplayWord--;
+                } else if (idOfDisplayWord < current.size() - 1) {
+                    current.remove(idOfDisplayWord);
+                }
+                //idOfDisplayWord--;
                 wordsLeft = current.size();
                 progress.setText(wordsLeft + "/" + fakeNumberOfWordsinCollection);
             }
-            if (wordsLeft > 0) {
+            if (current.size() > 0) {
                 displayWord = current.get(idOfDisplayWord);
                 currentWord.setText(displayWord.getWord() + "\n" + displayWord.getPronunciation());
                 infoOfWord.setText("");
                 transfer.setVisible(false);
                 showAnswer.setVisible(true); }
-            else {
+            else if (current.size() == 0){
+                tmpAnchor.setVisible(false);
                 speaker.setVisible(false);
                 currentWord.setVisible(false);
                 infoOfWord.setVisible(false);

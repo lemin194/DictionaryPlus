@@ -92,9 +92,14 @@ public class processTyping extends process {
         try {
             if (!WordCollectionDao.queryWordInCollection(fixedNameCollection).isEmpty()) {
                 WordCollectionDao.deleteWordFromCollection(displayWord.getWord(), fixedNameCollection);
-                wordsLeft--;
+                if (idOfDisplayWord == current.size() - 1) {
+                    current.remove(idOfDisplayWord);
+                    idOfDisplayWord--;
+                } else if (idOfDisplayWord < current.size() - 1) {
+                    current.remove(idOfDisplayWord);
+                }
+                wordsLeft = current.size();
                 progress.setText(wordsLeft + "/" + fakeNumberOfWordsinCollection);
-                current.remove(idOfDisplayWord);
                 System.out.println("id la " + idOfDisplayWord + "; kich co collection la: " + current.size());
             }
             if (current.size() > 0) {
@@ -105,9 +110,13 @@ public class processTyping extends process {
                 firstDeck.setVisible(true);
                 transfer.setVisible(false);
                 showAnswer.setVisible(true);
+                System.out.println("current size hien tai la: " + current.size());
             }
             else if (current.size() == 0){
+                System.out.println("current size hien tai la: " + current.size());
                 speaker.setVisible(false);
+                firstDeck.setVisible(false);
+                secondDeck.setVisible(false);
                 currentWord.setVisible(false);
                 progress.setVisible(false);
                 transfer.setVisible(false);

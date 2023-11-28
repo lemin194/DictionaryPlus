@@ -37,7 +37,7 @@
       </Button>
       <Label fx:id="progress" layoutX="351.0" layoutY="30.0" />
       <Label fx:id="done" layoutX="129.0" layoutY="158.0" text="Nothing left to learn!" />
-      <AnchorPane layoutX="66.0" layoutY="80.0" prefHeight="200.0" prefWidth="285.0" styleClass="deck" stylesheets="@../style/review.css">
+      <AnchorPane fx:id="tmpAnchor" layoutX="66.0" layoutY="80.0" prefHeight="200.0" prefWidth="285.0" styleClass="deck" stylesheets="@../style/review.css">
          <children>
             <TextArea fx:id="infoOfWord" layoutY="25.0" prefHeight="150.0" prefWidth="285.0" styleClass="text-area1" editable="false" stylesheets="@../style/review.css" wrapText="true" />
          </children>
