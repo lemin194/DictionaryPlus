@@ -3,6 +3,8 @@ package dictionary.models.Dao;
 import dictionary.models.Entity.Word;
 import dictionary.services.WordOperationService;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -198,10 +200,5 @@ public class WordsDao {
             res.add(indexWord.getWord());
         }
         return res;
-    }
-
-
-    public static void main(String[] args) {
-        deleteWord("meoudangiu", "anhviet");
     }
 }

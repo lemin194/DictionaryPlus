@@ -4,7 +4,6 @@ import dictionary.models.Entity.Word;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -206,8 +205,6 @@ public class WordCollectionDao {
     }
 
     public static void main(String[] args) {
-        String o = "afdskj fdsafds kafdlfj";
-        o = o.replaceAll(" ", "_");
-        System.out.println(o);
+
     }
 }
