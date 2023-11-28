@@ -2,8 +2,9 @@
 !**/src/main/**/target/
 !**/src/test/**/target/
 !**/src/main/resources/data/Collection.txt
-!**/src/main/resources/data/dict_hh.db
-!**/src/main/resources/data/images
+
+/src/main/resources/data/dict_hh.db
+
 **/desktop.ini
 
 ### Oasis
@@ -51,3 +52,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
+/src/main/resources/data/images/

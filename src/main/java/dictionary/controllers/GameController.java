@@ -1,21 +1,17 @@
 package dictionary.controllers;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
-import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -77,7 +73,7 @@ public class GameController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Game 1: Quiz");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Game1.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
+            Parent root = fxmlLoader.load();
             stage.initStyle(StageStyle.TRANSPARENT);
 
             root.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -110,7 +106,7 @@ public class GameController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Game 1: Quiz");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Game2.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
+            Parent root = fxmlLoader.load();
             stage.initStyle(StageStyle.TRANSPARENT);
 
             root.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -134,6 +130,7 @@ public class GameController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Can't create new scene for game1");
         }
     }
@@ -144,7 +141,7 @@ public class GameController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Game 3: Practice speaking");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Game3.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
+            Parent root1 = fxmlLoader.load();
             Scene scene = new Scene(root1, Color.web("FFFFFF"));
             scene.setFill(Color.TRANSPARENT);
             // Duc can change the css file for his  game here
@@ -154,7 +151,8 @@ public class GameController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            System.out.println("Can't create new scene for game3");
+            e.printStackTrace();
+//            System.out.println("Can't create new scene for game3");
         }
     }
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+<AnchorPane prefHeight="360.0" prefWidth="688.0" stylesheets="@../style/game3.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="lblLevel" layoutX="46.0" layoutY="305.0" text="Level: C1">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="46.0" layoutY="91.0" prefHeight="178.0" prefWidth="596.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 16;">
+         <children>
+            <AnchorPane layoutX="37.0" layoutY="33.0" prefHeight="77.0" prefWidth="523.0">
+               <children>
+                  <TextFlow fx:id="textFlow" lineSpacing="4.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="77.0" prefWidth="523.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="My hobbies is playing the guitar and watching football.">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER_LEFT" layoutX="35.0" layoutY="110.0" prefHeight="49.0" prefWidth="354.0" spacing="12.0">
+               <children>
+                  <JFXButton fx:id="btnPlay" contentDisplay="GRAPHIC_ONLY" maxHeight="32.0" maxWidth="32.0" minHeight="32.0" minWidth="32.0" prefHeight="32.0" prefWidth="32.0" styleClass="button-translate-service">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../utils/icons/translate/speaker.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnNext" contentDisplay="GRAPHIC_ONLY" maxHeight="32.0" maxWidth="32.0" minHeight="32.0" minWidth="32.0" prefHeight="32.0" prefWidth="32.0" styleClass="button-translate-service">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../utils/icons/translate/next.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="btnRecord" contentDisplay="GRAPHIC_ONLY" layoutX="312.0" layoutY="282.0" maxHeight="64.0" maxWidth="64.0" minHeight="64.0" minWidth="64.0" prefHeight="64.0" prefWidth="64.0" styleClass="button-translate-service">
+         <graphic>
+            <ImageView fx:id="iconRecord" fitHeight="52.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../utils/icons/translate/micro.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <VBox alignment="CENTER" layoutX="230.0" layoutY="31.0" prefHeight="21.0" prefWidth="228.0">
+         <children>
+            <Label fx:id="lblScore" text="Score: 100%">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="lblProgress" layoutX="46.0" layoutY="37.0" text="Progress: 0/10">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnBack" contentDisplay="GRAPHIC_ONLY" layoutX="600.0" layoutY="25.0" maxHeight="42.0" maxWidth="42.0" minHeight="42.0" minWidth="42.0" prefHeight="42.0" prefWidth="42.0">
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../utils/icons/review/icons8-back-48.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+   </children>
+</AnchorPane>

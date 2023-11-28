@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="360.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="163.0" layoutY="52.0" prefHeight="308.0" prefWidth="362.0" styleClass="resultPane">
+         <children>
+            <HBox alignment="CENTER" layoutX="88.0" layoutY="226.0" spacing="24.0">
+               <children>
+                  <JFXButton fx:id="btnDone" contentDisplay="TEXT_ONLY" maxHeight="64.0" maxWidth="81.0" minHeight="30.0" minWidth="64.0" prefHeight="30.0" prefWidth="81.0" styleClass="btnMenu" text="Done" />
+                  <JFXButton fx:id="btnRestart" contentDisplay="TEXT_ONLY" maxHeight="64.0" maxWidth="81.0" minHeight="30.0" minWidth="64.0" prefHeight="30.0" prefWidth="81.0" styleClass="btnMenu" text="Restart" />
+               </children>
+            </HBox>
+            <VBox layoutX="90.0" layoutY="78.0" spacing="12.0">
+               <children>
+                  <Label fx:id="lblOverall" alignment="CENTER" prefHeight="22.0" prefWidth="182.0" styleClass="resultLabel" text="Overall score: 100%">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblLevel" alignment="CENTER" prefHeight="22.0" prefWidth="182.0" styleClass="resultLabel" text="Level: C1">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCorrect" alignment="CENTER" prefHeight="22.0" prefWidth="182.0" styleClass="resultLabel" text="Correct: 8/10">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+         <stylesheets>
+            <URL value="@../style/game3.css" />
+            <URL value="@../style/variable.css" />
+         </stylesheets>
+      </AnchorPane>
+   </children>
+   <stylesheets>
+      <URL value="@../style/game3.css" />
+      <URL value="@../style/review.css" />
+      <URL value="@../style/variable.css" />
+   </stylesheets>
+</AnchorPane>

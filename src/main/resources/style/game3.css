@@ -1,3 +1,19 @@
 .button {
   -fx-background-radius: 64px;
 }
+
+.btnMenu {
+  -fx-background-radius: 12px;
+  -fx-background-color: -button-1;
+  -fx-text-fill: #FFFFFF;
+
+}
+
+.resultPane {
+  -fx-background-color: -secondary;
+  -fx-background-radius: 12 12 0 0;
+}
+
+.resultLabel {
+  -fx-font-size: 36px;
+}
