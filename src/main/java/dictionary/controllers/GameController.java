@@ -73,7 +73,7 @@ public class GameController implements Initializable {
         try {
             Stage stage = new Stage();
             stage.setTitle("Game 1: Quiz");
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Game1.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Game2.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             stage.initStyle(StageStyle.TRANSPARENT);
 

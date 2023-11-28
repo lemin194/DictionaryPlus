@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="489.0" prefWidth="688.0" styleClass="sub-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.Game2Controller">
+    <children>
+        <AnchorPane fx:id="question1" layoutX="21.0" layoutY="57.0" prefHeight="260.0" prefWidth="640.0" stylesheets="@../style/review.css">
+         <children>
+            <ImageView fx:id="image" fitHeight="254.0" fitWidth="369.0" layoutX="262.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" >
+                <image>
+                    <Image url="@../utils/icons/review/incorrectDeck.png" />
+                </image>
+            </ImageView>
+            <Label fx:id="question" layoutX="6.0" layoutY="23.0" prefHeight="34.0" prefWidth="256.0" text="Question: What is in this picture?" />
+         </children></AnchorPane>
+        <Button fx:id="btnNext" layoutX="279.0" layoutY="432.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="25.0" prefWidth="131.0" styleClass="normal-button" stylesheets="@../style/review.css" text="NEXT" />
+        <Label fx:id="rightOrFalse" layoutX="21.0" layoutY="395.0" prefHeight="25.0" prefWidth="144.0" stylesheets="@../style/review.css" text="Correct or wrong" />
+        <Label fx:id="progress" layoutX="540.0" layoutY="62.0" prefHeight="17.0" prefWidth="110.0" styleClass="label2WithText" stylesheets="@../style/review.css" />
+        <ToggleButton fx:id="ansA" layoutX="356.0" layoutY="330.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="144.0" stylesheets="@../style/review.css" text="Choice 3rd" />
+        <ToggleButton fx:id="ansC" layoutX="194.0" layoutY="330.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="144.0" stylesheets="@../style/review.css" text="Choice 2nd" />
+        <ToggleButton fx:id="ansB" layoutX="519.0" layoutY="330.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="144.0" stylesheets="@../style/review.css" text="Choice 4th" />
+        <ToggleButton fx:id="ansD" layoutX="21.0" layoutY="330.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="144.0" stylesheets="@../style/review.css" text="Choice 1st" />
+        <Button fx:id="btnClose" layoutX="626.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleClose" styleClass="transparent-button" stylesheets="@../style/review.css">
+            <graphic>
+                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../utils/icons/game/icons8-quit-48.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="btnRestart" layoutX="626.0" layoutY="384.0" mnemonicParsing="false" onAction="#restart" styleClass="transparent-button" stylesheets="@../style/review.css">
+            <graphic>
+                <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../utils/icons/game/replay.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+    </children>
+</AnchorPane>
