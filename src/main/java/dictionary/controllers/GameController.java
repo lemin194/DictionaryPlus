@@ -29,10 +29,13 @@ public class GameController implements Initializable {
     private Button quizBtn = new Button();
 
     @FXML
+    private Button quiz2Btn = new Button();
+    @FXML
     private Button quiz3Btn = new Button();
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         quizBtn.setOnAction(event -> handleGame1Button());
+        quiz2Btn.setOnAction(event -> handleGame2Button());
 
 
         quiz3Btn.setOnAction(actionEvent -> handleGame3Button());
@@ -70,6 +73,39 @@ public class GameController implements Initializable {
     }*/
     @FXML
     public void handleGame1Button() {
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Game 1: Quiz");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Game1.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            stage.initStyle(StageStyle.TRANSPARENT);
+
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                }
+            });
+
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    stage.setX(event.getScreenX() - xOffset);
+                    stage.setY(event.getScreenY() - yOffset);
+                }
+            });
+            Scene scene = new Scene(root, Color.web("1F1F1F"));
+            scene.setFill(Color.TRANSPARENT);
+            scene.getStylesheets().add(getClass().getResource("/style/review.css").toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Can't create new scene for game1");
+        }
+    }
+    @FXML
+    public void handleGame2Button() {
         try {
             Stage stage = new Stage();
             stage.setTitle("Game 1: Quiz");

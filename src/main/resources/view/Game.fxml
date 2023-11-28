@@ -6,8 +6,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
 <?import javafx.scene.text.Font?>
+
 <AnchorPane prefHeight="560" prefWidth="750" styleClass="main-container" stylesheets="@../style/main1.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dictionary.controllers.GameController">
     <AnchorPane layoutX="269.0" layoutY="25.0" prefHeight="52.0" prefWidth="200.0" styleClass="sub-container" stylesheets="@../style/main.css">
         <children>
@@ -30,8 +30,8 @@
       </ImageView>
    <AnchorPane layoutX="31.0" layoutY="117.0" prefHeight="430.0" prefWidth="688.0" styleClass="sub-container">
       <children>
-            <Button fx:id="quizBtn" layoutX="286.0" layoutY="207.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="117.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
-         <Button fx:id="quiz3Btn" layoutX="284.0" layoutY="353.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="124.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
+            <Button fx:id="quizBtn" layoutX="286.0" layoutY="183.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="117.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
+         <Button fx:id="quiz3Btn" layoutX="284.0" layoutY="311.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="124.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
          <AnchorPane layoutX="13.0" layoutY="72.0" prefHeight="5.0" prefWidth="662.0" styleClass="bar" stylesheets="@../style/main.css" />
          <Label layoutX="84.0" layoutY="21.0" prefHeight="34.0" prefWidth="322.0" stylesheets="@../style/review.css" text="Challenge yourself with our games!" />
          <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="26.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -39,8 +39,10 @@
                <Image url="@../utils/icons/review/icons8-game-48.png" />
             </image>
          </ImageView>
-         <TextArea editable="false" layoutX="61.0" layoutY="110.0" prefHeight="79.0" prefWidth="567.0" styleClass="text-field" stylesheets="@../style/review.css" text="Game 1: Normal quiz game with your collections. &#10;               There will be a question with four choices for each word&#10;&#9;&#9;in the chosen collection." wrapText="true" />
-         <TextArea editable="false" layoutX="61.0" layoutY="260.0" prefHeight="79.0" prefWidth="567.0" styleClass="text-field" stylesheets="@../style/review.css" text="Game 2: Test your pronunciation with our AI grading system&#10;&#9;      Read aloud the sentences containing each word in &#10;&#9;      the collection." wrapText="true" />
+         <TextArea editable="false" layoutX="61.0" layoutY="91.0" prefHeight="79.0" prefWidth="567.0" styleClass="text-field" stylesheets="@../style/review.css" text="Game 1: Normal quiz game with your collections. &#10;               There will be a question with four choices for each word&#10;&#9;&#9;in the chosen collection." wrapText="true" />
+         <TextArea editable="false" layoutX="62.0" layoutY="232.0" prefHeight="79.0" prefWidth="567.0" styleClass="text-field" stylesheets="@../style/review.css" text="Game 3: Test your pronunciation with our AI grading system&#10;&#9;      Read aloud the sentences containing each word in &#10;&#9;      the collection." wrapText="true" />
+         <Label layoutX="74.0" layoutY="363.0" stylesheets="@../style/review.css" text="Game 2: Normal quiz game with random pictures. " />
+         <Button fx:id="quiz2Btn" layoutX="286.0" layoutY="385.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="124.0" styleClass="normal-button" stylesheets="@../style/review.css" text="Start" />
       </children>
    </AnchorPane>
 </AnchorPane>
