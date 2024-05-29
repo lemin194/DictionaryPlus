@@ -14,7 +14,7 @@ def load_from_bytes(input):
 def stt(lang="en", path='temp/record_tmp.mp3'):
 	url = "https://transcribe.whisperapi.com"
 	headers = {
-	'Authorization': 'Bearer PVD42ZJYK89N87FDGNEUCMXN6AY7NTIJ'
+	'Authorization': 'Bearer INSERT_KEY'
 	}
 	file = {'file': open(path, 'rb')}
 	data = {
